@@ -1,1 +1,1 @@
-oteapi-core==0.0.4
+oteapi-core==0.0.5
