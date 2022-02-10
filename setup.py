@@ -5,7 +5,7 @@ from pathlib import Path
 from setuptools import find_packages, setup
 
 TOP_DIR = Path(__file__).resolve().parent
-PACKAGE_NAME = "oteapi_dlite_plugin"
+PACKAGE_NAME = "oteapi_dlite"
 
 with open(TOP_DIR / PACKAGE_NAME / "__init__.py", "r", encoding="utf8") as handle:
     VERSION = AUTHOR = AUTHOR_EMAIL = None
@@ -50,12 +50,12 @@ DEV = [
 ]
 
 setup(
-    name="oteapi-dlite-plugin",
+    name="oteapi-dlite",
     version=VERSION,
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
-    url="https://github.com/EMMC-ASBL/oteapi-dlite-plugin",
-    description="OTE-API Plugin.",
+    url="https://github.com/EMMC-ASBL/oteapi-dlite",
+    description="DLite plugin for OTEAPI.",
     long_description=(TOP_DIR / "README.md").read_text(encoding="utf8"),
     long_description_content_type="text/markdown",
     packages=find_packages(),
