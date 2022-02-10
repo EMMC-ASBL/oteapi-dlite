@@ -9,11 +9,10 @@ def dict2recarray(excel_dict, names=None):
     """
     arrays = []
     for arr in excel_dict.values():
-        if all(isinstance(v, (bool, int, float, complex, None.__class__))
-               for v in arr):
+        if all(isinstance(v, (bool, int, float, complex, None.__class__)) for v in arr):
             arrays.append([np.nan if v is None else v for v in arr])
         elif all(isinstance(v, (str, bytes, None.__class__)) for v in arr):
-            arrays.append(['' if v is None else v for v in arr])
+            arrays.append(["" if v is None else v for v in arr])
         else:
             arrays.append(arr)
         if names is None:

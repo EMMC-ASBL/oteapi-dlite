@@ -24,11 +24,11 @@ def test_parse_excel():
     parser = DLiteXLSXParseStrategy(config)
     d = parser.get()
 
-    import numpy as np
     import dlite
+    import numpy as np
 
-    inst = dlite.get_instance(d['uuid'])
+    inst = dlite.get_instance(d["uuid"])
 
-    #assert np.all(inst.Sample == ['A', 'B', 'C', 'D'])
+    # assert np.all(inst.Sample == ['A', 'B', 'C', 'D'])
     assert np.allclose(inst.Temperature, [293.15, 300, 320, 340])
     assert np.all(inst.Pressure == [100000, 200000, 300000, 400000])
