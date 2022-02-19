@@ -8,14 +8,14 @@ from typing import TYPE_CHECKING, Optional
 import dlite
 import numpy as np
 from dlite.datamodel import DataModel
-from oteapi.datacache.datacache import DataCache
+from oteapi.models import SessionUpdate
 from oteapi.strategies.parse.excel_xlsx import XLSXParseDataModel, XLSXParseStrategy
 from pydantic import BaseModel, Field, HttpUrl
 
 from oteapi_dlite.utils import dict2recarray
 
 if TYPE_CHECKING:
-    from typing import Any, Dict, Optional
+    from typing import Any, Dict
 
     from oteapi.models.resourceconfig import ResourceConfig
 
@@ -32,6 +32,11 @@ class DLiteXLSXConfig(BaseModel):
     )
 
     id: Optional[str] = Field(None, description="Optional id on new instance.")
+
+    label: Optional[str] = Field(
+        "excel-data",
+        description="Optional label for new instance in collection.",
+    )
 
     xlsx_config: XLSXParseDataModel = Field(
         ...,
@@ -55,7 +60,7 @@ class DLiteXLSXParseStrategy:
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> "Dict[str, Any]":
         """Initialize."""
-        return {}
+        return SessionUpdate()
 
     def get(self, session: "Optional[Dict[str, Any]]" = None) -> "Dict[str, Any]":
         """Execute the strategy.
@@ -70,20 +75,20 @@ class DLiteXLSXParseStrategy:
             DLite instance.
 
         """
+        if session is None:
+            raise ValueError("Missing session")
+
         config = DLiteXLSXConfig(**self.parse_config.configuration)
         parse_config = self.parse_config.copy()
         parse_config.configuration = config.xlsx_config.dict()
 
         parser = XLSXParseStrategy(parse_config)
-        columns = parser.get(session)
-
-        with open("xxx.py", "w") as f:
-            print(repr(columns), file=f)
+        columns = parser.get(session)["data"]
 
         names, units = zip(*[split_column_name(column) for column in columns])
         rec = dict2recarray(columns, names=names)
 
-        if config.metadata:
+        if config.metadata:  # pylint: disable=no-else-raise
             raise NotImplementedError("")
         else:
             meta = infer_metadata(rec, units=units)
@@ -92,8 +97,19 @@ class DLiteXLSXParseStrategy:
         for name in names:
             inst[name] = rec[name]
 
+        # Insert inst into collection
+        coll = dlite.get_collection(session["collection_id"])
+        coll.add(config.label, inst)
+
+        # Increase refcount of instance to avoid that it is freed when
+        # returning from this function
         inst.incref()
-        return {"uuid": inst.uuid}
+
+        return SessionUpdate(
+            inst_uuid=inst.uuid,
+            collection_id=coll.uuid,
+            label=config.label,
+        )
 
 
 def split_column_name(column):
@@ -105,7 +121,7 @@ def split_column_name(column):
     return name, unit
 
 
-def infer_metadata(rec: dict, units: list) -> "dlite.Instance":
+def infer_metadata(rec: np.recarray, units: list) -> "dlite.Instance":
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
     uri = f"http://onto-ns.com/meta/1.0/generated_from_xlsx_{rnd:0x}"
@@ -113,5 +129,6 @@ def infer_metadata(rec: dict, units: list) -> "dlite.Instance":
     metadata.add_dimension("nrows", "Number of rows.")
     for i, name in enumerate(rec.dtype.names):
         dtype = rec[name].dtype
-        metadata.add_property(name, type=dtype.name, dims=["nrows"], unit=units[i])
+        ptype = "string" if dtype.kind == "U" else dtype.name
+        metadata.add_property(name, type=ptype, dims=["nrows"], unit=units[i])
     return metadata.get()
