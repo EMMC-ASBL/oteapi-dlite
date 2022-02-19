@@ -2,6 +2,7 @@
 *.egg-info
 __pycache__
 *.pyc
+*~
 
 # Testing and tools
 .pytest_cache/
@@ -10,3 +11,6 @@ __pycache__
 # Coverage
 .coverage
 htmlcov
+
+# Build
+dist/
