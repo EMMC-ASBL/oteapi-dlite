@@ -67,5 +67,11 @@ setup(
     packages=find_packages(),
     python_requires=">=3.9",
     install_requires=BASE,
-    extras_require={"dev": DEV},
+    extras_require={"dev": DEV, "docs": DOCS},
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "License :: OSI Approved :: MIT License",
+    ],
 )
