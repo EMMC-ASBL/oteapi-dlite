@@ -2,18 +2,18 @@
 from pathlib import Path
 
 
-def test_parse_excel():
+def test_parse_xlsx():
     """Test `text/json` parse strategy."""
     import dlite
     import numpy as np
     from oteapi.models import ResourceConfig
 
-    from oteapi_dlite.strategies.parse_xlsx import DLiteXLSXParseStrategy
+    from oteapi_dlite.strategies.parse import DLiteXLSXParseStrategy
 
     thisdir = Path(__file__).absolute().parent
 
     config = ResourceConfig(
-        downloadUrl=f"file://{thisdir}/test_parse_xlsx.xlsx",
+        downloadUrl=f"file://{thisdir}/test_parse.xlsx",
         mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         configuration={
             "xlsx_config": {
@@ -35,9 +35,6 @@ def test_parse_excel():
 
     inst = coll.get("excel-data")
 
-    print(inst.meta)
-    print()
-    print(inst)
     assert np.all(inst.Sample == ["A", "B", "C", "D"])
     assert np.allclose(inst.Temperature, [293.15, 300, 320, 340])
     assert np.all(inst.Pressure == [100000, 200000, 300000, 400000])

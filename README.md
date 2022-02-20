@@ -11,6 +11,9 @@ A DLite collection stores references to DLite instances and relations between th
 Hence, the collection is a knowledge base for the current use case.
 
 
+In order to make it easy retrieve the collection id when executing a pipeline, the `get()` method of all filters in this plugin should return the `collection_id`.
+
+
 Further reading:
 
 - [OTE-API Core Documentation](https://emmc-asbl.github.io/oteapi-core)
