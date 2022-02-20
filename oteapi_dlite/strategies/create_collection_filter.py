@@ -13,12 +13,12 @@ if TYPE_CHECKING:
 
 
 @dataclass
-class DLiteCollectionFilterStrategy:
+class CreateCollectionFilterStrategy:
     """Trivial filter that adds an empty collection to the session.
 
     **Registers strategies**:
 
-    - `("filterType", "filter/collection")`
+    - `("filterType", "create_collection")`
 
     """
 
