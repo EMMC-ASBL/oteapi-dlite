@@ -11,3 +11,6 @@ __pycache__
 # Coverage
 .coverage
 htmlcov
+
+# Distribution
+dist/
