@@ -24,7 +24,7 @@ disable = [
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-rs --cov=./oteapi_dlite_plugin/ --cov-report=term --durations=10"
+addopts = "-rs --cov=oteapi_dlite --cov-report=term --durations=10"
 filterwarnings = [
     "ignore:.*imp module.*:DeprecationWarning",
     "ignore:.*_yaml extension module.*:DeprecationWarning"
