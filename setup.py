@@ -61,7 +61,7 @@ setup(
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
     url="https://github.com/EMMC-ASBL/oteapi-dlite",
-    description="OTE-API Plugin.",
+    description="DLite plugin for OTEAPI.",
     long_description=(TOP_DIR / "README.md").read_text(encoding="utf8"),
     long_description_content_type="text/markdown",
     packages=find_packages(),
