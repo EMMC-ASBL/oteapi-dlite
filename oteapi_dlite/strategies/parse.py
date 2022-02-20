@@ -1,4 +1,4 @@
-"""Strategy class for parsing xlsx to a DLite instance."""
+"""Strategy class for parsing Excel XLSX to a DLite instance."""
 # pylint: disable=no-self-use,unused-argument
 import re
 from dataclasses import dataclass
@@ -45,7 +45,7 @@ class DLiteXLSXConfig(BaseModel):
 
 
 @dataclass
-class DLiteXLSXParseStrategy:
+class DLiteXLSXStrategy:
     """Parse strategy for Excel XLSX files.
 
     **Registers strategies**:

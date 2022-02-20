@@ -3,12 +3,12 @@ from pathlib import Path
 
 
 def test_parse_xlsx():
-    """Test `text/json` parse strategy."""
+    """Test `xlsx` parse strategy."""
     import dlite
     import numpy as np
     from oteapi.models import ResourceConfig
 
-    from oteapi_dlite.strategies.parse import DLiteXLSXParseStrategy
+    from oteapi_dlite.strategies.parse import DLiteXLSXStrategy
 
     thisdir = Path(__file__).absolute().parent
 
@@ -27,10 +27,11 @@ def test_parse_xlsx():
     coll = dlite.Collection()
     session = {"collection_id": coll.uuid}
 
-    parser = DLiteXLSXParseStrategy(config)
+    parser = DLiteXLSXStrategy(config)
     session.update(parser.initialize(session))
 
-    parser = DLiteXLSXParseStrategy(config)
+    # Note that initialize() and get() are called on different parser instances...
+    parser = DLiteXLSXStrategy(config)
     parser.get(session)
 
     inst = coll.get("excel-data")
