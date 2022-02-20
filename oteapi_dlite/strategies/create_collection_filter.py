@@ -32,8 +32,14 @@ class DLiteCollectionFilterStrategy:
             raise ValueError("Missing session")
         if "collection_id" in session:
             raise KeyError("`collection_id` already exists in session.")
-        return SessionUpdate(collection_id=dlite.Collection())
+        coll = dlite.Collection()
+
+        # Save reference to  the collection to ensure that it lives as long as
+        # the session does
+        session["_collection_ref"] = coll
+
+        return SessionUpdate(collection_id=coll.uuid)
 
     def get(self, session: "Optional[Dict[str, Any]]" = None) -> "Dict[str, Any]":
         """Execute the strategy."""
-        return SessionUpdate()
+        return SessionUpdate(collection_id=dlite.Collection())

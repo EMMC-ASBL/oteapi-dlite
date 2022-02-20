@@ -6,7 +6,9 @@ def test_filter_collection():
     import dlite
     from oteapi.models.filterconfig import FilterConfig
 
-    from oteapi_dlite.strategies.filter_collection import DLiteCollectionFilterstrategy
+    from oteapi_dlite.strategies.create_collection_filter import (
+        DLiteCollectionFilterstrategy,
+    )
 
     config = FilterConfig()
 

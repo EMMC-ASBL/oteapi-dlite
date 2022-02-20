@@ -6,10 +6,13 @@ Further reading:
 
 - [OTE-API Core Documentation](https://emmc-asbl.github.io/oteapi-core)
 - [OTE-API Services Documentation](https://emmc-asbl.github.io/oteapi-services)
+- [DLite](https://sintef.github.io/dlite)
+
 
 ## License and copyright
 
 OTEAPI DLite Plugin is released under the [MIT license](LICENSE) with copyright &copy; SINTEF.
+
 
 ## Acknowledgment
 
