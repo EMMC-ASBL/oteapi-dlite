@@ -1,4 +1,6 @@
 """Pytest fixtures for `strategies/`."""
+from pathlib import Path
+
 import pytest
 
 
@@ -8,3 +10,9 @@ def load_plugins() -> None:
     from oteapi.plugins.factories import load_strategies
 
     load_strategies()
+
+
+@pytest.fixture(scope="session")
+def repo_dir() -> Path:
+    """Absolute path to the repository directory."""
+    return Path(__file__).parent.parent.resolve()
