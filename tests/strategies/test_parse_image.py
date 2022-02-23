@@ -2,8 +2,30 @@
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
 import pytest
+from PIL import Image
+
+
+def test_image_config():
+    """Test the DLiteImageConfig class."""
+    from oteapi.models.resourceconfig import ResourceConfig
+
+    from oteapi_dlite.strategies.parse_image import DLiteImageConfig
+
+    config = ResourceConfig(
+        downloadUrl="file://dummy",
+        mediaType="image/png",
+        configuration={
+            "crop": (0, 0, 100, 100),
+            "given_id": "abcdef",
+            "new_key_just_for_testing": 3.14,
+        },
+    )
+    image_config = DLiteImageConfig(**config.configuration)
+    assert image_config.crop == config.configuration["crop"]
+    assert image_config.given_id == config.configuration["given_id"]
+    assert not image_config.metadata
+    assert "new_key_just_for_testing" in image_config.configuration
 
 
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
@@ -23,19 +45,17 @@ def test_image(test_file, target_file, crop_rect) -> None:
     import dlite
     from oteapi.datacache.datacache import DataCache
     from oteapi.models.resourceconfig import ResourceConfig
+
     from oteapi_dlite.strategies.parse_image import DLiteImageParseStrategy
 
-    media_type = "image/" + test_file.rpartition(".")[2]
-    dc = DataCache()
     this_dir = Path(__file__).resolve().parent
-    orig_key = dc.add((this_dir / test_file).read_bytes())
+    orig_key = DataCache().add((this_dir / test_file).read_bytes())
     config = ResourceConfig(
-        downloadUrl="file://dummy",
-        mediaType=media_type,
+        downloadUrl="file://dummy.host/" + str(this_dir / test_file),
+        mediaType="image/" + test_file.rpartition(".")[2],
         configuration={"crop": crop_rect},
     )
-    parser = DLiteImageParseStrategy(config)
-    inst = parser.get(session={"key": orig_key})
+    inst = DLiteImageParseStrategy(config).get(session={"key": orig_key})
 
     # Compare data instance contents to expected values
     contents = dlite.get_instance(inst["uuid"]).asdict()

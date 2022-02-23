@@ -1,19 +1,20 @@
-"""Strategy class for parsing xlsx to a DLite instance."""
+"""Strategy class for parsing an image to a DLite instance."""
 # pylint: disable=no-self-use,unused-argument
 from dataclasses import dataclass
-from pathlib import Path
+from io import BytesIO
 from random import getrandbits
-
-import numpy as np
-from PIL import Image
-from pydantic import BaseModel, Field, HttpUrl
 from typing import TYPE_CHECKING, Any, Dict, Optional, Tuple
 
-import dlite
+import numpy as np
+from dlite.datamodel import DataModel
+from oteapi.datacache.datacache import DataCache
+from oteapi.models import SessionUpdate
+from oteapi.strategies.parse.image import ImageDataParseStrategy
+from PIL import Image
+from pydantic import BaseModel, Field, HttpUrl
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict, Optional, Tuple
-
+    from dlite import Instance
     from oteapi.models.resourceconfig import ResourceConfig
 
 
@@ -28,8 +29,8 @@ class DLiteImageConfig(BaseModel):
         config = kwargs.copy()
         if "crop" in config:
             self.crop = config.pop("crop", self.crop)
-        if "id" in config:
-            self.id = config.pop("id", self.id)
+        if "given_id" in config:
+            self.given_id = config.pop("given_id", self.given_id)
         if "metadata" in config:
             self.metadata = config.pop("metadata", self.metadata)
         if config:
@@ -43,7 +44,7 @@ class DLiteImageConfig(BaseModel):
         None, description="Cropping rectangle. The whole image if None."
     )
 
-    id: Optional[str] = Field(None, description="Optional id for new instance.")
+    given_id: Optional[str] = Field(None, description="Optional id for new instance.")
 
     metadata: Optional[HttpUrl] = Field(
         None,
@@ -72,17 +73,18 @@ class DLiteImageParseStrategy:
     META_PREFIX = "http://onto-ns.com/meta/1.0/generated_from_"
     parse_config: "ResourceConfig"
 
-    def initialize(
-        self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "Dict[str, Any]":
+    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> "SessionUpdate":
         """Initialize."""
-        return {}
+        SessionUpdate()
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> "Dict[str, Any]":
+    def get(self, session: "Optional[Dict[str, Any]]" = None) -> "SessionUpdate":
         """Execute the strategy.
 
-        This method will be called through the strategy-specific endpoint
-        of the OTE-API Services.
+        This method will be called through the strategy-specific
+        endpoint of the OTE-API Services.  It assumes that the image to
+        parse is stored in a data cache, and can be retrieved via a key
+        that is supplied in either the session (highest priority)
+        or in the parser configuration (lowest priority).
 
         Parameters:
             session: A session-specific dictionary context.
@@ -91,49 +93,43 @@ class DLiteImageParseStrategy:
             DLite instance.
 
         """
-        from oteapi.datacache.datacache import DataCache
-        from oteapi.strategies.parse.image import ImageDataParseStrategy
+        if session and "key" in session:
+            key = session["key"]
+        elif "key" in self.parse_config.configuration:
+            key = self.parse_config.configuration["key"]
+        else:
+            raise RuntimeError("Image parser needs an image to parse")
 
         image_config = DLiteImageConfig(**self.parse_config.configuration)
         if image_config.metadata:
             raise NotImplementedError(
                 "User-defined metadata for images not implemented"
             )
-        if "key" not in session:
-            raise RuntimeError("Image parser needs an image to parse")
-        key = session["key"]
-        dc = DataCache()
 
-        if image_config.crop:
-            # Crop the image before creating a DLite datamodel from it
-            # NOTE: Change this when ImageDataParseStrategy.get()
-            # uses datacache key as input
-            suffix = "." + self.parse_config.mediaType.rpartition("/")[2]
-            with dc.getfile(key, suffix=suffix) as tmp_file:
+        with DataCache().getfile(
+            key, suffix=self.parse_config.mediaType.split("/")[1]
+        ) as tmp_file:
+            if image_config.crop:
                 tmp_config = self.parse_config.copy()
                 tmp_config.configuration["filename"] = tmp_file.name
                 tmp_config.configuration["localpath"] = tmp_file.parent
-                parsed = ImageDataParseStrategy(tmp_config).get().parsedOutput
-            cropped_file = Path(parsed["cropped_filename"])
-            key = dc.add(cropped_file.read_bytes())
-            cropped_file.unlink()
-
-        with dc.getfile(key) as source:
-            temp = Image.open(source)
-            image = temp.copy()
-            temp.close()
+                image = Image.open(
+                    BytesIO(ImageDataParseStrategy(tmp_config).get().content)
+                )
+            else:
+                image = Image.open(tmp_file).copy()
 
         data = np.asarray(image)
         if np.ndim(data) == 2:
             data.shape = (data.shape[0], data.shape[1], 1)
-        meta = __class__.create_meta(
+        meta = self.create_meta(
             image,
             self.parse_config.mediaType,
             data.dtype.name,
         )
         inst = meta(
             dims=[image.height, image.width, len(image.getbands())],
-            id=image_config.id,
+            id=image_config.given_id,
         )
         inst["data"] = data
         if image.format:
@@ -145,20 +141,17 @@ class DLiteImageParseStrategy:
         #     inst["animated"] = getattr(image, "is_animated", False)
 
         inst.incref()
-        return {"uuid": inst.uuid}
+        return SessionUpdate(uuid=inst.uuid)
 
     @classmethod
-    def create_meta(
-        cls, image: Image, media_type: str, data_type: str
-    ) -> "dlite.Instance":
+    def create_meta(cls, image: Image, media_type: str, data_type: str) -> "Instance":
         """Create DLite metadata from Image `image`."""
-        from dlite.datamodel import DataModel
 
-        format = media_type.rpartition("/")[2]
+        image_format = media_type.rpartition("/")[2]
         rnd = getrandbits(128)
-        uri = f"{__class__.META_PREFIX}{format}_{rnd:0x}"
+        uri = f"{cls.META_PREFIX}{image_format}_{rnd:0x}"
         metadata = DataModel(
-            uri, description=f"Generated datamodel from {format} file."
+            uri, description=f"Generated datamodel from {image_format} file."
         )
         metadata.add_dimension("nheight", "Vertical number of pixels.")
         metadata.add_dimension("nwidth", "Horizontal number of pixels.")
