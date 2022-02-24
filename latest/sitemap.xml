@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/</loc>
+         <lastmod>2022-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/CHANGELOG/</loc>
+         <lastmod>2022-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/LICENSE/</loc>
+         <lastmod>2022-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/all_strategies/</loc>
+         <lastmod>2022-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse/</loc>
+         <lastmod>2022-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/utils/nputils/</loc>
+         <lastmod>2022-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>
