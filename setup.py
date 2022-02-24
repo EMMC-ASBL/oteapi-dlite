@@ -53,7 +53,7 @@ DEV = [
     f"{_.strip()}"
     for _ in (TOP_DIR / "requirements_dev.txt").read_text(encoding="utf8").splitlines()
     if not _.startswith("#") and "git+" not in _
-]
+] + DOCS
 
 setup(
     name="oteapi-dlite",
