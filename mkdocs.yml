@@ -1,6 +1,6 @@
 site_name: "OTEAPI DLite Plugin"
 site_description: Documentation for the OTEAPI DLite Plugin package
-site_url: https://TEAM4.0.github.io/oteapi-dlite
+site_url: https://TEMMC-ASBL.github.io/oteapi-dlite
 copyright: Copyright &copy; 2022 SINTEF
 
 theme:
@@ -25,8 +25,8 @@ edit_uri: ""
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/TEAM4.0
-      name: "TEAM4.0 on GitHub"
+      link: https://github.com/EMMC-ASBL
+      name: "EMMC-ASBL on GitHub"
   version:
     provider: mike
     default: latest
@@ -83,7 +83,7 @@ plugins:
             - import os
             - os.environ["MKDOCS_BUILD"] = "1"
       watch:
-        - oteapi
+        - oteapi_dlite
   - awesome-pages
 
 nav:
