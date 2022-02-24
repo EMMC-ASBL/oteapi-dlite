@@ -1,4 +1,5 @@
 """Test the image formats in the image parse strategy."""
+# pylint: disable=too-many-locals
 from typing import TYPE_CHECKING
 
 import pytest
@@ -42,7 +43,12 @@ def test_image_config() -> None:
         ("sample_640_426.tiff", None),
     ),
 )
-def test_image(test_file: str, target_file: "Optional[str]", crop_rect: "Optional[Tuple[int, int, int, int]]", static_files: "Path") -> None:
+def test_image(
+    test_file: str,
+    target_file: "Optional[str]",
+    crop_rect: "Optional[Tuple[int, int, int, int]]",
+    static_files: "Path",
+) -> None:
     """Test parsing an image format."""
     import dlite
     import numpy as np

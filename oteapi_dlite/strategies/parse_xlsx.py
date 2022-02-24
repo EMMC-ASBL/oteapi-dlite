@@ -57,9 +57,7 @@ class DLiteXLSXStrategy:
 
     parse_config: "ResourceConfig"
 
-    def initialize(
-        self, session: "Optional[Dict[str, Any]]" = None
-    ) -> SessionUpdate:
+    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Initialize."""
         return SessionUpdate()
 
