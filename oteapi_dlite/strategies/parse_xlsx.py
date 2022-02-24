@@ -9,7 +9,7 @@ import dlite
 import numpy as np
 from dlite.datamodel import DataModel
 from oteapi.models import SessionUpdate
-from oteapi.strategies.parse.excel_xlsx import XLSXParseDataModel, XLSXParseStrategy
+from oteapi.strategies.parse.excel_xlsx import XLSXParseConfig, XLSXParseStrategy
 from pydantic import BaseModel, Field, HttpUrl
 
 from oteapi_dlite.utils import dict2recarray
@@ -17,7 +17,8 @@ from oteapi_dlite.utils import dict2recarray
 if TYPE_CHECKING:
     from typing import Any, Dict
 
-    from oteapi.models.resourceconfig import ResourceConfig
+    from oteapi.interfaces import IParseStrategy
+    from oteapi.models import ResourceConfig
 
 
 class DLiteXLSXConfig(BaseModel):
@@ -38,7 +39,7 @@ class DLiteXLSXConfig(BaseModel):
         description="Optional label for new instance in collection.",
     )
 
-    xlsx_config: XLSXParseDataModel = Field(
+    xlsx_config: XLSXParseConfig = Field(
         ...,
         description="Excel XLSX configurations.",
     )
@@ -58,11 +59,11 @@ class DLiteXLSXStrategy:
 
     def initialize(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "Dict[str, Any]":
+    ) -> SessionUpdate:
         """Initialize."""
         return SessionUpdate()
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> "Dict[str, Any]":
+    def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint of the
@@ -80,25 +81,25 @@ class DLiteXLSXStrategy:
 
         config = DLiteXLSXConfig(**self.parse_config.configuration)
         parse_config = self.parse_config.copy()
-        parse_config.configuration = config.xlsx_config.dict()
+        parse_config.configuration = config.xlsx_config
 
-        parser = XLSXParseStrategy(parse_config)
+        parser: "IParseStrategy" = XLSXParseStrategy(parse_config)
         columns = parser.get(session)["data"]
 
         names, units = zip(*[split_column_name(column) for column in columns])
         rec = dict2recarray(columns, names=names)
 
-        if config.metadata:  # pylint: disable=no-else-raise
+        if config.metadata:
             raise NotImplementedError("")
-        else:
-            meta = infer_metadata(rec, units=units)
+        # else
+        meta = infer_metadata(rec, units=units)
 
         inst = meta(dims=[len(rec)], id=config.id)
         for name in names:
             inst[name] = rec[name]
 
         # Insert inst into collection
-        coll = dlite.get_collection(session["collection_id"])
+        coll: dlite.Collection = dlite.get_collection(session["collection_id"])
         coll.add(config.label, inst)
 
         # Increase refcount of instance to avoid that it is freed when
@@ -121,7 +122,7 @@ def split_column_name(column):
     return name, unit
 
 
-def infer_metadata(rec: np.recarray, units: list) -> "dlite.Instance":
+def infer_metadata(rec: np.recarray, units: list) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
     uri = f"http://onto-ns.com/meta/1.0/generated_from_xlsx_{rnd:0x}"
