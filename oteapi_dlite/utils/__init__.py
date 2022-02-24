@@ -3,3 +3,5 @@
 This module provide some utility functions.
 """
 from .nputils import dict2recarray
+
+__all__ = ("dict2recarray",)
