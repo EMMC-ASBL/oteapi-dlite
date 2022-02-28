@@ -10,7 +10,6 @@ coll = dlite.get_collection(collection_id)
 A DLite collection stores references to DLite instances and relations between them as RDF triples.
 Hence, the collection is a knowledge base for the current use case.
 
-
 In order to make it easy retrieve the collection id when executing a pipeline, the `get()` method of all filters in this plugin should return the `collection_id`.
 
 
