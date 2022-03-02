@@ -73,11 +73,11 @@ class DLiteImageParseStrategy:
     META_PREFIX = "http://onto-ns.com/meta/1.0/generated_from_"
     parse_config: "ResourceConfig"
 
-    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> "SessionUpdate":
+    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Initialize."""
-        SessionUpdate()
+        return SessionUpdate()
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> "SessionUpdate":
+    def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific

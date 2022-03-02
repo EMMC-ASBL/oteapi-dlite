@@ -22,7 +22,7 @@ Further reading:
 
 ## License and copyright
 
-The OTEAPI DLite Plugin is released under the [MIT license](LICENSE) with copyright &copy; SINTEF.
+The OTEAPI DLite Plugin is released under the [MIT license](LICENSE.md) with copyright &copy; SINTEF.
 
 
 ## Acknowledgment

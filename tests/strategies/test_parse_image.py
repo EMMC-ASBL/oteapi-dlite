@@ -1,12 +1,15 @@
 """Test the image formats in the image parse strategy."""
-from pathlib import Path
+# pylint: disable=too-many-locals
+from typing import TYPE_CHECKING
 
-import numpy as np
 import pytest
-from PIL import Image
+
+if TYPE_CHECKING:
+    from pathlib import Path
+    from typing import Optional, Tuple
 
 
-def test_image_config():
+def test_image_config() -> None:
     """Test the DLiteImageConfig class."""
     from oteapi.models.resourceconfig import ResourceConfig
 
@@ -40,25 +43,33 @@ def test_image_config():
         ("sample_640_426.tiff", None),
     ),
 )
-def test_image(test_file, target_file, crop_rect) -> None:
+def test_image(
+    test_file: str,
+    target_file: "Optional[str]",
+    crop_rect: "Optional[Tuple[int, int, int, int]]",
+    static_files: "Path",
+) -> None:
     """Test parsing an image format."""
     import dlite
+    import numpy as np
     from oteapi.datacache.datacache import DataCache
     from oteapi.models.resourceconfig import ResourceConfig
+    from PIL import Image
 
     from oteapi_dlite.strategies.parse_image import DLiteImageParseStrategy
 
-    this_dir = Path(__file__).resolve().parent
-    orig_key = DataCache().add((this_dir / test_file).read_bytes())
+    sample_file = static_files / test_file
+
+    orig_key = DataCache().add(sample_file.read_bytes())
     config = ResourceConfig(
-        downloadUrl="file://dummy.host/" + str(this_dir / test_file),
+        downloadUrl="file://dummy.host/" + str(sample_file),
         mediaType="image/" + test_file.rpartition(".")[2],
         configuration={"crop": crop_rect},
     )
     inst = DLiteImageParseStrategy(config).get(session={"key": orig_key})
 
     # Compare data instance contents to expected values
-    contents = dlite.get_instance(inst["uuid"]).asdict()
+    contents: dict = dlite.get_instance(inst["uuid"]).asdict()
     assert contents["meta"].startswith(
         DLiteImageParseStrategy.META_PREFIX,
     )
@@ -70,11 +81,11 @@ def test_image(test_file, target_file, crop_rect) -> None:
             # Pixel values in instance will not match those in the
             # cropped subset of the original image, so we must compare
             # with a pre-defined target
-            target = Image.open(this_dir / target_file)
+            target = Image.open(static_files / target_file)
         else:
-            target = Image.open(this_dir / test_file)
+            target = Image.open(sample_file)
     else:
-        target = Image.open(this_dir / test_file)
+        target = Image.open(sample_file)
 
     assert dims["nbands"] == len(target.getbands())
     if "format" in contents["properties"]:
