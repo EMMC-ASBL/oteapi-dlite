@@ -2,32 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/</loc>
-         <lastmod>2022-02-24</lastmod>
+         <lastmod>2022-03-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/CHANGELOG/</loc>
-         <lastmod>2022-02-24</lastmod>
+         <lastmod>2022-03-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/LICENSE/</loc>
-         <lastmod>2022-02-24</lastmod>
+         <lastmod>2022-03-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/all_strategies/</loc>
-         <lastmod>2022-02-24</lastmod>
+         <lastmod>2022-03-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse/</loc>
-         <lastmod>2022-02-24</lastmod>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse_image/</loc>
+         <lastmod>2022-03-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse_xlsx/</loc>
+         <lastmod>2022-03-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/utils/nputils/</loc>
-         <lastmod>2022-02-24</lastmod>
+         <lastmod>2022-03-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

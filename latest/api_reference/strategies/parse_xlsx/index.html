@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse/">
+        <link rel="canonical" href="https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse_xlsx/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.3">
     
     
       
-        <title>parse - OTEAPI DLite Plugin</title>
+        <title>parse_xlsx - OTEAPI DLite Plugin</title>
       
     
     
@@ -37,7 +37,7 @@
       
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#parse" class="md-skip">
+        <a href="#parse_xlsx" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              parse
+              parse_xlsx
             
           </span>
         </div>
@@ -333,6 +333,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../parse_image/" class="md-nav__link">
+        parse_image
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -345,12 +359,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          parse
+          parse_xlsx
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        parse
+        parse_xlsx
       </a>
       
         
@@ -369,21 +383,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse" class="md-nav__link">
-    oteapi_dlite.strategies.parse
+  <a href="#oteapi_dlite.strategies.parse_xlsx" class="md-nav__link">
+    oteapi_dlite.strategies.parse_xlsx
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.DLiteXLSXConfig" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXConfig" class="md-nav__link">
     DLiteXLSXConfig
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy" class="md-nav__link">
     DLiteXLSXStrategy
   </a>
   
@@ -391,14 +405,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy.get" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy.get" class="md-nav__link">
     get()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy.initialize" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy.initialize" class="md-nav__link">
     initialize()
   </a>
   
@@ -410,14 +424,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.infer_metadata" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.infer_metadata" class="md-nav__link">
     infer_metadata()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.split_column_name" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.split_column_name" class="md-nav__link">
     split_column_name()
   </a>
   
@@ -519,21 +533,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse" class="md-nav__link">
-    oteapi_dlite.strategies.parse
+  <a href="#oteapi_dlite.strategies.parse_xlsx" class="md-nav__link">
+    oteapi_dlite.strategies.parse_xlsx
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.DLiteXLSXConfig" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXConfig" class="md-nav__link">
     DLiteXLSXConfig
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy" class="md-nav__link">
     DLiteXLSXStrategy
   </a>
   
@@ -541,14 +555,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy.get" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy.get" class="md-nav__link">
     get()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy.initialize" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy.initialize" class="md-nav__link">
     initialize()
   </a>
   
@@ -560,14 +574,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.infer_metadata" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.infer_metadata" class="md-nav__link">
     infer_metadata()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.parse.split_column_name" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.parse_xlsx.split_column_name" class="md-nav__link">
     split_column_name()
   </a>
   
@@ -587,12 +601,12 @@
                 
 
 
-<h1 id="parse">parse<a class="headerlink" href="#parse" title="Permanent link">&para;</a></h1>
+<h1 id="parse_xlsx">parse_xlsx<a class="headerlink" href="#parse_xlsx" title="Permanent link">&para;</a></h1>
 
 
   <div class="doc doc-object doc-module">
 
-<a id="oteapi_dlite.strategies.parse"></a>
+<a id="oteapi_dlite.strategies.parse_xlsx"></a>
     <div class="doc doc-contents first">
 
       <p>Strategy class for parsing Excel XLSX to a DLite instance.</p>
@@ -611,12 +625,12 @@
 
 
 
-<h2 id="oteapi_dlite.strategies.parse.DLiteXLSXConfig" class="doc doc-heading">
+<h2 id="oteapi_dlite.strategies.parse_xlsx.DLiteXLSXConfig" class="doc doc-heading">
           <code>DLiteXLSXConfig</code>
 
 
 
-<a href="#oteapi_dlite.strategies.parse.DLiteXLSXConfig" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents ">
@@ -628,9 +642,8 @@
 
 
           <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
-<span class="normal">24</span>
+            <summary>Source code in <code>oteapi_dlite/strategies/parse_xlsx.py</code></summary>
+            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
@@ -650,7 +663,8 @@
 <span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
-<span class="normal">44</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteXLSXConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteXLSXConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Configuration for DLite XLSX parser.&quot;&quot;&quot;</span>
 
     <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HttpUrl</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -668,7 +682,7 @@
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Optional label for new instance in collection.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">xlsx_config</span><span class="p">:</span> <span class="n">XLSXParseDataModel</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">xlsx_config</span><span class="p">:</span> <span class="n">XLSXParseConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="o">...</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Excel XLSX configurations.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
@@ -705,12 +719,12 @@
 
 
 
-<h2 id="oteapi_dlite.strategies.parse.DLiteXLSXStrategy" class="doc doc-heading">
+<h2 id="oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy" class="doc doc-heading">
           <code>DLiteXLSXStrategy</code>
 
 
 
-<a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents ">
@@ -724,9 +738,8 @@
 
 
           <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 47</span>
-<span class="normal"> 48</span>
+            <summary>Source code in <code>oteapi_dlite/strategies/parse_xlsx.py</code></summary>
+            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 48</span>
 <span class="normal"> 49</span>
 <span class="normal"> 50</span>
 <span class="normal"> 51</span>
@@ -789,8 +802,7 @@
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteXLSXStrategy</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse strategy for Excel XLSX files.</span>
 
@@ -802,13 +814,11 @@
 
     <span class="n">parse_config</span><span class="p">:</span> <span class="s2">&quot;ResourceConfig&quot;</span>
 
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Dict[str, Any]&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionUpdate</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SessionUpdate</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Dict[str, Any]&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionUpdate</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
 <span class="sd">        This method will be called through the strategy-specific endpoint of the</span>
@@ -826,25 +836,25 @@
 
         <span class="n">config</span> <span class="o">=</span> <span class="n">DLiteXLSXConfig</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span>
         <span class="n">parse_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">xlsx_config</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+        <span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">xlsx_config</span>
 
-        <span class="n">parser</span> <span class="o">=</span> <span class="n">XLSXParseStrategy</span><span class="p">(</span><span class="n">parse_config</span><span class="p">)</span>
+        <span class="n">parser</span><span class="p">:</span> <span class="s2">&quot;IParseStrategy&quot;</span> <span class="o">=</span> <span class="n">XLSXParseStrategy</span><span class="p">(</span><span class="n">parse_config</span><span class="p">)</span>
         <span class="n">columns</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="p">)[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
 
         <span class="n">names</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">])</span>
         <span class="n">rec</span> <span class="o">=</span> <span class="n">dict2recarray</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>  <span class="c1"># pylint: disable=no-else-raise</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">meta</span> <span class="o">=</span> <span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
+        <span class="c1"># else</span>
+        <span class="n">meta</span> <span class="o">=</span> <span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
 
         <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)],</span> <span class="nb">id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
             <span class="n">inst</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
 
         <span class="c1"># Insert inst into collection</span>
-        <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+        <span class="n">coll</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
         <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
         <span class="c1"># Increase refcount of instance to avoid that it is freed when</span>
@@ -876,11 +886,11 @@
 
 
 
-<h3 id="oteapi_dlite.strategies.parse.DLiteXLSXStrategy.get" class="doc doc-heading">
+<h3 id="oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy.get" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
-<a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -924,7 +934,7 @@ OTE-API Services.</p>
     <tbody>
         <tr>
           <td>
-                <code>&#39;Dict[str, Any]&#39;</code>
+                <code><span title="oteapi.models.SessionUpdate">SessionUpdate</span></code>
           </td>
           <td><p>DLite instance.</p></td>
         </tr>
@@ -932,8 +942,9 @@ OTE-API Services.</p>
   </table>
 
         <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 65</span>
+          <summary>Source code in <code>oteapi_dlite/strategies/parse_xlsx.py</code></summary>
+          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 64</span>
+<span class="normal"> 65</span>
 <span class="normal"> 66</span>
 <span class="normal"> 67</span>
 <span class="normal"> 68</span>
@@ -979,8 +990,7 @@ OTE-API Services.</p>
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Dict[str, Any]&quot;</span><span class="p">:</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionUpdate</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
 <span class="sd">    This method will be called through the strategy-specific endpoint of the</span>
@@ -998,25 +1008,25 @@ OTE-API Services.</p>
 
     <span class="n">config</span> <span class="o">=</span> <span class="n">DLiteXLSXConfig</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span>
     <span class="n">parse_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">xlsx_config</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+    <span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">xlsx_config</span>
 
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">XLSXParseStrategy</span><span class="p">(</span><span class="n">parse_config</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">:</span> <span class="s2">&quot;IParseStrategy&quot;</span> <span class="o">=</span> <span class="n">XLSXParseStrategy</span><span class="p">(</span><span class="n">parse_config</span><span class="p">)</span>
     <span class="n">columns</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="p">)[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
 
     <span class="n">names</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">])</span>
     <span class="n">rec</span> <span class="o">=</span> <span class="n">dict2recarray</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>  <span class="c1"># pylint: disable=no-else-raise</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">meta</span> <span class="o">=</span> <span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
+    <span class="c1"># else</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
 
     <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)],</span> <span class="nb">id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
         <span class="n">inst</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
 
     <span class="c1"># Insert inst into collection</span>
-    <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+    <span class="n">coll</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
     <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
     <span class="c1"># Increase refcount of instance to avoid that it is freed when</span>
@@ -1041,11 +1051,11 @@ OTE-API Services.</p>
 
 
 
-<h3 id="oteapi_dlite.strategies.parse.DLiteXLSXStrategy.initialize" class="doc doc-heading">
+<h3 id="oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy.initialize" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
-<a href="#oteapi_dlite.strategies.parse.DLiteXLSXStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#oteapi_dlite.strategies.parse_xlsx.DLiteXLSXStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -1053,14 +1063,10 @@ OTE-API Services.</p>
       <p>Initialize.</p>
 
         <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
-<span class="normal">60</span>
+          <summary>Source code in <code>oteapi_dlite/strategies/parse_xlsx.py</code></summary>
+          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
 <span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Dict[str, Any]&quot;</span><span class="p">:</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionUpdate</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">SessionUpdate</span><span class="p">()</span>
 </code></pre></div>
@@ -1087,11 +1093,11 @@ OTE-API Services.</p>
 
 
 
-<h2 id="oteapi_dlite.strategies.parse.infer_metadata" class="doc doc-heading">
+<h2 id="oteapi_dlite.strategies.parse_xlsx.infer_metadata" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span></code>
 
 
-<a href="#oteapi_dlite.strategies.parse.infer_metadata" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#oteapi_dlite.strategies.parse_xlsx.infer_metadata" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents ">
@@ -1099,8 +1105,9 @@ OTE-API Services.</p>
       <p>Infer dlite metadata from recarray <code>rec</code>.</p>
 
         <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span>
+          <summary>Source code in <code>oteapi_dlite/strategies/parse_xlsx.py</code></summary>
+          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
+<span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
 <span class="normal">127</span>
@@ -1109,8 +1116,7 @@ OTE-API Services.</p>
 <span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;dlite.Instance&quot;</span><span class="p">:</span>
+<span class="normal">133</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Infer dlite metadata from recarray `rec`.&quot;&quot;&quot;</span>
     <span class="n">rnd</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
     <span class="n">uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://onto-ns.com/meta/1.0/generated_from_xlsx_</span><span class="si">{</span><span class="n">rnd</span><span class="si">:</span><span class="s2">0x</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -1134,11 +1140,11 @@ OTE-API Services.</p>
 
 
 
-<h2 id="oteapi_dlite.strategies.parse.split_column_name" class="doc doc-heading">
+<h2 id="oteapi_dlite.strategies.parse_xlsx.split_column_name" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">)</span></code>
 
 
-<a href="#oteapi_dlite.strategies.parse.split_column_name" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#oteapi_dlite.strategies.parse_xlsx.split_column_name" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents ">
@@ -1146,14 +1152,14 @@ OTE-API Services.</p>
       <p>Split column name into a (name, unit) tuple.</p>
 
         <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">115</span>
+          <summary>Source code in <code>oteapi_dlite/strategies/parse_xlsx.py</code></summary>
+          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
+<span class="normal">115</span>
 <span class="normal">116</span>
 <span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+<span class="normal">120</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Split column name into a (name, unit) tuple.&quot;&quot;&quot;</span>
     <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*([^ ([&lt;]+)\s*[([&lt;]?([^] )&gt;]*)[])&gt;]?&quot;</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
@@ -1194,7 +1200,7 @@ OTE-API Services.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../../all_strategies/" class="md-footer__link md-footer__link--prev" aria-label="Previous: OTEAPI DLite Plugin Strategies" rel="prev">
+        <a href="../parse_image/" class="md-footer__link md-footer__link--prev" aria-label="Previous: parse_image" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1203,7 +1209,7 @@ OTE-API Services.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              OTEAPI DLite Plugin Strategies
+              parse_image
             </div>
           </div>
         </a>
@@ -1263,7 +1269,7 @@ OTE-API Services.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.bd0b6b67.min.js", "version": {"provider": "mike", "default": "latest"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.8aa65030.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.b88e97c5.min.js"></script>
       
     
   </body>
