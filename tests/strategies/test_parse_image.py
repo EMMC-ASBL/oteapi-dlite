@@ -80,7 +80,7 @@ def test_image(
     inst.meta.save("json", "Image.json", "mode=w")
 
     # Compare data instance contents to expected values
-    assert inst.meta.uri.startswith(DLiteImageParseStrategy.META_PREFIX)
+    assert inst.meta.uri.startswith("http://onto-ns.com/meta")
     dims = inst.dimensions
     if crop_rect:
         assert dims["nheight"] == crop_rect[3] - crop_rect[1]

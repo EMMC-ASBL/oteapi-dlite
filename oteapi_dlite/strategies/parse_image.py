@@ -2,12 +2,10 @@
 # pylint: disable=no-self-use,unused-argument
 from dataclasses import dataclass
 from io import BytesIO
-from random import getrandbits
 from typing import TYPE_CHECKING, Optional, Tuple
 
 import dlite
 import numpy as np
-from dlite.datamodel import DataModel
 from oteapi.datacache.datacache import DataCache
 from oteapi.models import SessionUpdate
 from oteapi.strategies.parse.image import ImageDataParseStrategy
@@ -51,7 +49,6 @@ class DLiteImageParseStrategy:
 
     """
 
-    META_PREFIX = "http://onto-ns.com/meta"
     parse_config: "ResourceConfig"
 
     def initialize(self, session: "Dict[str, Any]" = None) -> SessionUpdate:
@@ -112,24 +109,3 @@ class DLiteImageParseStrategy:
         coll.add(image_config.image_label, inst)
 
         return SessionUpdate(collection_id=coll.uuid)
-
-    @classmethod
-    def create_meta(cls, image: Image, media_type: str, data_type: str) -> "Instance":
-        """Create DLite metadata from Image `image`."""
-
-        image_format = media_type.rpartition("/")[2]
-        rnd = getrandbits(128)
-        uri = f"{cls.META_PREFIX}/1.0/generated_from_{image_format}_{rnd:0x}"
-        metadata = DataModel(
-            uri, description=f"Generated datamodel from {image_format} file."
-        )
-        metadata.add_dimension("nheight", "Vertical number of pixels.")
-        metadata.add_dimension("nwidth", "Horizontal number of pixels.")
-        metadata.add_dimension("nbands", "Number of bands per pixel.")
-        metadata.add_property(
-            "data",
-            data_type,
-            ["nheight", "nwidth", "nbands"],
-            description="The image contents.",
-        )
-        return metadata.get()
