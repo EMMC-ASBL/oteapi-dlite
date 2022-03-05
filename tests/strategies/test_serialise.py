@@ -17,7 +17,7 @@ def test_serialise(tmp_dir):
             "driver": "json",
             "location": str(tmp_dir / "coll.json"),
             "options": "mode=w",
-            "labels": ["image"],
+            # "labels": ["image"],
         },
     )
 

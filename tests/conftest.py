@@ -33,5 +33,5 @@ def static_files(repo_dir: "Path") -> "Path":
 def tmp_dir(repo_dir: "Path") -> "Path":
     """Absolute path to directory output files created by the tests."""
     tmpdir = repo_dir / "tests" / "tmp"
-    tmpdir.mkdir(mode=700, exist_ok=True)
+    tmpdir.mkdir(exist_ok=True)
     return tmpdir
