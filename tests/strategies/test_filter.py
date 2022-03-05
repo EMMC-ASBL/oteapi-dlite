@@ -19,3 +19,8 @@ def test_create_collection():
     coll_id = session["collection_id"]
     coll = dlite.get_collection(coll_id)
     assert isinstance(coll, dlite.Collection)
+
+    collfilter = CreateCollectionStrategy(config)
+    session.update(collfilter.get(session))
+    assert "collection_id" in session
+    assert session["collection_id"] == coll_id
