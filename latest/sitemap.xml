@@ -41,6 +41,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/serialise/</loc>
+         <lastmod>2022-03-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/utils/nputils/</loc>
          <lastmod>2022-03-05</lastmod>
          <changefreq>daily</changefreq>
