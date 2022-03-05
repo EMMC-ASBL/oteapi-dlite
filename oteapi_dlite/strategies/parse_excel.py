@@ -80,7 +80,9 @@ class DLiteExcelStrategy:
 
     def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Initialize."""
-        return SessionUpdate()
+        if session is None:
+            raise ValueError("Missing session")
+        return DLiteSessionUpdate(collection_id=session["collection_id"])
 
     def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Execute the strategy.

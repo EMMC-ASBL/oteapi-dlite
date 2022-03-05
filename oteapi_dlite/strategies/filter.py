@@ -4,7 +4,8 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 import dlite
-from oteapi.models import SessionUpdate
+
+from oteapi_dlite.models import DLiteSessionUpdate
 
 if TYPE_CHECKING:
     from typing import Any, Dict, Optional
@@ -24,7 +25,9 @@ class CreateCollectionStrategy:
 
     filter_config: "FilterConfig"
 
-    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
+    def initialize(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> DLiteSessionUpdate:
         """Initialize."""
         if session is None:
             raise ValueError("Missing session")
@@ -36,8 +39,10 @@ class CreateCollectionStrategy:
         # the session does
         session["_collection_ref"] = coll
 
-        return SessionUpdate(collection_id=coll.uuid)
+        return DLiteSessionUpdate(collection_id=coll.uuid)
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
+    def get(self, session: "Optional[Dict[str, Any]]" = None) -> DLiteSessionUpdate:
         """Execute the strategy."""
-        return SessionUpdate(collection_id=dlite.Collection())
+        if session is None:
+            raise ValueError("Missing session")
+        return DLiteSessionUpdate(collection_id=session["collection_id"])
