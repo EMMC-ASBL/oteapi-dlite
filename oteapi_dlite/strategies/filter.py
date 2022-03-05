@@ -24,9 +24,7 @@ class CreateCollectionStrategy:
 
     filter_config: "FilterConfig"
 
-    def initialize(
-        self, session: "Optional[Dict[str, Any]]" = None
-    ) -> SessionUpdate:
+    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Initialize."""
         if session is None:
             raise ValueError("Missing session")
@@ -34,7 +32,7 @@ class CreateCollectionStrategy:
             raise KeyError("`collection_id` already exists in session.")
         coll = dlite.Collection()
 
-        # Save reference to  the collection to ensure that it lives as long as
+        # Save reference to the collection to ensure that it lives as long as
         # the session does
         session["_collection_ref"] = coll
 
