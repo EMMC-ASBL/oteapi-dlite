@@ -26,7 +26,7 @@ class CreateCollectionStrategy:
 
     def initialize(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "Dict[str, Any]":
+    ) -> SessionUpdate:
         """Initialize."""
         if session is None:
             raise ValueError("Missing session")
@@ -40,6 +40,6 @@ class CreateCollectionStrategy:
 
         return SessionUpdate(collection_id=coll.uuid)
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> "Dict[str, Any]":
+    def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Execute the strategy."""
         return SessionUpdate(collection_id=dlite.Collection())
