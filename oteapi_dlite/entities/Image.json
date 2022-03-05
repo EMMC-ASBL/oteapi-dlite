@@ -1,0 +1,26 @@
+{
+  "uri": "http://onto-ns.com/meta/1.0/Image",
+  "description": "Image data model.",
+  "dimensions": [
+    {
+      "name": "nheight",
+      "description": "Vertical number of pixels."
+    },
+    {
+      "name": "nwidth",
+      "description": "Horizontal number of pixels."
+    },
+    {
+      "name": "nbands",
+      "description": "Number of bands for each pixel."
+    }
+  ],
+  "properties": [
+    {
+      "name": "data",
+      "type": "uint8",
+      "dims": ["nheight", "nwidth", "nbands"],
+      "description": "The image contents."
+    }
+  ]
+}

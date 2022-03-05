@@ -5,21 +5,21 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-def test_parse_xlsx(static_files: "Path") -> None:
-    """Test `xlsx` parse strategy."""
+def test_parse_excel(static_files: "Path") -> None:
+    """Test excel parse strategy."""
     import dlite
     import numpy as np
     from oteapi.models import ResourceConfig
 
-    from oteapi_dlite.strategies.parse_xlsx import DLiteXLSXStrategy
+    from oteapi_dlite.strategies.parse_excel import DLiteExcelStrategy
 
-    sample_file = static_files / "test_parse_xlsx.xlsx"
+    sample_file = static_files / "test_parse_excel.xlsx"
 
     config = ResourceConfig(
         downloadUrl=sample_file.as_uri(),
         mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         configuration={
-            "xlsx_config": {
+            "excel_config": {
                 "worksheet": "Sheet1",
                 "header_row": "1",
                 "row_from": "2",
@@ -30,11 +30,11 @@ def test_parse_xlsx(static_files: "Path") -> None:
     coll = dlite.Collection()
     session = {"collection_id": coll.uuid}
 
-    parser = DLiteXLSXStrategy(config)
+    parser = DLiteExcelStrategy(config)
     session.update(parser.initialize(session))
 
     # Note that initialize() and get() are called on different parser instances...
-    parser = DLiteXLSXStrategy(config)
+    parser = DLiteExcelStrategy(config)
     parser.get(session)
 
     inst = coll.get("excel-data")
