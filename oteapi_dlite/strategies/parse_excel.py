@@ -1,4 +1,4 @@
-"""Strategy class for parsing Excel XLSX to a DLite instance."""
+"""Strategy for parsing an Excel spreadsheet to a DLite instance."""
 # pylint: disable=no-self-use,unused-argument
 import re
 from dataclasses import dataclass
@@ -8,21 +8,21 @@ from typing import TYPE_CHECKING, Optional
 import dlite
 import numpy as np
 from dlite.datamodel import DataModel
-from oteapi.models import SessionUpdate
+from oteapi.models import AttrDict, ResourceConfig, SessionUpdate
 from oteapi.strategies.parse.excel_xlsx import XLSXParseConfig, XLSXParseStrategy
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import Field, HttpUrl
 
+from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import dict2recarray
 
 if TYPE_CHECKING:
     from typing import Any, Dict
 
     from oteapi.interfaces import IParseStrategy
-    from oteapi.models import ResourceConfig
 
 
-class DLiteXLSXConfig(BaseModel):
-    """Configuration for DLite XLSX parser."""
+class DLiteExcelParseConfig(AttrDict):
+    """Configuration for DLite Excel parser."""
 
     metadata: Optional[HttpUrl] = Field(
         None,
@@ -39,15 +39,36 @@ class DLiteXLSXConfig(BaseModel):
         description="Optional label for new instance in collection.",
     )
 
-    xlsx_config: XLSXParseConfig = Field(
+    excel_config: XLSXParseConfig = Field(
         ...,
-        description="Excel XLSX configurations.",
+        description="DLite-specific excel configurations.",
+    )
+
+
+class DLiteExcelParseResourceConfig(ResourceConfig):
+    """DLite excel parse strategy resource config."""
+
+    configuration: DLiteExcelParseConfig = Field(
+        ..., description="DLite excel parse strategy-specific configuration."
+    )
+
+
+class DLiteExcelSessionUpdate(DLiteSessionUpdate):
+    """Class for returning values from DLite excel parser."""
+
+    inst_uuid: str = Field(
+        ...,
+        description="UUID of new instance.",
+    )
+    label: str = Field(
+        ...,
+        description="Label of the new instance in the collection.",
     )
 
 
 @dataclass
-class DLiteXLSXStrategy:
-    """Parse strategy for Excel XLSX files.
+class DLiteExcelStrategy:
+    """Parse strategy for Excel files.
 
     **Registers strategies**:
 
@@ -59,7 +80,9 @@ class DLiteXLSXStrategy:
 
     def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Initialize."""
-        return SessionUpdate()
+        if session is None:
+            raise ValueError("Missing session")
+        return DLiteSessionUpdate(collection_id=session["collection_id"])
 
     def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Execute the strategy.
@@ -77,11 +100,11 @@ class DLiteXLSXStrategy:
         if session is None:
             raise ValueError("Missing session")
 
-        config = DLiteXLSXConfig(**self.parse_config.configuration)
-        parse_config = self.parse_config.copy()
-        parse_config.configuration = config.xlsx_config
+        config = DLiteExcelParseConfig(**self.parse_config.configuration)
 
-        parser: "IParseStrategy" = XLSXParseStrategy(parse_config)
+        xlsx_session = self.parse_config.copy()
+        xlsx_session.configuration = config.excel_config
+        parser: "IParseStrategy" = XLSXParseStrategy(xlsx_session)
         columns = parser.get(session)["data"]
 
         names, units = zip(*[split_column_name(column) for column in columns])
@@ -104,9 +127,9 @@ class DLiteXLSXStrategy:
         # returning from this function
         inst.incref()
 
-        return SessionUpdate(
-            inst_uuid=inst.uuid,
+        return DLiteExcelSessionUpdate(
             collection_id=coll.uuid,
+            inst_uuid=inst.uuid,
             label=config.label,
         )
 
@@ -123,8 +146,11 @@ def split_column_name(column):
 def infer_metadata(rec: np.recarray, units: list) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
-    uri = f"http://onto-ns.com/meta/1.0/generated_from_xlsx_{rnd:0x}"
-    metadata = DataModel(uri, description="Generated datamodel from xlsx file.")
+    uri = f"http://onto-ns.com/meta/1.0/generated_from_excel_{rnd:0x}"
+    metadata = DataModel(
+        uri,
+        description="Generated datamodel from excel file.",
+    )
     metadata.add_dimension("nrows", "Number of rows.")
     for i, name in enumerate(rec.dtype.names):
         dtype = rec[name].dtype
