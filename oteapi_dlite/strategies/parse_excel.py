@@ -10,7 +10,7 @@ import numpy as np
 from dlite.datamodel import DataModel
 from oteapi.models import AttrDict, ResourceConfig, SessionUpdate
 from oteapi.strategies.parse.excel_xlsx import XLSXParseConfig, XLSXParseStrategy
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import Field, HttpUrl
 
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import dict2recarray
@@ -19,7 +19,6 @@ if TYPE_CHECKING:
     from typing import Any, Dict
 
     from oteapi.interfaces import IParseStrategy
-    from oteapi.models import ResourceConfig
 
 
 class DLiteExcelParseConfig(AttrDict):
@@ -81,7 +80,7 @@ class DLiteExcelStrategy:
 
     def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Initialize."""
-        return DLiteSessionUpdate()
+        return SessionUpdate()
 
     def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Execute the strategy.
@@ -101,17 +100,8 @@ class DLiteExcelStrategy:
 
         config = DLiteExcelParseConfig(**self.parse_config.configuration)
 
-        print("\n*** config")
-        print(config)
-        print("\n*** self.parse_config")
-        print(self.parse_config)
-
         xlsx_session = self.parse_config.copy()
         xlsx_session.configuration = config.excel_config
-
-        print("\n*** xlsx_session")
-        print(xlsx_session)
-
         parser: "IParseStrategy" = XLSXParseStrategy(xlsx_session)
         columns = parser.get(session)["data"]
 

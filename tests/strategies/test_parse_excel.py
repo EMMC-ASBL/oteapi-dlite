@@ -26,9 +26,6 @@ def test_parse_excel(static_files: "Path") -> None:
             },
         },
     )
-    print()
-    print("config")
-    print(config)
 
     coll = dlite.Collection()
     session = {"collection_id": coll.uuid}
