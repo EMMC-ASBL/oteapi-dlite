@@ -20,27 +20,24 @@ def test_image_config() -> None:
         mediaType="image/png",
         configuration={
             "crop": (0, 0, 100, 100),
-            "given_id": "abcdef",
-            "new_key_just_for_testing": 3.14,
+            "image_label": "test_image",
         },
     )
     image_config = DLiteImageConfig(**config.configuration)
     assert image_config.crop == config.configuration["crop"]
-    assert image_config.given_id == config.configuration["given_id"]
-    assert not image_config.metadata
-    assert "new_key_just_for_testing" in image_config.configuration
+    assert image_config.image_label == config.configuration["image_label"]
 
 
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
 @pytest.mark.parametrize(
     "test_file, target_file",
     (
-        ("sample_1280_853.gif", "sample_150_100.gif"),
-        ("sample_1280_853.jpeg", "sample_150_100.jpeg"),
-        ("sample_1280_853.jpg", "sample_150_100.jpeg"),
+        # ("sample_1280_853.gif", "sample_150_100.gif"),
+        # ("sample_1280_853.jpeg", "sample_150_100.jpeg"),
+        # ("sample_1280_853.jpg", "sample_150_100.jpeg"),
         # ("sample1.jp2", "sample1_150_100.jp2"), DISABLED BECAUSE SLOW
         ("sample_640_426.png", None),
-        ("sample_640_426.tiff", None),
+        # ("sample_640_426.tiff", None),
     ),
 )
 def test_image(
@@ -52,8 +49,8 @@ def test_image(
     """Test parsing an image format."""
     import dlite
     import numpy as np
-    from oteapi.datacache.datacache import DataCache
-    from oteapi.models.resourceconfig import ResourceConfig
+    from oteapi.datacache import DataCache
+    from oteapi.models import ResourceConfig
     from PIL import Image
 
     from oteapi_dlite.strategies.parse_image import DLiteImageParseStrategy
@@ -64,16 +61,28 @@ def test_image(
     config = ResourceConfig(
         downloadUrl="file://dummy.host/" + str(sample_file),
         mediaType="image/" + test_file.rpartition(".")[2],
-        configuration={"crop": crop_rect},
+        configuration={
+            "image_label": "test_image",
+            "crop": crop_rect,
+        },
     )
-    inst = DLiteImageParseStrategy(config).get(session={"key": orig_key})
+    coll = dlite.Collection()
+    session = {
+        "collection_id": coll.uuid,
+        "key": orig_key,
+    }
+    parser = DLiteImageParseStrategy(config)
+    output = parser.get(session)
+    assert "collection_id" in output
+    assert output.collection_id == coll.uuid
+
+    coll2 = dlite.get_collection(session["collection_id"])
+    inst = coll2.get("test_image")
+    inst.meta.save("json", "Image.json", "mode=w")
 
     # Compare data instance contents to expected values
-    contents: dict = dlite.get_instance(inst["uuid"]).asdict()
-    assert contents["meta"].startswith(
-        DLiteImageParseStrategy.META_PREFIX,
-    )
-    dims = contents["dimensions"]
+    assert inst.meta.uri.startswith("http://onto-ns.com/meta")
+    dims = inst.dimensions
     if crop_rect:
         assert dims["nheight"] == crop_rect[3] - crop_rect[1]
         assert dims["nwidth"] == crop_rect[2] - crop_rect[0]
@@ -88,8 +97,8 @@ def test_image(
         target = Image.open(sample_file)
 
     assert dims["nbands"] == len(target.getbands())
-    if "format" in contents["properties"]:
-        assert contents["properties"]["format"] == target.format
+    if "format" in inst.properties:
+        assert inst.format == target.format
 
     subset = np.asarray(target)
     if np.ndim(subset) == 2:
@@ -102,4 +111,4 @@ def test_image(
         ]
 
     # Compare pixel values
-    assert np.all(np.equal(contents["properties"]["data"], subset))
+    assert np.all(np.equal(inst.data, subset))
