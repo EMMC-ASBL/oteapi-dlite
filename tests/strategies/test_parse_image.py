@@ -78,7 +78,6 @@ def test_image(
 
     coll2 = dlite.get_collection(session["collection_id"])
     inst = coll2.get("test_image")
-    inst.meta.save("json", "Image.json", "mode=w")
 
     # Compare data instance contents to expected values
     assert inst.meta.uri.startswith("http://onto-ns.com/meta")
