@@ -27,3 +27,11 @@ def repo_dir() -> "Path":
 def static_files(repo_dir: "Path") -> "Path":
     """Absolute path to the static directory filled with test files."""
     return repo_dir / "tests" / "static"
+
+
+@pytest.fixture(scope="session")
+def tmp_dir(repo_dir: "Path") -> "Path":
+    """Absolute path to directory output files created by the tests."""
+    tmpdir = repo_dir / "tests" / "tmp"
+    tmpdir.mkdir(mode=700, exist_ok=True)
+    return tmpdir
