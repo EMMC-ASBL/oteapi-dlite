@@ -1,14 +1,13 @@
 """Tests serialise strategy."""
 
+
 def test_serialise(tmp_dir):
     """Test the serialise filter."""
     import dlite
-    from oteapi.models.filterconfig import FilterConfig
 
     from oteapi_dlite.strategies.serialise import (
-        SerialiseStrategy,
         SerialiseFilterConfig,
-        SerialiseConfig,
+        SerialiseStrategy,
     )
     from oteapi_dlite.utils import get_meta
 
@@ -30,9 +29,11 @@ def test_serialise(tmp_dir):
 
     # Imitate other filters adding stuff to the collection
     coll.add_relation("subject", "predicate", "object")
-    Image = get_meta("http://onto-ns.com/meta/1.0/Image")
+    Image = get_meta(  # pylint: disable=invalid-name
+        "http://onto-ns.com/meta/1.0/Image"
+    )
     image = Image([2, 2, 1])
-    image.data = [[[1], [2]],[[3], [4]]]
+    image.data = [[[1], [2]], [[3], [4]]]
     coll.add("image", image)
 
     serialiser = SerialiseStrategy(config)

@@ -1,15 +1,17 @@
 """Filter for serialisation using DLite."""
-# pylint: disable=no-self-use,unused-argument
+# pylint: disable=no-self-use
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, Sequence
+from typing import TYPE_CHECKING, Optional, Sequence
 
 import dlite
-
-from pydantic import Field
 from oteapi.models import AttrDict, FilterConfig
+from pydantic import Field
 
 from oteapi_dlite.models import DLiteSessionUpdate
+
+if TYPE_CHECKING:  # pragma: no cover
+    from typing import Any, Dict
 
 
 class SerialiseConfig(AttrDict):
@@ -37,6 +39,8 @@ class SerialiseConfig(AttrDict):
 
 
 class SerialiseFilterConfig(FilterConfig):
+    """Filter config for serialise."""
+
     configuration: SerialiseConfig = Field(
         ...,
         description="Serialise-specific configurations.",

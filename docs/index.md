@@ -16,8 +16,8 @@ In order to make it easy retrieve the collection id when executing a pipeline, t
 Further reading:
 
 - [OTE-API Core Documentation](https://emmc-asbl.github.io/oteapi-core)
-- [OTE-API Services Documentation](https://emmc-asbl.github.io/oteapi-services)
-- [DLite](https://sintef.github.io/dlite)
+- [OTE-API Services Documentation](https://github.com/EMMC-ASBL/oteapi-services)
+- [DLite](https://github.com/SINTEF/dlite)
 
 
 ## License and copyright
