@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Optional, Tuple
 import dlite
 import numpy as np
 from oteapi.datacache.datacache import DataCache
-from oteapi.models import SessionUpdate
 from oteapi.strategies.parse.image import ImageDataParseStrategy
 from PIL import Image
 from pydantic import BaseModel, Field
@@ -51,13 +50,13 @@ class DLiteImageParseStrategy:
 
     parse_config: "ResourceConfig"
 
-    def initialize(self, session: "Dict[str, Any]" = None) -> SessionUpdate:
+    def initialize(self, session: "Dict[str, Any]" = None) -> DLiteSessionUpdate:
         """Initialize."""
         if session is None:
             raise ValueError("Missing session")
         return DLiteSessionUpdate(collection_id=session["collection_id"])
 
-    def get(self, session: "Dict[str, Any]" = None) -> SessionUpdate:
+    def get(self, session: "Dict[str, Any]" = None) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific
@@ -108,4 +107,4 @@ class DLiteImageParseStrategy:
         coll = dlite.get_collection(session["collection_id"])
         coll.add(image_config.image_label, inst)
 
-        return SessionUpdate(collection_id=coll.uuid)
+        return DLiteSessionUpdate(collection_id=coll.uuid)

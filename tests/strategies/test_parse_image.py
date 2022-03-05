@@ -50,7 +50,7 @@ def test_image(
     import dlite
     import numpy as np
     from oteapi.datacache import DataCache
-    from oteapi.models import AttrDict, ResourceConfig
+    from oteapi.models import ResourceConfig
     from PIL import Image
 
     from oteapi_dlite.strategies.parse_image import DLiteImageParseStrategy
@@ -67,16 +67,17 @@ def test_image(
         },
     )
     coll = dlite.Collection()
-    session = AttrDict(
-        collection_id=coll.uuid,
-        key=orig_key,
-    )
+    session = {
+        "collection_id": coll.uuid,
+        "key": orig_key,
+    }
     parser = DLiteImageParseStrategy(config)
     output = parser.get(session)
     assert "collection_id" in output
+    assert output.collection_id == coll.uuid
 
-    coll = dlite.get_collection(session.collection_id)
-    inst = coll.get("test_image")
+    coll2 = dlite.get_collection(session["collection_id"])
+    inst = coll2.get("test_image")
     inst.meta.save("json", "Image.json", "mode=w")
 
     # Compare data instance contents to expected values
