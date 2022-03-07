@@ -49,7 +49,7 @@ jobs:
       run: |
         invoke setver --version="${GITHUB_REF#refs/tags/}"
 
-        git add oteapi/__init__.py CHANGELOG.md
+        git add oteapi_dlite/__init__.py CHANGELOG.md
         git commit -m "Release ${GITHUB_REF#refs/tags/} - Changelog"
 
         TAG_MSG=.github/utils/release_tag_msg.txt
