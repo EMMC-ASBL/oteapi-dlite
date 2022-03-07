@@ -47,7 +47,7 @@ jobs:
 
     - name: Update version and tag
       run: |
-        invoke setver --ver="${GITHUB_REF#refs/tags/}"
+        invoke setver --version="${GITHUB_REF#refs/tags/}"
 
         git add oteapi/__init__.py CHANGELOG.md
         git commit -m "Release ${GITHUB_REF#refs/tags/} - Changelog"
