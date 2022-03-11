@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.0.5](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.0.5) (2022-03-11)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.0.4...v0.0.5)
+
+**Merged pull requests:**
+
+- Updated strategy names [\#27](https://github.com/EMMC-ASBL/oteapi-dlite/pull/27) ([jesper-friis](https://github.com/jesper-friis))
+- \[Auto-generated\] Update dependencies [\#26](https://github.com/EMMC-ASBL/oteapi-dlite/pull/26) ([TEAM4-0](https://github.com/TEAM4-0))
+- Updated dlite image parse strategy according to changes in the image parse strategy in oteapi core PR \#108 [\#18](https://github.com/EMMC-ASBL/oteapi-dlite/pull/18) ([jesper-friis](https://github.com/jesper-friis))
+
 ## [v0.0.4](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.0.4) (2022-03-07)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.0.3...v0.0.4)
