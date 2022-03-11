@@ -485,6 +485,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.parse_image.DLiteImageResourceConfig" class="md-nav__link">
+    DLiteImageResourceConfig
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -649,6 +656,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.parse_image.DLiteImageResourceConfig" class="md-nav__link">
+    DLiteImageResourceConfig
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -697,7 +711,7 @@
 
     <div class="doc doc-contents ">
         <p class="doc doc-class-bases">
-          Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+          Bases: <code><span title="oteapi.strategies.parse.image.ImageParserConfig">ImageParserConfig</span></code></p>
 
 
       <p>Configuration for DLite image parser.</p>
@@ -705,21 +719,15 @@
 
           <details class="quote">
             <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
-<span class="normal">25</span>
+            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageConfig</span><span class="p">(</span><span class="n">ImageParserConfig</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Configuration for DLite image parser.&quot;&quot;&quot;</span>
 
-    <span class="n">crop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Cropping rectangle. The whole image if None.&quot;</span>
-    <span class="p">)</span>
     <span class="n">image_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="s2">&quot;image&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Label to assign to the image in the collection.&quot;</span><span class="p">,</span>
@@ -731,7 +739,6 @@
 
 
   <div class="doc doc-children">
-
 
 
 
@@ -780,14 +787,7 @@
 
           <details class="quote">
             <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
+            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 43</span>
 <span class="normal"> 44</span>
 <span class="normal"> 45</span>
 <span class="normal"> 46</span>
@@ -851,10 +851,7 @@
 <span class="normal">104</span>
 <span class="normal">105</span>
 <span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">107</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteImageParseStrategy</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse strategy for image files.</span>
 
@@ -869,7 +866,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">parse_config</span><span class="p">:</span> <span class="s2">&quot;ResourceConfig&quot;</span>
+    <span class="n">parse_config</span><span class="p">:</span> <span class="n">DLiteImageResourceConfig</span>
 
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Dict[str, Any]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
@@ -891,42 +888,32 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            DLite instance.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">:</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Image parser needs an image to parse&quot;</span><span class="p">)</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
 
-        <span class="n">image_config</span> <span class="o">=</span> <span class="n">DLiteImageConfig</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span>
+        <span class="c1"># Configuration for ImageDataParseStrategy in oteapi-core</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+        <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;configuration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImageParserConfig</span><span class="p">(</span>
+            <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span>
+            <span class="n">extra</span><span class="o">=</span><span class="n">Extra</span><span class="o">.</span><span class="n">ignore</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">core_config</span> <span class="o">=</span> <span class="n">ImageParserResourceConfig</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="n">DataCache</span><span class="p">()</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span>
-            <span class="n">key</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">mediaType</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="p">)</span> <span class="k">as</span> <span class="n">tmp_file</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">image_config</span><span class="o">.</span><span class="n">crop</span><span class="p">:</span>
-                <span class="n">tmp_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                <span class="n">tmp_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_file</span><span class="o">.</span><span class="n">name</span>
-                <span class="n">tmp_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s2">&quot;localpath&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_file</span><span class="o">.</span><span class="n">parent</span>
-                <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
-                    <span class="n">BytesIO</span><span class="p">(</span><span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">tmp_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-                <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">tmp_file</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;image_key&quot;</span><span class="p">])</span>
+
         <span class="n">meta</span> <span class="o">=</span> <span class="n">get_meta</span><span class="p">(</span><span class="s2">&quot;http://onto-ns.com/meta/1.0/Image&quot;</span><span class="p">)</span>
-        <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">getbands</span><span class="p">())])</span>
+        <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="n">inst</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
 
         <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
-        <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">image_config</span><span class="o">.</span><span class="n">image_label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
+        <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">image_label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div>
@@ -1009,14 +996,7 @@ or in the parser configuration (lowest priority).</p>
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
+          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 66</span>
 <span class="normal"> 67</span>
 <span class="normal"> 68</span>
 <span class="normal"> 69</span>
@@ -1057,10 +1037,7 @@ or in the parser configuration (lowest priority).</p>
 <span class="normal">104</span>
 <span class="normal">105</span>
 <span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Dict[str, Any]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
+<span class="normal">107</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Dict[str, Any]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
 <span class="sd">    This method will be called through the strategy-specific</span>
@@ -1074,42 +1051,32 @@ or in the parser configuration (lowest priority).</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        DLite instance.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">:</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Image parser needs an image to parse&quot;</span><span class="p">)</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
 
-    <span class="n">image_config</span> <span class="o">=</span> <span class="n">DLiteImageConfig</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span>
+    <span class="c1"># Configuration for ImageDataParseStrategy in oteapi-core</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+    <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;configuration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImageParserConfig</span><span class="p">(</span>
+        <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span>
+        <span class="n">extra</span><span class="o">=</span><span class="n">Extra</span><span class="o">.</span><span class="n">ignore</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">core_config</span> <span class="o">=</span> <span class="n">ImageParserResourceConfig</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="n">DataCache</span><span class="p">()</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span>
-        <span class="n">key</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">mediaType</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="p">)</span> <span class="k">as</span> <span class="n">tmp_file</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">image_config</span><span class="o">.</span><span class="n">crop</span><span class="p">:</span>
-            <span class="n">tmp_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="n">tmp_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_file</span><span class="o">.</span><span class="n">name</span>
-            <span class="n">tmp_config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s2">&quot;localpath&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_file</span><span class="o">.</span><span class="n">parent</span>
-            <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
-                <span class="n">BytesIO</span><span class="p">(</span><span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">tmp_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">tmp_file</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 
-    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;image_key&quot;</span><span class="p">])</span>
+
     <span class="n">meta</span> <span class="o">=</span> <span class="n">get_meta</span><span class="p">(</span><span class="s2">&quot;http://onto-ns.com/meta/1.0/Image&quot;</span><span class="p">)</span>
-    <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">getbands</span><span class="p">())])</span>
+    <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="n">inst</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
 
     <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
-    <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">image_config</span><span class="o">.</span><span class="n">image_label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
+    <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">image_label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div>
@@ -1138,11 +1105,11 @@ or in the parser configuration (lowest priority).</p>
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Dict[str, Any]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
+          <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Dict[str, Any]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
@@ -1153,6 +1120,67 @@ or in the parser configuration (lowest priority).</p>
     </div>
 
   </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="oteapi_dlite.strategies.parse_image.DLiteImageResourceConfig" class="doc doc-heading">
+          <code>DLiteImageResourceConfig</code>
+
+
+
+<a href="#oteapi_dlite.strategies.parse_image.DLiteImageResourceConfig" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+        <p class="doc doc-class-bases">
+          Bases: <code><span title="oteapi.models.ResourceConfig">ResourceConfig</span></code></p>
+
+
+      <p>Resource config for DLite image parser.</p>
+
+
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
+            <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageResourceConfig</span><span class="p">(</span><span class="n">ResourceConfig</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Resource config for DLite image parser.&quot;&quot;&quot;</span>
+
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteImageConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">DLiteImageConfig</span><span class="p">(),</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Image parse strategy-specific configuration.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+          </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
 
 
 
