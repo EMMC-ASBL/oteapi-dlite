@@ -19,11 +19,14 @@ class CreateCollectionStrategy:
 
     **Registers strategies**:
 
-    - `("filterType", "create_collection")`
+    - `("filterType", "create-collection")`
 
     """
 
     filter_config: "FilterConfig"
+
+    # Find a better way to keep collections alive!!!
+    collection_refs: "Dict[str, dlite.Collection]" = {}
 
     def initialize(
         self, session: "Optional[Dict[str, Any]]" = None
@@ -37,7 +40,7 @@ class CreateCollectionStrategy:
 
         # Save reference to the collection to ensure that it lives as long as
         # the session does
-        session["_collection_ref"] = coll
+        self.collection_refs[coll.uuid] = coll
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 

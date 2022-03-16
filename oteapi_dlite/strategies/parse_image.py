@@ -46,12 +46,12 @@ class DLiteImageParseStrategy:
 
     **Registers strategies**:
 
-    - `("mediaType", "image/gif")`
-    - `("mediaType", "image/jpeg")`
-    - `("mediaType", "image/jpg")`
-    - `("mediaType", "image/jp2")`
-    - `("mediaType", "image/png")`
-    - `("mediaType", "image/tiff")`
+    - `("mediaType", "image/vnd.dlite-gif")`
+    - `("mediaType", "image/vnd.dlite-jpeg")`
+    - `("mediaType", "image/vnd.dlite-jpg")`
+    - `("mediaType", "image/vnd.dlite-jp2")`
+    - `("mediaType", "image/vnd.dlite-png")`
+    - `("mediaType", "image/vnd.dlite-tiff")`
 
     """
 
@@ -89,6 +89,7 @@ class DLiteImageParseStrategy:
             **config.dict(),
             extra=Extra.ignore,
         )
+        conf["mediaType"] = "image/" + conf["mediaType"].split("-")[1]
         core_config = ImageParserResourceConfig(**conf)
 
         ImageDataParseStrategy(core_config).initialize(session)
@@ -100,6 +101,9 @@ class DLiteImageParseStrategy:
         meta = get_meta("http://onto-ns.com/meta/1.0/Image")
         inst = meta(dims=data.shape)
         inst["data"] = data
+
+        print("********************************************************''")
+        print(session)
 
         coll = dlite.get_collection(session["collection_id"])
         coll.add(config.image_label, inst)
