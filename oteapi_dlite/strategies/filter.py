@@ -19,7 +19,7 @@ class CreateCollectionStrategy:
 
     **Registers strategies**:
 
-    - `("filterType", "create-collection")`
+    - `("filterType", "dlite/create-collection")`
 
     """
 
