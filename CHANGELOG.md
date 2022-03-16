@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.0.6](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.0.6) (2022-03-16)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.0.5...v0.0.6)
+
+**Fixed bugs:**
+
+- Documentation issue [\#25](https://github.com/EMMC-ASBL/oteapi-dlite/issues/25)
+
+**Merged pull requests:**
+
+- Fix setup.cfg [\#31](https://github.com/EMMC-ASBL/oteapi-dlite/pull/31) ([jesper-friis](https://github.com/jesper-friis))
+- \[Auto-generated\] Update dependencies [\#30](https://github.com/EMMC-ASBL/oteapi-dlite/pull/30) ([TEAM4-0](https://github.com/TEAM4-0))
+- Corrected syntax in setup.cfg [\#28](https://github.com/EMMC-ASBL/oteapi-dlite/pull/28) ([jesper-friis](https://github.com/jesper-friis))
+
 ## [v0.0.5](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.0.5) (2022-03-11)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.0.4...v0.0.5)
