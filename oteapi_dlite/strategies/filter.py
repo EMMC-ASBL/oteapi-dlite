@@ -1,16 +1,16 @@
 """Trivial filter that adds an empty collection to the session."""
 # pylint: disable=no-self-use,unused-argument
-from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Dict
 
 import dlite
+from oteapi.models import FilterConfig
+from pydantic import Field
+from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
 
 if TYPE_CHECKING:
-    from typing import Any, Dict, Optional
-
-    from oteapi.models import FilterConfig
+    from typing import Optional
 
 
 @dataclass
@@ -23,10 +23,14 @@ class CreateCollectionStrategy:
 
     """
 
-    filter_config: "FilterConfig"
+    filter_config: FilterConfig
 
     # Find a better way to keep collections alive!!!
-    collection_refs: "Dict[str, dlite.Collection]" = {}
+    # Need to be `Any`, because otherwise `pydantic` complains.
+    collection_refs: Dict[str, Any] = Field(
+        {},
+        description="A dictionary of DLite Collections.",
+    )
 
     def initialize(
         self, session: "Optional[Dict[str, Any]]" = None

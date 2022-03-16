@@ -1,6 +1,5 @@
 """Strategy class for parsing an image to a DLite instance."""
 # pylint: disable=no-self-use,unused-argument
-from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 import dlite
@@ -12,14 +11,13 @@ from oteapi.strategies.parse.image import (
     ImageParserResourceConfig,
 )
 from pydantic import Extra, Field
+from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_meta
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
-
-    from dlite import Instance
 
 
 class DLiteImageConfig(ImageParserConfig):

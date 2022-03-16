@@ -60,7 +60,7 @@ def test_image(
     orig_key = DataCache().add(sample_file.read_bytes())
     config = ResourceConfig(
         downloadUrl="file://dummy.host/" + str(sample_file),
-        mediaType="image/" + test_file.rpartition(".")[2],
+        mediaType="image/vnd.dlite-" + test_file.rpartition(".")[2],
         configuration={
             "image_label": "test_image",
             "crop": crop_rect,
