@@ -1,5 +1,6 @@
 """Strategy class for parsing an image to a DLite instance."""
-# pylint: disable=no-self-use,unused-argument
+# pylint: disable=no-self-use
+import logging
 from typing import TYPE_CHECKING
 
 import dlite
@@ -18,6 +19,10 @@ from oteapi_dlite.utils import get_meta
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
+
+
+LOGGER = logging.getLogger("oteapi_dlite.strategies")
+LOGGER.setLevel(logging.DEBUG)
 
 
 class DLiteImageConfig(ImageParserConfig):
@@ -100,8 +105,7 @@ class DLiteImageParseStrategy:
         inst = meta(dims=data.shape)
         inst["data"] = data
 
-        print("********************************************************''")
-        print(session)
+        LOGGER.info("session: %s", session)
 
         coll = dlite.get_collection(session["collection_id"])
         coll.add(config.image_label, inst)
