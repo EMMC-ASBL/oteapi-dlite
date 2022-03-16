@@ -89,7 +89,7 @@ class DLiteImageParseStrategy:
             **config.dict(),
             extra=Extra.ignore,
         )
-        conf["mediaType"] = "image/" + conf["mediaType"].split("-")[1]
+        conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
         core_config = ImageParserResourceConfig(**conf)
 
         ImageDataParseStrategy(core_config).initialize(session)
