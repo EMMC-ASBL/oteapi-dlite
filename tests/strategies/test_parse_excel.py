@@ -4,28 +4,29 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pathlib import Path
 
+    from oteapi.interfaces import IParseStrategy
+
 
 def test_parse_excel(static_files: "Path") -> None:
     """Test excel parse strategy."""
     import dlite
     import numpy as np
-    from oteapi.models import ResourceConfig
 
     from oteapi_dlite.strategies.parse_excel import DLiteExcelStrategy
 
     sample_file = static_files / "test_parse_excel.xlsx"
 
-    config = ResourceConfig(
-        downloadUrl=sample_file.as_uri(),
-        mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        configuration={
+    config = {
+        "downloadUrl": sample_file.as_uri(),
+        "mediaType": "application/vnd.dlite-xlsx",
+        "configuration": {
             "excel_config": {
                 "worksheet": "Sheet1",
                 "header_row": "1",
                 "row_from": "2",
             },
         },
-    )
+    }
 
     coll = dlite.Collection()
     session = {"collection_id": coll.uuid}
@@ -34,7 +35,7 @@ def test_parse_excel(static_files: "Path") -> None:
     session.update(parser.initialize(session))
 
     # Note that initialize() and get() are called on different parser instances...
-    parser = DLiteExcelStrategy(config)
+    parser: "IParseStrategy" = DLiteExcelStrategy(config)
     parser.get(session)
 
     inst = coll.get("excel-data")

@@ -102,9 +102,13 @@ class DLiteExcelStrategy:
 
         config = self.parse_config.configuration
 
-        xlsx_session = self.parse_config.copy()
-        xlsx_session.configuration = config.excel_config
-        parser: "IParseStrategy" = XLSXParseStrategy(xlsx_session)
+        xlsx_config = self.parse_config.dict()
+        xlsx_config["configuration"] = config.excel_config
+        xlsx_config[
+            "mediaType"
+        ] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        print(xlsx_config)
+        parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
         columns = parser.get(session)["data"]
 
         names, units = zip(*[split_column_name(column) for column in columns])
