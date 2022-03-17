@@ -1,18 +1,21 @@
 """Tests filter strategies."""
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from oteapi.interfaces import IFilterStrategy
 
 
-def test_create_collection():
+def test_create_collection() -> None:
     """Test the create_collection filter."""
     import dlite
-    from oteapi.models.filterconfig import FilterConfig
 
     from oteapi_dlite.strategies.filter import CreateCollectionStrategy
 
-    config = FilterConfig(filterType="create_collection")
+    config = {"filterType": "dlite/create_collection"}
 
     session = {}
 
-    collfilter = CreateCollectionStrategy(config)
+    collfilter: "IFilterStrategy" = CreateCollectionStrategy(config)
     session.update(collfilter.initialize(session))
 
     assert "collection_id" in session
