@@ -1,5 +1,22 @@
 # Changelog
 
+## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.0.7...HEAD)
+
+**Fixed bugs:**
+
+- Tests are failing when using the `oteapi-core`@master [\#32](https://github.com/EMMC-ASBL/oteapi-dlite/issues/32)
+- Fix Excel parser [\#8](https://github.com/EMMC-ASBL/oteapi-dlite/issues/8)
+
+## [v0.0.7](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.0.7) (2022-03-17)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.0.6...v0.0.7)
+
+**Merged pull requests:**
+
+- Fix tests + excel parser [\#33](https://github.com/EMMC-ASBL/oteapi-dlite/pull/33) ([CasperWA](https://github.com/CasperWA))
+
 ## [v0.0.6](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.0.6) (2022-03-16)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.0.5...v0.0.6)
