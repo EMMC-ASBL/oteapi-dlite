@@ -8,6 +8,10 @@ if TYPE_CHECKING:
     from pathlib import Path
     from typing import Optional, Tuple
 
+    from oteapi.interfaces import IParseStrategy
+
+    from oteapi_dlite.models import DLiteSessionUpdate
+
 
 def test_image_config() -> None:
     """Test the DLiteImageConfig class."""
@@ -33,11 +37,11 @@ def test_image_config() -> None:
     "test_file, target_file",
     (
         # ("sample_1280_853.gif", "sample_150_100.gif"),
-        # ("sample_1280_853.jpeg", "sample_150_100.jpeg"),
-        # ("sample_1280_853.jpg", "sample_150_100.jpeg"),
+        ("sample_1280_853.jpeg", "sample_150_100.jpeg"),
+        ("sample_1280_853.jpg", "sample_150_100.jpeg"),
         # ("sample1.jp2", "sample1_150_100.jp2"), DISABLED BECAUSE SLOW
         ("sample_640_426.png", None),
-        # ("sample_640_426.tiff", None),
+        ("sample_640_426.tiff", None),
     ),
 )
 def test_image(
@@ -47,10 +51,12 @@ def test_image(
     static_files: "Path",
 ) -> None:
     """Test parsing an image format."""
+    if crop_rect and (target_file is None or "jpeg" in target_file):
+        pytest.skip("This variable combination is not supported")
+
     import dlite
     import numpy as np
     from oteapi.datacache import DataCache
-    from oteapi.models import ResourceConfig
     from PIL import Image
 
     from oteapi_dlite.strategies.parse_image import DLiteImageParseStrategy
@@ -58,26 +64,26 @@ def test_image(
     sample_file = static_files / test_file
 
     orig_key = DataCache().add(sample_file.read_bytes())
-    config = ResourceConfig(
-        downloadUrl="file://dummy.host/" + str(sample_file),
-        mediaType="image/" + test_file.rpartition(".")[2],
-        configuration={
+    config = {
+        "downloadUrl": f"file://dummy.host/{sample_file}",
+        "mediaType": f"image/vnd.dlite-{sample_file.suffix.lstrip('.')}",
+        "configuration": {
             "image_label": "test_image",
             "crop": crop_rect,
         },
-    )
+    }
     coll = dlite.Collection()
     session = {
         "collection_id": coll.uuid,
         "key": orig_key,
     }
-    parser = DLiteImageParseStrategy(config)
-    output = parser.get(session)
+    parser: "IParseStrategy" = DLiteImageParseStrategy(config)
+    output: "DLiteSessionUpdate" = parser.get(session)
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 
-    coll2 = dlite.get_collection(session["collection_id"])
-    inst = coll2.get("test_image")
+    coll2: dlite.Collection = dlite.get_collection(session["collection_id"])
+    inst: dlite.Instance = coll2.get("test_image")
 
     # Compare data instance contents to expected values
     assert inst.meta.uri.startswith("http://onto-ns.com/meta")

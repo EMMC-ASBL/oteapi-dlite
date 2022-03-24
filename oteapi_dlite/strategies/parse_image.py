@@ -1,15 +1,18 @@
 """Strategy class for parsing an image to a DLite instance."""
-# pylint: disable=no-self-use,unused-argument
-from dataclasses import dataclass
-from io import BytesIO
-from typing import TYPE_CHECKING, Optional, Tuple
+# pylint: disable=no-self-use
+import logging
+from typing import TYPE_CHECKING
 
 import dlite
-import numpy as np
-from oteapi.datacache.datacache import DataCache
-from oteapi.strategies.parse.image import ImageDataParseStrategy
-from PIL import Image
-from pydantic import BaseModel, Field
+from oteapi.datacache import DataCache
+from oteapi.models import ResourceConfig
+from oteapi.strategies.parse.image import (
+    ImageDataParseStrategy,
+    ImageParserConfig,
+    ImageParserResourceConfig,
+)
+from pydantic import Extra, Field
+from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_meta
@@ -17,19 +20,26 @@ from oteapi_dlite.utils import get_meta
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
 
-    from dlite import Instance
-    from oteapi.models.resourceconfig import ResourceConfig
+
+LOGGER = logging.getLogger("oteapi_dlite.strategies")
+LOGGER.setLevel(logging.DEBUG)
 
 
-class DLiteImageConfig(BaseModel):
+class DLiteImageConfig(ImageParserConfig):
     """Configuration for DLite image parser."""
 
-    crop: Optional[Tuple] = Field(
-        None, description="Cropping rectangle. The whole image if None."
-    )
     image_label: str = Field(
         "image",
         description="Label to assign to the image in the collection.",
+    )
+
+
+class DLiteImageResourceConfig(ResourceConfig):
+    """Resource config for DLite image parser."""
+
+    configuration: DLiteImageConfig = Field(
+        DLiteImageConfig(),
+        description="Image parse strategy-specific configuration.",
     )
 
 
@@ -39,16 +49,16 @@ class DLiteImageParseStrategy:
 
     **Registers strategies**:
 
-    - `("mediaType", "image/gif")`
-    - `("mediaType", "image/jpeg")`
-    - `("mediaType", "image/jpg")`
-    - `("mediaType", "image/jp2")`
-    - `("mediaType", "image/png")`
-    - `("mediaType", "image/tiff")`
+    - `("mediaType", "image/vnd.dlite-gif")`
+    - `("mediaType", "image/vnd.dlite-jpeg")`
+    - `("mediaType", "image/vnd.dlite-jpg")`
+    - `("mediaType", "image/vnd.dlite-jp2")`
+    - `("mediaType", "image/vnd.dlite-png")`
+    - `("mediaType", "image/vnd.dlite-tiff")`
 
     """
 
-    parse_config: "ResourceConfig"
+    parse_config: DLiteImageResourceConfig
 
     def initialize(self, session: "Dict[str, Any]" = None) -> DLiteSessionUpdate:
         """Initialize."""
@@ -70,41 +80,34 @@ class DLiteImageParseStrategy:
 
         Returns:
             DLite instance.
-
         """
         if session is None:
             raise ValueError("Missing session")
 
-        if "key" in session:
-            key = session["key"]
-        elif "key" in self.parse_config.configuration:
-            key = self.parse_config.configuration["key"]
-        else:
-            raise RuntimeError("Image parser needs an image to parse")
+        config = self.parse_config.configuration
 
-        image_config = DLiteImageConfig(**self.parse_config.configuration)
+        # Configuration for ImageDataParseStrategy in oteapi-core
+        conf = self.parse_config.dict()
+        conf["configuration"] = ImageParserConfig(
+            **config.dict(),
+            extra=Extra.ignore,
+        )
+        conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
+        core_config = ImageParserResourceConfig(**conf)
 
-        with DataCache().getfile(
-            key, suffix=self.parse_config.mediaType.split("/")[1]
-        ) as tmp_file:
-            if image_config.crop:
-                tmp_config = self.parse_config.copy()
-                tmp_config.configuration["filename"] = tmp_file.name
-                tmp_config.configuration["localpath"] = tmp_file.parent
-                image = Image.open(
-                    BytesIO(ImageDataParseStrategy(tmp_config).get().content)
-                )
-            else:
-                image = Image.open(tmp_file).copy()
+        ImageDataParseStrategy(core_config).initialize(session)
+        output = ImageDataParseStrategy(core_config).get(session)
 
-        data = np.asarray(image)
-        if np.ndim(data) == 2:
-            data.shape = (data.shape[0], data.shape[1], 1)
+        cache = DataCache()
+        data = cache.get(output["image_key"])
+
         meta = get_meta("http://onto-ns.com/meta/1.0/Image")
-        inst = meta(dims=[image.height, image.width, len(image.getbands())])
+        inst = meta(dims=data.shape)
         inst["data"] = data
 
+        LOGGER.info("session: %s", session)
+
         coll = dlite.get_collection(session["collection_id"])
-        coll.add(image_config.image_label, inst)
+        coll.add(config.image_label, inst)
 
         return DLiteSessionUpdate(collection_id=coll.uuid)

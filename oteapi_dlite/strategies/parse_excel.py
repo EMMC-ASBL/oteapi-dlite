@@ -1,7 +1,6 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
 # pylint: disable=no-self-use,unused-argument
 import re
-from dataclasses import dataclass
 from random import getrandbits
 from typing import TYPE_CHECKING, Optional
 
@@ -11,6 +10,7 @@ from dlite.datamodel import DataModel
 from oteapi.models import AttrDict, ResourceConfig, SessionUpdate
 from oteapi.strategies.parse.excel_xlsx import XLSXParseConfig, XLSXParseStrategy
 from pydantic import Field, HttpUrl
+from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import dict2recarray
@@ -76,7 +76,7 @@ class DLiteExcelStrategy:
 
     """
 
-    parse_config: "ResourceConfig"
+    parse_config: DLiteExcelParseResourceConfig
 
     def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Initialize."""
@@ -100,11 +100,15 @@ class DLiteExcelStrategy:
         if session is None:
             raise ValueError("Missing session")
 
-        config = DLiteExcelParseConfig(**self.parse_config.configuration)
+        config = self.parse_config.configuration
 
-        xlsx_session = self.parse_config.copy()
-        xlsx_session.configuration = config.excel_config
-        parser: "IParseStrategy" = XLSXParseStrategy(xlsx_session)
+        xlsx_config = self.parse_config.dict()
+        xlsx_config["configuration"] = config.excel_config
+        xlsx_config[
+            "mediaType"
+        ] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        print(xlsx_config)
+        parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
         columns = parser.get(session)["data"]
 
         names, units = zip(*[split_column_name(column) for column in columns])
