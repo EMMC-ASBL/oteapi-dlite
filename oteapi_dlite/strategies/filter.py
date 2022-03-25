@@ -42,9 +42,9 @@ class CreateCollectionStrategy:
             raise KeyError("`collection_id` already exists in session.")
         coll = dlite.Collection()
 
-        # Save reference to the collection to ensure that it lives as long as
-        # the session does
-        self.collection_refs[coll.uuid] = coll
+        # Make sure that collection stays alive
+        # It will never be deallocated...
+        coll.incref()
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
