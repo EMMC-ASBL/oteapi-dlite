@@ -120,9 +120,9 @@ class DLiteExcelStrategy:
 
         if config.metadata:
             if config.storage_path is not None:
-                for storage_path in  config.storage_path.split('|'):
+                for storage_path in config.storage_path.split("|"):
                     dlite.storage_path.append(storage_path)
-            meta = dlite.get_instance(config.metadata) 
+            meta = dlite.get_instance(config.metadata)
             # TODO: check the metadata config
         else:
             meta = infer_metadata(rec, units=units)
