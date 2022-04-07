@@ -123,7 +123,7 @@ class DLiteExcelStrategy:
                 for storage_path in config.storage_path.split("|"):
                     dlite.storage_path.append(storage_path)
             meta = dlite.get_instance(config.metadata)
-            # TODO: check the metadata config
+            # check the metadata config would go here
         else:
             meta = infer_metadata(rec, units=units)
 
