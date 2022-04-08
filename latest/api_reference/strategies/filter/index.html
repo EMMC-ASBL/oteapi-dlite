@@ -761,9 +761,9 @@
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;`collection_id` already exists in session.&quot;</span><span class="p">)</span>
         <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">()</span>
 
-        <span class="c1"># Save reference to the collection to ensure that it lives as long as</span>
-        <span class="c1"># the session does</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">collection_refs</span><span class="p">[</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="n">coll</span>
+        <span class="c1"># Make sure that collection stays alive</span>
+        <span class="c1"># It will never be deallocated...</span>
+        <span class="n">coll</span><span class="o">.</span><span class="n">incref</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 
@@ -865,9 +865,9 @@
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;`collection_id` already exists in session.&quot;</span><span class="p">)</span>
     <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">()</span>
 
-    <span class="c1"># Save reference to the collection to ensure that it lives as long as</span>
-    <span class="c1"># the session does</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">collection_refs</span><span class="p">[</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="n">coll</span>
+    <span class="c1"># Make sure that collection stays alive</span>
+    <span class="c1"># It will never be deallocated...</span>
+    <span class="n">coll</span><span class="o">.</span><span class="n">incref</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div>
