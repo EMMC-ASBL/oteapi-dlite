@@ -43,6 +43,10 @@ class DLiteExcelParseConfig(AttrDict):
         ...,
         description="DLite-specific excel configurations.",
     )
+    storage_path: Optional[str] = Field(
+        None,
+        description="Path to metadata storage",
+    )
 
 
 class DLiteExcelParseResourceConfig(ResourceConfig):
@@ -115,9 +119,13 @@ class DLiteExcelStrategy:
         rec = dict2recarray(columns, names=names)
 
         if config.metadata:
-            raise NotImplementedError("")
-        # else
-        meta = infer_metadata(rec, units=units)
+            if config.storage_path is not None:
+                for storage_path in config.storage_path.split("|"):
+                    dlite.storage_path.append(storage_path)
+            meta = dlite.get_instance(config.metadata)
+            # check the metadata config would go here
+        else:
+            meta = infer_metadata(rec, units=units)
 
         inst = meta(dims=[len(rec)], id=config.id)
         for name in names:
