@@ -11,11 +11,13 @@ def test_parse_excel(static_files: "Path") -> None:
     """Test excel parse strategy."""
     import dlite
     import numpy as np
+    from oteapi.datacache import DataCache
 
     from oteapi_dlite.strategies.parse_excel import DLiteExcelStrategy
 
     sample_file = static_files / "test_parse_excel.xlsx"
 
+    cache_key = DataCache().add(sample_file.read_bytes())
     config = {
         "downloadUrl": sample_file.as_uri(),
         "mediaType": "application/vnd.dlite-xlsx",
@@ -29,7 +31,10 @@ def test_parse_excel(static_files: "Path") -> None:
     }
 
     coll = dlite.Collection()
-    session = {"collection_id": coll.uuid}
+    session = {
+        "collection_id": coll.uuid,
+        "key": cache_key,
+    }
 
     parser = DLiteExcelStrategy(config)
     session.update(parser.initialize(session))
