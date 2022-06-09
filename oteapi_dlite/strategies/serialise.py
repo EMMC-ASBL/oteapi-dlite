@@ -1,5 +1,4 @@
 """Filter for serialisation using DLite."""
-# pylint: disable=no-self-use
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional, Sequence
 
