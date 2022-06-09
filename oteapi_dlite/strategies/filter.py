@@ -1,5 +1,5 @@
 """Trivial filter that adds an empty collection to the session."""
-# pylint: disable=no-self-use,unused-argument
+# pylint: disable=unused-argument
 from typing import TYPE_CHECKING, Any, Dict
 
 import dlite

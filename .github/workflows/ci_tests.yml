@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Set up Python 3.9
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
 
@@ -52,7 +52,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python 3.9
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
 
@@ -65,10 +65,10 @@ jobs:
         pip install safety
 
     - name: Run pylint
-      run: pylint --rcfile=.pylintrc --ignore-paths=tests/ --extension-pkg-whitelist='pydantic' -- *.py oteapi_dlite
+      run: pylint --rcfile=.pylintrc --ignore-paths=tests/ --extension-pkg-whitelist='pydantic' *.py oteapi_dlite
 
     - name: Run pylint - tests
-      run: pylint --rcfile=.pylintrc --extension-pkg-whitelist='pydantic' --disable=C0415,W0621 -- tests
+      run: pylint --rcfile=.pylintrc --extension-pkg-whitelist='pydantic' --disable=C0415,W0621 tests
 
     # Ignore ID 44715 for now.
     # See this NumPy issue for more information: https://github.com/numpy/numpy/issues/19038
@@ -90,7 +90,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python ${{ matrix.python-version}}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version}}
 
@@ -125,7 +125,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python ${{ matrix.python-version}}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version}}
 
@@ -153,7 +153,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
@@ -174,7 +174,7 @@ jobs:
       with:
         fetch-depth: 2
 
-    - uses: actions/setup-python@v3
+    - uses: actions/setup-python@v4
       with:
         python-version: 3.9
 

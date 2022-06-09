@@ -1,5 +1,4 @@
 """Strategy class for parsing an image to a DLite instance."""
-# pylint: disable=no-self-use
 import logging
 from typing import TYPE_CHECKING
 
