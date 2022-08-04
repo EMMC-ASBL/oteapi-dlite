@@ -1,6 +1,5 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
 # pylint: disable=unused-argument
-# pylint: disable=no-self-use
 import re
 from random import getrandbits
 from typing import TYPE_CHECKING, Optional
@@ -136,7 +135,7 @@ class DLiteExcelStrategy:
             inst[name] = rec[name]
 
         # Insert inst into collection
-        coll: dlite.Collection = dlite.get_collection(session["collection_id"])
+        coll: dlite.Collection = dlite.get_instance(session["collection_id"])
         coll.add(config.label, inst)
 
         # Increase refcount of instance to avoid that it is freed when

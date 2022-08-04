@@ -16,7 +16,7 @@ from pydantic import Field
 #    #     coll = dlite.get_collection(UUID)
 #    #     coll.decref()
 #    #
-#    coll.incref()
+#    coll._incref()
 #
 #    return coll.uuid
 
