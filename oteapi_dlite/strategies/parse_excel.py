@@ -1,5 +1,6 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
 # pylint: disable=unused-argument
+# pylint: disable=no-self-use
 import re
 from random import getrandbits
 from typing import TYPE_CHECKING, Optional
@@ -82,7 +83,10 @@ class DLiteExcelStrategy:
 
     parse_config: DLiteExcelParseResourceConfig
 
-    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
+    def initialize(
+        self,
+        session: "Optional[Dict[str, Any]]" = None,
+    ) -> SessionUpdate:
         """Initialize."""
         if session is None:
             raise ValueError("Missing session")
@@ -137,7 +141,7 @@ class DLiteExcelStrategy:
 
         # Increase refcount of instance to avoid that it is freed when
         # returning from this function
-        inst.incref()
+        inst._incref()  # pylint: disable=protected-access
 
         return DLiteExcelSessionUpdate(
             collection_id=coll.uuid,

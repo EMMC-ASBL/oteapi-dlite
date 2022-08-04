@@ -32,7 +32,7 @@ class CreateCollectionStrategy:
         description="A dictionary of DLite Collections.",
     )
 
-    def initialize(
+    def initialize(  # pylint: disable=no-self-use
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
@@ -44,11 +44,13 @@ class CreateCollectionStrategy:
 
         # Make sure that collection stays alive
         # It will never be deallocated...
-        coll.incref()
+        coll._incref()  # pylint: disable=protected-access
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> DLiteSessionUpdate:
+    def get(  # pylint: disable=no-self-use
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> DLiteSessionUpdate:
         """Execute the strategy."""
         if session is None:
             raise ValueError("Missing session")
