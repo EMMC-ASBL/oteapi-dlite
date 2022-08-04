@@ -44,7 +44,7 @@ class CreateCollectionStrategy:
 
         # Make sure that collection stays alive
         # It will never be deallocated...
-        coll.incref()
+        coll._incref()  # pylint: disable=protected-access
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
