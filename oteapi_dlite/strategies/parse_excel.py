@@ -1,6 +1,5 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
 # pylint: disable=unused-argument
-# pylint: disable=no-self-use
 import re
 from random import getrandbits
 from typing import TYPE_CHECKING, Optional

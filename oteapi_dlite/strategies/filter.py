@@ -32,7 +32,7 @@ class CreateCollectionStrategy:
         description="A dictionary of DLite Collections.",
     )
 
-    def initialize(  # pylint: disable=no-self-use
+    def initialize(
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
@@ -48,9 +48,7 @@ class CreateCollectionStrategy:
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
-    def get(  # pylint: disable=no-self-use
-        self, session: "Optional[Dict[str, Any]]" = None
-    ) -> DLiteSessionUpdate:
+    def get(self, session: "Optional[Dict[str, Any]]" = None) -> DLiteSessionUpdate:
         """Execute the strategy."""
         if session is None:
             raise ValueError("Missing session")
