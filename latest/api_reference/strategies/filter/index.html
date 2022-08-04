@@ -765,7 +765,7 @@
 
         <span class="c1"># Make sure that collection stays alive</span>
         <span class="c1"># It will never be deallocated...</span>
-        <span class="n">coll</span><span class="o">.</span><span class="n">incref</span><span class="p">()</span>
+        <span class="n">coll</span><span class="o">.</span><span class="n">_incref</span><span class="p">()</span>  <span class="c1"># pylint: disable=protected-access</span>
 
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 
@@ -862,7 +862,7 @@
 
     <span class="c1"># Make sure that collection stays alive</span>
     <span class="c1"># It will never be deallocated...</span>
-    <span class="n">coll</span><span class="o">.</span><span class="n">incref</span><span class="p">()</span>
+    <span class="n">coll</span><span class="o">.</span><span class="n">_incref</span><span class="p">()</span>  <span class="c1"># pylint: disable=protected-access</span>
 
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
