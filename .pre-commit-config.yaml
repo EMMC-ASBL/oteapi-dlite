@@ -61,7 +61,7 @@ repos:
       args:
       - "--rcfile=pyproject.toml"
       - "--extension-pkg-whitelist='pydantic'"
-      - "--disable=import-outside-toplevel,redefined-outer-name"
+      - "--disable=import-outside-toplevel,redefined-outer-name,import-error"
       language: python
       types: [python]
       require_serial: true
