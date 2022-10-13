@@ -13,7 +13,7 @@ from pydantic import Field, HttpUrl
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import dict2recarray
+from oteapi_dlite.utils import OteapiDliteError, dict2recarray
 
 if TYPE_CHECKING:
     from typing import Any, Dict
@@ -130,7 +130,15 @@ class DLiteExcelStrategy:
         else:
             meta = infer_metadata(rec, units=units)
 
-        inst = meta(dims=[len(rec)], id=config.id)
+        if len(meta.dimensions) == 0:
+            inst = meta(dims=[], id=config.id)
+        elif len(meta.dimensions) == 1:
+            inst = meta(dims=[len(rec)], id=config.id)
+        else:
+            raise OteapiDliteError(
+                f"Expected 0 or 1 dimensions in the data model." f"{meta.dimensions}"
+            )
+
         for name in names:
             inst[name] = rec[name]
 

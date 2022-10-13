@@ -17,3 +17,7 @@ def get_meta(uri: str) -> dlite.Instance:
     if not meta.is_meta:
         raise ValueError("uri {uri} does not correspond to metadata")
     return meta
+
+
+class OteapiDliteError(Exception):
+    """General exception for OTEAPI-Dlite"""
