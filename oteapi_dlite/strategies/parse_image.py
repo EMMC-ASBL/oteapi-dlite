@@ -17,7 +17,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_meta
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict
+    from typing import Any, Dict, Optional
 
 
 LOGGER = logging.getLogger("oteapi_dlite.strategies")
@@ -59,13 +59,15 @@ class DLiteImageParseStrategy:
 
     parse_config: DLiteImageResourceConfig
 
-    def initialize(self, session: "Dict[str, Any]" = None) -> DLiteSessionUpdate:
+    def initialize(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> DLiteSessionUpdate:
         """Initialize."""
         if session is None:
             raise ValueError("Missing session")
         return DLiteSessionUpdate(collection_id=session["collection_id"])
 
-    def get(self, session: "Dict[str, Any]" = None) -> DLiteSessionUpdate:
+    def get(self, session: "Optional[Dict[str, Any]]" = None) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific
