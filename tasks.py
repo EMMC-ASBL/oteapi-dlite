@@ -148,8 +148,8 @@ def create_api_reference_docs(context, pre_clean=False, pre_commit=False):
             )
             md_filename = filename.replace(".py", ".md")
 
-            # For models we want to include EVERYTHING, even if it doesn't have a
-            # doc-string
+            # For models we want to include EVERYTHING, even if it doesn't
+            # have a doc-string
             template = (
                 models_template if str(relpath) == "models" else md_template
             )
