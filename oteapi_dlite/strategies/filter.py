@@ -48,7 +48,9 @@ class CreateCollectionStrategy:
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> DLiteSessionUpdate:
+    def get(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> DLiteSessionUpdate:
         """Execute the strategy."""
         if session is None:
             raise ValueError("Missing session")

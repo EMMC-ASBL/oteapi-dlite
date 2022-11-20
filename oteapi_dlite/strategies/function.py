@@ -1,7 +1,7 @@
 """Generic function strategy using DLite storage plugin."""
 # pylint: disable=unused-argument,invalid-name
 import tempfile
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 import dlite
 from oteapi.datacache import DataCache
@@ -18,7 +18,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_driver, init_session
 
 if TYPE_CHECKING:
-    from typing import Any, Dict, Optional
+    from typing import Any, Dict
 
     from oteapi.interfaces import IFunctionStrategy
 
@@ -33,15 +33,15 @@ class DLiteStorageConfig(AttrDict):
     `location` or `datacache_config.accessKey` field.
     """
 
-    driver: "Optional[str]" = Field(
+    driver: Optional[str] = Field(
         None,
         description='Name of DLite driver (ex: "json").',
     )
-    mediaType: "Optional[str]" = Field(
+    mediaType: Optional[str] = Field(
         None,
         description='Media type for DLite driver (ex: "application/json").',
     )
-    location: "Optional[str]" = Field(
+    location: Optional[str] = Field(
         None,
         description=(
             "Location of storage to write to.  If unset to store in data "
@@ -49,7 +49,7 @@ class DLiteStorageConfig(AttrDict):
             "(defaults to 'function_data')."
         ),
     )
-    options: "Optional[str]" = Field(
+    options: Optional[str] = Field(
         None,
         description=(
             "Comma-separated list of options passed to the DLite "
@@ -60,7 +60,7 @@ class DLiteStorageConfig(AttrDict):
         ...,
         description="Label of DLite instance to serialise in the collection.",
     )
-    datacache_config: "Optional[DataCacheConfig]" = Field(
+    datacache_config: Optional[DataCacheConfig] = Field(
         None,
         description="Configuration options for the local data cache.",
     )
@@ -94,11 +94,13 @@ class DLiteFunctionStrategy:
         init_session(session)
         return SessionUpdate()
 
-    def get(self, session: "Dict[str, Any]" = None) -> "DLiteSessionUpdate":
+    def get(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> "DLiteSessionUpdate":
         """Execute the strategy.
 
-        This method will be called through the strategy-specific endpoint of the
-        OTE-API Services.
+        This method will be called through the strategy-specific endpoint
+        of the OTE-API Services.
 
         Parameters:
             session: A session-specific dictionary context.

@@ -8,7 +8,10 @@ import dlite
 import numpy as np
 from dlite.datamodel import DataModel
 from oteapi.models import AttrDict, ResourceConfig, SessionUpdate
-from oteapi.strategies.parse.excel_xlsx import XLSXParseConfig, XLSXParseStrategy
+from oteapi.strategies.parse.excel_xlsx import (
+    XLSXParseConfig,
+    XLSXParseStrategy,
+)
 from pydantic import Field, HttpUrl
 from pydantic.dataclasses import dataclass
 
@@ -76,7 +79,8 @@ class DLiteExcelStrategy:
 
     **Registers strategies**:
 
-    - `("mediaType", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")`
+    - `("mediaType",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")`
 
     """
 
@@ -94,8 +98,8 @@ class DLiteExcelStrategy:
     def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Execute the strategy.
 
-        This method will be called through the strategy-specific endpoint of the
-        OTE-API Services.
+        This method will be called through the strategy-specific endpoint
+        of the OTE-API Services.
 
         Parameters:
             session: A session-specific dictionary context.

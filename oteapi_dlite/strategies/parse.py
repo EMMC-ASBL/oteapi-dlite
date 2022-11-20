@@ -149,4 +149,4 @@ class DLiteParseStrategy:
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
 
-DLiteParseConfig.update_forward_refs()
+# DLiteParseConfig.update_forward_refs()

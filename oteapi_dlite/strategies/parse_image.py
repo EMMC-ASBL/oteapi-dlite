@@ -59,7 +59,9 @@ class DLiteImageParseStrategy:
 
     parse_config: DLiteImageResourceConfig
 
-    def initialize(self, session: "Dict[str, Any]" = None) -> DLiteSessionUpdate:
+    def initialize(
+        self, session: "Dict[str, Any]" = None
+    ) -> DLiteSessionUpdate:
         """Initialize."""
         if session is None:
             raise ValueError("Missing session")
