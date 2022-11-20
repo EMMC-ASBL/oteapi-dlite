@@ -67,14 +67,14 @@ repos:
       types: [python]
       require_serial: true
       files: ^tests/.*$
-#    - id: update-docs-api-reference
-#      name: Update API Reference in Documentation
-#      entry: invoke
-#      args: [create-api-reference-docs, --pre-clean, --pre-commit]
-#      language: python
-#      pass_filenames: false
-#      files: ^oteapi_dlite/.*\.py$
-#      description: Update the API Reference documentation, whenever a Python file is touched in the code base.
+    - id: update-docs-api-reference
+      name: Update API Reference in Documentation
+      entry: invoke
+      args: [create-api-reference-docs, --pre-clean, --pre-commit]
+      language: python
+      pass_filenames: false
+      files: ^oteapi_dlite/.*\.py$
+      description: Update the API Reference documentation, whenever a Python file is touched in the code base.
     - id: update-docs-index
       name: Update Landing Page for Documentation
       entry: invoke

@@ -41,7 +41,7 @@ jobs:
         pip install ${pre_commit} ${invoke}
 
     - name: Test with pre-commit
-      run: SKIP=pylint,pylint-tests pre-commit run --all-files
+      run: SKIP=pylint,pylint-tests,update-docs-api-reference pre-commit run --all-files
 
   pylint-safety:
     runs-on: ubuntu-latest

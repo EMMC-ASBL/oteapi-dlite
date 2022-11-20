@@ -1,4 +1,5 @@
 """Utility functions for OTEAPI DLite plugin."""
+# pylint: disable=invalid-name
 import weakref
 from pathlib import Path
 
