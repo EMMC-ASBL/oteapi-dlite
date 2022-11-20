@@ -59,7 +59,9 @@ def setver(_, version=""):
 
 @task(
     help={
-        "pre-clean": "Remove the 'api_reference' sub directory prior to (re)creation.",
+        "pre-clean": (
+            "Remove the 'api_reference' sub directory prior to (re)creation."
+        ),
         "pre-commit": "Return a non-zero error code if changes were made.",
     }
 )  # pylint: disable=too-many-branches
@@ -87,7 +89,8 @@ def create_api_reference_docs(context, pre_clean=False, pre_commit=False):
     pages_template = 'title: "{name}"\n'
     md_template = "# {name}\n\n::: {py_path}\n"
     models_template = (
-        md_template + f"{' ' * 4}rendering:\n{' ' * 6}show_if_no_docstring: true\n"
+        md_template
+        + f"{' ' * 4}rendering:\n{' ' * 6}show_if_no_docstring: true\n"
     )
 
     if docs_api_ref_dir.exists() and pre_clean:
@@ -128,7 +131,10 @@ def create_api_reference_docs(context, pre_clean=False, pre_commit=False):
 
         # Create markdown files
         for filename in filenames:
-            if re.match(r".*\.py$", filename) is None or filename in unwanted_files:
+            if (
+                re.match(r".*\.py$", filename) is None
+                or filename in unwanted_files
+            ):
                 # Not a Python file: We don't care about it!
                 # Or filename is in the tuple of unwanted files:
                 # We don't want it!
@@ -142,9 +148,11 @@ def create_api_reference_docs(context, pre_clean=False, pre_commit=False):
             )
             md_filename = filename.replace(".py", ".md")
 
-            # For models we want to include EVERYTHING, even if it doesn't have a
-            # doc-string
-            template = models_template if str(relpath) == "models" else md_template
+            # For models we want to include EVERYTHING, even if it doesn't
+            # have a doc-string
+            template = (
+                models_template if str(relpath) == "models" else md_template
+            )
 
             write_file(
                 full_path=docs_sub_dir / md_filename,

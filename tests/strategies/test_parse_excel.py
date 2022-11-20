@@ -39,7 +39,8 @@ def test_parse_excel(static_files: "Path") -> None:
     parser = DLiteExcelStrategy(config)
     session.update(parser.initialize(session))
 
-    # Note that initialize() and get() are called on different parser instances...
+    # Note that initialize() and get() are called on different parser
+    # instances...
     parser: "IParseStrategy" = DLiteExcelStrategy(config)
     parser.get(session)
 

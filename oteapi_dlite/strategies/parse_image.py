@@ -67,7 +67,9 @@ class DLiteImageParseStrategy:
             raise ValueError("Missing session")
         return DLiteSessionUpdate(collection_id=session["collection_id"])
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> DLiteSessionUpdate:
+    def get(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific

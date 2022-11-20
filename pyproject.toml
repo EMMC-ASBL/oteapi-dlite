@@ -14,12 +14,13 @@ show_error_codes = true
 allow_redefinition = true
 
 [tool.pylint.messages_control]
-max-line-length = 90
+max-line-length = 80
 disable = [
     "duplicate-code",
     "no-name-in-module",
     "too-few-public-methods",
-    "no-self-argument"
+    "no-self-argument",
+    "invalid-name",
 ]
 
 [tool.pytest.ini_options]

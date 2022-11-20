@@ -7,11 +7,17 @@ from setuptools import find_packages, setup
 TOP_DIR = Path(__file__).resolve().parent
 PACKAGE_NAME = "oteapi_dlite"
 
-with open(TOP_DIR / PACKAGE_NAME / "__init__.py", "r", encoding="utf8") as handle:
+with open(
+    TOP_DIR / PACKAGE_NAME / "__init__.py", "r", encoding="utf8"
+) as handle:
     VERSION = AUTHOR = AUTHOR_EMAIL = None
     for line in handle.readlines():
-        VERSION_match = re.match(r'^__version__ = (\'|")(?P<version>.+)(\'|")', line)
-        AUTHOR_match = re.match(r'^__author__ = (\'|")(?P<author>.+)(\'|")', line)
+        VERSION_match = re.match(
+            r'^__version__ = (\'|")(?P<version>.+)(\'|")', line
+        )
+        AUTHOR_match = re.match(
+            r'^__author__ = (\'|")(?P<author>.+)(\'|")', line
+        )
         AUTHOR_EMAIL_match = re.match(
             r'^__author_email__ = (\'|")(?P<email>.+)(\'|")', line
         )
@@ -39,19 +45,25 @@ with open(TOP_DIR / PACKAGE_NAME / "__init__.py", "r", encoding="utf8") as handl
 
 BASE = [
     f"{_.strip()}"
-    for _ in (TOP_DIR / "requirements.txt").read_text(encoding="utf8").splitlines()
+    for _ in (TOP_DIR / "requirements.txt")
+    .read_text(encoding="utf8")
+    .splitlines()
     if not _.startswith("#") and "git+" not in _
 ]
 
 DOCS = [
     f"{_.strip()}"
-    for _ in (TOP_DIR / "requirements_docs.txt").read_text(encoding="utf8").splitlines()
+    for _ in (TOP_DIR / "requirements_docs.txt")
+    .read_text(encoding="utf8")
+    .splitlines()
     if not _.startswith("#") and "git+" not in _
 ]
 
 DEV = [
     f"{_.strip()}"
-    for _ in (TOP_DIR / "requirements_dev.txt").read_text(encoding="utf8").splitlines()
+    for _ in (TOP_DIR / "requirements_dev.txt")
+    .read_text(encoding="utf8")
+    .splitlines()
     if not _.startswith("#") and "git+" not in _
 ] + DOCS
 
