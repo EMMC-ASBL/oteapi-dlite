@@ -14,7 +14,7 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_driver, init_session
+from oteapi_dlite.utils import get_collection, get_driver
 
 if TYPE_CHECKING:
     from typing import Any, Dict
@@ -82,7 +82,6 @@ class DLiteParseStrategy:
         session: "Optional[Dict[str, Any]]" = None,
     ) -> "SessionUpdate":
         """Initialize."""
-        init_session(session)
         return SessionUpdate()
 
     def get(
@@ -99,8 +98,6 @@ class DLiteParseStrategy:
         Returns:
             SessionUpdate instance.
         """
-        init_session(session)
-
         config = self.parse_config.configuration
         cacheconfig = config.datacache_config
 
@@ -124,7 +121,7 @@ class DLiteParseStrategy:
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
             elif "key" in session:  # type: ignore
-                key = session.key  # type: ignore
+                key = session["key"]  # type: ignore
             else:
                 raise ValueError(
                     "either `location` or `cacheconfig.accessKey` must be "
@@ -135,16 +132,20 @@ class DLiteParseStrategy:
             with cache.getfile(key) as location:
                 inst = dlite.Instance.from_location(
                     driver=driver,
-                    location=location,
+                    location=str(location),
                     options=config.options,
                     id=config.id,
                 )
 
         # Insert inst into collection
-        coll: dlite.Collection = dlite.get_instance(
-            session["collection_id"]  # type:ignore
-        )
+        coll = get_collection(session)
         coll.add(config.label, inst)
+
+        # __TODO__
+        # Can we savely assume that all strategies in a pipeline will be
+        # executed in the same Python interpreter?  If not, we should write
+        # the collection to a storage, such that it can be shared with the
+        # other strategies.
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
