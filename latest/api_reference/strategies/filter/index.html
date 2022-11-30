@@ -466,6 +466,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../function/" class="md-nav__link">
+        function
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parse/" class="md-nav__link">
+        parse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../parse_excel/" class="md-nav__link">
         parse_excel
       </a>
@@ -735,7 +763,9 @@
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">CreateCollectionStrategy</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Trivial filter that adds an empty collection to the session.</span>
 
@@ -770,7 +800,9 @@
 
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
@@ -810,7 +842,11 @@
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
@@ -929,13 +965,13 @@
       
       
         
-        <a href="../parse_excel/" class="md-footer__link md-footer__link--next" aria-label="Next: parse_excel" rel="next">
+        <a href="../function/" class="md-footer__link md-footer__link--next" aria-label="Next: function" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              parse_excel
+              function
             </div>
           </div>
           <div class="md-footer__button md-icon">

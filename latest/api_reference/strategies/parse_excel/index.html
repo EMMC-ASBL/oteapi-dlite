@@ -396,6 +396,34 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../function/" class="md-nav__link">
+        function
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parse/" class="md-nav__link">
+        parse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -764,10 +792,7 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
@@ -789,7 +814,10 @@
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteExcelParseConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteExcelParseConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Configuration for DLite Excel parser.&quot;&quot;&quot;</span>
 
     <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HttpUrl</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -859,12 +887,12 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
 <span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteExcelParseResourceConfig</span><span class="p">(</span><span class="n">ResourceConfig</span><span class="p">):</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteExcelParseResourceConfig</span><span class="p">(</span><span class="n">ResourceConfig</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;DLite excel parse strategy resource config.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteExcelParseConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -914,17 +942,17 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">63</span>
 <span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteExcelSessionUpdate</span><span class="p">(</span><span class="n">DLiteSessionUpdate</span><span class="p">):</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteExcelSessionUpdate</span><span class="p">(</span><span class="n">DLiteSessionUpdate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class for returning values from DLite excel parser.&quot;&quot;&quot;</span>
 
     <span class="n">inst_uuid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -975,16 +1003,14 @@
       <p>Parse strategy for Excel files.</p>
 <p><strong>Registers strategies</strong>:</p>
 <ul>
-<li><code>("mediaType", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")</code></li>
+<li><code>("mediaType",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")</code></li>
 </ul>
 
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 76</span>
 <span class="normal"> 77</span>
 <span class="normal"> 78</span>
 <span class="normal"> 79</span>
@@ -1057,13 +1083,18 @@
 <span class="normal">146</span>
 <span class="normal">147</span>
 <span class="normal">148</span>
-<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteExcelStrategy</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Parse strategy for Excel files.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
-<span class="sd">    - `(&quot;mediaType&quot;, &quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;)`</span>
+<span class="sd">    - `(&quot;mediaType&quot;,</span>
+<span class="sd">        &quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;)`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1081,8 +1112,8 @@
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionUpdate</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
-<span class="sd">        This method will be called through the strategy-specific endpoint of the</span>
-<span class="sd">        OTE-API Services.</span>
+<span class="sd">        This method will be called through the strategy-specific endpoint</span>
+<span class="sd">        of the OTE-API Services.</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">            session: A session-specific dictionary context.</span>
@@ -1162,8 +1193,8 @@
   <div class="doc doc-contents ">
   
       <p>Execute the strategy.</p>
-<p>This method will be called through the strategy-specific endpoint of the
-OTE-API Services.</p>
+<p>This method will be called through the strategy-specific endpoint
+of the OTE-API Services.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1209,11 +1240,7 @@ OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span>
@@ -1264,11 +1291,15 @@ OTE-API Services.</p>
 <span class="normal">146</span>
 <span class="normal">147</span>
 <span class="normal">148</span>
-<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionUpdate</span><span class="p">:</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionUpdate</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
-<span class="sd">    This method will be called through the strategy-specific endpoint of the</span>
-<span class="sd">    OTE-API Services.</span>
+<span class="sd">    This method will be called through the strategy-specific endpoint</span>
+<span class="sd">    of the OTE-API Services.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        session: A session-specific dictionary context.</span>
@@ -1342,14 +1373,14 @@ OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">89</span>
 <span class="normal">90</span>
 <span class="normal">91</span>
-<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionUpdate</span><span class="p">:</span>
@@ -1388,11 +1419,7 @@ OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">165</span>
 <span class="normal">166</span>
 <span class="normal">167</span>
 <span class="normal">168</span>
@@ -1401,7 +1428,11 @@ OTE-API Services.</p>
 <span class="normal">171</span>
 <span class="normal">172</span>
 <span class="normal">173</span>
-<span class="normal">174</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Infer dlite metadata from recarray `rec`.&quot;&quot;&quot;</span>
     <span class="n">rnd</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
     <span class="n">uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://onto-ns.com/meta/1.0/generated_from_excel_</span><span class="si">{</span><span class="n">rnd</span><span class="si">:</span><span class="s2">0x</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -1437,13 +1468,13 @@ OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">156</span>
 <span class="normal">157</span>
-<span class="normal">158</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Split column name into a (name, unit) tuple.&quot;&quot;&quot;</span>
     <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*([^ ([&lt;]+)\s*[([&lt;]?([^] )&gt;]*)[])&gt;]?&quot;</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
@@ -1488,7 +1519,7 @@ OTE-API Services.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../filter/" class="md-footer__link md-footer__link--prev" aria-label="Previous: filter" rel="prev">
+        <a href="../parse/" class="md-footer__link md-footer__link--prev" aria-label="Previous: parse" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -1497,7 +1528,7 @@ OTE-API Services.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              filter
+              parse
             </div>
           </div>
         </a>
