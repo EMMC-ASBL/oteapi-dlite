@@ -1,5 +1,5 @@
 """Mapping filter strategy."""
-# pylint: disable=unused-argument
+# pylint: disable=unused-argument,invalid-name
 from typing import TYPE_CHECKING
 
 from oteapi.models import AttrDict, MappingConfig, SessionUpdate
