@@ -1,8 +1,15 @@
 """Utility functions for OTEAPI DLite plugin."""
 # pylint: disable=invalid-name
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import dlite
+from dlite.mappings import instantiate
+from tripper import Triplestore
+
+if TYPE_CHECKING:
+    from typing import Optional, Union
+
 
 # Set up paths
 entities_dir = Path(__file__).parent.parent.resolve() / "entities"
@@ -71,3 +78,39 @@ def get_driver(mediaType=None, accessService=None, options=None) -> str:
         return ACCESSSERVICES[accessService]
 
     raise ValueError("either `mediaType` or `accessService` must be provided")
+
+
+def get_instance(
+    meta: "Union[str, dlite.Metadata]",
+    collection: "dlite.Collection",
+    routedict: "Optional[dict]" = None,
+    instance_id: "Optional[str]" = None,
+    allow_incomplete: bool = False,
+    **kwargs,
+) -> dlite.Instance:
+    """Instantiates and returns an instance of `meta`.
+
+    Arguments:
+        meta: Metadata to instantiate.  Typically its URI.
+        collection: The collection with instances and mappings.
+
+    Some less used optional arguments:
+        routedict: Dict mapping property names to route number to select for
+            the given property.  The default is to select the route with
+            lowest cost.
+        instance_id: URI of instance to create.
+        allow_incomplete: Whether to allow not populating all properties
+            of the returned instance.
+        kwargs: Additional arguments passed to dlite.mappings.instantiate().
+    """
+    ts = Triplestore(backend="collection", collection=collection)
+    inst = instantiate(
+        meta=meta,
+        instances=list(collection.get_instances()),
+        triplestore=ts,
+        routedict=routedict,
+        id=instance_id,
+        allow_incomplete=allow_incomplete,
+        **kwargs,
+    )
+    return inst
