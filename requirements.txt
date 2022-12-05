@@ -2,4 +2,4 @@ DLite-Python>=0.3.3,<1
 numpy>=1.21,<2
 oteapi-core>=0.1.2
 Pillow>=9.0.1,<10
-tripper>=0.1.1
+tripper>=git+ssh://git@github.com/EMMC-ASBL/tripper.git@eb1c9fa2760a061ef0422974e633b105e3cc254d#egg=tripper
