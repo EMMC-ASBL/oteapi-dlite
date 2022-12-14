@@ -3,6 +3,7 @@
 import tempfile
 from typing import TYPE_CHECKING, Optional
 
+import dlite
 from oteapi.datacache import DataCache
 from oteapi.models import (
     AttrDict,
@@ -58,6 +59,10 @@ class DLiteStorageConfig(AttrDict):
     label: str = Field(
         ...,
         description="Label of DLite instance to serialise in the collection.",
+    )
+    collection_id: Optional[str] = Field(
+        None,
+        description=("ID of the collection to use."),
     )
     datacache_config: Optional[DataCacheConfig] = Field(
         None,
@@ -117,7 +122,10 @@ class DLiteFunctionStrategy:
             )
         )
 
-        coll = get_collection(session)
+        if config.collection_id:
+            coll = dlite.get_instance(config.collection_id)
+        else:
+            coll = get_collection(session)
         inst = coll[config.label]
 
         # Save instance
