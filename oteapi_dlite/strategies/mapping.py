@@ -70,7 +70,11 @@ class DLiteMappingStrategy:
                 )
             if isinstance(additions, str):
                 additions = [additions]
-            getattr(dlite, dlite_global_config, []).extend(additions)
+            setattr(
+                dlite,
+                dlite_global_config,
+                getattr(dlite, dlite_global_config, []).extend(additions),
+            )
 
         coll = get_collection(session)
         ts = Triplestore(backend="collection", collection=coll)

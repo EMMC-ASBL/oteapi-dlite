@@ -120,7 +120,11 @@ class DLiteParseStrategy:
                 )
             if isinstance(additions, str):
                 additions = [additions]
-            getattr(dlite, dlite_global_config, []).extend(additions)
+            setattr(
+                dlite,
+                dlite_global_config,
+                getattr(dlite, dlite_global_config, []).extend(additions),
+            )
 
         driver = (
             config.driver
