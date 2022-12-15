@@ -54,11 +54,15 @@ def get_collection(session: "Dict[str, Any]") -> dlite.Collection:
         A DLite Collection to be used throughout the OTEAPI session.
 
     """
+    cache = DataCache()
     if "collection_id" not in session:
         coll = dlite.Collection()
         session["collection_id"] = coll.uuid
+        cache.add(coll.asjson(), key=coll.uuid)
     else:
-        coll = dlite.get_instance(session["collection_id"])
+        coll = dlite.Collection.from_json(
+            cache.get(session["collection_id"]), id=session["collection_id"]
+        )
 
     return coll
 
