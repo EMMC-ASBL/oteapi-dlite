@@ -6,7 +6,7 @@ from oteapi.models import AttrDict, MappingConfig, SessionUpdate
 from pydantic.dataclasses import Field, dataclass
 from tripper import Triplestore
 
-from oteapi_dlite.utils import get_collection
+from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict, Optional
@@ -45,6 +45,8 @@ class DLiteMappingStrategy:
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> "SessionUpdate":
         """Initialize strategy."""
+        if session is None:
+            raise ValueError("Missing session")
 
         coll = get_collection(session)
         ts = Triplestore(backend="collection", collection=coll)
@@ -64,6 +66,7 @@ class DLiteMappingStrategy:
                 ]
             )
 
+        update_collection(coll)
         return SessionUpdate()
 
     def get(

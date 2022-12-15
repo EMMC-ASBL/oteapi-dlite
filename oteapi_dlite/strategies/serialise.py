@@ -8,6 +8,7 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
@@ -75,7 +76,7 @@ class SerialiseStrategy:
 
         config = self.filter_config.configuration
 
-        coll = dlite.get_collection(session["collection_id"])
+        coll = get_collection(session["collection_id"])
 
         storage = dlite.Storage(
             driver_or_url=config.driver,
@@ -89,4 +90,5 @@ class SerialiseStrategy:
                 inst = coll.get(label)
                 inst.save_to_storage(storage)
 
+        update_collection(coll)
         return DLiteSessionUpdate(collection_id=session["collection_id"])

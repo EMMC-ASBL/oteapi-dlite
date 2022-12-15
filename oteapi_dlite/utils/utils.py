@@ -5,10 +5,11 @@ from typing import TYPE_CHECKING
 
 import dlite
 from dlite.mappings import instantiate
+from oteapi.datacache import DataCache
 from tripper import Triplestore
 
 if TYPE_CHECKING:
-    from typing import Optional, Union
+    from typing import Any, Dict, Optional, Union
 
 
 # Set up paths
@@ -39,18 +40,38 @@ ACCESSSERVICES = {
 }
 
 
-def get_collection(session):
-    """Makes sure that the session contain a `collection_id` and returns
-    the collection."""
-    if session is None:
-        raise ValueError("Missing session")
+def get_collection(session: "Dict[str, Any]") -> dlite.Collection:
+    """Retrieve a DLite Collection.
 
+    Looks for a Collection UUID in the session.
+    If none exists, a new, empty Collection is created and stored in the
+    session.
+
+    Parameters:
+        session: An OTEAPI session object.
+
+    Return:
+        A DLite Collection to be used throughout the OTEAPI session.
+
+    """
     if "collection_id" not in session:
         coll = dlite.Collection()
         session["collection_id"] = coll.uuid
+    else:
+        coll = dlite.get_instance(session["collection_id"])
 
-    coll = dlite.get_instance(session["collection_id"])
     return coll
+
+
+def update_collection(collection: dlite.Collection) -> None:
+    """Update collection in DataCache.
+
+    Parameters:
+        collection: The DLite Collection to be updated.
+
+    """
+    cache = DataCache()
+    cache.add(value=collection.asjson(), key=collection.uuid)
 
 
 def get_meta(uri: str) -> dlite.Instance:

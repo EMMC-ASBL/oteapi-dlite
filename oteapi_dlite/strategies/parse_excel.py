@@ -16,7 +16,7 @@ from pydantic import Field, HttpUrl
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import dict2recarray
+from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
 if TYPE_CHECKING:
     from typing import Any, Dict
@@ -139,13 +139,14 @@ class DLiteExcelStrategy:
             inst[name] = rec[name]
 
         # Insert inst into collection
-        coll: dlite.Collection = dlite.get_collection(session["collection_id"])
+        coll = get_collection(session["collection_id"])
         coll.add(config.label, inst)
 
-        # Increase refcount of instance to avoid that it is freed when
-        # returning from this function
-        inst._incref()  # pylint: disable=protected-access
+        # # Increase refcount of instance to avoid that it is freed when
+        # # returning from this function
+        # inst._incref()  # pylint: disable=protected-access
 
+        update_collection(coll)
         return DLiteExcelSessionUpdate(
             collection_id=coll.uuid,
             inst_uuid=inst.uuid,

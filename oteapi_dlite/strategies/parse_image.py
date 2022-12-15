@@ -2,7 +2,6 @@
 import logging
 from typing import TYPE_CHECKING
 
-import dlite
 from oteapi.datacache import DataCache
 from oteapi.models import ResourceConfig
 from oteapi.strategies.parse.image import (
@@ -14,7 +13,7 @@ from pydantic import Extra, Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_meta
+from oteapi_dlite.utils import get_collection, get_meta, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict, Optional
@@ -110,7 +109,8 @@ class DLiteImageParseStrategy:
 
         LOGGER.info("session: %s", session)
 
-        coll = dlite.get_collection(session["collection_id"])
+        coll = get_collection(session["collection_id"])
         coll.add(config.image_label, inst)
 
+        update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)

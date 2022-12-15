@@ -15,12 +15,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, get_driver
+from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
 if TYPE_CHECKING:
     from typing import Any, Dict
-
-    from oteapi.interfaces import IFunctionStrategy
 
 
 class DLiteStorageConfig(AttrDict):
@@ -111,6 +109,9 @@ class DLiteFunctionStrategy:
         Returns:
             SessionUpdate instance.
         """
+        if session is None:
+            raise ValueError("Missing session")
+
         config = self.function_config.configuration
         cacheconfig = config.datacache_config
 
@@ -149,6 +150,7 @@ class DLiteFunctionStrategy:
         # the collection to a storage, such that it can be shared with the
         # other strategies.
 
+        update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
 
