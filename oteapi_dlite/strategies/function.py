@@ -1,7 +1,7 @@
 """Generic function strategy using DLite storage plugin."""
 # pylint: disable=unused-argument,invalid-name
 import tempfile
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
 import dlite
 from oteapi.datacache import DataCache
@@ -18,7 +18,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
 if TYPE_CHECKING:
-    from typing import Any, Dict
+    from typing import Any
 
 
 class DLiteStorageConfig(AttrDict):
@@ -65,6 +65,13 @@ class DLiteStorageConfig(AttrDict):
     datacache_config: Optional[DataCacheConfig] = Field(
         None,
         description="Configuration options for the local data cache.",
+    )
+    global_configuration_additions: Dict[str, Union[str, List[str]]] = Field(
+        {},
+        description=(
+            "A dictionary of DLite global configuration options to append. "
+            "E.g., `storage_path` or `python_storage_plugin_path`."
+        ),
     )
 
 
@@ -114,6 +121,19 @@ class DLiteFunctionStrategy:
 
         config = self.function_config.configuration
         cacheconfig = config.datacache_config
+
+        for (
+            dlite_global_config,
+            additions,
+        ) in config.global_configuration_additions.items():
+            if not hasattr(dlite, dlite_global_config):
+                raise ValueError(
+                    f"{dlite_global_config!r} is not a valid DLite global "
+                    "configuration name."
+                )
+            if isinstance(additions, str):
+                additions = [additions]
+            getattr(dlite, dlite_global_config, []).extend(additions)
 
         driver = (
             config.driver

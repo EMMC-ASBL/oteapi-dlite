@@ -1,7 +1,8 @@
 """Mapping filter strategy."""
 # pylint: disable=unused-argument,invalid-name
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
+import dlite
 from oteapi.models import AttrDict, MappingConfig, SessionUpdate
 from pydantic.dataclasses import Field, dataclass
 from tripper import Triplestore
@@ -9,23 +10,31 @@ from tripper import Triplestore
 from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict, Optional
+    from typing import Any
 
 
-class Config(AttrDict):
+class DLiteMappingStrategyConfig(AttrDict):
     """Configuration for a DLite mapping filter."""
 
-    datamodel: "str" = Field(
+    datamodel: Optional[str] = Field(
         None,
         description="URI of the datamodel that is mapped.",
+    )
+    global_configuration_additions: Dict[str, Union[str, List[str]]] = Field(
+        {},
+        description=(
+            "A dictionary of DLite global configuration options to append. "
+            "E.g., `storage_path` or `python_storage_plugin_path`."
+        ),
     )
 
 
 class DLiteMappingConfig(MappingConfig):
     """DLite mapping strategy config."""
 
-    configuration: "Optional[Config]" = Field(
-        None, description="DLite mapping strategy-specific configuration."
+    configuration: DLiteMappingStrategyConfig = Field(
+        DLiteMappingStrategyConfig(),
+        description="DLite mapping strategy-specific configuration.",
     )
 
 
@@ -39,7 +48,7 @@ class DLiteMappingStrategy:
 
     """
 
-    mapping_config: MappingConfig
+    mapping_config: DLiteMappingConfig
 
     def initialize(
         self, session: "Optional[Dict[str, Any]]" = None
@@ -47,6 +56,21 @@ class DLiteMappingStrategy:
         """Initialize strategy."""
         if session is None:
             raise ValueError("Missing session")
+
+        config = self.mapping_config.configuration
+
+        for (
+            dlite_global_config,
+            additions,
+        ) in config.global_configuration_additions.items():
+            if not hasattr(dlite, dlite_global_config):
+                raise ValueError(
+                    f"{dlite_global_config!r} is not a valid DLite global "
+                    "configuration name."
+                )
+            if isinstance(additions, str):
+                additions = [additions]
+            getattr(dlite, dlite_global_config, []).extend(additions)
 
         coll = get_collection(session)
         ts = Triplestore(backend="collection", collection=coll)
