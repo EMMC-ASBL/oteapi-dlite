@@ -1,13 +1,17 @@
 """Mapping filter strategy."""
 # pylint: disable=unused-argument,invalid-name
-from typing import TYPE_CHECKING, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Dict, Optional
 
 import dlite
 from oteapi.models import AttrDict, MappingConfig, SessionUpdate
 from pydantic.dataclasses import Field, dataclass
 from tripper import Triplestore
 
-from oteapi_dlite.utils import get_collection, update_collection
+from oteapi_dlite.utils import (
+    DLiteGlobalConfiguration,
+    get_collection,
+    update_collection,
+)
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
@@ -20,10 +24,10 @@ class DLiteMappingStrategyConfig(AttrDict):
         None,
         description="URI of the datamodel that is mapped.",
     )
-    global_configuration_additions: Dict[str, Union[str, List[str]]] = Field(
-        {},
+    global_configuration_additions: DLiteGlobalConfiguration = Field(
+        DLiteGlobalConfiguration(),
         description=(
-            "A dictionary of DLite global configuration options to append. "
+            "Global DLite configuration options to append. "
             "E.g., `storage_path` or `python_storage_plugin_path`."
         ),
     )
@@ -59,22 +63,24 @@ class DLiteMappingStrategy:
 
         config = self.mapping_config.configuration
 
+        for addition in config.global_configuration_additions.storage_path:
+            dlite.storage_path.append(addition)
         for (
-            dlite_global_config,
-            additions,
-        ) in config.global_configuration_additions.items():
-            if not hasattr(dlite, dlite_global_config):
-                raise ValueError(
-                    f"{dlite_global_config!r} is not a valid DLite global "
-                    "configuration name."
-                )
-            if isinstance(additions, str):
-                additions = [additions]
-            setattr(
-                dlite,
-                dlite_global_config,
-                getattr(dlite, dlite_global_config, []).extend(additions),
-            )
+            addition
+        ) in config.global_configuration_additions.storage_plugin_path:
+            dlite.storage_plugin_path.append(addition)
+        for (
+            addition
+        ) in config.global_configuration_additions.mapping_plugin_path:
+            dlite.mapping_plugin_path.append(addition)
+        for (
+            addition
+        ) in config.global_configuration_additions.python_storage_plugin_path:
+            dlite.python_storage_plugin_path.append(addition)
+        for (
+            addition
+        ) in config.global_configuration_additions.python_mapping_plugin_path:
+            dlite.python_mapping_plugin_path.append(addition)
 
         coll = get_collection(session)
         ts = Triplestore(backend="collection", collection=coll)

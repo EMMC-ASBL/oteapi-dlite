@@ -1,11 +1,12 @@
 """Utility functions for OTEAPI DLite plugin."""
 # pylint: disable=invalid-name
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 
 import dlite
 from dlite.mappings import instantiate
 from oteapi.datacache import DataCache
+from pydantic import BaseModel, Field
 from tripper import Triplestore
 
 if TYPE_CHECKING:
@@ -38,6 +39,24 @@ ACCESSSERVICES = {
     "mongodb": "mongodb",
     "postgresql": "postgresql",
 }
+
+
+class DLiteGlobalConfiguration(BaseModel):
+    """Global configurations for DLite."""
+
+    storage_path: List[str] = Field([], description="Extra storage paths.")
+    storage_plugin_path: List[str] = Field(
+        [], description="Extra storage plugin paths."
+    )
+    mapping_plugin_path: List[str] = Field(
+        [], description="Extra mapping plugin paths."
+    )
+    python_storage_plugin_path: List[str] = Field(
+        [], description="Extra Python storage plugin paths."
+    )
+    python_mapping_plugin_path: List[str] = Field(
+        [], description="Extra Python mapping plugin paths."
+    )
 
 
 def get_collection(session: "Dict[str, Any]") -> dlite.Collection:
