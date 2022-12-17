@@ -39,17 +39,27 @@ ACCESSSERVICES = {
 }
 
 
-def get_collection(session):
+def get_collection(session, collection_id=None):
     """Makes sure that the session contain a `collection_id` and returns
-    the collection."""
+    the collection.
+
+    If `collection_id` is provided, that id is used.  If there already is
+    a `collection_id` in the session, that is left untuched. Otherwise
+    `collection_id` is added to the session.
+    """
     if session is None:
         raise ValueError("Missing session")
 
-    if "collection_id" not in session:
+    if collection_id:
+        coll = dlite.get_instance(collection_id)
+    elif "collection_id" in session:
+        coll = dlite.get_instance(session["collection_id"])
+    else:
         coll = dlite.Collection()
+
+    if "collection_id" not in session:
         session["collection_id"] = coll.uuid
 
-    coll = dlite.get_instance(session["collection_id"])
     return coll
 
 

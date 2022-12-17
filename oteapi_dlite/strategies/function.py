@@ -3,7 +3,6 @@
 import tempfile
 from typing import TYPE_CHECKING, Optional
 
-import dlite
 from oteapi.datacache import DataCache
 from oteapi.models import (
     AttrDict,
@@ -122,10 +121,7 @@ class DLiteFunctionStrategy:
             )
         )
 
-        if config.collection_id:
-            coll = dlite.get_instance(config.collection_id)
-        else:
-            coll = get_collection(session)
+        coll = get_collection(session, config.collection_id)
         inst = coll[config.label]
 
         # Save instance
