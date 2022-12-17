@@ -11,11 +11,13 @@ from oteapi_dlite.utils import get_collection
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict, Optional
 
+    from pydantic import AnyUrl
+
 
 class Config(AttrDict):
     """Configuration for a DLite mapping filter."""
 
-    datamodel: "str" = Field(
+    datamodel: "AnyUrl" = Field(
         None,
         description="URI of the datamodel that is mapped.",
     )
