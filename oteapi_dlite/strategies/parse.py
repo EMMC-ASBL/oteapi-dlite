@@ -120,8 +120,8 @@ class DLiteParseStrategy:
         else:
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
-            elif "key" in session:  # type: ignore
-                key = session["key"]  # type: ignore
+            elif session and "key" in session:
+                key = session["key"]
             else:
                 raise ValueError(
                     "either `location` or `cacheconfig.accessKey` must be "
