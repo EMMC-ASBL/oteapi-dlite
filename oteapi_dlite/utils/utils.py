@@ -41,9 +41,9 @@ def get_collection(session):
     if "collection_id" not in session:
         coll = dlite.Collection()
         session["collection_id"] = coll.uuid
+        return coll
 
-    coll = dlite.get_instance(session["collection_id"])
-    return coll
+    return dlite.get_instance(session["collection_id"])
 
 
 def get_meta(uri: str) -> dlite.Instance:
