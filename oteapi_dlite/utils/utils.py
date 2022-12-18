@@ -1,6 +1,5 @@
 """Utility functions for OTEAPI DLite plugin."""
 # pylint: disable=invalid-name
-import weakref
 from pathlib import Path
 
 import dlite
@@ -33,22 +32,18 @@ ACCESSSERVICES = {
 }
 
 
-def init_session(session):
-    """Initialise session if it is not already initialised."""
+def get_collection(session):
+    """Makes sure that the session contain a `collection_id` and returns
+    the collection."""
     if session is None:
         raise ValueError("Missing session")
 
     if "collection_id" not in session:
         coll = dlite.Collection()
         session["collection_id"] = coll.uuid
+        return coll
 
-        # Make sure that collection stays alive when leaving this function
-        coll._incref()  # pylint: disable=protected-access
-
-        # Call _decref() on the collection when `session` is garbage collected
-        weakref.finalize(
-            session, coll._decref  # pylint: disable=protected-access
-        )
+    return dlite.get_instance(session["collection_id"])
 
 
 def get_meta(uri: str) -> dlite.Instance:

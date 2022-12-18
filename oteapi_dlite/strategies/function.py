@@ -3,7 +3,6 @@
 import tempfile
 from typing import TYPE_CHECKING, Optional
 
-import dlite
 from oteapi.datacache import DataCache
 from oteapi.models import (
     AttrDict,
@@ -15,7 +14,7 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_driver, init_session
+from oteapi_dlite.utils import get_collection, get_driver
 
 if TYPE_CHECKING:
     from typing import Any, Dict
@@ -91,7 +90,6 @@ class DLiteFunctionStrategy:
         session: "Optional[Dict[str, Any]]" = None,
     ) -> "SessionUpdate":
         """Initialize."""
-        init_session(session)
         return SessionUpdate()
 
     def get(
@@ -108,8 +106,6 @@ class DLiteFunctionStrategy:
         Returns:
             SessionUpdate instance.
         """
-        init_session(session)
-
         config = self.function_config.configuration
         cacheconfig = config.datacache_config
 
@@ -121,7 +117,7 @@ class DLiteFunctionStrategy:
             )
         )
 
-        coll = dlite.get_instance(session["collection_id"])  # type: ignore
+        coll = get_collection(session)
         inst = coll[config.label]
 
         # Save instance
@@ -138,6 +134,12 @@ class DLiteFunctionStrategy:
                 inst.save(driver, "{tmpdir}/data", config.options)
                 with open(f"{tmpdir}/data", "rb") as f:
                     cache.add(f.read(), key=key)
+
+        # __TODO__
+        # Can we savely assume that all strategies in a pipeline will be
+        # executed in the same Python interpreter?  If not, we should write
+        # the collection to a storage, such that it can be shared with the
+        # other strategies.
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
