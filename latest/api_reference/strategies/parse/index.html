@@ -997,7 +997,12 @@
 <span class="normal">146</span>
 <span class="normal">147</span>
 <span class="normal">148</span>
-<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteParseStrategy</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Generic DLite parse strategy utilising DLite storage plugins.</span>
 
@@ -1014,7 +1019,6 @@
         <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SessionUpdate&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-        <span class="n">init_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">SessionUpdate</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -1031,8 +1035,6 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            SessionUpdate instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">init_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
         <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
 
@@ -1055,8 +1057,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">cacheconfig</span> <span class="ow">and</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span><span class="p">:</span>
                 <span class="n">key</span> <span class="o">=</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span>
-            <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">key</span>  <span class="c1"># type: ignore</span>
+            <span class="k">elif</span> <span class="n">session</span> <span class="ow">and</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="s2">&quot;either `location` or `cacheconfig.accessKey` must be &quot;</span>
@@ -1067,17 +1069,25 @@
             <span class="k">with</span> <span class="n">cache</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">as</span> <span class="n">location</span><span class="p">:</span>
                 <span class="n">inst</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="o">.</span><span class="n">from_location</span><span class="p">(</span>
                     <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span>
-                    <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+                    <span class="n">location</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">location</span><span class="p">),</span>
                     <span class="n">options</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">,</span>
                     <span class="nb">id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
                 <span class="p">)</span>
 
         <span class="c1"># Insert inst into collection</span>
-        <span class="n">coll</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span>
-            <span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">]</span>  <span class="c1"># type:ignore</span>
-        <span class="p">)</span>
+        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
         <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
+        <span class="c1"># __TODO__</span>
+        <span class="c1"># See</span>
+        <span class="c1"># https://github.com/EMMC-ASBL/oteapi-dlite/pull/84#discussion_r1050437185</span>
+        <span class="c1"># and following comments.</span>
+        <span class="c1">#</span>
+        <span class="c1"># Since we cannot safely assume that all strategies in a</span>
+        <span class="c1"># pipeline will be executed in the same Python interpreter,</span>
+        <span class="c1"># the collection should be written to a storage, such that it</span>
+        <span class="c1"># can be shared with the other strategies.</span>
+        <span class="c1">#</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
         </details>
@@ -1154,7 +1164,8 @@ of the OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 87</span>
+<span class="normal"> 88</span>
 <span class="normal"> 89</span>
 <span class="normal"> 90</span>
 <span class="normal"> 91</span>
@@ -1215,7 +1226,12 @@ of the OTE-API Services.</p>
 <span class="normal">146</span>
 <span class="normal">147</span>
 <span class="normal">148</span>
-<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DLiteSessionUpdate&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
@@ -1229,8 +1245,6 @@ of the OTE-API Services.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        SessionUpdate instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">init_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
     <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
 
@@ -1253,8 +1267,8 @@ of the OTE-API Services.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">cacheconfig</span> <span class="ow">and</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span><span class="p">:</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span>
-        <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">key</span>  <span class="c1"># type: ignore</span>
+        <span class="k">elif</span> <span class="n">session</span> <span class="ow">and</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;either `location` or `cacheconfig.accessKey` must be &quot;</span>
@@ -1265,17 +1279,25 @@ of the OTE-API Services.</p>
         <span class="k">with</span> <span class="n">cache</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">as</span> <span class="n">location</span><span class="p">:</span>
             <span class="n">inst</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="o">.</span><span class="n">from_location</span><span class="p">(</span>
                 <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span>
-                <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+                <span class="n">location</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">location</span><span class="p">),</span>
                 <span class="n">options</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">,</span>
                 <span class="nb">id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
             <span class="p">)</span>
 
     <span class="c1"># Insert inst into collection</span>
-    <span class="n">coll</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span>
-        <span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">]</span>  <span class="c1"># type:ignore</span>
-    <span class="p">)</span>
+    <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
     <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
+    <span class="c1"># __TODO__</span>
+    <span class="c1"># See</span>
+    <span class="c1"># https://github.com/EMMC-ASBL/oteapi-dlite/pull/84#discussion_r1050437185</span>
+    <span class="c1"># and following comments.</span>
+    <span class="c1">#</span>
+    <span class="c1"># Since we cannot safely assume that all strategies in a</span>
+    <span class="c1"># pipeline will be executed in the same Python interpreter,</span>
+    <span class="c1"># the collection should be written to a storage, such that it</span>
+    <span class="c1"># can be shared with the other strategies.</span>
+    <span class="c1">#</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
@@ -1304,13 +1326,11 @@ of the OTE-API Services.</p>
 <span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SessionUpdate&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-    <span class="n">init_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">SessionUpdate</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
       </details>

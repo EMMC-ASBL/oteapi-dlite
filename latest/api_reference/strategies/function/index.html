@@ -750,12 +750,12 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">69</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
+<span class="normal">69</span>
 <span class="normal">70</span>
 <span class="normal">71</span>
 <span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteFunctionConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
+<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteFunctionConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;DLite function strategy config.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteStorageConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -807,7 +807,8 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 77</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 76</span>
+<span class="normal"> 77</span>
 <span class="normal"> 78</span>
 <span class="normal"> 79</span>
 <span class="normal"> 80</span>
@@ -872,7 +873,9 @@
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
-<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteFunctionStrategy</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Generic DLite function strategy utilising DLite storage plugins.</span>
 
@@ -889,7 +892,6 @@
         <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SessionUpdate&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-        <span class="n">init_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">SessionUpdate</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -906,8 +908,6 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            SessionUpdate instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">init_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span>
         <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
 
@@ -919,7 +919,7 @@
             <span class="p">)</span>
         <span class="p">)</span>
 
-        <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
+        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
         <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">]</span>
 
         <span class="c1"># Save instance</span>
@@ -936,6 +936,12 @@
                 <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{tmpdir}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tmpdir</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                     <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="c1"># __TODO__</span>
+        <span class="c1"># Can we savely assume that all strategies in a pipeline will be</span>
+        <span class="c1"># executed in the same Python interpreter?  If not, we should write</span>
+        <span class="c1"># the collection to a storage, such that it can be shared with the</span>
+        <span class="c1"># other strategies.</span>
 
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1013,7 +1019,9 @@ of the OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
@@ -1058,7 +1066,9 @@ of the OTE-API Services.</p>
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
-<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DLiteSessionUpdate&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
@@ -1072,8 +1082,6 @@ of the OTE-API Services.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        SessionUpdate instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">init_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span>
     <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
 
@@ -1085,7 +1093,7 @@ of the OTE-API Services.</p>
         <span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
+    <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
     <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">]</span>
 
     <span class="c1"># Save instance</span>
@@ -1102,6 +1110,12 @@ of the OTE-API Services.</p>
             <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{tmpdir}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tmpdir</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># __TODO__</span>
+    <span class="c1"># Can we savely assume that all strategies in a pipeline will be</span>
+    <span class="c1"># executed in the same Python interpreter?  If not, we should write</span>
+    <span class="c1"># the collection to a storage, such that it can be shared with the</span>
+    <span class="c1"># other strategies.</span>
 
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1126,18 +1140,16 @@ of the OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">89</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">88</span>
+<span class="normal">89</span>
 <span class="normal">90</span>
 <span class="normal">91</span>
 <span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span>
-<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SessionUpdate&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-    <span class="n">init_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">SessionUpdate</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
       </details>
@@ -1178,7 +1190,8 @@ or <code>mediaType</code> field.</p>
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
@@ -1217,8 +1230,7 @@ or <code>mediaType</code> field.</p>
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Configuration for a generic DLite storage filter.</span>
 
 <span class="sd">    The DLite storage driver to can be specified using either the `driver`</span>
