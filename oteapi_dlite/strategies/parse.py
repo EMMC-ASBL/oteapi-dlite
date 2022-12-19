@@ -152,8 +152,8 @@ class DLiteParseStrategy:
         else:
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
-            elif "key" in session:  # type: ignore
-                key = session["key"]  # type: ignore
+            elif session and "key" in session:
+                key = session["key"]
             else:
                 raise ValueError(
                     "either `location` or `cacheconfig.accessKey` must be "
@@ -174,10 +174,14 @@ class DLiteParseStrategy:
         coll.add(config.label, inst)
 
         # __TODO__
-        # Can we savely assume that all strategies in a pipeline will be
-        # executed in the same Python interpreter?  If not, we should write
-        # the collection to a storage, such that it can be shared with the
-        # other strategies.
+        # See
+        # https://github.com/EMMC-ASBL/oteapi-dlite/pull/84#discussion_r1050437185
+        # and following comments.
+        #
+        # Since we cannot safely assume that all strategies in a
+        # pipeline will be executed in the same Python interpreter,
+        # the collection should be written to a storage, such that it
+        # can be shared with the other strategies.
 
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)

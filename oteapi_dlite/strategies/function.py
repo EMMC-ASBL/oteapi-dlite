@@ -154,10 +154,7 @@ class DLiteFunctionStrategy:
             )
         )
 
-        if config.collection_id:
-            coll = dlite.get_instance(config.collection_id)
-        else:
-            coll = get_collection(session)
+        coll = get_collection(session)
         inst = coll[config.label]
 
         # Save instance
