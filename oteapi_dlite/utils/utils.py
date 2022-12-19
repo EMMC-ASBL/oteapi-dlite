@@ -44,7 +44,7 @@ def get_collection(session, collection_id=None):
     the collection.
 
     If `collection_id` is provided, that id is used.  If there already is
-    a `collection_id` in the session, that is left untuched. Otherwise
+    a `collection_id` in the session, that is left untouched. Otherwise
     `collection_id` is added to the session.
     """
     if session is None:
@@ -92,7 +92,7 @@ def get_driver(mediaType=None, accessService=None, options=None) -> str:
 
 def get_instance(
     meta: "Union[str, dlite.Metadata]",
-    collection: "dlite.Collection",
+    collection: dlite.Collection,
     routedict: "Optional[dict]" = None,
     instance_id: "Optional[str]" = None,
     allow_incomplete: bool = False,
