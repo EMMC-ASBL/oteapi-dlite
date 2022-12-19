@@ -52,5 +52,6 @@ session2.update(mapper2.initialize(session2))
 session2.update(mapper2.get(session2))
 
 relations2 = set(coll2.get_relations())
+assert len(list(coll2.get_relations())) == len(relations2)
 assert (FORCES.forces, MAP.mapsTo, EMMO.Force) in relations2
 assert (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy) in relations2
