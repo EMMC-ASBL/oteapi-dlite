@@ -22,8 +22,8 @@ coll = dlite.Collection()
 session = {"collection_id": coll.uuid}
 
 mapper = DLiteMappingStrategy(config)
-mapper.initialize(session)
-mapper.get(session)
+session.update(mapper.initialize(session))
+session.update(mapper.get(session))
 
 relations = set(coll.get_relations())
 assert (FORCES.forces, MAP.mapsTo, EMMO.Force) in relations
@@ -48,9 +48,10 @@ coll2 = dlite.Collection()
 session2 = {"collection_id": coll2.uuid}
 
 mapper2 = DLiteMappingStrategy(config2)
-mapper2.initialize(session2)
-mapper2.get(session2)
+session2.update(mapper2.initialize(session2))
+session2.update(mapper2.get(session2))
 
 relations2 = set(coll2.get_relations())
+assert len(list(coll2.get_relations())) == len(relations2)
 assert (FORCES.forces, MAP.mapsTo, EMMO.Force) in relations2
 assert (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy) in relations2

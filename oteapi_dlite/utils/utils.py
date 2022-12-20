@@ -9,6 +9,8 @@ from oteapi.datacache import DataCache
 from pydantic import BaseModel, Field
 from tripper import Triplestore
 
+from oteapi_dlite.utils.exceptions import CollectionNotFound
+
 if TYPE_CHECKING:
     from typing import Any, Dict, Optional, Union
 
@@ -59,29 +61,45 @@ class DLiteGlobalConfiguration(BaseModel):
     )
 
 
-def get_collection(session: "Dict[str, Any]") -> dlite.Collection:
+def get_collection(
+    session: "Dict[str, Any]", collection_id: "Optional[str]" = None
+) -> dlite.Collection:
     """Retrieve a DLite Collection.
 
     Looks for a Collection UUID in the session.
     If none exists, a new, empty Collection is created and stored in the
     session.
 
+    If `collection_id` is provided, that id is used. If there already is a
+    `collection_id` in the session, that is left untouched. Otherwise
+    `collection_id` is added to the session.
+
     Parameters:
         session: An OTEAPI session object.
+        collection_id: A specific collection ID to retrieve.
 
     Return:
         A DLite Collection to be used throughout the OTEAPI session.
 
     """
     cache = DataCache()
-    if "collection_id" not in session:
-        coll = dlite.Collection()
-        session["collection_id"] = coll.uuid
-        cache.add(coll.asjson(), key=coll.uuid)
-    else:
+
+    if collection_id and collection_id in cache:
+        session["collection_id"] = collection_id
+
+    if "collection_id" in session:
+        if session["collection_id"] not in cache:
+            raise CollectionNotFound(
+                "Could not find DLite Collection with "
+                f"uuid={session['collection_id']!r}"
+            )
         coll = dlite.Collection.from_json(
             cache.get(session["collection_id"]), id=session["collection_id"]
         )
+    else:
+        coll = dlite.Collection()
+        session["collection_id"] = coll.uuid
+        cache.add(coll.asjson(), key=coll.uuid)
 
     return coll
 
@@ -126,7 +144,7 @@ def get_driver(mediaType=None, accessService=None, options=None) -> str:
 
 def get_instance(
     meta: "Union[str, dlite.Metadata]",
-    collection: "dlite.Collection",
+    collection: dlite.Collection,
     routedict: "Optional[dict]" = None,
     instance_id: "Optional[str]" = None,
     allow_incomplete: bool = False,

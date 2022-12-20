@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Dict, Optional
 
 import dlite
 from oteapi.models import AttrDict, MappingConfig, SessionUpdate
+from pydantic import AnyUrl
 from pydantic.dataclasses import Field, dataclass
 from tripper import Triplestore
 
@@ -20,7 +21,7 @@ if TYPE_CHECKING:  # pragma: no cover
 class DLiteMappingStrategyConfig(AttrDict):
     """Configuration for a DLite mapping filter."""
 
-    datamodel: Optional[str] = Field(
+    datamodel: Optional[AnyUrl] = Field(
         None,
         description="URI of the datamodel that is mapped.",
     )
