@@ -6,6 +6,6 @@ Authored by team4.0@sintef.no, SINTEF, 2022
 Created from cookiecutter-oteapi-plugin, SINTEF, 2022
 """
 
-__version__ = "0.0.7"
+__version__ = "0.1.0"
 __author__ = "team4.0@sintef.no"
 __author_email__ = "team4.0@sintef.no"
