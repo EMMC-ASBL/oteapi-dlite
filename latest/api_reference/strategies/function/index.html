@@ -494,6 +494,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../mapping/" class="md-nav__link">
+        mapping
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../parse/" class="md-nav__link">
         parse
       </a>
@@ -750,12 +764,12 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteFunctionConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteFunctionConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;DLite function strategy config.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteStorageConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -807,11 +821,7 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 80</span>
 <span class="normal"> 81</span>
 <span class="normal"> 82</span>
 <span class="normal"> 83</span>
@@ -875,7 +885,11 @@
 <span class="normal">141</span>
 <span class="normal">142</span>
 <span class="normal">143</span>
-<span class="normal">144</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteFunctionStrategy</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Generic DLite function strategy utilising DLite storage plugins.</span>
 
@@ -919,7 +933,7 @@
             <span class="p">)</span>
         <span class="p">)</span>
 
-        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
         <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">]</span>
 
         <span class="c1"># Save instance</span>
@@ -1019,11 +1033,7 @@ of the OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span>
 <span class="normal">102</span>
@@ -1068,7 +1078,11 @@ of the OTE-API Services.</p>
 <span class="normal">141</span>
 <span class="normal">142</span>
 <span class="normal">143</span>
-<span class="normal">144</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DLiteSessionUpdate&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
@@ -1093,7 +1107,7 @@ of the OTE-API Services.</p>
         <span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+    <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
     <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">]</span>
 
     <span class="c1"># Save instance</span>
@@ -1140,12 +1154,12 @@ of the OTE-API Services.</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SessionUpdate&quot;</span><span class="p">:</span>
@@ -1230,7 +1244,11 @@ or <code>mediaType</code> field.</p>
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Configuration for a generic DLite storage filter.</span>
 
 <span class="sd">    The DLite storage driver to can be specified using either the `driver`</span>
@@ -1266,6 +1284,10 @@ or <code>mediaType</code> field.</p>
     <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="o">...</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Label of DLite instance to serialise in the collection.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">collection_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;ID of the collection to use.&quot;</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">datacache_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataCacheConfig</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
@@ -1343,13 +1365,13 @@ or <code>mediaType</code> field.</p>
       
       
         
-        <a href="../parse/" class="md-footer__link md-footer__link--next" aria-label="Next: parse" rel="next">
+        <a href="../mapping/" class="md-footer__link md-footer__link--next" aria-label="Next: mapping" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              parse
+              mapping
             </div>
           </div>
           <div class="md-footer__button md-icon">
