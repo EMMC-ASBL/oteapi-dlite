@@ -10,6 +10,7 @@ if TYPE_CHECKING:
 def test_serialise(tmp_path: "Path") -> None:
     """Test the serialise filter."""
     import dlite
+    from oteapi.datacache import DataCache
 
     from oteapi_dlite.strategies.serialise import (
         SerialiseFilterConfig,
@@ -29,6 +30,7 @@ def test_serialise(tmp_path: "Path") -> None:
 
     coll = dlite.Collection()
     session = {"collection_id": coll.uuid}
+    DataCache().add(coll.asjson(), key=coll.uuid)
 
     serialiser: "IFilterStrategy" = SerialiseStrategy(config)
     session.update(serialiser.initialize(session))

@@ -91,9 +91,7 @@ class DLiteExcelStrategy:
         session: "Optional[Dict[str, Any]]" = None,
     ) -> SessionUpdate:
         """Initialize."""
-        if session is None:
-            raise ValueError("Missing session")
-        return DLiteSessionUpdate(collection_id=session["collection_id"])
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
         """Execute the strategy.
@@ -108,9 +106,6 @@ class DLiteExcelStrategy:
             DLite instance.
 
         """
-        if session is None:
-            raise ValueError("Missing session")
-
         config = self.parse_config.configuration
 
         xlsx_config = self.parse_config.dict()
@@ -118,7 +113,6 @@ class DLiteExcelStrategy:
         xlsx_config[
             "mediaType"
         ] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        print(xlsx_config)
         parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
         columns = parser.get(session)["data"]
 
@@ -139,7 +133,7 @@ class DLiteExcelStrategy:
             inst[name] = rec[name]
 
         # Insert inst into collection
-        coll = get_collection(session["collection_id"])
+        coll = get_collection(session)
         coll.add(config.label, inst)
 
         # # Increase refcount of instance to avoid that it is freed when

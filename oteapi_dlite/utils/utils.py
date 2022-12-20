@@ -62,7 +62,8 @@ class DLiteGlobalConfiguration(BaseModel):
 
 
 def get_collection(
-    session: "Dict[str, Any]", collection_id: "Optional[str]" = None
+    session: "Optional[Dict[str, Any]]" = None,
+    collection_id: "Optional[str]" = None,
 ) -> dlite.Collection:
     """Retrieve a DLite Collection.
 
@@ -84,24 +85,24 @@ def get_collection(
     """
     cache = DataCache()
 
-    if collection_id and collection_id in cache:
-        session["collection_id"] = collection_id
+    session = session or {}
+    id_ = collection_id or session.get("collection_id")
 
-    if "collection_id" in session:
-        if session["collection_id"] not in cache:
-            raise CollectionNotFound(
-                "Could not find DLite Collection with "
-                f"uuid={session['collection_id']!r}"
-            )
-        coll = dlite.Collection.from_json(
-            cache.get(session["collection_id"]), id=session["collection_id"]
+    if id_ is None:
+        collection = dlite.Collection()
+        cache.add(collection.asjson(), key=collection.uuid)
+    elif id_ not in cache:
+        raise CollectionNotFound(
+            "Could not find DLite Collection with "
+            f"uuid={session['collection_id']!r}"
         )
     else:
-        coll = dlite.Collection()
-        session["collection_id"] = coll.uuid
-        cache.add(coll.asjson(), key=coll.uuid)
+        collection = dlite.Collection.from_json(cache.get(id_), id=id_)
 
-    return coll
+    if "collection_id" not in session:
+        session["collection_id"] = collection.uuid
+
+    return collection
 
 
 def update_collection(collection: dlite.Collection) -> None:

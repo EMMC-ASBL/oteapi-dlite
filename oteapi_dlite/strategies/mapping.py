@@ -3,11 +3,12 @@
 from typing import TYPE_CHECKING, Dict, Optional
 
 import dlite
-from oteapi.models import AttrDict, MappingConfig, SessionUpdate
+from oteapi.models import AttrDict, MappingConfig
 from pydantic import AnyUrl
 from pydantic.dataclasses import Field, dataclass
 from tripper import Triplestore
 
+from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import (
     DLiteGlobalConfiguration,
     get_collection,
@@ -57,11 +58,8 @@ class DLiteMappingStrategy:
 
     def initialize(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "SessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Initialize strategy."""
-        if session is None:
-            raise ValueError("Missing session")
-
         config = self.mapping_config.configuration
 
         for addition in config.global_configuration_additions.storage_path:
@@ -102,10 +100,10 @@ class DLiteMappingStrategy:
             )
 
         update_collection(coll)
-        return SessionUpdate()
+        return DLiteSessionUpdate(collection_id=coll.uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "SessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Execute strategy and return a dictionary."""
-        return SessionUpdate()
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)

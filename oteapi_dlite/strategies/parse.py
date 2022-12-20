@@ -108,9 +108,6 @@ class DLiteParseStrategy:
         Returns:
             SessionUpdate instance.
         """
-        if session is None:
-            raise ValueError("Missing session")
-
         config = self.parse_config.configuration
         cacheconfig = config.datacache_config
 

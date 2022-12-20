@@ -5,12 +5,7 @@ from typing import TYPE_CHECKING, Dict, Optional
 
 import dlite
 from oteapi.datacache import DataCache
-from oteapi.models import (
-    AttrDict,
-    DataCacheConfig,
-    FunctionConfig,
-    SessionUpdate,
-)
+from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
@@ -103,13 +98,13 @@ class DLiteFunctionStrategy:
     def initialize(
         self,
         session: "Optional[Dict[str, Any]]" = None,
-    ) -> "SessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Initialize."""
-        return SessionUpdate()
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "DLiteSessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
@@ -121,9 +116,6 @@ class DLiteFunctionStrategy:
         Returns:
             SessionUpdate instance.
         """
-        if session is None:
-            raise ValueError("Missing session")
-
         config = self.function_config.configuration
         cacheconfig = config.datacache_config
 

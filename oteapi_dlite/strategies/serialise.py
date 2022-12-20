@@ -63,20 +63,15 @@ class SerialiseStrategy:
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
-        if session is None:
-            raise ValueError("Missing session")
-        return DLiteSessionUpdate(collection_id=session["collection_id"])
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy."""
-        if session is None:
-            raise ValueError("Missing session")
-
         config = self.filter_config.configuration
 
-        coll = get_collection(session["collection_id"])
+        coll = get_collection(session)
 
         storage = dlite.Storage(
             driver_or_url=config.driver,
@@ -91,4 +86,4 @@ class SerialiseStrategy:
                 inst.save_to_storage(storage)
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=session["collection_id"])
+        return DLiteSessionUpdate(collection_id=coll.uuid)
