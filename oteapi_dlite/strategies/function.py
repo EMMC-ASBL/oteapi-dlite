@@ -59,6 +59,10 @@ class DLiteStorageConfig(AttrDict):
         ...,
         description="Label of DLite instance to serialise in the collection.",
     )
+    collection_id: Optional[str] = Field(
+        None,
+        description=("ID of the collection to use."),
+    )
     datacache_config: Optional[DataCacheConfig] = Field(
         None,
         description="Configuration options for the local data cache.",
@@ -117,7 +121,7 @@ class DLiteFunctionStrategy:
             )
         )
 
-        coll = get_collection(session)
+        coll = get_collection(session, config.collection_id)
         inst = coll[config.label]
 
         # Save instance
