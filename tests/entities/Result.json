@@ -1,0 +1,21 @@
+{
+  "uri": "http://onto-ns.com/meta/0.1/Result",
+  "description": "Calculation result.",
+  "dimensions": {
+    "natoms": "Number of atoms.",
+    "ncoords": "Number of coordinates. Always 3.",
+  },
+  "properties": {
+    "potential_energy": {
+      "type": "double",
+      "unit": "J",
+      "description": "Potential energy."
+    },
+    "forces": {
+      "type": "double",
+      "shape": ["natoms", "ncoords"],
+      "unit": "N",
+      "description": "The force on each atom."
+    }
+  }
+}

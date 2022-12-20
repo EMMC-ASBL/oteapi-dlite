@@ -163,13 +163,13 @@ def create_api_reference_docs(context, pre_clean=False, pre_commit=False):
         # Check if there have been any changes.
         # List changes if yes.
         if TYPE_CHECKING:  # pragma: no cover
-            context: "Context" = context
+            context: "Context" = context  # type: ignore
 
         # NOTE: grep returns an exit code of 1 if it doesn't find anything
         # (which will be good in this case).
         # Concerning the weird last grep command see:
         # http://manpages.ubuntu.com/manpages/precise/en/man1/git-status.1.html
-        result: "Result" = context.run(
+        result: "Result" = context.run(  # type: ignore
             "git status --porcelain docs/api_reference | "
             "grep -E '^[? MARC][?MD]' || exit 0",
             hide=True,
