@@ -4,22 +4,12 @@ from typing import TYPE_CHECKING, Dict, Optional
 
 import dlite
 from oteapi.datacache import DataCache
-from oteapi.models import (
-    AttrDict,
-    DataCacheConfig,
-    ResourceConfig,
-    SessionUpdate,
-)
+from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import (
-    DLiteGlobalConfiguration,
-    get_collection,
-    get_driver,
-    update_collection,
-)
+from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
 if TYPE_CHECKING:
     from typing import Any
@@ -58,13 +48,6 @@ class DLiteParseConfig(AttrDict):
         None,
         description="Configuration options for the local data cache.",
     )
-    global_configuration_additions: DLiteGlobalConfiguration = Field(
-        DLiteGlobalConfiguration(),
-        description=(
-            "Global DLite configuration options to append. "
-            "E.g., `storage_path` or `python_storage_plugin_path`."
-        ),
-    )
 
 
 class DLiteParseResourceConfig(ResourceConfig):
@@ -90,9 +73,9 @@ class DLiteParseStrategy:
     def initialize(
         self,
         session: "Optional[Dict[str, Any]]" = None,
-    ) -> "SessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Initialize."""
-        return SessionUpdate()
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
@@ -110,25 +93,6 @@ class DLiteParseStrategy:
         """
         config = self.parse_config.configuration
         cacheconfig = config.datacache_config
-
-        for addition in config.global_configuration_additions.storage_path:
-            dlite.storage_path.append(addition)
-        for (
-            addition
-        ) in config.global_configuration_additions.storage_plugin_path:
-            dlite.storage_plugin_path.append(addition)
-        for (
-            addition
-        ) in config.global_configuration_additions.mapping_plugin_path:
-            dlite.mapping_plugin_path.append(addition)
-        for (
-            addition
-        ) in config.global_configuration_additions.python_storage_plugin_path:
-            dlite.python_storage_plugin_path.append(addition)
-        for (
-            addition
-        ) in config.global_configuration_additions.python_mapping_plugin_path:
-            dlite.python_mapping_plugin_path.append(addition)
 
         driver = (
             config.driver
