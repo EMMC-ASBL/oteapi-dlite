@@ -2,7 +2,6 @@
 import logging
 from typing import TYPE_CHECKING
 
-import dlite
 from oteapi.datacache import DataCache
 from oteapi.models import ResourceConfig
 from oteapi.strategies.parse.image import (
@@ -14,7 +13,7 @@ from pydantic import Extra, Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_meta
+from oteapi_dlite.utils import get_collection, get_meta, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict, Optional
@@ -63,9 +62,7 @@ class DLiteImageParseStrategy:
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
-        if session is None:
-            raise ValueError("Missing session")
-        return DLiteSessionUpdate(collection_id=session["collection_id"])
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
@@ -84,9 +81,6 @@ class DLiteImageParseStrategy:
         Returns:
             DLite instance.
         """
-        if session is None:
-            raise ValueError("Missing session")
-
         config = self.parse_config.configuration
 
         # Configuration for ImageDataParseStrategy in oteapi-core
@@ -98,8 +92,10 @@ class DLiteImageParseStrategy:
         conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
         core_config = ImageParserResourceConfig(**conf)
 
-        ImageDataParseStrategy(core_config).initialize(session)
-        output = ImageDataParseStrategy(core_config).get(session)
+        parse_strategy_session = ImageDataParseStrategy(core_config).initialize(
+            session
+        )
+        output = ImageDataParseStrategy(core_config).get(parse_strategy_session)
 
         cache = DataCache()
         data = cache.get(output["image_key"])
@@ -110,7 +106,8 @@ class DLiteImageParseStrategy:
 
         LOGGER.info("session: %s", session)
 
-        coll = dlite.get_collection(session["collection_id"])
+        coll = get_collection(session)
         coll.add(config.image_label, inst)
 
+        update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)

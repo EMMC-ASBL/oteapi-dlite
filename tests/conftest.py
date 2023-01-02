@@ -27,3 +27,10 @@ def repo_dir() -> "Path":
 def static_files(repo_dir: "Path") -> "Path":
     """Absolute path to the static directory filled with test files."""
     return repo_dir / "tests" / "static"
+
+
+@pytest.fixture(scope="session")
+def entities_path(repo_dir: "Path") -> "Path":
+    """Absolute path to the entities directory filled with test DLite
+    entities."""
+    return repo_dir / "tests" / "entities"

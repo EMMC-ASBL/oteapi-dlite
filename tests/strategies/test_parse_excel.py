@@ -17,7 +17,9 @@ def test_parse_excel(static_files: "Path") -> None:
 
     sample_file = static_files / "test_parse_excel.xlsx"
 
-    cache_key = DataCache().add(sample_file.read_bytes())
+    cache = DataCache()
+
+    cache_key = cache.add(sample_file.read_bytes())
     config = {
         "downloadUrl": sample_file.as_uri(),
         "mediaType": "application/vnd.dlite-xlsx",
@@ -35,6 +37,7 @@ def test_parse_excel(static_files: "Path") -> None:
         "collection_id": coll.uuid,
         "key": cache_key,
     }
+    cache.add(coll.asjson(), key=coll.uuid)
 
     parser = DLiteExcelStrategy(config)
     session.update(parser.initialize(session))

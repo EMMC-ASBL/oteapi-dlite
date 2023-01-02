@@ -8,6 +8,7 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
@@ -62,20 +63,15 @@ class SerialiseStrategy:
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
-        if session is None:
-            raise ValueError("Missing session")
-        return DLiteSessionUpdate(collection_id=session["collection_id"])
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy."""
-        if session is None:
-            raise ValueError("Missing session")
-
         config = self.filter_config.configuration
 
-        coll = dlite.get_collection(session["collection_id"])
+        coll = get_collection(session)
 
         storage = dlite.Storage(
             driver_or_url=config.driver,
@@ -89,4 +85,5 @@ class SerialiseStrategy:
                 inst = coll.get(label)
                 inst.save_to_storage(storage)
 
-        return DLiteSessionUpdate(collection_id=session["collection_id"])
+        update_collection(coll)
+        return DLiteSessionUpdate(collection_id=coll.uuid)

@@ -5,10 +5,13 @@ from typing import TYPE_CHECKING
 
 import dlite
 from dlite.mappings import instantiate
+from oteapi.datacache import DataCache
 from tripper import Triplestore
 
+from oteapi_dlite.utils.exceptions import CollectionNotFound
+
 if TYPE_CHECKING:
-    from typing import Optional, Union
+    from typing import Any, Dict, Optional, Union
 
 
 # Set up paths
@@ -39,28 +42,59 @@ ACCESSSERVICES = {
 }
 
 
-def get_collection(session, collection_id=None):
-    """Makes sure that the session contain a `collection_id` and returns
-    the collection.
+def get_collection(
+    session: "Optional[Dict[str, Any]]" = None,
+    collection_id: "Optional[str]" = None,
+) -> dlite.Collection:
+    """Retrieve a DLite Collection.
 
-    If `collection_id` is provided, that id is used.  If there already is
-    a `collection_id` in the session, that is left untouched. Otherwise
+    Looks for a Collection UUID in the session.
+    If none exists, a new, empty Collection is created and stored in the
+    session.
+
+    If `collection_id` is provided, that id is used. If there already is a
+    `collection_id` in the session, that is left untouched. Otherwise
     `collection_id` is added to the session.
-    """
-    if session is None:
-        raise ValueError("Missing session")
 
-    if collection_id:
-        coll = dlite.get_instance(collection_id)
-    elif "collection_id" in session:
-        coll = dlite.get_instance(session["collection_id"])
+    Parameters:
+        session: An OTEAPI session object.
+        collection_id: A specific collection ID to retrieve.
+
+    Return:
+        A DLite Collection to be used throughout the OTEAPI session.
+
+    """
+    cache = DataCache()
+
+    session = session or {}
+    id_ = collection_id or session.get("collection_id")
+
+    if id_ is None:
+        collection = dlite.Collection()
+        cache.add(collection.asjson(), key=collection.uuid)
+    elif id_ not in cache:
+        raise CollectionNotFound(
+            "Could not find DLite Collection with "
+            f"uuid={session['collection_id']!r}"
+        )
     else:
-        coll = dlite.Collection()
+        collection = dlite.Collection.from_json(cache.get(id_), id=id_)
 
     if "collection_id" not in session:
-        session["collection_id"] = coll.uuid
+        session["collection_id"] = collection.uuid
 
-    return coll
+    return collection
+
+
+def update_collection(collection: dlite.Collection) -> None:
+    """Update collection in DataCache.
+
+    Parameters:
+        collection: The DLite Collection to be updated.
+
+    """
+    cache = DataCache()
+    cache.add(value=collection.asjson(), key=collection.uuid)
 
 
 def get_meta(uri: str) -> dlite.Instance:
