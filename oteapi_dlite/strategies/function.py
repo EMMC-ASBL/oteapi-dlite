@@ -1,25 +1,18 @@
 """Generic function strategy using DLite storage plugin."""
 # pylint: disable=unused-argument,invalid-name
 import tempfile
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Dict, Optional
 
 from oteapi.datacache import DataCache
-from oteapi.models import (
-    AttrDict,
-    DataCacheConfig,
-    FunctionConfig,
-    SessionUpdate,
-)
+from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, get_driver
+from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
 if TYPE_CHECKING:
-    from typing import Any, Dict
-
-    from oteapi.interfaces import IFunctionStrategy
+    from typing import Any
 
 
 class DLiteStorageConfig(AttrDict):
@@ -92,13 +85,13 @@ class DLiteFunctionStrategy:
     def initialize(
         self,
         session: "Optional[Dict[str, Any]]" = None,
-    ) -> "SessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Initialize."""
-        return SessionUpdate()
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "DLiteSessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
@@ -145,6 +138,7 @@ class DLiteFunctionStrategy:
         # the collection to a storage, such that it can be shared with the
         # other strategies.
 
+        update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
 

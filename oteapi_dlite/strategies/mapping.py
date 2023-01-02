@@ -1,23 +1,23 @@
 """Mapping filter strategy."""
 # pylint: disable=unused-argument,invalid-name
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict, Optional
 
-from oteapi.models import AttrDict, MappingConfig, SessionUpdate
+from oteapi.models import AttrDict, MappingConfig
+from pydantic import AnyUrl
 from pydantic.dataclasses import Field, dataclass
 from tripper import Triplestore
 
-from oteapi_dlite.utils import get_collection
+from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict, Optional
-
-    from pydantic import AnyUrl
+    from typing import Any
 
 
-class Config(AttrDict):
+class DLiteMappingStrategyConfig(AttrDict):
     """Configuration for a DLite mapping filter."""
 
-    datamodel: "AnyUrl" = Field(
+    datamodel: Optional[AnyUrl] = Field(
         None,
         description="URI of the datamodel that is mapped.",
     )
@@ -26,8 +26,9 @@ class Config(AttrDict):
 class DLiteMappingConfig(MappingConfig):
     """DLite mapping strategy config."""
 
-    configuration: "Optional[Config]" = Field(
-        None, description="DLite mapping strategy-specific configuration."
+    configuration: DLiteMappingStrategyConfig = Field(
+        DLiteMappingStrategyConfig(),
+        description="DLite mapping strategy-specific configuration.",
     )
 
 
@@ -41,13 +42,12 @@ class DLiteMappingStrategy:
 
     """
 
-    mapping_config: MappingConfig
+    mapping_config: DLiteMappingConfig
 
     def initialize(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "SessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Initialize strategy."""
-
         coll = get_collection(session)
         ts = Triplestore(backend="collection", collection=coll)
 
@@ -66,10 +66,11 @@ class DLiteMappingStrategy:
                 ]
             )
 
-        return SessionUpdate()
+        update_collection(coll)
+        return DLiteSessionUpdate(collection_id=coll.uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "SessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Execute strategy and return a dictionary."""
-        return SessionUpdate()
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)

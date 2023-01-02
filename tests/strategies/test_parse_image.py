@@ -63,7 +63,9 @@ def test_image(
 
     sample_file = static_files / test_file
 
-    orig_key = DataCache().add(sample_file.read_bytes())
+    cache = DataCache()
+
+    orig_key = cache.add(sample_file.read_bytes())
     config = {
         "downloadUrl": f"file://dummy.host/{sample_file}",
         "mediaType": f"image/vnd.dlite-{sample_file.suffix.lstrip('.')}",
@@ -77,6 +79,7 @@ def test_image(
         "collection_id": coll.uuid,
         "key": orig_key,
     }
+    cache.add(coll.asjson(), key=coll.uuid)
     parser: "IParseStrategy" = DLiteImageParseStrategy(config)
     output: "DLiteSessionUpdate" = parser.get(session)
     assert "collection_id" in output
