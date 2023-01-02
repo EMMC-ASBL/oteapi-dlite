@@ -583,6 +583,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../utils/exceptions/" class="md-nav__link">
+        exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../utils/nputils/" class="md-nav__link">
         nputils
       </a>
@@ -781,7 +795,7 @@
 <span class="normal">56</span>
 <span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">CreateCollectionStrategy</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Trivial filter that adds an empty collection to the session.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trivial filter that adds an empty collection to the session.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
@@ -801,7 +815,7 @@
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="s2">&quot;collection_id&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
@@ -817,7 +831,7 @@
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
@@ -861,7 +875,7 @@
 <span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
@@ -904,7 +918,7 @@
 <span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="s2">&quot;collection_id&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>

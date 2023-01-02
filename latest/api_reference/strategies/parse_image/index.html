@@ -597,6 +597,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../utils/exceptions/" class="md-nav__link">
+        exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../utils/nputils/" class="md-nav__link">
         nputils
       </a>
@@ -764,14 +778,14 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
+<span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageConfig</span><span class="p">(</span><span class="n">ImageParserConfig</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Configuration for DLite image parser.&quot;&quot;&quot;</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageConfig</span><span class="p">(</span><span class="n">ImageParserConfig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for DLite image parser.&quot;&quot;&quot;</span>
 
     <span class="n">image_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="s2">&quot;image&quot;</span><span class="p">,</span>
@@ -828,7 +842,8 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 45</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 44</span>
+<span class="normal"> 45</span>
 <span class="normal"> 46</span>
 <span class="normal"> 47</span>
 <span class="normal"> 48</span>
@@ -896,12 +911,9 @@
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteImageParseStrategy</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Parse strategy for image files.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse strategy for image files.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
@@ -919,15 +931,13 @@
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
 <span class="sd">        This method will be called through the strategy-specific</span>
 <span class="sd">        endpoint of the OTE-API Services.  It assumes that the image to</span>
@@ -941,9 +951,6 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            DLite instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
-
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
 
         <span class="c1"># Configuration for ImageDataParseStrategy in oteapi-core</span>
@@ -955,8 +962,10 @@
         <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;mediaType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;image/&quot;</span> <span class="o">+</span> <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;mediaType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">core_config</span> <span class="o">=</span> <span class="n">ImageParserResourceConfig</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="p">)</span>
 
-        <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">parse_strategy_session</span> <span class="o">=</span> <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+            <span class="n">session</span>
+        <span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parse_strategy_session</span><span class="p">)</span>
 
         <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;image_key&quot;</span><span class="p">])</span>
@@ -967,9 +976,10 @@
 
         <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;session: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
 
-        <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
         <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">image_label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
+        <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
         </details>
@@ -1049,7 +1059,10 @@ or in the parser configuration (lowest priority).</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 70</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
 <span class="normal"> 71</span>
 <span class="normal"> 72</span>
 <span class="normal"> 73</span>
@@ -1092,13 +1105,10 @@ or in the parser configuration (lowest priority).</p>
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
 <span class="sd">    This method will be called through the strategy-specific</span>
 <span class="sd">    endpoint of the OTE-API Services.  It assumes that the image to</span>
@@ -1112,9 +1122,6 @@ or in the parser configuration (lowest priority).</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        DLite instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
-
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
 
     <span class="c1"># Configuration for ImageDataParseStrategy in oteapi-core</span>
@@ -1126,8 +1133,10 @@ or in the parser configuration (lowest priority).</p>
     <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;mediaType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;image/&quot;</span> <span class="o">+</span> <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;mediaType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">core_config</span> <span class="o">=</span> <span class="n">ImageParserResourceConfig</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="p">)</span>
 
-    <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+    <span class="n">parse_strategy_session</span> <span class="o">=</span> <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+        <span class="n">session</span>
+    <span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">ImageDataParseStrategy</span><span class="p">(</span><span class="n">core_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parse_strategy_session</span><span class="p">)</span>
 
     <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;image_key&quot;</span><span class="p">])</span>
@@ -1138,9 +1147,10 @@ or in the parser configuration (lowest priority).</p>
 
     <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;session: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
 
-    <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+    <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
     <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">image_label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
+    <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
@@ -1164,19 +1174,15 @@ or in the parser configuration (lowest priority).</p>
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
+<span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1212,14 +1218,14 @@ or in the parser configuration (lowest priority).</p>
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+<span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageResourceConfig</span><span class="p">(</span><span class="n">ResourceConfig</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Resource config for DLite image parser.&quot;&quot;&quot;</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageResourceConfig</span><span class="p">(</span><span class="n">ResourceConfig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resource config for DLite image parser.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteImageConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">DLiteImageConfig</span><span class="p">(),</span>

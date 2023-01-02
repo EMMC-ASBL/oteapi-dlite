@@ -597,6 +597,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../utils/exceptions/" class="md-nav__link">
+        exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../utils/nputils/" class="md-nav__link">
         nputils
       </a>
@@ -764,8 +778,7 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
-<span class="normal">17</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
@@ -785,8 +798,9 @@
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
-<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SerialiseConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;DLite serialise-specific configurations.&quot;&quot;&quot;</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SerialiseConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite serialise-specific configurations.&quot;&quot;&quot;</span>
 
     <span class="n">driver</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="o">...</span><span class="p">,</span>
@@ -851,14 +865,14 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
-<span class="normal">41</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span>
 <span class="normal">45</span>
-<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SerialiseFilterConfig</span><span class="p">(</span><span class="n">FilterConfig</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Filter config for serialise.&quot;&quot;&quot;</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SerialiseFilterConfig</span><span class="p">(</span><span class="n">FilterConfig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter config for serialise.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">SerialiseConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="o">...</span><span class="p">,</span>
@@ -910,8 +924,7 @@
 
         <details class="quote">
           <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
-<span class="normal">50</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
@@ -950,12 +963,9 @@
 <span class="normal">86</span>
 <span class="normal">87</span>
 <span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">SerialiseStrategy</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Filter for serialisation using DLite.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter for serialisation using DLite.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
@@ -968,21 +978,16 @@
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_config</span><span class="o">.</span><span class="n">configuration</span>
 
-        <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 
         <span class="n">storage</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Storage</span><span class="p">(</span>
             <span class="n">driver_or_url</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span>
@@ -996,7 +1001,8 @@
                 <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
                 <span class="n">inst</span><span class="o">.</span><span class="n">save_to_storage</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+        <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
         </details>
 
@@ -1028,7 +1034,8 @@
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">69</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
+<span class="normal">69</span>
 <span class="normal">70</span>
 <span class="normal">71</span>
 <span class="normal">72</span>
@@ -1048,19 +1055,13 @@
 <span class="normal">86</span>
 <span class="normal">87</span>
 <span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
-
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_config</span><span class="o">.</span><span class="n">configuration</span>
 
-    <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+    <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 
     <span class="n">storage</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Storage</span><span class="p">(</span>
         <span class="n">driver_or_url</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span>
@@ -1074,7 +1075,8 @@
             <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
             <span class="n">inst</span><span class="o">.</span><span class="n">save_to_storage</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+    <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1097,19 +1099,15 @@
 
       <details class="quote">
         <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
-<span class="normal">62</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
 <span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing session&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1173,13 +1171,13 @@
       
       
         
-        <a href="../../utils/nputils/" class="md-footer__link md-footer__link--next" aria-label="Next: nputils" rel="next">
+        <a href="../../utils/exceptions/" class="md-footer__link md-footer__link--next" aria-label="Next: exceptions" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              nputils
+              exceptions
             </div>
           </div>
           <div class="md-footer__button md-icon">
