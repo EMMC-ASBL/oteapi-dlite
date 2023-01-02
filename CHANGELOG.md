@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.1.1](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.1) (2023-01-02)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.0...v0.1.1)
+
+**Merged pull requests:**
+
+- \[Auto-generated\] Update dependencies [\#97](https://github.com/EMMC-ASBL/oteapi-dlite/pull/97) ([TEAM4-0](https://github.com/TEAM4-0))
+- Store collection in datacache [\#95](https://github.com/EMMC-ASBL/oteapi-dlite/pull/95) ([CasperWA](https://github.com/CasperWA))
+
 ## [v0.1.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.0) (2022-12-20)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.0.8...v0.1.0)
