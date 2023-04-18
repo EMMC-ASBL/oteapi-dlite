@@ -1,5 +1,28 @@
 # Changelog
 
+## [v0.1.2](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.2) (2023-04-18)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.1...v0.1.2)
+
+**Fixed bugs:**
+
+- Getting `Segmentation fault` in CI tests [\#126](https://github.com/EMMC-ASBL/oteapi-dlite/issues/126)
+
+**Merged pull requests:**
+
+- Avoid psycopg2-binary v2.9.6 [\#129](https://github.com/EMMC-ASBL/oteapi-dlite/pull/129) ([CasperWA](https://github.com/CasperWA))
+- \[Auto-generated\] Update dependencies [\#125](https://github.com/EMMC-ASBL/oteapi-dlite/pull/125) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#121](https://github.com/EMMC-ASBL/oteapi-dlite/pull/121) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#118](https://github.com/EMMC-ASBL/oteapi-dlite/pull/118) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#114](https://github.com/EMMC-ASBL/oteapi-dlite/pull/114) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#111](https://github.com/EMMC-ASBL/oteapi-dlite/pull/111) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#109](https://github.com/EMMC-ASBL/oteapi-dlite/pull/109) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#107](https://github.com/EMMC-ASBL/oteapi-dlite/pull/107) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#106](https://github.com/EMMC-ASBL/oteapi-dlite/pull/106) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#104](https://github.com/EMMC-ASBL/oteapi-dlite/pull/104) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#102](https://github.com/EMMC-ASBL/oteapi-dlite/pull/102) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#99](https://github.com/EMMC-ASBL/oteapi-dlite/pull/99) ([TEAM4-0](https://github.com/TEAM4-0))
+
 ## [v0.1.1](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.1) (2023-01-02)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.0...v0.1.1)
