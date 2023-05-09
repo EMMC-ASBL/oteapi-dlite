@@ -13,6 +13,9 @@ from oteapi.models import (
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
+import dlite
+from dlite.utils import infer_dimensions
+
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, get_driver
 
@@ -45,7 +48,7 @@ class DLiteAddInstanceConfig(FunctionConfig):
         ..., description="Strategy-specific configuration for adding
         and instance to the collection."
     )
-    
+
 
 @dataclass
 class DLiteAddInstanceStrategy:
@@ -81,16 +84,13 @@ class DLiteAddInstanceStrategy:
             SessionUpdate instance.
         """
         config = self.function_config.configuration
-        cacheconfig = config.datacache_config
-
 
         coll = get_collection(session)
-        inst =  dlite.get_instance(config.datamodel)
-        inst.from_dict(config.value)
-        inst.label(config.label)
-
+        datamodel = dlite.get_instance(config.datamodel)
+        dims = infer_dimensions(datamodel, config.value, strict=True)
+        inst = datamodel(dimensions=dims, properties=config.value)
         coll.add(inst)
-     
+
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
 
