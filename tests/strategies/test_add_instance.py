@@ -4,8 +4,6 @@ from pathlib import Path
 
 import dlite
 
-from tripper import EMMO, MAP, Namespace
-
 from otelib import OTEClient
 
 
@@ -19,10 +17,7 @@ os.makedirs(outdir, exist_ok=True)
 dlite.storage_path.append(entitydir)
 
 
-# Create OTE client
-client = OTEClient("python")
-
-value = {
+values = {
     "potential_energy": 3.2e-19,
     "forces": [
         [1.2, 2.3, 3.4],
@@ -30,11 +25,14 @@ value = {
     ],
 }
 
+# Create OTE client
+client = OTEClient("python")
+
 add_instance = client.create_function(
     functionType="application/vnd.dlite-addinstance",
     configuration={
         "datamodel": "http://onto-ns.com/meta/0.1/Result",
-        "value": value,
+        "values": values,
         "label": "result",
     },
 )

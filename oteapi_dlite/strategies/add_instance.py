@@ -32,8 +32,13 @@ class AddInstanceConfig(AttrDict):
     datamodel: str = Field(
         description='ID (URI or UUID) of the datamodel.',
     )
-    value: dict = Field(
-        description='Dict with instance values.',
+    values: dict = Field(
+        description='Dict with property values.',
+    )
+    dimensions: 'Optional[dict]' = Field(
+        None,
+        description='Dict with dimension values.  If not provided, the '
+        'dimensions will be inferred from `values`.',
     )
     label: str = Field(
         ...,
@@ -87,8 +92,11 @@ class DLiteAddInstanceStrategy:
 
         coll = get_collection(session)
         datamodel = dlite.get_instance(config.datamodel)
-        dims = infer_dimensions(datamodel, config.value, strict=True)
-        inst = datamodel(dimensions=dims, properties=config.value)
+        if config.dimensions is None:
+            dims = infer_dimensions(datamodel, config.values, strict=True)
+        else:
+            dims = config.dimensions
+        inst = datamodel(dimensions=dims, properties=config.values)
         coll.add(inst)
 
         return DLiteSessionUpdate(collection_id=coll.uuid)

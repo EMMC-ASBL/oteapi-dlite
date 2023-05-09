@@ -10,13 +10,13 @@ def test_create_collection() -> None:
     import dlite
 
     from oteapi_dlite.strategies.function import DLiteAddInstanceStrategy
- 
+
     # Need to add storage
-    # Need to 
+    # Need to
     config = {"datamodel": "some uuid",
-            "value": a dict,
+            "values": a dict,
             "label": "name"}
-    
+
 
     session = {}
 
