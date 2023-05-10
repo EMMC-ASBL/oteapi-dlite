@@ -1,25 +1,18 @@
 """Generic parse strategy using DLite storage plugin."""
 # pylint: disable=unused-argument
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Dict, Optional
 
 import dlite
 from oteapi.datacache import DataCache
-from oteapi.models import (
-    AttrDict,
-    DataCacheConfig,
-    ResourceConfig,
-    SessionUpdate,
-)
+from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, get_driver
+from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
 if TYPE_CHECKING:
-    from typing import Any, Dict
-
-    from oteapi.interfaces import IParseStrategy
+    from typing import Any
 
 
 class DLiteParseConfig(AttrDict):
@@ -80,13 +73,13 @@ class DLiteParseStrategy:
     def initialize(
         self,
         session: "Optional[Dict[str, Any]]" = None,
-    ) -> "SessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Initialize."""
-        return SessionUpdate()
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
-    ) -> "DLiteSessionUpdate":
+    ) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
@@ -120,8 +113,8 @@ class DLiteParseStrategy:
         else:
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
-            elif "key" in session:  # type: ignore
-                key = session["key"]  # type: ignore
+            elif session and "key" in session:
+                key = session["key"]
             else:
                 raise ValueError(
                     "either `location` or `cacheconfig.accessKey` must be "
@@ -142,11 +135,16 @@ class DLiteParseStrategy:
         coll.add(config.label, inst)
 
         # __TODO__
-        # Can we savely assume that all strategies in a pipeline will be
-        # executed in the same Python interpreter?  If not, we should write
-        # the collection to a storage, such that it can be shared with the
-        # other strategies.
+        # See
+        # https://github.com/EMMC-ASBL/oteapi-dlite/pull/84#discussion_r1050437185
+        # and following comments.
+        #
+        # Since we cannot safely assume that all strategies in a
+        # pipeline will be executed in the same Python interpreter,
+        # the collection should be written to a storage, such that it
+        # can be shared with the other strategies.
 
+        update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
 
