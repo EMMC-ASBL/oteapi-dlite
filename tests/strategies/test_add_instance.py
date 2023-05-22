@@ -3,9 +3,7 @@ import os
 from pathlib import Path
 
 import dlite
-
 from otelib import OTEClient
-
 
 # Paths
 thisdir = Path(__file__).resolve().parent
@@ -32,16 +30,17 @@ add_instance = client.create_function(
     functionType="application/vnd.dlite-addinstance",
     configuration={
         "datamodel": "http://onto-ns.com/meta/0.1/Result",
-        "values": values,
+        "property_values": values,
         "label": "result",
     },
 )
+
 
 generate = client.create_function(
     functionType="application/vnd.dlite-generate",
     configuration={
         "driver": "json",
-        "location": "{outdir}/test_add_instance.json",
+        "location": f"{outdir}/test_add_instance.json",
         "options": "mode=w",
         "label": "result",
     },

@@ -115,6 +115,7 @@ class DLiteFunctionStrategy:
         )
 
         coll = get_collection(session, config.collection_id)
+
         inst = coll[config.label]
 
         # Save instance

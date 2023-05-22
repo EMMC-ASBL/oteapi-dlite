@@ -1,23 +1,15 @@
 """Generic function strategy using DLite storage plugin."""
 # pylint: disable=unused-argument,invalid-name
-import tempfile
 from typing import TYPE_CHECKING, Optional
-
-from oteapi.datacache import DataCache
-from oteapi.models import (
-    AttrDict,
-    DataCacheConfig,
-    FunctionConfig,
-    SessionUpdate,
-)
-from pydantic import Field
-from pydantic.dataclasses import dataclass
 
 import dlite
 from dlite.utils import infer_dimensions
+from oteapi.models import AttrDict, FunctionConfig, SessionUpdate
+from pydantic import Field
+from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, get_driver
+from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:
     from typing import Any, Dict
@@ -26,19 +18,18 @@ if TYPE_CHECKING:
 
 
 class AddInstanceConfig(AttrDict):
-    """Configuration for adding an instance to the collection.
-    """
+    """Configuration for adding an instance to the collection."""
 
     datamodel: str = Field(
-        description='ID (URI or UUID) of the datamodel.',
+        description="ID (URI or UUID) of the datamodel.",
     )
-    values: dict = Field(
-        description='Dict with property values.',
+    property_values: dict = Field(
+        description="Dict with property values.",
     )
-    dimensions: 'Optional[dict]' = Field(
+    dimensions: "Optional[dict]" = Field(
         None,
-        description='Dict with dimension values.  If not provided, the '
-        'dimensions will be inferred from `values`.',
+        description="Dict with dimension values.  If not provided, the "
+        "dimensions will be inferred from `values`.",
     )
     label: str = Field(
         ...,
@@ -50,8 +41,9 @@ class DLiteAddInstanceConfig(FunctionConfig):
     """DLite function strategy config."""
 
     configuration: AddInstanceConfig = Field(
-        ..., description="Strategy-specific configuration for adding
-        and instance to the collection."
+        ...,
+        description="Strategy-specific configuration for adding "
+        "an instance to the collection.",
     )
 
 
@@ -93,13 +85,14 @@ class DLiteAddInstanceStrategy:
         coll = get_collection(session)
         datamodel = dlite.get_instance(config.datamodel)
         if config.dimensions is None:
-            dims = infer_dimensions(datamodel, config.values, strict=True)
+            dims = infer_dimensions(
+                datamodel, config.property_values, strict=True
+            )
         else:
             dims = config.dimensions
         inst = datamodel(dimensions=dims, properties=config.values)
-        coll.add(inst)
 
+        coll.add(label=config.label, inst=inst)
+
+        update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
-
-
-# DLiteStorageConfig.update_forward_refs()
