@@ -101,7 +101,7 @@ class DLiteImageParseStrategy:
         data = cache.get(output["image_key"])
 
         meta = get_meta("http://onto-ns.com/meta/1.0/Image")
-        inst = meta(dims=data.shape)
+        inst = meta(dimensions=data.shape)
         inst["data"] = data
 
         LOGGER.info("session: %s", session)
