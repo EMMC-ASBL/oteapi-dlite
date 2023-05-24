@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
     
     
       
@@ -887,7 +887,7 @@ session.</p>
     <span class="k">elif</span> <span class="n">id_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">CollectionNotFound</span><span class="p">(</span>
             <span class="s2">&quot;Could not find DLite Collection with &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;uuid=</span><span class="si">{</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;collection_id&#39;</span><span class="p">]</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;uuid=&#39;</span><span class="si">{</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;collection_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">collection</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">id_</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="n">id_</span><span class="p">)</span>
