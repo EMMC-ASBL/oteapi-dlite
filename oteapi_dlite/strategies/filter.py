@@ -3,6 +3,7 @@
 from typing import TYPE_CHECKING, Any, Dict
 
 import dlite
+from oteapi.datacache import DataCache
 from oteapi.models import FilterConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -40,11 +41,16 @@ class CreateCollectionStrategy:
             raise ValueError("Missing session")
         if "collection_id" in session:
             raise KeyError("`collection_id` already exists in session.")
+
         coll = dlite.Collection()
 
         # Make sure that collection stays alive
         # It will never be deallocated...
         coll._incref()  # pylint: disable=protected-access
+
+        # Store the collection in the data cache
+        cache = DataCache()
+        cache.add(value=coll.asjson(), key=coll.uuid)
 
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
