@@ -2,77 +2,77 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/CHANGELOG/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/LICENSE/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/all_strategies/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/models/session/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/filter/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/function/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/mapping/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse_excel/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse_image/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/serialise/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/utils/exceptions/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/utils/nputils/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/utils/utils/</loc>
-         <lastmod>2023-05-24</lastmod>
+         <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
