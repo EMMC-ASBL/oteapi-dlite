@@ -75,7 +75,7 @@ def get_collection(
     elif id_ not in cache:
         raise CollectionNotFound(
             "Could not find DLite Collection with "
-            f"uuid={session['collection_id']!r}"
+            f"uuid='{session['collection_id']}'"
         )
     else:
         collection = dlite.Collection.from_json(cache.get(id_), id=id_)

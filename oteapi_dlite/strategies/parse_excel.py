@@ -136,10 +136,6 @@ class DLiteExcelStrategy:
         coll = get_collection(session)
         coll.add(config.label, inst)
 
-        # # Increase refcount of instance to avoid that it is freed when
-        # # returning from this function
-        # inst._incref()  # pylint: disable=protected-access
-
         update_collection(coll)
         return DLiteExcelSessionUpdate(
             collection_id=coll.uuid,

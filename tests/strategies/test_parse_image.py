@@ -85,7 +85,7 @@ def test_image(
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 
-    coll2: dlite.Collection = dlite.get_collection(session["collection_id"])
+    coll2: dlite.Collection = dlite.get_instance(session["collection_id"])
     inst: dlite.Instance = coll2.get("test_image")
 
     # Compare data instance contents to expected values
