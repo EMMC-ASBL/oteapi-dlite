@@ -33,8 +33,8 @@ class DLiteStorageConfig(AttrDict):
     )
     datamodel: Optional[str] = Field(
         None,
-        description='URI to metadata of new instance.  Needed when generating the '
-        'instance from mappings.  Cannot be combined with `label`',
+        description="URI to metadata of new instance.  Needed when generating "
+        "the instance from mappings.  Cannot be combined with `label`",
     )
     driver: Optional[str] = Field(
         None,
@@ -138,7 +138,9 @@ class DLiteGenerateStrategy:
             inst = next(instances)
             # fail if there are more instances
         else:
-            raise ValueError("One of `label` or `metadata` configurations should be given.")
+            raise ValueError(
+                "One of `label` or `metadata` configurations should be given."
+            )
 
         # Save instance
         if config.location:

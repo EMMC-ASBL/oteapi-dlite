@@ -2,20 +2,18 @@
 from pathlib import Path
 
 import dlite
-
+from oteapi.datacache import DataCache
 from tripper import EMMO, MAP, Namespace
 
-from oteapi.datacache import DataCache
-from oteapi_dlite.strategies.mapping import (
-    DLiteMappingConfig,
-    DLiteMappingStrategy,
-)
 from oteapi_dlite.strategies.generate import (
     DLiteGenerateConfig,
     DLiteGenerateStrategy,
 )
+from oteapi_dlite.strategies.mapping import (
+    DLiteMappingConfig,
+    DLiteMappingStrategy,
+)
 from oteapi_dlite.utils import get_meta
-
 
 thisdir = Path(__file__).resolve().parent
 entitydir = thisdir / ".." / "entities"
