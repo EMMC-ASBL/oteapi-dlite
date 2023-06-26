@@ -158,13 +158,10 @@ class DLiteGenerateStrategy:
                     cache.add(f.read(), key=key)
 
         # __TODO__
-        # Can we savely assume that all strategies in a pipeline will be
+        # Can we safely assume that all strategies in a pipeline will be
         # executed in the same Python interpreter?  If not, we should write
         # the collection to a storage, such that it can be shared with the
         # other strategies.
 
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
-
-
-# DLiteStorageConfig.update_forward_refs()
