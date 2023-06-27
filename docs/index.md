@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/455070691.svg)](https://zenodo.org/badge/latestdoi/455070691)
+
+
 # OTEAPI DLite Plugin
 
 All strategies implemented in this plugin (except for `create_collection`) assumes that you have the UUID of a DLite collection with the key `collection_id` in the `session`:
