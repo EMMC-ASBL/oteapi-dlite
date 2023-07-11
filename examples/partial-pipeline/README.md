@@ -28,9 +28,3 @@ Go to oteutils folder:
 
 - pip install -r requirements.txt
 
-we also need a new version of otelib(small bug fix but not yet released)
-
-- pip install otelib-0.3.0-py3-none-any.whl
-
-
-
