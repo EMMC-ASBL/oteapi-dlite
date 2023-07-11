@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+
+  oteapi:
+    image: ghcr.io/emmc-asbl/oteapi:latest
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    environment:
+      OTEAPI_REDIS_TYPE: redis
+      OTEAPI_REDIS_HOST: redis
+      OTEAPI_REDIS_PORT: 6379
+      OTEAPI_prefix: "${OTEAPI_prefix:-/api/v1}"
+      # OTEAPI_PLUGIN_PACKAGES: git+https://github.com/EMMC-ASBL/oteapi-dlite#egg=oteapi-dlite       
+      OTEAPI_PLUGIN_PACKAGES: "-v -e /oteapi-dlite"
+    depends_on:
+      - redis
+    volumes:
+      - "./oteapi-dlite:/oteapi-dlite"
+      - ".:/dome_demo"
+    entrypoint: "./entrypoint.sh --reload"
+
+  fuseki:
+    image: secoresearch/fuseki
+    container_name: fuseki
+    environment:
+      - ADMIN_PASSWORD="secret"
+      - ENABLE_DATA_WRITE=true
+      - ENABLE_UPDATE=true
+      - ENABLE_UPLOAD=true
+      - QUERY_TIMEOUT=5000
+    volumes:
+      - ./datasets:/fuseki/databases
+    ports:
+      - "3030:3030"
+
+  redis:
+    image: redis:latest
+    volumes:
+      - redis-persist:/data
+
+volumes:
+  redis-persist:
+
+

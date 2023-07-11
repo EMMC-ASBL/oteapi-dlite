@@ -1,0 +1,187 @@
+{
+  "uri": "http://onto-ns.com/meta/matchmaker/demo/0.2/image",
+  "description": "Image Metadata",
+  "dimensions":[
+    {
+      "name": "I",
+      "description": "Number of elements (i.e. number or rows)."
+    }
+  ],
+  "properties": [
+    {
+      "name": "InstructName",
+      "type": "string",
+      "description": "InstringuctName"
+    },
+    {
+      "name": "SerialNumber",
+      "type": "string",
+      "description": "SerialNumber"
+    },
+    {
+      "name": "DataNumber",
+      "type": "string",
+      "description": "DataNumber"
+    },
+    {
+      "name": "Format",
+      "type": "string",
+      "description": "Format"
+    },
+    {
+      "name": "ImageName",
+      "type": "string",
+      "description": "ImageName"
+    },
+    {
+      "name": "ImageUrl",
+      "type": "string",
+      "description": "ImageUrl"
+    },
+    {
+      "name": "Directory",
+      "type": "string",
+      "description": "Directory"
+    },
+    {
+      "name": "Date",
+      "type": "string",
+      "description": "Date"
+    },
+    {
+      "name": "Time",
+      "type": "string",
+      "description": "Time"
+    },
+    {
+      "name": "Media",
+      "type": "string",
+      "description": "Media"
+    },
+    {
+      "name": "DataSize",
+      "type": "string",
+      "description": "DataSize"
+    },
+    {
+      "name": "PixelSize",
+      "type": "string",
+      "description": "PixelSize"
+    },
+    {
+      "name": "SignalName",
+      "type": "string",
+      "description": "SignalName"
+    },
+    {
+      "name": "AcceleratingVoltage",
+      "type": "string",
+      "description": "AcceleratingVoltage"
+    },
+    {
+      "name": "DecelerationVoltage",
+      "type": "string",
+      "description": "DecelerationVoltage"
+    },
+    {
+      "name": "Magnification",
+      "type": "string",
+      "description": "Magnification"
+    },
+    {
+      "name": "WorkingDistance",
+      "type": "string",
+      "description": "WorkingDistance"
+    },
+    {
+      "name": "EmissionCurrent",
+      "type": "string",
+      "description": "EmissionCurrent"
+    },
+    {
+      "name": "PhotoSize",
+      "type": "string",
+      "description": "PhotoSize"
+    },
+    {
+      "name": "MicronMarker",
+      "type": "string",
+      "description": "MicronMarker"
+    },
+    {
+      "name": "SubMagnification",
+      "type": "string",
+      "description": "SubMagnification"
+    },
+    {
+      "name": "SpecimenBias",
+      "type": "string",
+      "description": "SpecimenBias"
+    },
+    {
+      "name": "Condencer1",
+      "type": "string",
+      "description": "Condencer1"
+    },
+    {
+      "name": "ScanSpeed",
+      "type": "string",
+      "description": "ScanSpeed"
+    },
+    {
+      "name": "CalibrationScanSpeed",
+      "type": "string",
+      "description": "CalibrationScanSpeed"
+    },
+    {
+      "name": "ColorMode",
+      "type": "string",
+      "description": "ColorMode"
+    },
+    {
+      "name": "ScreenMode",
+      "type": "string",
+      "description": "ScreenMode"
+    },
+    {
+      "name": "Condition",
+      "type": "string",
+      "description": "Condition"
+    },
+    {
+      "name": "DataDisplayCombine",
+      "type": "string",
+      "description": "DataDisplayCombine"
+    },
+    {
+      "name": "StageType",
+      "type": "string",
+      "description": "StageType"
+    },
+    {
+      "name": "StagePositionX",
+      "type": "string",
+      "description": "StagePositionX"
+    },
+    {
+      "name": "StagePositionY",
+      "type": "string",
+      "description": "StagePositionY"
+    },
+    {
+      "name": "StagePositionR",
+      "type": "string",
+      "description": "StagePositionR"
+    },
+    {
+      "name": "StagePositionZ",
+      "type": "string",
+      "description": "StagePositionZ"
+    },
+    {
+      "name": "StagePositionT",
+      "type": "string",
+      "description": "StagePositionT"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+# Python
+*.egg-info
+__pycache__
+*.pyc
+*~
+
+# Testing and tools
+.pytest_cache/
+.mypy_cache/
+
+# Coverage
+.coverage
+htmlcov
+
+# Distribution
+dist/
+
+# Documentation
+site/

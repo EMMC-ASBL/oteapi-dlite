@@ -1,0 +1,317 @@
+@prefix : <http://onto-ns.com/1/sem#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+
+
+:instructName rdf:type skos:Concept ;
+
+    skos:prefLabel "Instruct Name"@en ;
+
+    skos:definition "The name or model of the Scanning Electron Microscope (SEM) used for imaging."@en . 
+
+
+
+:serialNumber rdf:type skos:Concept ;
+
+    skos:prefLabel "Serial Number"@en ;
+
+    skos:definition "The unique serial number associated with the specific SEM instrument."@en . 
+
+
+
+:dataNumber rdf:type skos:Concept ;
+
+    skos:prefLabel "Data Number"@en ;
+
+    skos:definition "Unique number assigned to the SEM data."@en . 
+
+
+
+:sampleName rdf:type skos:Concept ;
+
+    skos:prefLabel "Sample Name"@en ;
+
+    skos:definition "The name of the sample under observation in the SEM."@en . 
+
+
+
+:format rdf:type skos:Concept ;
+
+    skos:prefLabel "Format"@en ;
+
+    skos:definition "The format of the image file obtained from the SEM, in this case, TIFF (Tagged Image File Format)."@en . 
+
+
+
+:imageName rdf:type skos:Concept ;
+
+    skos:prefLabel "Image Name"@en ;
+
+    skos:definition "The name of the image file obtained from the SEM."@en . 
+
+
+
+:date rdf:type skos:Concept ;
+
+    skos:prefLabel "Date"@en ;
+
+    skos:definition "The date when the image was taken."@en . 
+
+
+
+:time rdf:type skos:Concept ;
+
+    skos:prefLabel "Time"@en ;
+
+    skos:definition "The time when the image was taken."@en . 
+
+
+
+:media rdf:type skos:Concept ;
+
+    skos:prefLabel "Media"@en ;
+
+    skos:definition "The type of media data (could contain information about the storage medium)."@en . 
+
+
+
+:dataSize rdf:type skos:Concept ;
+
+    skos:prefLabel "Data Size"@en ;
+
+    skos:definition "The resolution of the image obtained from the SEM in pixels (Width x Height)."@en . 
+
+
+
+:pixelSize rdf:type skos:Concept ;
+
+    skos:prefLabel "Pixel Size"@en ;
+
+    skos:definition "The real world size of each pixel in the image, typically in nanometers."@en . 
+
+
+
+:signalName rdf:type skos:Concept ;
+
+    skos:prefLabel "Signal Name"@en ;
+
+    skos:definition "The type of signal detected by the SEM, such as Secondary Electrons (SE)."@en . 
+
+
+
+:acceleratingVoltage rdf:type skos:Concept ;
+
+    skos:prefLabel "Accelerating Voltage"@en ;
+
+    skos:definition "The voltage applied to accelerate the electron beam in the SEM."@en . 
+
+
+
+:decelerationVoltage rdf:type skos:Concept ;
+
+    skos:prefLabel "Deceleration Voltage"@en ;
+
+    skos:definition "The voltage applied to decelerate the electron beam before it hits the sample."@en . 
+
+
+
+:magnification rdf:type skos:Concept ;
+
+    skos:prefLabel "Magnification"@en ;
+
+    skos:definition "The magnification level at which the image was taken."@en . 
+
+
+
+:workingDistance rdf:type skos:Concept ;
+
+    skos:prefLabel "Working Distance"@en ;
+
+    skos:definition "The distance between the final lens and the sample in the SEM, typically in millimeters."@en . 
+
+
+
+:emissionCurrent rdf:type skos:Concept ;
+
+    skos:prefLabel "Emission Current"@en ;
+
+    skos:definition "The current of the electron beam, usually measured in nanoAmperes (nA)."@en . 
+
+
+
+:lensMode rdf:type skos:Concept ;
+
+    skos:prefLabel "Lens Mode"@en ;
+
+    skos:definition "The mode of the lens in the SEM."@en . 
+
+
+
+:photoSize rdf:type skos:Concept ;
+
+    skos:prefLabel "Photo Size"@en ;
+
+    skos:definition "The size of the captured photo (may be related to the output size of the image)."@en . 
+
+
+
+:vacuum rdf:type skos:Concept ;
+
+    skos:prefLabel "Vacuum"@en ;
+
+    skos:definition "The vacuum conditions in the SEM chamber while the image was taken."@en . 
+
+
+
+:micronMarker rdf:type skos:Concept ;
+
+    skos:prefLabel "Micron Marker"@en ;
+
+    skos:definition "A scale marker present in the image to provide a sense of scale, measured in microns."@en . 
+
+
+
+:subMagnification rdf:type skos:Concept ;
+
+    skos:prefLabel "Sub Magnification"@en ;
+
+    skos:definition "The magnification level of a sub-area of the image if applicable."@en . 
+
+
+
+:subSignalName rdf:type skos:Concept ;
+
+    skos:prefLabel "Sub Signal Name"@en ;
+
+    skos:definition "The type of sub-signal detected if applicable."@en . 
+
+
+
+:specimenBias rdf:type skos:Concept ;
+
+    skos:prefLabel "Specimen Bias"@en ;
+
+    skos:definition "The bias voltage applied to the specimen."@en . 
+
+
+
+:condencer1 rdf:type skos:Concept ;
+
+    skos:prefLabel "Condencer1"@en ;
+
+    skos:definition "The setting of the condenser lens, which focuses the electron beam."@en . 
+
+
+
+:scanSpeed rdf:type skos:Concept ;
+
+    skos:prefLabel "Scan Speed"@en ;
+
+    skos:definition "The speed at which the electron beam scans the sample."@en . 
+
+
+
+:calibrationScanSpeed rdf:type skos:Concept ;
+
+    skos:prefLabel "Calibration Scan Speed"@en ;
+
+    skos:definition "The calibrated scan speed of the SEM."@en . 
+
+
+
+:colorMode rdf:type skos:Concept ;
+
+    skos:prefLabel "Color Mode"@en ;
+
+    skos:definition "The color mode of the image, in this case, grayscale."@en . 
+
+
+
+:colorPalette rdf:type skos:Concept ;
+
+    skos:prefLabel "Color Palette"@en ;
+
+    skos:definition "The color palette applied to the image if applicable."@en . 
+
+
+
+:screenMode rdf:type skos:Concept ;
+
+    skos:prefLabel "Screen Mode"@en ;
+
+    skos:definition "The mode of the screen, in this case, small screen."@en . 
+
+
+
+:comment rdf:type skos:Concept ;
+
+    skos:prefLabel "Comment"@en ;
+
+    skos:definition "Any additional comments added by the user during or after the SEM imaging session."@en . 
+
+
+
+:condition rdf:type skos:Concept ;
+
+    skos:prefLabel "Condition"@en ;
+
+    skos:definition "Summary of the imaging conditions such as accelerating voltage, magnification, and working distance."@en . 
+
+
+
+:dataDisplayCombine rdf:type skos:Concept ;
+
+    skos:prefLabel "Data Display Combine"@en ;
+
+    skos:definition "Indicator if any data were combined for display (such as multiple signal types)."@en . 
+
+
+
+:stageType rdf:type skos:Concept ;
+
+    skos:prefLabel "Stage Type"@en ;
+
+    skos:definition "The type of stage in the SEM, which supports the sample during imaging."@en . 
+
+
+
+:stagePositionX rdf:type skos:Concept ;
+
+    skos:prefLabel "Stage Position X"@en ;
+
+    skos:definition "The X-coordinate position of the SEM stage."@en . 
+
+
+
+:stagePositionY rdf:type skos:Concept ;
+
+    skos:prefLabel "Stage Position Y"@en ;
+
+    skos:definition "The Y-coordinate position of the SEM stage."@en . 
+
+
+
+:stagePositionR rdf:type skos:Concept ;
+
+    skos:prefLabel "Stage Position R"@en ;
+
+    skos:definition "The rotation position of the SEM stage."@en . 
+
+
+
+:stagePositionZ rdf:type skos:Concept ;
+
+    skos:prefLabel "Stage Position Z"@en ;
+
+    skos:definition "The Z-coordinate (vertical) position of the SEM stage."@en . 
+
+
+
+:stagePositionT rdf:type skos:Concept ;
+
+    skos:prefLabel "Stage Position T"@en ;
+
+    skos:definition "The tilt angle of the SEM stage."@en .

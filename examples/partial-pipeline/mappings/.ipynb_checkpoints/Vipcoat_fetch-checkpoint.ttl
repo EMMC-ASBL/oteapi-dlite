@@ -1,0 +1,6 @@
+@prefix EIS: <http://onto-ns.com/meta/vipcoat/demo/0.2/properties#> .
+@prefix map: <http://emmo.info/domain-mappings#> .
+@prefix fetch: <http://onto-ns.com/meta/vipcoat/demo/0.2/data#> .
+fetch:Time map:mapsTo EIS:time .
+fetch:Potential_of_electrode map:mapsTo EIS:electrodePotential .
+fetch:Impedence map:mapsTo EIS:absoluteImpedanceValue .

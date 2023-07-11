@@ -1,0 +1,32 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.mypy]
+python_version = "3.9"
+ignore_missing_imports = true
+scripts_are_modules = true
+warn_unused_configs = true
+show_error_codes = true
+allow_redefinition = true
+
+[tool.pylint.messages_control]
+max-line-length = 80
+disable = [
+    "duplicate-code",
+    "no-name-in-module",
+    "too-few-public-methods",
+    "no-self-argument",
+    "invalid-name",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-rs --cov=oteapi_dlite --cov-report=term --durations=10"
+filterwarnings = [
+    "ignore:.*imp module.*:DeprecationWarning",
+    "ignore:.*_yaml extension module.*:DeprecationWarning"
+]

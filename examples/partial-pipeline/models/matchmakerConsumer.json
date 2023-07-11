@@ -1,0 +1,22 @@
+{
+  "uri": "http://onto-ns.com/meta/matchmaker/demo/0.1/imageurl",
+  "description": "Image Metadata",
+  "dimensions":[
+    {
+      "name": "I",
+      "description": "Number of elements (i.e. number or rows)."
+    }
+  ],
+  "properties": [
+    {
+      "name": "imageURL",
+      "type": "string",
+      "description": "imageurl"
+    },
+    {
+      "name": "pixelSIZE",
+      "type": "string",
+      "description": "PixelSize"
+    }
+  ]
+}

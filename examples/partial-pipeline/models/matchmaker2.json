@@ -1,0 +1,142 @@
+{
+  "uri": "http://onto-ns.com/meta/matchmaker/demo/0.2/image2",
+  "description": "Image Metadata",
+  "dimensions": [
+    {
+      "name": "I",
+      "description": "Number of elements (i.e. number or rows)."
+    }
+  ],
+  "properties": [
+    {
+      "name": "$CM_FORMAT",
+      "type": "string",
+      "description": "$CM_FORMAT"
+    },
+    {
+      "name": "$CM_VERSION",
+      "type": "string",
+      "description": "$CM_VERSION"
+    },
+    {
+      "name": "$CM_COMMENT",
+      "type": "string",
+      "description": "$CM_COMMENT"
+    },
+    {
+      "name": "$CM_DATE",
+      "type": "string",
+      "description": "$CM_DATE"
+    },
+    {
+      "name": "$CM_TIME",
+      "type": "string",
+      "description": "$CM_TIME"
+    },
+    {
+      "name": "$CM_OPERATOR",
+      "type": "string",
+      "description": "$CM_OPERATOR"
+    },
+    {
+      "name": "$CM_COMPANY",
+      "type": "string",
+      "description": "$CM_COMPANY"
+    },
+    {
+      "name": "$CM_IMAGEID",
+      "type": "string",
+      "description": "$CM_IMAGEID"
+    },
+    {
+      "name": "$CM_IMAGEURL",
+      "type": "string",
+      "description": "$CM_IMAGEURL"
+    },
+    {
+      "name": "$CM_INSTRUMENT",
+      "type": "string",
+      "description": "$CM_INSTRUMENT"
+    },
+    {
+      "name": "$CM_ACCEL_VOLT",
+      "type": "string",
+      "description": "$CM_ACCEL_VOLT"
+    },
+    {
+      "name": "$CM_MAG",
+      "type": "string",
+      "description": "$CM_MAG"
+    },
+    {
+      "name": "$CM_SIGNAL",
+      "type": "string",
+      "description": "$CM_SIGNAL"
+    },
+    {
+      "name": "$PIXEL_SIZE",
+      "type": "string",
+      "description": "$PIXEL_SIZE"
+    },
+    {
+      "name": "$$SM_FILM_NUMBER",
+      "type": "string",
+      "description": "$$SM_FILM_NUMBER"
+    },
+    {
+      "name": "$$SM_WD",
+      "type": "string",
+      "description": "$$SM_WD"
+    },
+    {
+      "name": "$$SM_MICRON_BAR",
+      "type": "string",
+      "description": "$$SM_MICRON_BAR"
+    },
+    {
+      "name": "$$SM_MICRON_MARKER",
+      "type": "string",
+      "description": "$$SM_MICRON_MARKER"
+    },
+    {
+      "name": "$$SM_FONT_SIZE",
+      "type": "string",
+      "description": "$$SM_FONT_SIZE"
+    },
+    {
+      "name": "$$SM_DISPLAY_MODE",
+      "type": "string",
+      "description": "$$SM_DISPLAY_MODE"
+    },
+    {
+      "name": "$$SM_COLUMN_MODE",
+      "type": "string",
+      "description": "$$SM_COLUMN_MODE"
+    },
+    {
+      "name": "$$SM_SEI_DETECTOR_MODE",
+      "type": "string",
+      "description": "$$SM_SEI_DETECTOR_MODE"
+    },
+    {
+      "name": "$$SM_SEI_DETECTOR_LEVEL",
+      "type": "string",
+      "description": "$$SM_SEI_DETECTOR_LEVEL"
+    },
+    {
+      "name": "$SM_GB_GUN_VOLT",
+      "type": "string",
+      "description": "$SM_GB_GUN_VOLT"
+    },
+    {
+      "name": "$SM_GB_BIAS_VOLT",
+      "type": "string",
+      "description": "$SM_GB_BIAS_VOLT"
+    },
+    {
+      "name": "$SM_COLUM_ECP_ANGLE",
+      "type": "string",
+      "description": "$SM_COLUM_ECP_ANGLE"
+    }
+  ]
+}

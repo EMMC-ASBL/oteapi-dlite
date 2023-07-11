@@ -1,0 +1,62 @@
+{
+    "uri": "http://onto-ns.com/meta/vipcoat/demo/0.2/EIS",
+    "description": "EIS",
+    "dimensions": [
+      {
+        "name": "nrows",
+        "description": "Number of elements (i.e. number or rows)."
+      }
+    ],
+    "properties": [
+      {
+        "name": "Time",
+        "type": "float",
+        "dims": ["nrows"],
+        "unit": "seconds",
+        "description": "Time in seconds,time/s"
+      },
+      {
+        "name": "Electrode_potential",
+        "type": "float",
+        "dims": ["nrows"],
+        "unit": "volt",
+        "description": "Electrode potential in volt,Ewe/V"
+      },
+      {
+        "name": "Frequency",
+        "type": "float",
+        "dims": ["nrows"],
+        "unit": "hertz",
+        "description": "Frequency in Hertz,freq/Hz"
+      },
+      {
+        "name": "Impedance_real",
+        "type": "float",
+        "dims": ["nrows"],
+        "unit": "ohm",
+        "description": "Real part of impedance in ohm,Re(Z)/Ohm"
+      },
+      {
+        "name": "Impedance_img",
+        "type": "float",
+        "dims": ["nrows"],
+        "unit": "ohm",
+        "description": "Imaginary part of impedance in ohm,-Im(Z)/Ohm"
+      },
+      {
+        "name": "Absolute_Impedance",
+        "type": "float",
+        "dims": ["nrows"],
+        "unit": "ohm",
+        "description": "Absolute value of impedance,|Z|/Ohm"
+      },
+      {
+        "name": "Impedance_Phase",
+        "type": "float",
+        "dims": ["nrows"],
+        "unit": "degree",
+        "description": "Phase of impedence,Phase(Z)/deg"
+      }
+    ]
+  }
+  
