@@ -12,6 +12,9 @@ User stories are explained in DEMO.ipynb
 
 docker-compose up --build -d
 
+Note: on Ubuntu, it has to be run as super user:
+sudo docker-compose up --build -d
+
 Go to http://localhost:3030/#/manage
 login: 
 user:admin
@@ -21,7 +24,11 @@ pwd:secret
 create OTE2 database in fuseki:
 ![Alt text](image-1.png)
 
-and run Juputer lab and use DEMO.ipynb
+and run Jupyter lab and use DEMO.ipynb
+
+Jupyter lab can be installed by running (in Ubuntu):
+sudo apt install jupyter
+pip install jupyterlab
 
 ### some packages to be installed :
 Go to oteutils folder:
