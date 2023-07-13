@@ -40,13 +40,13 @@ dataMappings=[
 # Create configurations for filters
 
 # Resource Config for mpr files
-cansDataConfig = ResourceConfig(    
+cansDataConfig = ResourceConfig(
     downloadUrl="https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/151-partial-pipeline-example/examples/partial-pipeline/data/Hitachi_imageName1.txt",
     mediaType="application/parse-txt",
     configuration={
         "splitBy":"=",
         "metadata": "http://onto-ns.com/meta/matchmaker/demo/0.2/image" ,
-        "storage_path": "/dome_demo/models" 
+        "storage_path": "/dome_demo/models"
     }
 )
 
@@ -60,7 +60,7 @@ cansDataMappingsMpr = MappingConfig(
     mappingType="mappings",
     triples = dataMappings,
     configuration={
-    }     
+    }
 )
 cansMprDataMappings = client.create_mapping(cansDataMappingsMpr)
 createCollection=client.create_filter(createcollectionfilter)
@@ -73,7 +73,7 @@ generatorMappingConfig = MappingConfig(
     mappingType="mappings",
     triples = generatorMappings,
     configuration={
-    }     
+    }
 )
 
 # Configuration that fetches data and stores to a json file
@@ -81,7 +81,7 @@ generatorFilterConfig = FunctionConfig(
     functionType="dlite/translate",
     configuration={'metadata':'http://onto-ns.com/meta/matchmaker/demo/0.1/imageurl',
                     'storage_path':"/dome_demo/models/matchmakerConsumer.json",
-                   "fileDestination": "/oteapi-dlite/output_dlite.json"} 
+                   "fileDestination": "/oteapi-dlite/output_dlite.json"}
 )
 generatorMappings= client.create_mapping(generatorMappingConfig)
 generatorFilter=client.create_function(generatorFilterConfig)
