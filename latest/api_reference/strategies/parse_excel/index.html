@@ -1184,7 +1184,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">meta</span> <span class="o">=</span> <span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
 
-        <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)],</span> <span class="nb">id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)],</span> <span class="nb">id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
             <span class="n">inst</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
 
@@ -1364,7 +1364,7 @@ of the OTE-API Services.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">meta</span> <span class="o">=</span> <span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
 
-    <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)],</span> <span class="nb">id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="n">inst</span> <span class="o">=</span> <span class="n">meta</span><span class="p">(</span><span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)],</span> <span class="nb">id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
         <span class="n">inst</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
 
