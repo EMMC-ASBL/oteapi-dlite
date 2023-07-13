@@ -20,7 +20,7 @@ def test_create_collection() -> None:
 
     assert "collection_id" in session
     coll_id = session["collection_id"]
-    coll = dlite.get_instance(coll_id)
+    coll = dlite.get_collection(coll_id)
     assert isinstance(coll, dlite.Collection)
 
     collfilter = CreateCollectionStrategy(config)

@@ -40,7 +40,7 @@ def test_instantiate_calcresults(entities_path: "Path") -> None:
     Forces = dlite.get_instance("http://onto-ns.com/meta/0.1/Forces")
     energy_inst = Energy()
     energy_inst.energy = 2.1  # eV
-    forces_inst = Forces(dimensions={"natoms": 2, "ncoords": 3})
+    forces_inst = Forces(dims={"natoms": 2, "ncoords": 3})
     forces_inst.forces = [(0.0, 0.0, 2.1), (0.0, 0.0, -2.1)]  # eV/Å
     coll.add("energy", energy_inst)
     coll.add("forces", forces_inst)

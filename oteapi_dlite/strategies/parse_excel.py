@@ -80,7 +80,7 @@ class DLiteExcelStrategy:
     **Registers strategies**:
 
     - `("mediaType",
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")`
+        "application/vnd.dlite-xlsx")`
 
     """
 
@@ -118,7 +118,6 @@ class DLiteExcelStrategy:
 
         names, units = zip(*[split_column_name(column) for column in columns])
         rec = dict2recarray(columns, names=names)
-
         if config.metadata:
             if config.storage_path is not None:
                 for storage_path in config.storage_path.split("|"):
@@ -129,14 +128,14 @@ class DLiteExcelStrategy:
             meta = infer_metadata(rec, units=units)
 
         inst = meta(dims=[len(rec)], id=config.id)
-        for name in names:
+        for name in names:            
             inst[name] = rec[name]
-
         # Insert inst into collection
         coll = get_collection(session)
         coll.add(config.label, inst)
 
         update_collection(coll)
+        print(coll)
         return DLiteExcelSessionUpdate(
             collection_id=coll.uuid,
             inst_uuid=inst.uuid,

@@ -1,15 +1,5 @@
 # Changelog
 
-## [v0.1.3](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.3) (2023-05-24)
-
-[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.2...v0.1.3)
-
-**Merged pull requests:**
-
-- Updated the create\_collection filter strategy to store the collection in the data cache [\#139](https://github.com/EMMC-ASBL/oteapi-dlite/pull/139) ([jesper-friis](https://github.com/jesper-friis))
-- \[Auto-generated\] Update dependencies [\#137](https://github.com/EMMC-ASBL/oteapi-dlite/pull/137) ([TEAM4-0](https://github.com/TEAM4-0))
-- \[Auto-generated\] Update dependencies [\#133](https://github.com/EMMC-ASBL/oteapi-dlite/pull/133) ([TEAM4-0](https://github.com/TEAM4-0))
-
 ## [v0.1.2](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.2) (2023-04-18)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.1...v0.1.2)
