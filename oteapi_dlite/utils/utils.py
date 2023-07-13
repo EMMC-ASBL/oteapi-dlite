@@ -63,28 +63,37 @@ def get_collection(
 
     Return:
         A DLite Collection to be used throughout the OTEAPI session.
-
     """
     cache = DataCache()
 
     session = session or {}
     id_ = collection_id or session.get("collection_id")
 
+    # Storing the collection in the datacache is not scalable.
+    # Do we really want to do that?
+    #
+    # Currently we check the datacache first and then ask dlite to look
+    # up the collection (which is the proper and scalable solution).
     if id_ is None:
-        collection = dlite.Collection()
-        cache.add(collection.asjson(), key=collection.uuid)
-    elif id_ not in cache:
-        raise CollectionNotFound(
-            "Could not find DLite Collection with "
-            f"uuid='{session['collection_id']}'"
-        )
+        coll = dlite.Collection()
+        cache.add(coll.asjson(), key=coll.uuid)
+    elif id_ in cache:
+        coll = dlite.Instance.from_json(cache.get(id_), id=id_)
     else:
-        collection = dlite.Collection.from_json(cache.get(id_), id=id_)
+        try:
+            coll = dlite.get_instance(id_)
+        except dlite.DLiteError as exc:
+            raise CollectionNotFound(
+                f"Could not find DLite Collection with id {id_}"
+            ) from exc
+
+    if coll.meta.uri != dlite.COLLECTION_ENTITY:
+        raise CollectionNotFound(f"instance with id {id_} is not a collection")
 
     if "collection_id" not in session:
-        session["collection_id"] = collection.uuid
+        session["collection_id"] = coll.uuid
 
-    return collection
+    return coll
 
 
 def update_collection(collection: dlite.Collection) -> None:
@@ -92,7 +101,6 @@ def update_collection(collection: dlite.Collection) -> None:
 
     Parameters:
         collection: The DLite Collection to be updated.
-
     """
     cache = DataCache()
     cache.add(value=collection.asjson(), key=collection.uuid)
