@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 import dlite
+import numpy as np
 from otelib import OTEClient
 
 # Paths
@@ -48,3 +49,11 @@ generate = client.create_function(
 
 pipeline = add_instance >> generate
 pipeline.get()
+
+
+# Test that the created content is as expected
+inst = dlite.Instance.from_location(
+    driver="json", location=f"{outdir}/test_add_instance.json", options="mode=r"
+)
+assert np.allclose(inst.potential_energy, 3.2e-19)
+assert np.allclose(inst.forses, [[1.2, 2.3, 3.4], [0.2, 3.4, 4.5]])
