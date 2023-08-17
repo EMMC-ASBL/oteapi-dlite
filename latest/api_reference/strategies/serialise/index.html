@@ -19,7 +19,7 @@
         <link rel="next" href="../../utils/exceptions/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -785,23 +785,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.serialise.SerialiseConfig" class="doc doc-heading">
-        <code>SerialiseConfig</code>
+          <code>SerialiseConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.serialise.SerialiseConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
   
       <p>DLite serialise-specific configurations.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
@@ -845,7 +844,7 @@
         <span class="p">),</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -872,23 +871,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.serialise.SerialiseFilterConfig" class="doc doc-heading">
-        <code>SerialiseFilterConfig</code>
+          <code>SerialiseFilterConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.serialise.SerialiseFilterConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="oteapi.models.FilterConfig">FilterConfig</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="oteapi.models.FilterConfig">FilterConfig</span></code></p>
 
   
       <p>Filter config for serialise.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span>
@@ -902,7 +900,7 @@
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Serialise-specific configurations.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -929,7 +927,7 @@
 
 
 <h2 id="oteapi_dlite.strategies.serialise.SerialiseStrategy" class="doc doc-heading">
-        <code>SerialiseStrategy</code>
+          <code>SerialiseStrategy</code>
 
 
 <a href="#oteapi_dlite.strategies.serialise.SerialiseStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -944,10 +942,9 @@
 <li><code>("filterType", "dlite_serialise")</code></li>
 </ul>
 
-
-        <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
@@ -1027,11 +1024,12 @@
         <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -1055,9 +1053,9 @@
   
       <p>Execute the strategy.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
 <span class="normal">71</span>
@@ -1101,10 +1099,11 @@
     <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1120,9 +1119,9 @@
   
       <p>Initialize.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
 <span class="normal">65</span>
@@ -1132,7 +1131,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>

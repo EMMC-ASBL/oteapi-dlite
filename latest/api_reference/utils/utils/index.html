@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -767,6 +767,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -786,6 +787,8 @@ session.</p>
 <p>If <code>collection_id</code> is provided, that id is used. If there already is a
 <code>collection_id</code> in the session, that is left untouched. Otherwise
 <code>collection_id</code> is added to the session.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -833,9 +836,9 @@ session.</p>
   <summary>Return</summary>
   <p>A DLite Collection to be used throughout the OTEAPI session.</p>
 </details>
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">46</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
@@ -937,10 +940,11 @@ session.</p>
 
     <span class="k">return</span> <span class="n">coll</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -956,9 +960,9 @@ session.</p>
   
       <p>Return name of DLite driver for the given media type/access service.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
 <span class="normal">123</span>
@@ -986,10 +990,11 @@ session.</p>
 
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;either `mediaType` or `accessService` must be provided&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1004,6 +1009,8 @@ session.</p>
   <div class="doc doc-contents ">
   
       <p>Instantiates and returns an instance of <code>meta</code>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1057,9 +1064,9 @@ allow_incomplete: Whether to allow not populating all properties
     of the returned instance.
 kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 </details>
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
 <span class="normal">137</span>
 <span class="normal">138</span>
 <span class="normal">139</span>
@@ -1127,10 +1134,11 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">inst</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1147,9 +1155,9 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
       <p>Returns metadata corresponding to given uri.</p>
 <p>This function may in the future be connected to a database.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">109</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">109</span>
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
@@ -1167,10 +1175,11 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;uri </span><span class="si">{uri}</span><span class="s2"> does not correspond to metadata&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">meta</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1185,6 +1194,8 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
   <div class="doc doc-contents ">
   
       <p>Update collection in DataCache.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1214,9 +1225,9 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span>
 <span class="normal">102</span>
@@ -1232,7 +1243,7 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
     <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
     <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">collection</span><span class="o">.</span><span class="n">asjson</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">collection</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>

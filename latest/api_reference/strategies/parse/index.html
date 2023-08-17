@@ -19,7 +19,7 @@
         <link rel="next" href="../parse_excel/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -785,23 +785,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.parse.DLiteParseConfig" class="doc doc-heading">
-        <code>DLiteParseConfig</code>
+          <code>DLiteParseConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.parse.DLiteParseConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
   
       <p>Configuration for generic DLite parser.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
@@ -867,7 +866,7 @@
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Configuration options for the local data cache.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -894,23 +893,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.parse.DLiteParseResourceConfig" class="doc doc-heading">
-        <code>DLiteParseResourceConfig</code>
+          <code>DLiteParseResourceConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.parse.DLiteParseResourceConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="oteapi.models.ResourceConfig">ResourceConfig</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="oteapi.models.ResourceConfig">ResourceConfig</span></code></p>
 
   
       <p>DLite parse strategy resource config.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
@@ -922,7 +920,7 @@
         <span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite parse strategy-specific configuration.&quot;</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -949,7 +947,7 @@
 
 
 <h2 id="oteapi_dlite.strategies.parse.DLiteParseStrategy" class="doc doc-heading">
-        <code>DLiteParseStrategy</code>
+          <code>DLiteParseStrategy</code>
 
 
 <a href="#oteapi_dlite.strategies.parse.DLiteParseStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -964,10 +962,9 @@
 <li><code>("mediaType", "application/vnd.dlite-parse")</code></li>
 </ul>
 
-
-        <details class="quote">
-          <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 61</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 61</span>
 <span class="normal"> 62</span>
 <span class="normal"> 63</span>
 <span class="normal"> 64</span>
@@ -1143,11 +1140,12 @@
         <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -1172,6 +1170,8 @@
       <p>Execute the strategy.</p>
 <p>This method will be called through the strategy-specific endpoint
 of the OTE-API Services.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1201,6 +1201,8 @@ of the OTE-API Services.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1223,9 +1225,9 @@ of the OTE-API Services.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 80</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 80</span>
 <span class="normal"> 81</span>
 <span class="normal"> 82</span>
 <span class="normal"> 83</span>
@@ -1363,10 +1365,11 @@ of the OTE-API Services.</p>
     <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1382,9 +1385,9 @@ of the OTE-API Services.</p>
   
       <p>Initialize.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
+          <details class="quote">
+            <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
 <span class="normal">74</span>
 <span class="normal">75</span>
 <span class="normal">76</span>
@@ -1396,7 +1399,7 @@ of the OTE-API Services.</p>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
