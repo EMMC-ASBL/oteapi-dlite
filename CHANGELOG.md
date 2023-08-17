@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.1.4](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.4) (2023-07-13)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.3...v0.1.4)
+
+**Merged pull requests:**
+
+- \[Auto-generated\] Update dependencies [\#154](https://github.com/EMMC-ASBL/oteapi-dlite/pull/154) ([TEAM4-0](https://github.com/TEAM4-0))
+- Bump pypa/gh-action-pypi-publish from 1.8.7 to 1.8.8 [\#153](https://github.com/EMMC-ASBL/oteapi-dlite/pull/153) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Auto-generated\] Update dependencies [\#149](https://github.com/EMMC-ASBL/oteapi-dlite/pull/149) ([TEAM4-0](https://github.com/TEAM4-0))
+- Proper lookup of collection [\#145](https://github.com/EMMC-ASBL/oteapi-dlite/pull/145) ([jesper-friis](https://github.com/jesper-friis))
+- Smarter generate [\#144](https://github.com/EMMC-ASBL/oteapi-dlite/pull/144) ([jesper-friis](https://github.com/jesper-friis))
+- \[Auto-generated\] Update dependencies [\#143](https://github.com/EMMC-ASBL/oteapi-dlite/pull/143) ([TEAM4-0](https://github.com/TEAM4-0))
+- Added badge [\#140](https://github.com/EMMC-ASBL/oteapi-dlite/pull/140) ([jesper-friis](https://github.com/jesper-friis))
+
 ## [v0.1.3](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.3) (2023-05-24)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.2...v0.1.3)
