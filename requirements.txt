@@ -1,0 +1,6 @@
+DLite-Python>=0.3.3,<1
+numpy>=1.21,<2
+oteapi-core>=0.1.2
+Pillow>=9.0.1,<11
+psycopg2-binary!=2.9.6
+tripper>=0.1.2
