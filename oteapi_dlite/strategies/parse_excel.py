@@ -128,7 +128,7 @@ class DLiteExcelStrategy:
         else:
             meta = infer_metadata(rec, units=units)
 
-        inst = meta(dims=[len(rec)], id=config.id)
+        inst = meta(dimensions=[len(rec)], id=config.id)
         for name in names:
             inst[name] = rec[name]
 
