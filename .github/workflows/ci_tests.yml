@@ -64,6 +64,10 @@ jobs:
         pip install -e .
         pip install safety
 
+    - name: List installed packages
+      run: |
+        pip list
+
     - name: Run pylint
       run: pylint --rcfile=pyproject.toml --ignore-paths=tests/ --extension-pkg-whitelist='pydantic' *.py oteapi_dlite
 
