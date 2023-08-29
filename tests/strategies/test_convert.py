@@ -1,15 +1,8 @@
 """Test convert strategy."""
-from typing import TYPE_CHECKING
-
 from otelib import OTEClient
 from paths import inputdir, outputdir
 
-if TYPE_CHECKING:
-    from oteapi.interfaces import IParseStrategy
-
-
 client = OTEClient("python")
-
 
 energy_resource = client.create_dataresource(
     downloadUrl=(inputdir / "energy.yaml").as_uri(),
