@@ -19,7 +19,7 @@ def converter(energy, forces):
     return result
 
 
-# Self-test
+# Self-tests
 Energy = dlite.get_instance("http://onto-ns.com/meta/0.1/Energy")
 Forces = dlite.get_instance("http://onto-ns.com/meta/0.1/Forces")
 
