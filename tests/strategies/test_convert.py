@@ -2,6 +2,8 @@
 from otelib import OTEClient
 from paths import inputdir, outputdir
 
+resultfile = outputdir / "result.yaml"
+
 client = OTEClient("python")
 
 energy_resource = client.create_dataresource(
@@ -39,11 +41,6 @@ convert = client.create_function(
     },
 )
 
-# Remove result file, so that we can check that it is generated
-resultfile = outputdir / "result.yaml"
-if resultfile.exists():
-    resultfile.unlink()
-
 generate = client.create_function(
     functionType="application/vnd.dlite-generate",
     configuration={
@@ -55,8 +52,13 @@ generate = client.create_function(
 )
 
 
+# Remove result file, so that we can check that it is generated
+if resultfile.exists():
+    resultfile.unlink()
+
 # Run pipeline
 pipeline = energy_resource >> forces_resource >> convert >> generate
 pipeline.get()
 
+# Ensure that the result file is regenerated
 assert resultfile.exists()

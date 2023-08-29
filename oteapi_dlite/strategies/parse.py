@@ -1,5 +1,6 @@
 """Generic parse strategy using DLite storage plugin."""
 # pylint: disable=unused-argument
+from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
 import dlite
@@ -121,8 +122,14 @@ class DLiteParseStrategy:
                     "provided"
                 )
 
+            # See if we can extract file suffix from downloadUrl
+            if self.parse_config.downloadUrl:
+                suffix = Path(self.parse_config.downloadUrl).suffix
+            else:
+                suffix = None
+
             cache = DataCache()
-            with cache.getfile(key) as location:
+            with cache.getfile(key, suffix=suffix) as location:
                 inst = dlite.Instance.from_location(
                     driver=driver,
                     location=str(location),
