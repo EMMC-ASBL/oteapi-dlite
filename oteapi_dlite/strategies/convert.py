@@ -54,21 +54,27 @@ class DLiteConvertOutputConfig(AttrDict):
 class DLiteConvertStrategyConfig(AttrDict):
     """Configuration for generic DLite converter."""
 
+    function_name: str = Field(
+        None,
+        description="Name of convert function.  It will be pased the input "
+        "instances as arguments and should return a sequence of output "
+        "instances.",
+    )
+    module_name: str = Field(
+        None,
+        description="Name of Python module containing the convertion function.",
+    )
     package: Optional[str] = Field(
         None,
         description="Used when performing a relative import of the converter "
         "function.  It specifies the package to use as the anchor point from "
         "which to resolve the relative import to an absolute import.",
     )
-    module_name: str = Field(
+    pypi_package: Optional[str] = Field(
         None,
-        description="Name of Python module containing the convertion function.",
-    )
-    function_name: str = Field(
-        None,
-        description="Name of convert function.  It will be pased the input "
-        "instances as arguments and should return a sequence of output "
-        "instances.",
+        description="Package name on PyPI.  This field is currently only "
+        "informative, but might be used in the future for automatic package "
+        "installation.",
     )
     inputs: Sequence[DLiteConvertInputConfig] = Field(
         None,
