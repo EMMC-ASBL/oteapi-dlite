@@ -80,7 +80,7 @@ class DLiteExcelStrategy:
     **Registers strategies**:
 
     - `("mediaType",
-        "application/vnd.dlite-xlsx")`
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")`
 
     """
 
@@ -127,7 +127,7 @@ class DLiteExcelStrategy:
         else:
             meta = infer_metadata(rec, units=units)
 
-        inst = meta(dims=[len(rec)], id=config.id)
+        inst = meta(dimensions=[len(rec)], id=config.id)
         for name in names:       
             inst[name] = rec[name]
         # Insert inst into collection
@@ -135,7 +135,6 @@ class DLiteExcelStrategy:
         coll.add(config.label, inst)
 
         update_collection(coll)
-        print(coll)
         return DLiteExcelSessionUpdate(
             collection_id=coll.uuid,
             inst_uuid=inst.uuid,

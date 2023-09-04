@@ -67,7 +67,6 @@ class DLiteMappingStrategy:
             )
 
         update_collection(coll)
-        print(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
     def get(

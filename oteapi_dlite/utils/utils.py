@@ -37,6 +37,7 @@ MEDIATYPES = {
 
 # Map accessService to DLite driver
 ACCESSSERVICES = {
+    "minio": "minio",
     "mongodb": "mongodb",
     "postgresql": "postgresql",
 }
