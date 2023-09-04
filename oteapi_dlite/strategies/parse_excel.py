@@ -128,7 +128,7 @@ class DLiteExcelStrategy:
             meta = infer_metadata(rec, units=units)
 
         inst = meta(dims=[len(rec)], id=config.id)
-        for name in names:            
+        for name in names:       
             inst[name] = rec[name]
         # Insert inst into collection
         coll = get_collection(session)
