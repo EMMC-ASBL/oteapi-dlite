@@ -1,19 +1,26 @@
 """Strategy that parses resource id and return all associated download links."""
-import requests
+from typing import TYPE_CHECKING, Optional
+
+import requests  # type: ignore
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from typing import TYPE_CHECKING, Optional
+
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
-from pydantic import Field, HttpUrl
-from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig, SessionUpdate
-import dlite
-from oteapi.datacache import DataCache
-import pandas as pd
-from dlite.datamodel import DataModel
-from galvani import BioLogic as BL
-from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
+import dlite
+import pandas as pd
+from galvani import BioLogic as BL
+from oteapi.datacache import DataCache
+from oteapi.models import (
+    AttrDict,
+    DataCacheConfig,
+    ResourceConfig,
+    SessionUpdate,
+)
+from pydantic import Field, HttpUrl
+
+from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
 
 class MPRConfig(AttrDict):
@@ -57,7 +64,8 @@ class MPRParseConfig(ResourceConfig):
         "application/parse-mpr",
         const=True,
         description=ResourceConfig.__fields__[
-            "mediaType"].field_info.description,
+            "mediaType"
+        ].field_info.description,
     )
 
     datacache_config: Optional[DataCacheConfig] = Field(
@@ -76,7 +84,6 @@ class MPRParseConfig(ResourceConfig):
 class SessionUpdateMPRParse(SessionUpdate):
     """Class for returning values from MPR Parse."""
 
-    
     eis_data: dict = Field(..., description="Content of the EISDlite document.")
     # inst_uuid: str = Field(
     #     ...,
@@ -86,6 +93,7 @@ class SessionUpdateMPRParse(SessionUpdate):
     #     ...,
     #     description="Label of the new instance in the collection.",
     # )
+
 
 @dataclass
 class MPRDataParseStrategy:
@@ -99,45 +107,48 @@ class MPRDataParseStrategy:
 
     parse_config: MPRParseConfig
 
-    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
+    def initialize(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> SessionUpdate:
         """Initialize."""
         return SessionUpdate()
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdateMPRParse:
+    def get(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> SessionUpdateMPRParse:
         """Download mpr file and return a list of dowload urls for later analysis."""
         coll = get_collection(session)
         config = self.parse_config
-        relations=config.configuration.mpr_config
+        relations = config.configuration.mpr_config
         # print(config.configuration.mpr_config)
         req = requests.get(
-                config.downloadUrl,
-                allow_redirects=True,
-                timeout=(3, 27),  # timeout: (connect, read) in seconds
-            )
+            config.downloadUrl,
+            allow_redirects=True,
+            timeout=(3, 27),  # timeout: (connect, read) in seconds
+        )
         cache = DataCache()
         key = cache.add(req.content)
         # using the key get file from cache
         with cache.getfile(key, suffix=".mpr") as filename:
             mpr_file = BL.MPRfile(str(filename))
-        data={}
+        data = {}
         for relation in relations:
-            data[relation]=mpr_file.data[relations[relation]]
+            data[relation] = mpr_file.data[relations[relation]]
         eis_file_data = pd.DataFrame(data)
         eis_data = None
         if eis_data is None:
             eis_data = eis_file_data
         else:
-                    # concatenate the data with previous EIS files' data
-            eis_data = pd.concat(
-                        [eis_data, eis_file_data], ignore_index=True)
-        rec=dict2recarray(data)        
-        configuration=config.configuration
+            # concatenate the data with previous EIS files' data
+            eis_data = pd.concat([eis_data, eis_file_data], ignore_index=True)
+        rec = dict2recarray(data)
+        configuration = config.configuration
         if configuration.metadata:
             if configuration.storage_path is not None:
                 for storage_path in configuration.storage_path.split("|"):
                     dlite.storage_path.append(storage_path)
             meta = dlite.get_instance(configuration.metadata)
-            
+
         inst = meta(dims=[len(rec)], id=configuration.id)
         for name in relations:
             inst[name] = data[name]

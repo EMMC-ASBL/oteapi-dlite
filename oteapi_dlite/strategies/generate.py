@@ -165,4 +165,3 @@ class DLiteGenerateStrategy:
 
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
-    

@@ -1,16 +1,23 @@
 """Strategy that parses resource id and return all associated download links."""
-import requests
+from typing import TYPE_CHECKING, Optional
+
+import requests  # type: ignore
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from typing import TYPE_CHECKING, Optional
+
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
-from pydantic import Field, HttpUrl
-from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig, SessionUpdate
+
 import dlite
+from oteapi.models import (
+    AttrDict,
+    DataCacheConfig,
+    ResourceConfig,
+    SessionUpdate,
+)
+from pydantic import Field, HttpUrl
 
-from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
-
+from oteapi_dlite.utils import get_collection, update_collection
 
 
 class TXTConfig(AttrDict):
@@ -54,7 +61,8 @@ class TXTParseConfig(ResourceConfig):
         "application/parse-txt",
         const=True,
         description=ResourceConfig.__fields__[
-            "mediaType"].field_info.description,
+            "mediaType"
+        ].field_info.description,
     )
 
     datacache_config: Optional[DataCacheConfig] = Field(
@@ -73,9 +81,8 @@ class TXTParseConfig(ResourceConfig):
 class SessionUpdateTXTParse(SessionUpdate):
     """Class for returning values from TXT Parse."""
 
-    
     image_metadata: dict = Field(..., description="Image Metadata.")
- 
+
 
 @dataclass
 class TXTDataParseStrategy:
@@ -89,29 +96,33 @@ class TXTDataParseStrategy:
 
     parse_config: TXTParseConfig
 
-    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
+    def initialize(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> SessionUpdate:
         """Initialize."""
         return SessionUpdate()
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdateTXTParse:
+    def get(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> SessionUpdateTXTParse:
         """Download TXT file and return a list of dowload urls for later analysis."""
         coll = get_collection(session)
         config = self.parse_config
-        
+
         req = requests.get(
-                config.downloadUrl,
-                allow_redirects=True,
-                timeout=(3, 27),  # timeout: (connect, read) in seconds
-            )
-        image_metadata=parse_metadata(req,config.configuration.splitBy)
-        print(image_metadata)        
-        configuration=config.configuration
+            config.downloadUrl,
+            allow_redirects=True,
+            timeout=(3, 27),  # timeout: (connect, read) in seconds
+        )
+        image_metadata = parse_metadata(req, config.configuration.splitBy)
+        print(image_metadata)
+        configuration = config.configuration
         if configuration.metadata:
             if configuration.storage_path is not None:
                 for storage_path in configuration.storage_path.split("|"):
                     dlite.storage_path.append(storage_path)
             meta = dlite.get_instance(configuration.metadata)
-            
+
         inst = meta(dims=[len(image_metadata)], id=configuration.id)
         for name in image_metadata:
             inst[name] = image_metadata[name]
@@ -123,28 +134,27 @@ class TXTDataParseStrategy:
         print("-------------collection------")
         print(coll)
         return SessionUpdateTXTParse(image_metadata=image_metadata)
-    
-def parse_metadata(response,splitby):
 
-        metadata = {}
 
-        # Decode the content to text and split into lines
-        lines = response.content.decode().splitlines()
+def parse_metadata(response, splitby):
+    metadata = {}
 
-        for line in lines:
-            # Ignore lines that do not contain keyword-value pairs
-            if "=" not in line:
-                continue
+    # Decode the content to text and split into lines
+    lines = response.content.decode().splitlines()
 
-            # Split the line into keyword and value
-            keyword, value = line.strip().split(splitby, 1)
+    for line in lines:
+        # Ignore lines that do not contain keyword-value pairs
+        if "=" not in line:
+            continue
 
-            # Ignore empty values
-            if not value:
-                continue
+        # Split the line into keyword and value
+        keyword, value = line.strip().split(splitby, 1)
 
-            # Add the keyword-value pair to the dictionary
-            metadata[keyword] = value
+        # Ignore empty values
+        if not value:
+            continue
 
-        return metadata
-    
+        # Add the keyword-value pair to the dictionary
+        metadata[keyword] = value
+
+    return metadata

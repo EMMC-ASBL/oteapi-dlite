@@ -50,7 +50,7 @@ repos:
       entry: pylint
       args:
       - "--rcfile=pyproject.toml"
-      - "--extension-pkg-whitelist='pydantic'"
+      - "--extension-pkg-whitelist='pydantic<2'"
       language: python
       types: [python]
       require_serial: true
@@ -61,7 +61,7 @@ repos:
       entry: pylint
       args:
       - "--rcfile=pyproject.toml"
-      - "--extension-pkg-whitelist='pydantic'"
+      - "--extension-pkg-whitelist='pydantic<2'"
       - "--disable=import-outside-toplevel,redefined-outer-name,import-error"
       language: python
       types: [python]

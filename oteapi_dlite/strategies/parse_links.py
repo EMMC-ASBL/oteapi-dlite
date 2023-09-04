@@ -1,17 +1,20 @@
 """Strategy that parses resource id and return all associated download links."""
-import requests
 import json
+from typing import TYPE_CHECKING, Optional
 
+import requests  # type: ignore
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from typing import TYPE_CHECKING, Optional
+
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
 
-from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig, SessionUpdate
-from oteapi.plugins import create_strategy
-
-from galvani import BioLogic as BL
+from oteapi.models import (
+    AttrDict,
+    DataCacheConfig,
+    ResourceConfig,
+    SessionUpdate,
+)
 
 
 class MPRConfig(AttrDict):
@@ -25,15 +28,18 @@ class MPRConfig(AttrDict):
         ),
     )
 
+
 class MPRParseConfig(ResourceConfig):
     """File download strategy filter config."""
 
     mediaType: str = Field(
         "application/mpr",
         const=True,
-        description=ResourceConfig.__fields__["mediaType"].field_info.description,
+        description=ResourceConfig.__fields__[
+            "mediaType"
+        ].field_info.description,
     )
-    
+
     datacache_config: Optional[DataCacheConfig] = Field(
         None,
         description=(
@@ -65,11 +71,15 @@ class MPRDataParseStrategy:
 
     parse_config: MPRParseConfig
 
-    def initialize(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
+    def initialize(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> SessionUpdate:
         """Initialize."""
         return SessionUpdate()
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdateMPRParse:
+    def get(
+        self, session: "Optional[Dict[str, Any]]" = None
+    ) -> SessionUpdateMPRParse:
         """Download mpr file and return a list of dowload urls for later analysis."""
 
         config = self.parse_config
@@ -83,9 +93,7 @@ class MPRDataParseStrategy:
                     if "downloadURL" in distribution:
                         links.append(distribution["downloadURL"])
             else:
-                raise ValueError(
-                    "Distributions are empty."
-                )
+                raise ValueError("Distributions are empty.")
         else:
             raise ValueError(
                 "Expected the parse strategy to recieve a list of distributions with a content key."
