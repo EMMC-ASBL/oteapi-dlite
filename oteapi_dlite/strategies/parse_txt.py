@@ -1,14 +1,8 @@
 """Strategy that parses resource id and return all associated download links."""
-from typing import TYPE_CHECKING, Optional
-
-import requests  # type: ignore
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import dlite
+import requests  # type: ignore
 from oteapi.models import (
     AttrDict,
     DataCacheConfig,
@@ -16,6 +10,7 @@ from oteapi.models import (
     SessionUpdate,
 )
 from pydantic import Field, HttpUrl
+from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.utils import get_collection, update_collection
 
@@ -105,7 +100,8 @@ class TXTDataParseStrategy:
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> SessionUpdateTXTParse:
-        """Download TXT file and return a list of dowload urls for later analysis."""
+        """Download TXT file and return a list of dowload urls
+        for later analysis."""
         coll = get_collection(session)
         config = self.parse_config
 
@@ -137,6 +133,7 @@ class TXTDataParseStrategy:
 
 
 def parse_metadata(response, splitby):
+    """Parse the metadata using splitby symbol"""
     metadata = {}
 
     # Decode the content to text and split into lines

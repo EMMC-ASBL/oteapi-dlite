@@ -1,7 +1,9 @@
 """EIS filter strategy."""
-# pylint: disable=unused-argument
-from typing import TYPE_CHECKING, List, Optional
+# pylint: disable=unused-argument,W0631,R1705
+from typing import Any, Dict, Optional
 
+import pandas as pd
+from galvani import BioLogic as BL
 from oteapi.datacache import DataCache
 from oteapi.models import (
     AttrDict,
@@ -12,12 +14,6 @@ from oteapi.models import (
 from oteapi.plugins import create_strategy
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict
-
-import pandas as pd
-from galvani import BioLogic as BL
 
 
 class EISConfig(AttrDict):
@@ -71,8 +67,8 @@ class EIS:
     ) -> SessionUpdate:
         """Initialize strategy.
 
-        This method will be called through the `/initialize` endpoint of the OTEAPI
-        Services.
+        This method will be called through the `/initialize` endpoint
+        of the OTEAPI Services.
 
         Parameters:
             session: A session-specific dictionary context.
@@ -88,6 +84,9 @@ class EIS:
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> SessionUpdateEIS:
+        """
+        Conver EIS to required structure
+        """
         if session["links"] is not None:
             links = session["links"]
 
@@ -145,8 +144,6 @@ class EIS:
                     eis_data = pd.concat(
                         [eis_data, eis_file_data], ignore_index=True
                     )
-
-            print(eis_data)
 
             return SessionUpdateEIS(eis_data=eis_data.to_dict())
         else:

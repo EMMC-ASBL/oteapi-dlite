@@ -1,15 +1,9 @@
 """Strategy that parses resource id and return all associated download links."""
-from typing import TYPE_CHECKING, Optional
-
-import requests  # type: ignore
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import dlite
 import pandas as pd
+import requests  # type: ignore
 from galvani import BioLogic as BL
 from oteapi.datacache import DataCache
 from oteapi.models import (
@@ -19,6 +13,7 @@ from oteapi.models import (
     SessionUpdate,
 )
 from pydantic import Field, HttpUrl
+from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
@@ -85,14 +80,6 @@ class SessionUpdateMPRParse(SessionUpdate):
     """Class for returning values from MPR Parse."""
 
     eis_data: dict = Field(..., description="Content of the EISDlite document.")
-    # inst_uuid: str = Field(
-    #     ...,
-    #     description="UUID of new instance.",
-    # )
-    # label: str = Field(
-    #     ...,
-    #     description="Label of the new instance in the collection.",
-    # )
 
 
 @dataclass

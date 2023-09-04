@@ -1,20 +1,16 @@
 """Strategy that parses resource id and return all associated download links."""
 import json
-from typing import TYPE_CHECKING, Optional
+from typing import Any, Dict, Optional
 
 import requests  # type: ignore
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict
-
 from oteapi.models import (
     AttrDict,
     DataCacheConfig,
     ResourceConfig,
     SessionUpdate,
 )
+from pydantic import Field
+from pydantic.dataclasses import dataclass
 
 
 class MPRConfig(AttrDict):
@@ -80,10 +76,11 @@ class MPRDataParseStrategy:
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> SessionUpdateMPRParse:
-        """Download mpr file and return a list of dowload urls for later analysis."""
+        """Download mpr file and return a list of dowload urls
+        for later analysis."""
 
         config = self.parse_config
-        request = requests.get(config.downloadUrl)
+        request = requests.get(config.downloadUrl, timeout=10)
         resource = json.loads(request.text)["results"][0]
 
         links = []
