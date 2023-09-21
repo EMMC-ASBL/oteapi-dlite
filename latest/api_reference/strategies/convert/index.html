@@ -10,28 +10,28 @@
       
       
       
-        <link rel="canonical" href="https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/function/">
+        <link rel="canonical" href="https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/convert/">
       
       
-        <link rel="prev" href="../filter/">
+        <link rel="prev" href="../../models/session/">
       
       
-        <link rel="next" href="../generate/">
+        <link rel="next" href="../filter/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.3">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
-        <title>function - OTEAPI DLite</title>
+        <title>convert - OTEAPI DLite</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0e669242.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.649f08f9.min.css">
       
       
 
@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#function" class="md-skip">
+        <a href="#convert" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              function
+              convert
             
           </span>
         </div>
@@ -442,26 +442,6 @@
                 
   
   
-  
-    <li class="md-nav__item">
-      <a href="../filter/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    filter
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -477,7 +457,7 @@
           
   
   <span class="md-ellipsis">
-    function
+    convert
   </span>
   
 
@@ -488,7 +468,7 @@
         
   
   <span class="md-ellipsis">
-    function
+    convert
   </span>
   
 
@@ -510,36 +490,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function" class="md-nav__link">
-    oteapi_dlite.strategies.function
+  <a href="#oteapi_dlite.strategies.convert" class="md-nav__link">
+    convert
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteFunctionConfig" class="md-nav__link">
-    DLiteFunctionConfig
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertConfig" class="md-nav__link">
+    DLiteConvertConfig
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy" class="md-nav__link">
-    DLiteFunctionStrategy
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertInputConfig" class="md-nav__link">
+    DLiteConvertInputConfig
   </a>
   
-    <nav class="md-nav" aria-label="DLiteFunctionStrategy">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertOutputConfig" class="md-nav__link">
+    DLiteConvertOutputConfig
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy" class="md-nav__link">
+    DLiteConvertStrategy
+  </a>
+  
+    <nav class="md-nav" aria-label="DLiteConvertStrategy">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy.get" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.get" class="md-nav__link">
     get()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy.initialize" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.initialize" class="md-nav__link">
     initialize()
   </a>
   
@@ -551,8 +545,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteStorageConfig" class="md-nav__link">
-    DLiteStorageConfig
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig" class="md-nav__link">
+    DLiteConvertStrategyConfig
   </a>
   
 </li>
@@ -561,6 +555,26 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    filter
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -830,36 +844,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function" class="md-nav__link">
-    oteapi_dlite.strategies.function
+  <a href="#oteapi_dlite.strategies.convert" class="md-nav__link">
+    convert
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteFunctionConfig" class="md-nav__link">
-    DLiteFunctionConfig
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertConfig" class="md-nav__link">
+    DLiteConvertConfig
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy" class="md-nav__link">
-    DLiteFunctionStrategy
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertInputConfig" class="md-nav__link">
+    DLiteConvertInputConfig
   </a>
   
-    <nav class="md-nav" aria-label="DLiteFunctionStrategy">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertOutputConfig" class="md-nav__link">
+    DLiteConvertOutputConfig
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy" class="md-nav__link">
+    DLiteConvertStrategy
+  </a>
+  
+    <nav class="md-nav" aria-label="DLiteConvertStrategy">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy.get" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.get" class="md-nav__link">
     get()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy.initialize" class="md-nav__link">
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.initialize" class="md-nav__link">
     initialize()
   </a>
   
@@ -871,8 +899,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oteapi_dlite.strategies.function.DLiteStorageConfig" class="md-nav__link">
-    DLiteStorageConfig
+  <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig" class="md-nav__link">
+    DLiteConvertStrategyConfig
   </a>
   
 </li>
@@ -892,16 +920,18 @@
                   
 
 
-<h1 id="function">function<a class="headerlink" href="#function" title="Permanent link">&para;</a></h1>
+<h1 id="convert">convert<a class="headerlink" href="#convert" title="Permanent link">&para;</a></h1>
 
 
 <div class="doc doc-object doc-module">
 
 
-<a id="oteapi_dlite.strategies.function"></a>
+
+<a id="oteapi_dlite.strategies.convert"></a>
   <div class="doc doc-contents first">
   
-      <p>Generic function strategy using DLite storage plugin.</p>
+      <p>Generic function strategy that converts zero or more input instances
+to zero or more new output instances.</p>
 
   
 
@@ -918,11 +948,12 @@
 
 
 
-<h2 id="oteapi_dlite.strategies.function.DLiteFunctionConfig" class="doc doc-heading">
-          <code>DLiteFunctionConfig</code>
+
+<h2 id="oteapi_dlite.strategies.convert.DLiteConvertConfig" class="doc doc-heading">
+          <code>DLiteConvertConfig</code>
 
 
-<a href="#oteapi_dlite.strategies.function.DLiteFunctionConfig" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#oteapi_dlite.strategies.convert.DLiteConvertConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-contents ">
@@ -930,20 +961,20 @@
             Bases: <code><span title="oteapi.models.FunctionConfig">FunctionConfig</span></code></p>
 
   
-      <p>DLite function strategy config.</p>
+      <p>DLite convert strategy resource config.</p>
 
             <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteFunctionConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite function strategy config.&quot;&quot;&quot;</span>
+              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteConvertConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite convert strategy resource config.&quot;&quot;&quot;</span>
 
-    <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteStorageConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite function strategy-specific configuration.&quot;</span>
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteConvertStrategyConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite convert strategy-specific configuration.&quot;</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -972,49 +1003,172 @@
 
 
 
-<h2 id="oteapi_dlite.strategies.function.DLiteFunctionStrategy" class="doc doc-heading">
-          <code>DLiteFunctionStrategy</code>
+
+<h2 id="oteapi_dlite.strategies.convert.DLiteConvertInputConfig" class="doc doc-heading">
+          <code>DLiteConvertInputConfig</code>
 
 
-<a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#oteapi_dlite.strategies.convert.DLiteConvertInputConfig" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+
+  
+      <p>Configuration for input instance to generic DLite converter.</p>
+<p>At least one of <code>label</code> or <code>datamodel</code> should be given.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteConvertInputConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for input instance to generic DLite converter.</span>
+
+<span class="sd">    At least one of `label` or `datamodel` should be given.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Label of the instance.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">datamodel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;URI of data model.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">property_mappings</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">False</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether to infer instance from property mappings.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="oteapi_dlite.strategies.convert.DLiteConvertOutputConfig" class="doc doc-heading">
+          <code>DLiteConvertOutputConfig</code>
+
+
+<a href="#oteapi_dlite.strategies.convert.DLiteConvertOutputConfig" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+
+  
+      <p>Configuration for output instance to generic DLite converter.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteConvertOutputConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for output instance to generic DLite converter.&quot;&quot;&quot;</span>
+
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Label to use when storing the instance.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">datamodel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;URI of data model.  Used for documentation.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="oteapi_dlite.strategies.convert.DLiteConvertStrategy" class="doc doc-heading">
+          <code>DLiteConvertStrategy</code>
+
+
+<a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-contents ">
 
   
-      <p>Generic DLite function strategy utilising DLite storage plugins.</p>
+      <p>Generic DLite convert strategy for converting zero or more input
+instances to zero or more output instances.</p>
 <p><strong>Registers strategies</strong>:</p>
 <ul>
-<li><code>("mediaType", "application/vnd.dlite-generate")</code></li>
+<li><code>("functionType", "application/vnd.dlite-convert")</code></li>
 </ul>
 
             <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
+              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
@@ -1059,17 +1213,41 @@
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
-<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">DLiteFunctionStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite function strategy utilising DLite storage plugins.</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">DLiteConvertStrategy</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite convert strategy for converting zero or more input</span>
+<span class="sd">    instances to zero or more output instances.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
-<span class="sd">    - `(&quot;mediaType&quot;, &quot;application/vnd.dlite-generate&quot;)`</span>
+<span class="sd">    - `(&quot;functionType&quot;, &quot;application/vnd.dlite-convert&quot;)`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">function_config</span><span class="p">:</span> <span class="n">DLiteFunctionConfig</span>
+    <span class="n">convert_config</span><span class="p">:</span> <span class="n">DLiteConvertConfig</span>
 
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1092,40 +1270,38 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            SessionUpdate instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span>
-        <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_config</span><span class="o">.</span><span class="n">configuration</span>
 
-        <span class="n">driver</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">driver</span>
-            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">driver</span>
-            <span class="k">else</span> <span class="n">get_driver</span><span class="p">(</span>
-                <span class="n">mediaType</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">mediaType</span><span class="p">,</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">package</span><span class="p">)</span>
+        <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">function_name</span><span class="p">)</span>
 
-        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
-        <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">]</span>
+        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 
-        <span class="c1"># Save instance</span>
-        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">:</span>
-            <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">cacheconfig</span> <span class="ow">and</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span><span class="p">:</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span>
-            <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;function_data&quot;</span>
+        <span class="n">instances</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">input_config</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">inputs</span><span class="p">):</span>
+            <span class="n">input_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">input_config</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
+                <span class="n">instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">coll</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">input_config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">input_config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">input_config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">:</span>
+                <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_instances</span><span class="p">(</span>
+                    <span class="n">metaid</span><span class="o">=</span><span class="n">input_config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">,</span>
+                    <span class="n">property_mappings</span><span class="o">=</span><span class="n">input_config</span><span class="o">.</span><span class="n">property_mappings</span><span class="p">,</span>
+                    <span class="c1"># More to do: add more arguments...</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;either `label` or `datamodel` must be specified in &quot;</span>
+                    <span class="s2">&quot;inputs[</span><span class="si">{i}</span><span class="s2">]&quot;</span>
+                <span class="p">)</span>
 
-            <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
-            <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
-                <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{tmpdir}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tmpdir</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                    <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">instances</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">):</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">outputs</span><span class="p">]</span>
 
-        <span class="c1"># __TODO__</span>
-        <span class="c1"># Can we savely assume that all strategies in a pipeline will be</span>
-        <span class="c1"># executed in the same Python interpreter?  If not, we should write</span>
-        <span class="c1"># the collection to a storage, such that it can be shared with the</span>
-        <span class="c1"># other strategies.</span>
+        <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">output_config</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">outputs</span><span class="p">):</span>
+            <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">output_config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
         <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
@@ -1149,10 +1325,11 @@
 
 
 
-<h3 id="oteapi_dlite.strategies.function.DLiteFunctionStrategy.get" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
-<a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
+<h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategy.get" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
   <div class="doc doc-contents ">
@@ -1216,33 +1393,8 @@ of the OTE-API Services.</p>
   </table>
 
           <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
+            <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span>
 <span class="normal">120</span>
@@ -1267,7 +1419,30 @@ of the OTE-API Services.</p>
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
-<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
@@ -1281,40 +1456,38 @@ of the OTE-API Services.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        SessionUpdate instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span>
-    <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_config</span><span class="o">.</span><span class="n">configuration</span>
 
-    <span class="n">driver</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">driver</span>
-        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">driver</span>
-        <span class="k">else</span> <span class="n">get_driver</span><span class="p">(</span>
-            <span class="n">mediaType</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">mediaType</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">package</span><span class="p">)</span>
+    <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">function_name</span><span class="p">)</span>
 
-    <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
-    <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">]</span>
+    <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 
-    <span class="c1"># Save instance</span>
-    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">:</span>
-        <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cacheconfig</span> <span class="ow">and</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span><span class="p">:</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span>
-        <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;function_data&quot;</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">input_config</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">inputs</span><span class="p">):</span>
+        <span class="n">input_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">input_config</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
+            <span class="n">instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">coll</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">input_config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">input_config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">input_config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">:</span>
+            <span class="n">inst</span> <span class="o">=</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_instances</span><span class="p">(</span>
+                <span class="n">metaid</span><span class="o">=</span><span class="n">input_config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">,</span>
+                <span class="n">property_mappings</span><span class="o">=</span><span class="n">input_config</span><span class="o">.</span><span class="n">property_mappings</span><span class="p">,</span>
+                <span class="c1"># More to do: add more arguments...</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;either `label` or `datamodel` must be specified in &quot;</span>
+                <span class="s2">&quot;inputs[</span><span class="si">{i}</span><span class="s2">]&quot;</span>
+            <span class="p">)</span>
 
-        <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
-        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
-            <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{tmpdir}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tmpdir</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">instances</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">):</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">outputs</span><span class="p">]</span>
 
-    <span class="c1"># __TODO__</span>
-    <span class="c1"># Can we savely assume that all strategies in a pipeline will be</span>
-    <span class="c1"># executed in the same Python interpreter?  If not, we should write</span>
-    <span class="c1"># the collection to a storage, such that it can be shared with the</span>
-    <span class="c1"># other strategies.</span>
+    <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">output_config</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">outputs</span><span class="p">):</span>
+        <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">output_config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
 
     <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
@@ -1329,10 +1502,11 @@ of the OTE-API Services.</p>
 
 
 
-<h3 id="oteapi_dlite.strategies.function.DLiteFunctionStrategy.initialize" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
-<a href="#oteapi_dlite.strategies.function.DLiteFunctionStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
+<h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategy.initialize" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
   <div class="doc doc-contents ">
@@ -1340,13 +1514,13 @@ of the OTE-API Services.</p>
       <p>Initialize.</p>
 
           <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+            <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
@@ -1370,11 +1544,12 @@ of the OTE-API Services.</p>
 
 
 
-<h2 id="oteapi_dlite.strategies.function.DLiteStorageConfig" class="doc doc-heading">
-          <code>DLiteStorageConfig</code>
+
+<h2 id="oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig" class="doc doc-heading">
+          <code>DLiteConvertStrategyConfig</code>
 
 
-<a href="#oteapi_dlite.strategies.function.DLiteStorageConfig" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-contents ">
@@ -1382,51 +1557,11 @@ of the OTE-API Services.</p>
             Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
   
-      <p>Configuration for a generic DLite storage filter.</p>
-<p>The DLite storage driver to can be specified using either the <code>driver</code>
-or <code>mediaType</code> field.</p>
-<p>Where the output should be written, is specified using either the
-<code>location</code> or <code>datacache_config.accessKey</code> field.</p>
+      <p>Configuration for generic DLite converter.</p>
 
             <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/function.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
+              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
 <span class="normal">57</span>
@@ -1434,50 +1569,62 @@ or <code>mediaType</code> field.</p>
 <span class="normal">59</span>
 <span class="normal">60</span>
 <span class="normal">61</span>
-<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a generic DLite storage filter.</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteConvertStrategyConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for generic DLite converter.&quot;&quot;&quot;</span>
 
-<span class="sd">    The DLite storage driver to can be specified using either the `driver`</span>
-<span class="sd">    or `mediaType` field.</span>
-
-<span class="sd">    Where the output should be written, is specified using either the</span>
-<span class="sd">    `location` or `datacache_config.accessKey` field.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">driver</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">function_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of DLite driver (ex: &quot;json&quot;).&#39;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Name of convert function.  It will be pased the input &quot;</span>
+        <span class="s2">&quot;instances as arguments and should return a sequence of output &quot;</span>
+        <span class="s2">&quot;instances.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">mediaType</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Media type for DLite driver (ex: &quot;application/json&quot;).&#39;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Name of Python module containing the convertion function.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">location</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">package</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;Location of storage to write to.  If unset to store in data &quot;</span>
-            <span class="s2">&quot;cache using the key provided with `datacache_config.accessKey` &quot;</span>
-            <span class="s2">&quot;(defaults to &#39;function_data&#39;).&quot;</span>
-        <span class="p">),</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Used when performing a relative import of the converter &quot;</span>
+        <span class="s2">&quot;function.  It specifies the package to use as the anchor point from &quot;</span>
+        <span class="s2">&quot;which to resolve the relative import to an absolute import.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">pypi_package</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;Comma-separated list of options passed to the DLite &quot;</span>
-            <span class="s2">&quot;storage plugin.&quot;</span>
-        <span class="p">),</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Package name on PyPI.  This field is currently only &quot;</span>
+        <span class="s2">&quot;informative, but might be used in the future for automatic package &quot;</span>
+        <span class="s2">&quot;installation.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="o">...</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Label of DLite instance to serialise in the collection.&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">collection_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">DLiteConvertInputConfig</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;ID of the collection to use.&quot;</span><span class="p">),</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Input instances.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">datacache_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataCacheConfig</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">DLiteConvertOutputConfig</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Configuration options for the local data cache.&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Output instances.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1569,10 +1716,10 @@ or <code>mediaType</code> field.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
     
   </body>

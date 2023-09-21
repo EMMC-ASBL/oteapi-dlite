@@ -13,14 +13,14 @@
         <link rel="canonical" href="https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/generate/">
       
       
-        <link rel="prev" href="../function/">
+        <link rel="prev" href="../filter/">
       
       
         <link rel="next" href="../mapping/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.3">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
@@ -28,10 +28,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0e669242.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.649f08f9.min.css">
       
       
 
@@ -444,11 +444,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../filter/" class="md-nav__link">
+      <a href="../convert/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    filter
+    convert
   </span>
   
 
@@ -464,11 +464,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../function/" class="md-nav__link">
+      <a href="../filter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    function
+    filter
   </span>
   
 
@@ -531,7 +531,7 @@
       
         <li class="md-nav__item">
   <a href="#oteapi_dlite.strategies.generate" class="md-nav__link">
-    oteapi_dlite.strategies.generate
+    generate
   </a>
   
 </li>
@@ -831,7 +831,7 @@
       
         <li class="md-nav__item">
   <a href="#oteapi_dlite.strategies.generate" class="md-nav__link">
-    oteapi_dlite.strategies.generate
+    generate
   </a>
   
 </li>
@@ -898,6 +898,7 @@
 <div class="doc doc-object doc-module">
 
 
+
 <a id="oteapi_dlite.strategies.generate"></a>
   <div class="doc doc-contents first">
   
@@ -918,6 +919,7 @@
 
 
 
+
 <h2 id="oteapi_dlite.strategies.generate.DLiteGenerateConfig" class="doc doc-heading">
           <code>DLiteGenerateConfig</code>
 
@@ -934,12 +936,12 @@
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">76</span>
-<span class="normal">77</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">77</span>
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteGenerateConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
+<span class="normal">81</span>
+<span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteGenerateConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite generate strategy config.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteStorageConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -972,6 +974,7 @@
 
 
 
+
 <h2 id="oteapi_dlite.strategies.generate.DLiteGenerateStrategy" class="doc doc-heading">
           <code>DLiteGenerateStrategy</code>
 
@@ -990,8 +993,7 @@
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 84</span>
-<span class="normal"> 85</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
 <span class="normal"> 86</span>
 <span class="normal"> 87</span>
 <span class="normal"> 88</span>
@@ -1073,7 +1075,8 @@
 <span class="normal">164</span>
 <span class="normal">165</span>
 <span class="normal">166</span>
-<span class="normal">167</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">167</span>
+<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteGenerateStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite generate strategy utilising DLite storage plugins.</span>
 
@@ -1131,7 +1134,7 @@
             <span class="c1"># fail if there are more instances</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;One of `label` or `metadata` configurations should be given.&quot;</span>
+                <span class="s2">&quot;One of `label` or `datamodel` configurations should be given.&quot;</span>
             <span class="p">)</span>
 
         <span class="c1"># Save instance</span>
@@ -1177,8 +1180,9 @@
 
 
 
+
 <h3 id="oteapi_dlite.strategies.generate.DLiteGenerateStrategy.get" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.generate.DLiteGenerateStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
 
@@ -1245,8 +1249,7 @@ of the OTE-API Services.</p>
 
           <details class="quote">
             <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">103</span>
-<span class="normal">104</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">104</span>
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
@@ -1309,7 +1312,8 @@ of the OTE-API Services.</p>
 <span class="normal">164</span>
 <span class="normal">165</span>
 <span class="normal">166</span>
-<span class="normal">167</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">167</span>
+<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
@@ -1348,7 +1352,7 @@ of the OTE-API Services.</p>
         <span class="c1"># fail if there are more instances</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;One of `label` or `metadata` configurations should be given.&quot;</span>
+            <span class="s2">&quot;One of `label` or `datamodel` configurations should be given.&quot;</span>
         <span class="p">)</span>
 
     <span class="c1"># Save instance</span>
@@ -1385,8 +1389,9 @@ of the OTE-API Services.</p>
 
 
 
+
 <h3 id="oteapi_dlite.strategies.generate.DLiteGenerateStrategy.initialize" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.generate.DLiteGenerateStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
 
@@ -1397,12 +1402,12 @@ of the OTE-API Services.</p>
 
           <details class="quote">
             <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 96</span>
-<span class="normal"> 97</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
-<span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+<span class="normal">101</span>
+<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
@@ -1426,6 +1431,7 @@ of the OTE-API Services.</p>
 
 
 
+
 <h2 id="oteapi_dlite.strategies.generate.DLiteStorageConfig" class="doc doc-heading">
           <code>DLiteStorageConfig</code>
 
@@ -1443,7 +1449,7 @@ of the OTE-API Services.</p>
 or <code>mediaType</code> field.</p>
 <p>Where the output should be written, is specified using either the
 <code>location</code> or <code>datacache_config.accessKey</code> field.</p>
-<p>Either <code>metadata</code> or <code>label</code> should be provided.</p>
+<p>Either <code>label</code> or <code>datamodel</code> should be provided.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
@@ -1502,7 +1508,8 @@ or <code>mediaType</code> field.</p>
 <span class="normal">70</span>
 <span class="normal">71</span>
 <span class="normal">72</span>
-<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="normal">73</span>
+<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a generic DLite storage filter.</span>
 
 <span class="sd">    The DLite storage driver to can be specified using either the `driver`</span>
@@ -1511,7 +1518,7 @@ or <code>mediaType</code> field.</p>
 <span class="sd">    Where the output should be written, is specified using either the</span>
 <span class="sd">    `location` or `datacache_config.accessKey` field.</span>
 
-<span class="sd">    Either `metadata` or `label` should be provided.</span>
+<span class="sd">    Either `label` or `datamodel` should be provided.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -1520,8 +1527,9 @@ or <code>mediaType</code> field.</p>
     <span class="p">)</span>
     <span class="n">datamodel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;URI to metadata of new instance.  Needed when generating &quot;</span>
-        <span class="s2">&quot;the instance from mappings.  Cannot be combined with `label`&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;URI to the datamodel of the new instance.  Needed when &quot;</span>
+        <span class="s2">&quot;generating the instance from mappings.  Cannot be combined with &quot;</span>
+        <span class="s2">&quot;`label`&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">driver</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
@@ -1648,10 +1656,10 @@ or <code>mediaType</code> field.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
     
   </body>

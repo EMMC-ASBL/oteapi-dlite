@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.3">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
@@ -26,10 +26,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0e669242.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.649f08f9.min.css">
       
       
 
@@ -440,11 +440,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../strategies/filter/" class="md-nav__link">
+      <a href="../../strategies/convert/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    filter
+    convert
   </span>
   
 
@@ -460,11 +460,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../strategies/function/" class="md-nav__link">
+      <a href="../../strategies/filter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    function
+    filter
   </span>
   
 
@@ -731,7 +731,7 @@
       
         <li class="md-nav__item">
   <a href="#oteapi_dlite.utils.utils" class="md-nav__link">
-    oteapi_dlite.utils.utils
+    utils
   </a>
   
 </li>
@@ -823,7 +823,7 @@
       
         <li class="md-nav__item">
   <a href="#oteapi_dlite.utils.utils" class="md-nav__link">
-    oteapi_dlite.utils.utils
+    utils
   </a>
   
 </li>
@@ -884,6 +884,7 @@
 <div class="doc doc-object doc-module">
 
 
+
 <a id="oteapi_dlite.utils.utils"></a>
   <div class="doc doc-contents first">
   
@@ -906,8 +907,9 @@
 
 
 
+
 <h2 id="oteapi_dlite.utils.utils.get_collection" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">collection_id</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">collection_id</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.utils.utils.get_collection" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -1061,7 +1063,7 @@ session.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">dlite</span><span class="o">.</span><span class="n">DLiteError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">except</span> <span class="n">dlite</span><span class="o">.</span><span class="n">DLiteError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>  <span class="c1"># pylint: disable=no-member</span>
             <span class="k">raise</span> <span class="n">CollectionNotFound</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Could not find DLite Collection with id </span><span class="si">{</span><span class="n">id_</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
@@ -1084,8 +1086,9 @@ session.</p>
 
 
 
+
 <h2 id="oteapi_dlite.utils.utils.get_driver" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_driver</span><span class="p">(</span><span class="n">mediaType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">accessService</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">get_driver</span><span class="p">(</span><span class="n">mediaType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">accessService</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.utils.utils.get_driver" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -1134,8 +1137,9 @@ session.</p>
 
 
 
+
 <h2 id="oteapi_dlite.utils.utils.get_instance" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_instance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">routedict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">instance_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_incomplete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">get_instance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">routedict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">instance_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_incomplete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.utils.utils.get_instance" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -1278,8 +1282,9 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
 
 
+
 <h2 id="oteapi_dlite.utils.utils.get_meta" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_meta</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">get_meta</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.utils.utils.get_meta" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -1319,8 +1324,9 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
 
 
+
 <h2 id="oteapi_dlite.utils.utils.update_collection" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">update_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">update_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.utils.utils.update_collection" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -1448,10 +1454,10 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
     
   </body>
