@@ -1,7 +1,7 @@
 """Generic generate strategy using DLite storage plugin."""
 # pylint: disable=unused-argument,invalid-name
 import tempfile
-from typing import TYPE_CHECKING, Dict, Optional
+from typing import TYPE_CHECKING, Optional
 
 from oteapi.datacache import DataCache
 from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
@@ -12,7 +12,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
 if TYPE_CHECKING:
-    from typing import Any
+    from typing import Any, Dict
 
 
 class DLiteStorageConfig(AttrDict):
@@ -24,7 +24,7 @@ class DLiteStorageConfig(AttrDict):
     Where the output should be written, is specified using either the
     `location` or `datacache_config.accessKey` field.
 
-    Either `metadata` or `label` should be provided.
+    Either `label` or `datamodel` should be provided.
     """
 
     label: Optional[str] = Field(
@@ -33,8 +33,9 @@ class DLiteStorageConfig(AttrDict):
     )
     datamodel: Optional[str] = Field(
         None,
-        description="URI to metadata of new instance.  Needed when generating "
-        "the instance from mappings.  Cannot be combined with `label`",
+        description="URI to the datamodel of the new instance.  Needed when "
+        "generating the instance from mappings.  Cannot be combined with "
+        "`label`",
     )
     driver: Optional[str] = Field(
         None,
@@ -139,7 +140,7 @@ class DLiteGenerateStrategy:
             # fail if there are more instances
         else:
             raise ValueError(
-                "One of `label` or `metadata` configurations should be given."
+                "One of `label` or `datamodel` configurations should be given."
             )
 
         # Save instance

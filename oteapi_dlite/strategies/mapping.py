@@ -1,6 +1,6 @@
 """Mapping filter strategy."""
 # pylint: disable=unused-argument,invalid-name
-from typing import TYPE_CHECKING, Dict, Optional
+from typing import TYPE_CHECKING, Optional
 
 from oteapi.models import AttrDict, MappingConfig
 from pydantic import AnyUrl
@@ -11,7 +11,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
+    from typing import Any, Dict
 
 
 class DLiteMappingStrategyConfig(AttrDict):
