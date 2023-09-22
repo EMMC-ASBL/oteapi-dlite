@@ -67,7 +67,7 @@ def test_image(
 
     orig_key = cache.add(sample_file.read_bytes())
     config = {
-        "downloadUrl": f"file://dummy.host/{sample_file}",
+        "downloadUrl": sample_file.as_uri(),
         "mediaType": f"image/vnd.dlite-{sample_file.suffix.lstrip('.')}",
         "configuration": {
             "image_label": "test_image",
