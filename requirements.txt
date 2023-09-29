@@ -1,6 +1,7 @@
-DLite-Python>=0.3.3,<1
+DLite-Python>=0.3.3,<0.4
 numpy>=1.21,<2
 oteapi-core>=0.1.2
 Pillow>=9.0.1,<11
 psycopg2-binary!=2.9.6
+pydantic>=1.10,<2  # Indirect requirement
 tripper>=0.1.2

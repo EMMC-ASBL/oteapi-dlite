@@ -1,6 +1,24 @@
 # Changelog
 
-## [v0.1.4](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.4) (2023-07-13)
+## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.5...HEAD)
+
+**Fixed bugs:**
+
+- Image parse strategy will change in OTEAPI Core [\#172](https://github.com/EMMC-ASBL/oteapi-dlite/issues/172)
+
+## [v0.1.5](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.5) (2023-09-22)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.4...v0.1.5)
+
+**Merged pull requests:**
+
+- Support image being stored in DataCache as bytes [\#173](https://github.com/EMMC-ASBL/oteapi-dlite/pull/173) ([CasperWA](https://github.com/CasperWA))
+- Added a generic convert function strategy [\#163](https://github.com/EMMC-ASBL/oteapi-dlite/pull/163) ([jesper-friis](https://github.com/jesper-friis))
+- \[Auto-generated\] Update dependencies [\#159](https://github.com/EMMC-ASBL/oteapi-dlite/pull/159) ([TEAM4-0](https://github.com/TEAM4-0))
+
+## [v0.1.4](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.4) (2023-08-17)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.3...v0.1.4)
 
