@@ -14,7 +14,7 @@ jobs:
     # timeout-minutes: 2
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 2
 
@@ -93,7 +93,7 @@ jobs:
         python-version: ["3.9", "3.10"]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 2
 
@@ -131,7 +131,7 @@ jobs:
         python-version: ["3.9", "3.10"]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 2
 
@@ -163,7 +163,7 @@ jobs:
     # timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v4
         with:
@@ -182,7 +182,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 2
 
