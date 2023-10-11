@@ -112,6 +112,8 @@ jobs:
     - name: Test with pytest
       #run: pytest -vvv --cov-report=xml
       run: |
+        apt-get update --fix-missing
+        apt-get install -y gdb
         gdb python <<EOF
         r -m  pytest -vvv --cov-report=xml
         where
