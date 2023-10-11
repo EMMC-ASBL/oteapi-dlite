@@ -110,7 +110,12 @@ jobs:
         pip install -e .
 
     - name: Test with pytest
-      run: pytest -vvv --cov-report=xml
+      #run: pytest -vvv --cov-report=xml
+      run: |
+        gdb python <<EOF
+        r -m  pytest -vvv --cov-report=xml
+        where
+        EOF
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
