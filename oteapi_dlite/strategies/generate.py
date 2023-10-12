@@ -27,16 +27,6 @@ class DLiteStorageConfig(AttrDict):
     Either `label` or `datamodel` should be provided.
     """
 
-    label: Optional[str] = Field(
-        None,
-        description="Label of DLite instance in the collection to serialise.",
-    )
-    datamodel: Optional[str] = Field(
-        None,
-        description="URI to the datamodel of the new instance.  Needed when "
-        "generating the instance from mappings.  Cannot be combined with "
-        "`label`",
-    )
     driver: Optional[str] = Field(
         None,
         description='Name of DLite driver (ex: "json").',
@@ -59,6 +49,21 @@ class DLiteStorageConfig(AttrDict):
             "Comma-separated list of options passed to the DLite "
             "storage plugin."
         ),
+    )
+    label: Optional[str] = Field(
+        None,
+        description="Label of DLite instance in the collection to serialise.",
+    )
+    datamodel: Optional[str] = Field(
+        None,
+        description="URI to the datamodel of the new instance.  Needed when "
+        "generating the instance from mappings.  Cannot be combined with "
+        "`label`",
+    )
+    store_collection: bool = Field(
+        False,
+        description="Whether to store the entire collection instead of a "
+        "single instance.  Cannot be combined with `label` or `datamodel`.",
     )
     allow_incomplete: Optional[bool] = Field(
         False,
@@ -137,8 +142,9 @@ class DLiteGenerateStrategy:
                 allow_incomplete=config.allow_incomplete,
             )
             inst = next(instances)
-            # fail if there are more instances
-        else:
+        elif config.store_collection:
+            inst = coll
+        else:  # fail if there are more instances
             raise ValueError(
                 "One of `label` or `datamodel` configurations should be given."
             )
