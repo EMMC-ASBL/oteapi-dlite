@@ -1,63 +1,74 @@
-"""Trivial filter that adds an empty collection to the session."""
+"""Filter that removes all but specified instances in the collection."""
 # pylint: disable=unused-argument
-from typing import TYPE_CHECKING, Any, Dict
+from typing import TYPE_CHECKING
 
-import dlite
-from oteapi.datacache import DataCache
 from oteapi.models import FilterConfig
-from pydantic import Field
+
+# from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:
-    from typing import Optional
+    from typing import Any, Dict, Optional
+
+
+# class DLiteFilterConfig(AttrDict):
+#    """Configuration for a DLite filter filter."""
+#    labels: List[str] = Field(
+#        ...,
+#        description='List of labels to keep in collection.',
+#    )
+#
+#
+# class DLiteFilterConfig(FilterConfig):
+#    """DLite generate strategy config."""
+#
+#    configuration: DLiteFilterConfig = Field(
+#        ..., description="DLite filter strategy-specific configuration."
+#    )
 
 
 @dataclass
-class CreateCollectionStrategy:
-    """Trivial filter that adds an empty collection to the session.
+class DLiteFilterStrategy:
+    """Filter that removes all but specified instances in the collection.
+
+    The `query` configuration should be a comma-separated list of labels
+    to keep in the collection.  All other labels will be removed.
 
     **Registers strategies**:
 
-    - `("filterType", "dlite/create-collection")`
+    - `("filterType", "dlite/filter")`
 
+    WARNING: This is a first simple implementation. The behaviour of this
+    strategy may change.
     """
 
     filter_config: FilterConfig
 
-    # Find a better way to keep collections alive!!!
-    # Need to be `Any`, because otherwise `pydantic` complains.
-    collection_refs: Dict[str, Any] = Field(
-        {},
-        description="A dictionary of DLite Collections.",
-    )
-
     def initialize(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self,
+        session: "Optional[Dict[str, Any]]" = None,
     ) -> DLiteSessionUpdate:
         """Initialize."""
-        if session is None:
-            raise ValueError("Missing session")
-        if "collection_id" in session:
-            raise KeyError("`collection_id` already exists in session.")
-
-        coll = dlite.Collection()
-
-        # Make sure that collection stays alive
-        # It will never be deallocated...
-        coll._incref()  # pylint: disable=protected-access
-
-        # Store the collection in the data cache
-        cache = DataCache()
-        cache.add(value=coll.asjson(), key=coll.uuid)
-
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
         self, session: "Optional[Dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy."""
-        if session is None:
-            raise ValueError("Missing session")
-        return DLiteSessionUpdate(collection_id=session["collection_id"])
+        config = self.filter_config
+        labels_to_keep = config.query.split(",")
+
+        to_remove = []
+        coll = get_collection(session)
+        for label in coll.get_labels():
+            if label not in labels_to_keep:
+                to_remove.append(label)
+
+        for label in to_remove:
+            coll.remove(label)
+
+        update_collection(coll)
+        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
