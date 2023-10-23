@@ -138,7 +138,7 @@ class DLiteParseStrategy:
 
             # See if we can extract file suffix from downloadUrl
             if self.parse_config.downloadUrl:
-                suffix = Path(self.parse_config.downloadUrl).suffix
+                suffix = Path(str(self.parse_config.downloadUrl)).suffix
             else:
                 suffix = None
 
