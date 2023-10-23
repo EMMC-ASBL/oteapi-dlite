@@ -1,7 +1,7 @@
 """Generic generate strategy using DLite storage plugin."""
 # pylint: disable=unused-argument,invalid-name
 import tempfile
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Annotated, Optional
 
 from oteapi.datacache import DataCache
 from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
@@ -11,8 +11,8 @@ from pydantic.dataclasses import dataclass
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
-if TYPE_CHECKING:
-    from typing import Any, Dict
+if TYPE_CHECKING:  # pragma: no cover
+    from typing import Any
 
 
 class DLiteStorageConfig(AttrDict):
@@ -27,59 +27,82 @@ class DLiteStorageConfig(AttrDict):
     Either `label` or `datamodel` should be provided.
     """
 
-    label: Optional[str] = Field(
-        None,
-        description="Label of DLite instance in the collection to serialise.",
-    )
-    datamodel: Optional[str] = Field(
-        None,
-        description="URI to the datamodel of the new instance.  Needed when "
-        "generating the instance from mappings.  Cannot be combined with "
-        "`label`",
-    )
-    driver: Optional[str] = Field(
-        None,
-        description='Name of DLite driver (ex: "json").',
-    )
-    mediaType: Optional[str] = Field(
-        None,
-        description='Media type for DLite driver (ex: "application/json").',
-    )
-    location: Optional[str] = Field(
-        None,
-        description=(
-            "Location of storage to write to.  If unset to store in data "
-            "cache using the key provided with `datacache_config.accessKey` "
-            "(defaults to 'generate_data')."
+    label: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Label of DLite instance in the collection to serialise."
+            ),
         ),
-    )
-    options: Optional[str] = Field(
-        None,
-        description=(
-            "Comma-separated list of options passed to the DLite "
-            "storage plugin."
+    ] = None
+    datamodel: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "URI to the datamodel of the new instance.  Needed when "
+                "generating the instance from mappings.  Cannot be combined "
+                "with `label`"
+            ),
         ),
-    )
-    allow_incomplete: Optional[bool] = Field(
-        False,
-        description="Whether to allow incomplete property mappings.",
-    )
-    collection_id: Optional[str] = Field(
-        None,
-        description=("ID of the collection to use."),
-    )
-    datacache_config: Optional[DataCacheConfig] = Field(
-        None,
-        description="Configuration options for the local data cache.",
-    )
+    ] = None
+    driver: Annotated[
+        Optional[str],
+        Field(
+            description='Name of DLite driver (ex: "json").',
+        ),
+    ] = None
+    mediaType: Annotated[
+        Optional[str],
+        Field(
+            description='Media type for DLite driver (ex: "application/json").',
+        ),
+    ] = None
+    location: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Location of storage to write to.  If unset to store in data "
+                "cache using the key provided with "
+                "`datacache_config.accessKey` (defaults to 'generate_data')."
+            ),
+        ),
+    ] = None
+    options: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Comma-separated list of options passed to the DLite "
+                "storage plugin."
+            ),
+        ),
+    ] = None
+    allow_incomplete: Annotated[
+        Optional[bool],
+        Field(
+            description="Whether to allow incomplete property mappings.",
+        ),
+    ] = False
+    collection_id: Annotated[
+        Optional[str],
+        Field(
+            description=("ID of the collection to use."),
+        ),
+    ] = None
+    datacache_config: Annotated[
+        Optional[DataCacheConfig],
+        Field(
+            description="Configuration options for the local data cache.",
+        ),
+    ] = None
 
 
 class DLiteGenerateConfig(FunctionConfig):
     """DLite generate strategy config."""
 
-    configuration: DLiteStorageConfig = Field(
-        ..., description="DLite generate strategy-specific configuration."
-    )
+    configuration: Annotated[
+        DLiteStorageConfig,
+        Field(description="DLite generate strategy-specific configuration."),
+    ]
 
 
 @dataclass
@@ -96,13 +119,13 @@ class DLiteGenerateStrategy:
 
     def initialize(
         self,
-        session: "Optional[Dict[str, Any]]" = None,
+        session: Optional[dict[str, "Any"]] = None,
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: Optional[dict[str, "Any"]] = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy.
 

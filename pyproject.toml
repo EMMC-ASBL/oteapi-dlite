@@ -5,6 +5,9 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
+[tool.black]
+line-length = 80
+
 [tool.mypy]
 python_version = "3.9"
 ignore_missing_imports = true
@@ -21,6 +24,9 @@ disable = [
     "too-few-public-methods",
     "no-self-argument",
     "invalid-name",
+    # pylint thinks all pydantic model instance attributes are FieldInfo.
+    # This is wrong, and it's a known issue.
+    "no-member",
 ]
 
 [tool.pytest.ini_options]

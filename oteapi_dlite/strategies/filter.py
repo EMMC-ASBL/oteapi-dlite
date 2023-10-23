@@ -1,6 +1,6 @@
 """Trivial filter that adds an empty collection to the session."""
 # pylint: disable=unused-argument
-from typing import TYPE_CHECKING, Any, Dict
+from typing import TYPE_CHECKING, Annotated
 
 import dlite
 from oteapi.datacache import DataCache
@@ -10,8 +10,8 @@ from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
 
-if TYPE_CHECKING:
-    from typing import Optional
+if TYPE_CHECKING:  # pragma: no cover
+    from typing import Any, Optional
 
 
 @dataclass
@@ -28,13 +28,15 @@ class CreateCollectionStrategy:
 
     # Find a better way to keep collections alive!!!
     # Need to be `Any`, because otherwise `pydantic` complains.
-    collection_refs: Dict[str, Any] = Field(
-        {},
-        description="A dictionary of DLite Collections.",
-    )
+    collection_refs: Annotated[
+        dict[str, "Any"],
+        Field(
+            description="A dictionary of DLite Collections.",
+        ),
+    ] = {}
 
     def initialize(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: "Optional[dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
         if session is None:
@@ -55,7 +57,7 @@ class CreateCollectionStrategy:
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
     def get(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: "Optional[dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy."""
         if session is None:

@@ -1,6 +1,7 @@
 """Filter for serialisation using DLite."""
+from collections.abc import Sequence
 from pathlib import Path
-from typing import TYPE_CHECKING, Optional, Sequence
+from typing import TYPE_CHECKING, Annotated, Optional
 
 import dlite
 from oteapi.models import AttrDict, FilterConfig
@@ -11,40 +12,51 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict
+    from typing import Any
 
 
 class SerialiseConfig(AttrDict):
     """DLite serialise-specific configurations."""
 
-    driver: str = Field(
-        ...,
-        description="Name of DLite plugin used for serialisation.",
-    )
-    location: Path = Field(
-        ...,
-        description="Path or URL to serialise to.",
-    )
-    options: Optional[str] = Field(
-        "",
-        description="Options passed to the driver.",
-    )
-    labels: Optional[Sequence[str]] = Field(
-        None,
-        description=(
-            "Optional sequence of labels in the collection to serialise.  "
-            "The default is to serialise the entire collection."
+    driver: Annotated[
+        str,
+        Field(
+            description="Name of DLite plugin used for serialisation.",
         ),
-    )
+    ]
+    location: Annotated[
+        Path,
+        Field(
+            description="Path or URL to serialise to.",
+        ),
+    ]
+    options: Annotated[
+        Optional[str],
+        Field(
+            description="Options passed to the driver.",
+        ),
+    ] = ""
+    labels: Annotated[
+        Optional[Sequence[str]],
+        Field(
+            None,
+            description=(
+                "Optional sequence of labels in the collection to serialise.  "
+                "The default is to serialise the entire collection."
+            ),
+        ),
+    ] = None
 
 
 class SerialiseFilterConfig(FilterConfig):
     """Filter config for serialise."""
 
-    configuration: SerialiseConfig = Field(
-        ...,
-        description="Serialise-specific configurations.",
-    )
+    configuration: Annotated[
+        SerialiseConfig,
+        Field(
+            description="Serialise-specific configurations.",
+        ),
+    ]
 
 
 @dataclass
@@ -60,13 +72,13 @@ class SerialiseStrategy:
     filter_config: SerialiseFilterConfig
 
     def initialize(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: Optional[dict[str, "Any"]] = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: Optional[dict[str, "Any"]] = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy."""
         config = self.filter_config.configuration

@@ -10,8 +10,10 @@ from tripper import Triplestore
 
 from oteapi_dlite.utils.exceptions import CollectionNotFound
 
-if TYPE_CHECKING:
-    from typing import Any, Dict, Optional, Union
+if TYPE_CHECKING:  # pragma: no cover
+    from typing import Any, Optional, Union
+
+    NoneType = type(None)
 
 
 # Set up paths
@@ -44,7 +46,7 @@ ACCESSSERVICES = {
 
 
 def get_collection(
-    session: "Optional[Dict[str, Any]]" = None,
+    session: "Optional[dict[str, Any]]" = None,
     collection_id: "Optional[str]" = None,
 ) -> dlite.Collection:
     """Retrieve a DLite Collection.
@@ -117,7 +119,11 @@ def get_meta(uri: str) -> dlite.Instance:
     return meta
 
 
-def get_driver(mediaType=None, accessService=None, options=None) -> str:
+def get_driver(
+    mediaType: "Optional[str]" = None,
+    accessService: "Optional[str]" = None,
+    options: "NoneType" = None,
+) -> str:
     """Return name of DLite driver for the given media type/access service."""
     # pylint: disable=unused-argument
     if mediaType:
