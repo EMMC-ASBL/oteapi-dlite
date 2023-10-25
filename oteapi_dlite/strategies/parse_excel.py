@@ -19,7 +19,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
+    from typing import Any, Union
 
     from oteapi.interfaces import IParseStrategy
 
@@ -134,16 +134,15 @@ class DLiteExcelStrategy:
         columns: dict[str, "Any"] = parser.get(session)["data"]
 
         names, units = zip(
-            *[
-                split_column_name(column)
-                for column in columns  # pylint: disable=not-an-iterable
-            ]
+            *[split_column_name(column) for column in columns.keys()]
         )
         rec = dict2recarray(columns, names=names)
 
-        if not isinstance(units, list):
+        if not isinstance(units, (list, tuple)):
             # This check is to satisfy mypy for the `infer_metadata` call below.
-            raise TypeError("units must be a list")
+            raise TypeError(
+                f"units must be a list or tuple, instead it was {type(units)}"
+            )
 
         if config.metadata:
             if config.storage_path is not None:
@@ -179,7 +178,9 @@ def split_column_name(column: str) -> tuple[str, str]:
     return name, unit
 
 
-def infer_metadata(rec: np.recarray, units: list) -> dlite.Instance:
+def infer_metadata(
+    rec: np.recarray, units: "Union[list, tuple]"
+) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
     uri = f"http://onto-ns.com/meta/1.0/generated_from_excel_{rnd:0x}"

@@ -11,7 +11,7 @@ from oteapi.strategies.parse.image import (
     ImageParserResourceConfig,
 )
 from PIL import Image
-from pydantic import Extra, Field
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
@@ -92,8 +92,7 @@ class DLiteImageParseStrategy:
         # Configuration for ImageDataParseStrategy in oteapi-core
         conf = self.parse_config.model_dump()
         conf["configuration"] = ImageParserConfig(
-            **config.model_dump(),
-            extra=Extra.ignore,
+            **config.model_dump(), extra="ignore"
         )
         conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
         core_config = ImageParserResourceConfig(**conf)
@@ -114,7 +113,10 @@ class DLiteImageParseStrategy:
                 )
             )
         if not isinstance(data, np.ndarray):
-            raise TypeError("Expected image data to be a numpy array.")
+            raise TypeError(
+                "Expected image data to be a numpy array, instead it was "
+                f"{type(data)}."
+            )
 
         meta = get_meta("http://onto-ns.com/meta/1.0/Image")
         inst = meta(dimensions=data.shape)
