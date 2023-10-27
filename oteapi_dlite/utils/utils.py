@@ -82,7 +82,7 @@ def get_collection(
     else:
         try:
             coll = dlite.get_instance(id_)
-        except dlite.DLiteError as exc:
+        except dlite.DLiteError as exc:  # pylint: disable=no-member
             raise CollectionNotFound(
                 f"Could not find DLite Collection with id {id_}"
             ) from exc

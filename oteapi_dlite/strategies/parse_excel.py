@@ -163,5 +163,5 @@ def infer_metadata(rec: np.recarray, units: list) -> dlite.Instance:
     for i, name in enumerate(rec.dtype.names):
         dtype = rec[name].dtype
         ptype = "string" if dtype.kind == "U" else dtype.name
-        metadata.add_property(name, type=ptype, dims=["nrows"], unit=units[i])
+        metadata.add_property(name, type=ptype, shape=["nrows"], unit=units[i])
     return metadata.get()

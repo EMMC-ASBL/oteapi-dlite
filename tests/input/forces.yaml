@@ -1,0 +1,13 @@
+d83303e9-fd8f-4508-b529-2f149d781a90:
+  meta: http://onto-ns.com/meta/0.1/Forces
+  dimensions:
+    natoms: 2
+    ncoords: 3
+  properties:
+    forces:
+    - - 0.1
+      - 0.0
+      - 0.3
+    - - 0.5
+      - 0.0
+      - 0.0

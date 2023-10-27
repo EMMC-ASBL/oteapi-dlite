@@ -2,6 +2,7 @@
 import logging
 from typing import TYPE_CHECKING
 
+import numpy as np
 from oteapi.datacache import DataCache
 from oteapi.models import ResourceConfig
 from oteapi.strategies.parse.image import (
@@ -9,6 +10,7 @@ from oteapi.strategies.parse.image import (
     ImageParserConfig,
     ImageParserResourceConfig,
 )
+from PIL import Image
 from pydantic import Extra, Field
 from pydantic.dataclasses import dataclass
 
@@ -99,6 +101,16 @@ class DLiteImageParseStrategy:
 
         cache = DataCache()
         data = cache.get(output["image_key"])
+        if isinstance(data, bytes):
+            data = np.asarray(
+                Image.frombytes(
+                    data=data,
+                    mode=output["image_mode"],
+                    size=output["image_size"],
+                )
+            )
+        if not isinstance(data, np.ndarray):
+            raise TypeError("Expected image data to be a numpy array.")
 
         meta = get_meta("http://onto-ns.com/meta/1.0/Image")
         inst = meta(dimensions=data.shape)
