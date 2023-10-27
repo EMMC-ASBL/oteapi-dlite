@@ -1,4 +1,4 @@
-"""Strategy that parses resource id and return all associated download links."""
+"""Strategy that parses an mpr file"""
 from typing import Any, Dict, Optional
 
 import dlite
