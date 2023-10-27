@@ -107,7 +107,6 @@ class MPRDataParseStrategy:
         coll = get_collection(session)
         config = self.parse_config
         relations = config.configuration.mpr_config
-        # print(config.configuration.mpr_config)
         req = requests.get(
             config.downloadUrl,
             allow_redirects=True,
@@ -142,5 +141,4 @@ class MPRDataParseStrategy:
         # # Insert inst into collection
         coll.add(configuration.label, inst)
         update_collection(coll)
-        print(coll)
         return SessionUpdateMPRParse(eis_data=eis_data.to_dict())

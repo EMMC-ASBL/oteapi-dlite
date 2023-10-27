@@ -111,7 +111,6 @@ class TXTDataParseStrategy:
             timeout=(3, 27),  # timeout: (connect, read) in seconds
         )
         image_metadata = parse_metadata(req, config.configuration.splitBy)
-        print(image_metadata)
         configuration = config.configuration
         if configuration.metadata:
             if configuration.storage_path is not None:
@@ -123,12 +122,8 @@ class TXTDataParseStrategy:
         for name in image_metadata:
             inst[name] = image_metadata[name]
         # # Insert inst into collection
-        print("-------------instance------")
-        print(inst)
         coll.add(configuration.label, inst)
         update_collection(coll)
-        print("-------------collection------")
-        print(coll)
         return SessionUpdateTXTParse(image_metadata=image_metadata)
 
 
