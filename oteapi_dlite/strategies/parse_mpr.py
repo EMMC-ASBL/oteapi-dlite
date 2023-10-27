@@ -1,6 +1,7 @@
 """Strategy that parses an mpr file"""
 from typing import Any, Dict, Optional
 
+# pylint: disable=unused-argument,C0301,R0914
 import dlite
 import pandas as pd
 import requests  # type: ignore

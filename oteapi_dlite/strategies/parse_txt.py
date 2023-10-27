@@ -1,6 +1,7 @@
 """Strategy that parses text and return all associated download links."""
 from typing import Any, Dict, Optional
 
+# pylint: disable=unused-argument,C0206
 import dlite
 import requests  # type: ignore
 from oteapi.models import (
