@@ -1,29 +1,81 @@
 """Tests filter strategies."""
-from typing import TYPE_CHECKING
+from pathlib import Path
 
-if TYPE_CHECKING:
-    from oteapi.interfaces import IFilterStrategy
+import dlite
+
+from oteapi_dlite.strategies.filter import (
+    DLiteFilterConfig,
+    DLiteFilterStrategy,
+)
+from oteapi_dlite.utils import get_meta
+
+thisdir = Path(__file__).resolve().parent
+entitydir = thisdir / ".." / "entities"
+outdir = thisdir / ".." / "output"
+
+Image = get_meta("http://onto-ns.com/meta/1.0/Image")
+image1 = Image([2, 2, 1])
+image2 = Image([2, 2, 1])
+image3 = Image([2, 2, 1])
+image4 = Image([2, 2, 1])
+innercoll = dlite.Collection()
+innercoll.add("im1", image1)
+innercoll.add("im2", image2)
+
+coll = dlite.Collection()
+coll.add("innercoll", innercoll)
+coll.add("image1", image1)
+coll.add("image2", image2)
+coll.add("image3", image3)
+coll.add("image4", image4)
 
 
-def test_create_collection() -> None:
-    """Test the create_collection filter."""
-    import dlite
+# Test 1
+config = DLiteFilterConfig(
+    filterType="dlite/filter",
+    query="^im",
+    configuration={},
+)
+coll1 = coll.copy()
+session = {"collection_id": coll1.uuid}
 
-    from oteapi_dlite.strategies.filter import CreateCollectionStrategy
+strategy = DLiteFilterStrategy(config)
+session.update(strategy.initialize(session))
 
-    config = {"filterType": "dlite/create_collection"}
+strategy = DLiteFilterStrategy(config)
+session.update(strategy.get(session))
 
-    session = {}
+assert set(coll1.get_labels()) == set(
+    [
+        "image1",
+        "image2",
+        "image3",
+        "image4",
+    ]
+)
 
-    collfilter: "IFilterStrategy" = CreateCollectionStrategy(config)
-    session.update(collfilter.initialize(session))
 
-    assert "collection_id" in session
-    coll_id = session["collection_id"]
-    coll = dlite.get_instance(coll_id)
-    assert isinstance(coll, dlite.Collection)
+# Test 2
+config = DLiteFilterConfig(
+    filterType="dlite/filter",
+    configuration={
+        "remove_datamodel": Image.uri,
+        "keep_label": "(image2)|(image4)",
+    },
+)
+coll2 = coll.copy()
+session = {"collection_id": coll2.uuid}
 
-    collfilter = CreateCollectionStrategy(config)
-    session.update(collfilter.get(session))
-    assert "collection_id" in session
-    assert session["collection_id"] == coll_id
+strategy = DLiteFilterStrategy(config)
+session.update(strategy.initialize(session))
+
+strategy = DLiteFilterStrategy(config)
+session.update(strategy.get(session))
+
+assert set(coll2.get_labels()) == set(
+    [
+        "innercoll",
+        "image2",
+        "image4",
+    ]
+)
