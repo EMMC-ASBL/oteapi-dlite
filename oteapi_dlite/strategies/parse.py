@@ -118,7 +118,7 @@ class DLiteParseStrategy:
                 key = session["key"]
             else:
                 raise ValueError(
-                    "either `location` or `cacheconfig.accessKey` must be "
+                    "either `location` or `datacache_config.accessKey` must be "
                     "provided"
                 )
 
