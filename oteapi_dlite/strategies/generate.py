@@ -150,7 +150,7 @@ class DLiteGenerateStrategy:
             inst = next(instances)
         elif config.store_collection:
             if config.store_collection_id:
-                inst = coll.copy(id=config.store_collection_id)
+                inst = coll.copy(newid=config.store_collection_id)
             else:
                 inst = coll
         else:  # fail if there are more instances
