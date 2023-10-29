@@ -62,8 +62,14 @@ class DLiteStorageConfig(AttrDict):
     )
     store_collection: bool = Field(
         False,
-        description="Whether to store the entire collection instead of a "
-        "single instance.  Cannot be combined with `label` or `datamodel`.",
+        description="Whether to store the entire collection in the session "
+        "instead of a single instance.  Cannot be combined with `label` or "
+        "`datamodel`.",
+    )
+    store_collection_id: Optional[str] = Field(
+        None,
+        description="Used together with `store_collection` If given, store "
+        "a copy of the collection with this id.",
     )
     allow_incomplete: Optional[bool] = Field(
         False,
@@ -143,7 +149,10 @@ class DLiteGenerateStrategy:
             )
             inst = next(instances)
         elif config.store_collection:
-            inst = coll
+            if config.store_collection_id:
+                inst = coll.copy(id=config.store_collection_id)
+            else:
+                inst = coll
         else:  # fail if there are more instances
             raise ValueError(
                 "One of `label` or `datamodel` configurations should be given."
