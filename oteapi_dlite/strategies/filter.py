@@ -145,6 +145,7 @@ class DLiteFilterStrategy:
                 removal.difference_update(
                     labels[inst.uuid]
                     for inst in get_referred_instances(coll.get(label))
+                    if inst.uuid in labels
                 )
 
         # 4: remove from collection
