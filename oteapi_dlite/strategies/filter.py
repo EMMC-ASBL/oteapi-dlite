@@ -104,22 +104,23 @@ class DLiteFilterStrategy:
             config.keep_label if config.keep_label else self.filter_config.query
         )
 
-        instdict = {}  # Map instance labels to metadata URI
+        instdict = {}  # Map instance labels to [uuid, metaURI]
         coll = get_collection(session)
-        for s, p, o in coll.get_relations():
-            if p == "_has-meta":
-                instdict[s] = o
+        for s, _, o in coll.get_relations(p="_has-uuid"):
+            instdict[s] = [o]
+        for s, _, o in coll.get_relations(p="_has-meta"):
+            instdict[s].append(o)
 
         removal = set()  # Labels marked for removal
 
         # 1: remove_label, remove_datamodel
         if config.remove_label or config.remove_datamodel:
-            for label, uri in instdict.items():
+            for label, (uuid, metauri) in instdict.items():
                 if config.remove_label and re.match(config.remove_label, label):
                     removal.add(label)
 
                 if config.remove_datamodel and re.match(
-                    config.remove_datamodel, uri
+                    config.remove_datamodel, metauri
                 ):
                     removal.add(label)
         else:
@@ -130,22 +131,21 @@ class DLiteFilterStrategy:
             if keep_label and re.match(keep_label, label):
                 removal.remove(label)
 
-            uri = instdict[label]
-            if config.keep_datamodel and re.match(config.keep_datamodel, uri):
+            uuid, metauri = instdict[label]
+            if config.keep_datamodel and re.match(
+                config.keep_datamodel, metauri
+            ):
                 removal.remove(label)
 
         # 3: keep_referred
         if config.keep_referred:
+            labels = {uuid: label for label, (uuid, _) in instdict.items()}
             kept = set(instdict.keys()).difference(removal)
             for label in kept:
                 removal.difference_update(
-                    get_referred_instances(coll.get(label))
+                    labels[inst.uuid]
+                    for inst in get_referred_instances(coll.get(label))
                 )
-
-        print()
-        print("*** Removal:")
-        for label in removal:
-            print("  - ", label)
 
         # 4: remove from collection
         for label in removal:

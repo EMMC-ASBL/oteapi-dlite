@@ -30,7 +30,7 @@ coll.add("image3", image3)
 coll.add("image4", image4)
 
 
-# Test 1
+# Test simple use of query
 config = DLiteFilterConfig(
     filterType="dlite/filter",
     query="^im",
@@ -55,12 +55,13 @@ assert set(coll1.get_labels()) == set(
 )
 
 
-# Test 2
+# Test combining remove and keep
 config = DLiteFilterConfig(
     filterType="dlite/filter",
     configuration={
         "remove_datamodel": Image.uri,
         "keep_label": "(image2)|(image4)",
+        "keep_referred": False,
     },
 )
 coll2 = coll.copy()
@@ -75,6 +76,34 @@ session.update(strategy.get(session))
 assert set(coll2.get_labels()) == set(
     [
         "innercoll",
+        "image2",
+        "image4",
+    ]
+)
+
+
+# Test with keep_referred=True
+config = DLiteFilterConfig(
+    filterType="dlite/filter",
+    configuration={
+        "remove_datamodel": Image.uri,
+        "keep_label": "(image2)|(image4)",
+        "keep_referred": True,
+    },
+)
+coll3 = coll.copy()
+session = {"collection_id": coll3.uuid}
+
+strategy = DLiteFilterStrategy(config)
+session.update(strategy.initialize(session))
+
+strategy = DLiteFilterStrategy(config)
+session.update(strategy.get(session))
+
+assert set(coll3.get_labels()) == set(
+    [
+        "innercoll",
+        "image1",
         "image2",
         "image4",
     ]
