@@ -50,7 +50,7 @@ class DLiteQueryConfig(AttrDict):
         None,
         description="Regular expression matching datamodel URIs to keep in "
         "collection.  "
-        "This configuration overrides `regexp_remove` and `datamodel_remove`.",
+        "This configuration overrides `remove_label` and `remove_datamodel`.",
     )
     keep_referred: bool = Field(
         True,
