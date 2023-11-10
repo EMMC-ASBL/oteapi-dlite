@@ -43,7 +43,7 @@ class DLiteQueryConfig(AttrDict):
     keep_label: str = Field(
         None,
         description="Regular expression matching labels to keep."
-        "This configuration overrides `regexp_remove` and `datamodel_remove`.  "
+        "This configuration overrides `remove_label` and `remove_datamodel`.  "
         "Alias for the DLiteFilterStrategy `query` configuration.",
     )
     keep_datamodel: str = Field(
