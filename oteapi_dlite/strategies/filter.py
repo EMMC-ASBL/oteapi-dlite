@@ -27,7 +27,7 @@ class DLiteQueryConfig(AttrDict):
     for removal.
 
     If `keep_referred` is true, any instance that is referred to by
-    an instance not marked for removeal is also unmarked for removal.
+    an instance not marked for removal is also unmarked for removal.
 
     Finally, the instances that are still marked for removal are removed
     from the collection.
