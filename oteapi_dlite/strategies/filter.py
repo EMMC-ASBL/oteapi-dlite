@@ -43,14 +43,14 @@ class DLiteQueryConfig(AttrDict):
     keep_label: str = Field(
         None,
         description="Regular expression matching labels to keep."
-        "This configuration overrides `regexp_remove` and `datamodel_remove`.  "
-        "Alias for the DLiteFilterStrategy `query` configuration.",
+        "This configuration overrides `remove_label` and `remove_datamodel`.  "
+        "Alias for the FilterStrategy `query` configuration, that is inherited from the oteapi-core Filter data model.",
     )
     keep_datamodel: str = Field(
         None,
         description="Regular expression matching datamodel URIs to keep in "
         "collection.  "
-        "This configuration overrides `regexp_remove` and `datamodel_remove`.",
+        "This configuration overrides `remove_label` and `remove_datamodel`.",
     )
     keep_referred: bool = Field(
         True,
