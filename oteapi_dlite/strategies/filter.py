@@ -44,7 +44,8 @@ class DLiteQueryConfig(AttrDict):
         None,
         description="Regular expression matching labels to keep."
         "This configuration overrides `remove_label` and `remove_datamodel`.  "
-        "Alias for the FilterStrategy `query` configuration, that is inherited from the oteapi-core Filter data model.",
+        "Alias for the FilterStrategy `query` configuration, that is "
+        "inherited from the oteapi-core Filter data model.",
     )
     keep_datamodel: str = Field(
         None,
