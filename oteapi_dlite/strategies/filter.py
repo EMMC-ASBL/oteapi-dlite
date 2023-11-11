@@ -80,8 +80,6 @@ class DLiteFilterStrategy:
 
     - `("filterType", "dlite/filter")`
 
-    WARNING: This is a first simple implementation. The behaviour of this
-    strategy may change.
     """
 
     filter_config: DLiteFilterConfig
