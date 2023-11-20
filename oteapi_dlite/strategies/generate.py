@@ -27,24 +27,6 @@ class DLiteStorageConfig(AttrDict):
     Either `label` or `datamodel` should be provided.
     """
 
-    label: Annotated[
-        Optional[str],
-        Field(
-            description=(
-                "Label of DLite instance in the collection to serialise."
-            ),
-        ),
-    ] = None
-    datamodel: Annotated[
-        Optional[str],
-        Field(
-            description=(
-                "URI to the datamodel of the new instance.  Needed when "
-                "generating the instance from mappings.  Cannot be combined "
-                "with `label`"
-            ),
-        ),
-    ] = None
     driver: Annotated[
         Optional[str],
         Field(
@@ -67,13 +49,37 @@ class DLiteStorageConfig(AttrDict):
             ),
         ),
     ] = None
-    options: Annotated[
+    datamodel: Annotated[
         Optional[str],
         Field(
             description=(
-                "Comma-separated list of options passed to the DLite "
-                "storage plugin."
+                "URI to the datamodel of the new instance.  Needed when "
+                "generating the instance from mappings.  Cannot be combined "
+                "with `label`"
             ),
+        ),
+    ] = None
+    label: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Label of DLite instance in the collection to serialise."
+            ),
+        ),
+    ] = None
+    store_collection: Annotated[
+        bool,
+        Field(
+            description="Whether to store the entire collection in the session "
+            "instead of a single instance.  Cannot be combined with `label` or "
+            "`datamodel`.",
+        ),
+    ] = False
+    store_collection_id: Annotated[
+        Optional[str],
+        Field(
+            description="Used together with `store_collection` If given, store "
+            "a copy of the collection with this id.",
         ),
     ] = None
     allow_incomplete: Annotated[
@@ -160,8 +166,12 @@ class DLiteGenerateStrategy:
                 allow_incomplete=config.allow_incomplete,
             )
             inst = next(instances)
-            # fail if there are more instances
-        else:
+        elif config.store_collection:
+            if config.store_collection_id:
+                inst = coll.copy(newid=config.store_collection_id)
+            else:
+                inst = coll
+        else:  # fail if there are more instances
             raise ValueError(
                 "One of `label` or `datamodel` configurations should be given."
             )
