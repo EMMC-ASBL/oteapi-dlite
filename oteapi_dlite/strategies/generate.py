@@ -39,6 +39,15 @@ class DLiteStorageConfig(AttrDict):
             description='Media type for DLite driver (ex: "application/json").',
         ),
     ] = None
+    options: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Comma-separated list of options passed to the DLite "
+                "storage plugin."
+            ),
+        ),
+    ] = None
     location: Annotated[
         Optional[str],
         Field(
@@ -49,6 +58,14 @@ class DLiteStorageConfig(AttrDict):
             ),
         ),
     ] = None
+    label: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Label of DLite instance in the collection to serialise."
+            ),
+        ),
+    ] = None
     datamodel: Annotated[
         Optional[str],
         Field(
@@ -56,14 +73,6 @@ class DLiteStorageConfig(AttrDict):
                 "URI to the datamodel of the new instance.  Needed when "
                 "generating the instance from mappings.  Cannot be combined "
                 "with `label`"
-            ),
-        ),
-    ] = None
-    label: Annotated[
-        Optional[str],
-        Field(
-            description=(
-                "Label of DLite instance in the collection to serialise."
             ),
         ),
     ] = None
