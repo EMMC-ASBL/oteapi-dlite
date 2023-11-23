@@ -36,6 +36,32 @@ config = DLiteFilterConfig(
     query="^im",
     configuration={},
 )
+coll0 = coll.copy()
+session = {"collection_id": coll0.uuid}
+
+strategy = DLiteFilterStrategy(config)
+session.update(strategy.initialize(session))
+
+strategy = DLiteFilterStrategy(config)
+session.update(strategy.get(session))
+
+assert set(coll0.get_labels()) == set(
+    [
+        "image1",
+        "image2",
+        "image3",
+        "image4",
+    ]
+)
+
+
+# Same test as above, but use use `keep_label` instead of `query`
+config = DLiteFilterConfig(
+    filterType="dlite/filter",
+    configuration={
+        "keep_label": "^im",
+    },
+)
 coll1 = coll.copy()
 session = {"collection_id": coll1.uuid}
 
