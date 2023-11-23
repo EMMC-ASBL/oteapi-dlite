@@ -31,6 +31,7 @@ coll.add("image4", image4)
 
 
 # Test simple use of query
+# Here keeping all instances with label containing "im" in the collection
 config = DLiteFilterConfig(
     filterType="dlite/filter",
     query="^im",
