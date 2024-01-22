@@ -43,6 +43,15 @@ repos:
     - id: mypy
       exclude: ^tests/.*$
 
+  - repo: https://github.com/SINTEF/ci-cd
+    rev: v2.7.2
+    hooks:
+    - id: docs-api-reference
+      args:
+      - --package-dir=oteapi_dlite
+      - --full-docs-folder=models
+    - id: docs-landing-page
+
   - repo: local
     hooks:
     - id: pylint
@@ -67,19 +76,3 @@ repos:
       types: [python]
       require_serial: true
       files: ^tests/.*$
-    - id: update-docs-api-reference
-      name: Update API Reference in Documentation
-      entry: invoke
-      args: [create-api-reference-docs, --pre-clean, --pre-commit]
-      language: python
-      pass_filenames: false
-      files: ^oteapi_dlite/.*\.py$
-      description: Update the API Reference documentation, whenever a Python file is touched in the code base.
-    - id: update-docs-index
-      name: Update Landing Page for Documentation
-      entry: invoke
-      args: [create-docs-index]
-      language: python
-      pass_filenames: false
-      files: ^README.md$
-      description: Update the landing page for the documentation if the source file (README.md) is changed.

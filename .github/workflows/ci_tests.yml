@@ -199,6 +199,6 @@ jobs:
 
     - name: Build
       run: |
-        invoke create-api-reference-docs --pre-clean
-        invoke create-docs-index
+        pre-commit run --all-files docs-api-reference
+        pre-commit run --all-files docs-landing-page
         mkdocs build --strict
