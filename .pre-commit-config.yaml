@@ -50,6 +50,7 @@ repos:
       args:
       - --package-dir=oteapi_dlite
       - --full-docs-folder=models
+      - --full-docs-folder=strategies
     - id: docs-landing-page
       args:
       - --replacement=(LICENSE),(LICENSE.md)
