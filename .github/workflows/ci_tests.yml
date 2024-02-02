@@ -116,6 +116,7 @@ jobs:
       if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
       uses: codecov/codecov-action@v3
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage.xml
         flags: linux
 
@@ -154,6 +155,7 @@ jobs:
       if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
       uses: codecov/codecov-action@v3
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage.xml
         flags: windows
 
