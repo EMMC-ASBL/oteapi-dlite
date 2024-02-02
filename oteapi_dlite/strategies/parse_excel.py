@@ -154,8 +154,7 @@ def split_column_name(column):
 
 
 def infer_metadata(
-    rec: np.recarray,
-    units: Union[list, tuple]
+    rec: np.recarray, units: Union[list, tuple]
 ) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
