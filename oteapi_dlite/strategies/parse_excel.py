@@ -2,7 +2,7 @@
 # pylint: disable=unused-argument
 import re
 from random import getrandbits
-from typing import TYPE_CHECKING, Optional, Union
+from typing import TYPE_CHECKING, Optional
 
 import dlite
 import numpy as np
@@ -153,9 +153,7 @@ def split_column_name(column):
     return name, unit
 
 
-def infer_metadata(
-    rec: np.recarray, units: Union[list, tuple]
-) -> dlite.Instance:
+def infer_metadata(rec: np.recarray, units: tuple) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
     uri = f"http://onto-ns.com/meta/1.0/generated_from_excel_{rnd:0x}"
