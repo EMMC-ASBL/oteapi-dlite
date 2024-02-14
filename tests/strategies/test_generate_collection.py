@@ -1,4 +1,5 @@
 """Test to store the entire collection with the generate strategy."""
+
 from pathlib import Path
 
 import dlite

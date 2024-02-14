@@ -1,4 +1,5 @@
 """Pytest fixtures for `strategies/`."""
+
 from typing import TYPE_CHECKING
 
 import pytest
