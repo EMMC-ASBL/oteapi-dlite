@@ -1,4 +1,5 @@
 """Filter that removes all but specified instances in the collection."""
+
 # pylint: disable=unused-argument
 import re
 from typing import TYPE_CHECKING

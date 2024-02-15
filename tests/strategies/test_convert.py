@@ -1,4 +1,5 @@
 """Test convert strategy."""
+
 from otelib import OTEClient
 from paths import inputdir, outputdir
 

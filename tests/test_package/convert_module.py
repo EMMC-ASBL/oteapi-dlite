@@ -1,4 +1,5 @@
 """Test module for convert strategy."""
+
 from pathlib import Path
 
 import dlite

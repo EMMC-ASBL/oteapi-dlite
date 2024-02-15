@@ -1,4 +1,5 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
+
 # pylint: disable=unused-argument
 import re
 from random import getrandbits
@@ -110,9 +111,9 @@ class DLiteExcelStrategy:
 
         xlsx_config = self.parse_config.dict()
         xlsx_config["configuration"] = config.excel_config
-        xlsx_config[
-            "mediaType"
-        ] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        xlsx_config["mediaType"] = (
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
         parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
         columns = parser.get(session)["data"]
 

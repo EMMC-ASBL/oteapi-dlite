@@ -1,4 +1,5 @@
 """Tests generate strategy."""
+
 from pathlib import Path
 
 import dlite
