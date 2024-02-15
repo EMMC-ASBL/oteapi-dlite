@@ -153,7 +153,7 @@ def split_column_name(column):
     return name, unit
 
 
-def infer_metadata(rec: np.recarray, units: list) -> dlite.Instance:
+def infer_metadata(rec: np.recarray, units: tuple[str, ...]) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
     uri = f"http://onto-ns.com/meta/1.0/generated_from_excel_{rnd:0x}"
