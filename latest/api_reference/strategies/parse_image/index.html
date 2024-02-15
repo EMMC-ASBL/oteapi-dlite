@@ -979,13 +979,13 @@
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
-<span class="normal">29</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageConfig</span><span class="p">(</span><span class="n">ImageParserConfig</span><span class="p">):</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageConfig</span><span class="p">(</span><span class="n">ImageParserConfig</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for DLite image parser.&quot;&quot;&quot;</span>
 
     <span class="n">image_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
@@ -1043,8 +1043,7 @@
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 46</span>
-<span class="normal"> 47</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 47</span>
 <span class="normal"> 48</span>
 <span class="normal"> 49</span>
 <span class="normal"> 50</span>
@@ -1122,7 +1121,8 @@
 <span class="normal">122</span>
 <span class="normal">123</span>
 <span class="normal">124</span>
-<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">125</span>
+<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteImageParseStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse strategy for image files.</span>
 
@@ -1293,8 +1293,7 @@ or in the parser configuration (lowest priority).</p>
 
           <details class="quote">
             <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 69</span>
-<span class="normal"> 70</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 70</span>
 <span class="normal"> 71</span>
 <span class="normal"> 72</span>
 <span class="normal"> 73</span>
@@ -1349,7 +1348,8 @@ or in the parser configuration (lowest priority).</p>
 <span class="normal">122</span>
 <span class="normal">123</span>
 <span class="normal">124</span>
-<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">125</span>
+<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
@@ -1429,11 +1429,11 @@ or in the parser configuration (lowest priority).</p>
 
           <details class="quote">
             <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">63</span>
-<span class="normal">64</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
-<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+<span class="normal">67</span>
+<span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[Dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
@@ -1473,13 +1473,13 @@ or in the parser configuration (lowest priority).</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/parse_image.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
-<span class="normal">38</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageResourceConfig</span><span class="p">(</span><span class="n">ResourceConfig</span><span class="p">):</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteImageResourceConfig</span><span class="p">(</span><span class="n">ResourceConfig</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Resource config for DLite image parser.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">DLiteImageConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
