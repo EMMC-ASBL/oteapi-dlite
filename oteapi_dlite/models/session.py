@@ -1,4 +1,5 @@
 """Pydantic data models for DLite."""
+
 from typing import Optional
 
 from oteapi.models import SessionUpdate

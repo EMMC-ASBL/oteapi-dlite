@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Python 3.9
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.9
 
@@ -52,7 +52,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python 3.9
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.9
 
@@ -98,7 +98,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python ${{ matrix.python-version}}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version}}
 
@@ -114,8 +114,9 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage.xml
         flags: linux
 
@@ -136,7 +137,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python ${{ matrix.python-version}}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version}}
 
@@ -152,8 +153,9 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage.xml
         flags: windows
 
@@ -165,7 +167,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
 
@@ -186,7 +188,7 @@ jobs:
       with:
         fetch-depth: 2
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: 3.9
 

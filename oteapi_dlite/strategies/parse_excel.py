@@ -1,4 +1,5 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
+
 # pylint: disable=unused-argument
 import re
 from random import getrandbits
@@ -110,9 +111,9 @@ class DLiteExcelStrategy:
 
         xlsx_config = self.parse_config.dict()
         xlsx_config["configuration"] = config.excel_config
-        xlsx_config[
-            "mediaType"
-        ] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        xlsx_config["mediaType"] = (
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
         parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
         columns = parser.get(session)["data"]
 
@@ -153,7 +154,7 @@ def split_column_name(column):
     return name, unit
 
 
-def infer_metadata(rec: np.recarray, units: list) -> dlite.Instance:
+def infer_metadata(rec: np.recarray, units: tuple[str, ...]) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
     uri = f"http://onto-ns.com/meta/1.0/generated_from_excel_{rnd:0x}"

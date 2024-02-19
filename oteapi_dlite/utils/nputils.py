@@ -1,4 +1,5 @@
 """NumNy-related utility functions."""
+
 import numpy as np
 
 

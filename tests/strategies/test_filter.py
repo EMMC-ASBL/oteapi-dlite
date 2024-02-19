@@ -1,4 +1,5 @@
 """Tests filter strategies."""
+
 from pathlib import Path
 
 import dlite
