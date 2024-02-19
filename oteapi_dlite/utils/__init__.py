@@ -2,6 +2,7 @@
 
 This module provide some utility functions.
 """
+
 from .nputils import dict2recarray
 from .utils import (
     get_collection,

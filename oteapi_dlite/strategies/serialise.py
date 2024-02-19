@@ -1,4 +1,5 @@
 """Filter for serialisation using DLite."""
+
 from collections.abc import Sequence
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Optional

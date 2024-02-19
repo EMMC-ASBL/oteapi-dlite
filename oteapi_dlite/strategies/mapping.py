@@ -1,4 +1,5 @@
 """Mapping filter strategy."""
+
 # pylint: disable=unused-argument,invalid-name
 from typing import TYPE_CHECKING, Annotated, Optional
 

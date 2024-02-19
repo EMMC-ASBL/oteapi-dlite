@@ -1,4 +1,5 @@
 """Paths used by the tests."""
+
 import sys
 from pathlib import Path
 

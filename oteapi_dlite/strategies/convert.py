@@ -2,9 +2,9 @@
 to zero or more new output instances.
 
 """
-import importlib
 
 # pylint: disable=unused-argument
+import importlib
 from collections.abc import Sequence
 from typing import TYPE_CHECKING, Annotated, Optional
 

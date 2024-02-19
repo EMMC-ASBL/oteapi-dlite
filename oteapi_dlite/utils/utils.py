@@ -1,4 +1,5 @@
 """Utility functions for OTEAPI DLite plugin."""
+
 # pylint: disable=invalid-name
 from pathlib import Path
 from typing import TYPE_CHECKING

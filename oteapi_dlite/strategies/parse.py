@@ -1,4 +1,5 @@
 """Generic parse strategy using DLite storage plugin."""
+
 # pylint: disable=unused-argument
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Optional

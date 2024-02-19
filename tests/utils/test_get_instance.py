@@ -1,4 +1,5 @@
 """Tests oteapi-dlite.utils.get_instance()."""
+
 # pylint: disable=too-many-locals
 from typing import TYPE_CHECKING
 
