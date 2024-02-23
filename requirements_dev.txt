@@ -1,6 +1,5 @@
 invoke~=2.2
 otelib>=0.3,<0.4.0
-pre-commit~=3.6
 pylint~=3.0
 pytest~=8.0
 pytest-cov~=4.1

@@ -34,14 +34,10 @@ jobs:
         pip install -U setuptools wheel
 
         while IFS="" read -r line || [ -n "${line}" ]; do
-          if [[ "${line}" =~ ^pre-commit.*$ ]]; then
-            pre_commit="${line}"
-          fi
-        done < requirements_dev.txt
-
-        while IFS="" read -r line || [ -n "${line}" ]; do
           if [[ "${line}" =~ ^invoke.*$ ]]; then
             invoke="${line}"
+          elif [[ "${line}" =~ ^pre-commit.*$ ]]; then
+            pre_commit="${line}"
           fi
         done < requirements_docs.txt
 
