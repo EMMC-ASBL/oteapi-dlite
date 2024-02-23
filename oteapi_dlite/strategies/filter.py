@@ -2,7 +2,7 @@
 
 # pylint: disable=unused-argument
 import re
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated, Optional
 
 from dlite.utils import get_referred_instances
 from oteapi.models import AttrDict, FilterConfig
@@ -12,8 +12,8 @@ from pydantic.dataclasses import dataclass
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, update_collection
 
-if TYPE_CHECKING:
-    from typing import Any, Dict, Optional
+if TYPE_CHECKING:  # pragma: no cover
+    from typing import Any
 
 
 class DLiteQueryConfig(AttrDict):
@@ -34,40 +34,57 @@ class DLiteQueryConfig(AttrDict):
     from the collection.
     """
 
-    remove_label: str = Field(
-        None, description="Regular expression matching labels to remove."
-    )
-    remove_datamodel: str = Field(
-        None,
-        description="Regular expression matching datamodel URIs to remove.",
-    )
-    keep_label: str = Field(
-        None,
-        description="Regular expression matching labels to keep."
-        "This configuration overrides `remove_label` and `remove_datamodel`.  "
-        "Alias for the FilterStrategy `query` configuration, that is "
-        "inherited from the oteapi-core Filter data model.",
-    )
-    keep_datamodel: str = Field(
-        None,
-        description="Regular expression matching datamodel URIs to keep in "
-        "collection.  "
-        "This configuration overrides `remove_label` and `remove_datamodel`.",
-    )
-    keep_referred: bool = Field(
-        True,
-        description="Whether to keep all instances in the collection that are "
-        "directly or indirectly referred to (via ref-types or collections) "
-        "by kept instances.",
-    )
+    remove_label: Annotated[
+        Optional[str],
+        Field(description="Regular expression matching labels to remove."),
+    ] = None
+    remove_datamodel: Annotated[
+        Optional[str],
+        Field(
+            description="Regular expression matching datamodel URIs to remove.",
+        ),
+    ] = None
+    keep_label: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Regular expression matching labels to keep. This "
+                "configuration overrides `remove_label` and "
+                "`remove_datamodel`. Alias for the FilterStrategy `query` "
+                "configuration, that is inherited from the oteapi-core Filter "
+                "data model."
+            ),
+        ),
+    ] = None
+    keep_datamodel: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Regular expression matching datamodel URIs to keep in "
+                "collection. This configuration overrides `remove_label` and "
+                "`remove_datamodel`."
+            ),
+        ),
+    ] = None
+    keep_referred: Annotated[
+        bool,
+        Field(
+            description=(
+                "Whether to keep all instances in the collection that are "
+                "directly or indirectly referred to (via ref-types or "
+                "collections) by kept instances."
+            ),
+        ),
+    ] = True
 
 
 class DLiteFilterConfig(FilterConfig):
     """DLite generate strategy config."""
 
-    configuration: DLiteQueryConfig = Field(
-        ..., description="DLite filter strategy-specific configuration."
-    )
+    configuration: Annotated[
+        DLiteQueryConfig,
+        Field(description="DLite filter strategy-specific configuration."),
+    ]
 
 
 @dataclass
@@ -87,13 +104,13 @@ class DLiteFilterStrategy:
 
     def initialize(
         self,
-        session: "Optional[Dict[str, Any]]" = None,
+        session: "Optional[dict[str, Any]]" = None,
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: "Optional[dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy."""
         # pylint: disable=too-many-branches
@@ -115,7 +132,7 @@ class DLiteFilterStrategy:
 
         # 1: remove_label, remove_datamodel
         if config.remove_label or config.remove_datamodel:
-            for label, (uuid, metauri) in instdict.items():
+            for label, (_, metauri) in instdict.items():
                 if config.remove_label and re.match(config.remove_label, label):
                     removal.add(label)
 
@@ -131,7 +148,7 @@ class DLiteFilterStrategy:
             if keep_label and re.match(keep_label, label):
                 removal.remove(label)
 
-            uuid, metauri = instdict[label]
+            _, metauri = instdict[label]
             if config.keep_datamodel and re.match(
                 config.keep_datamodel, metauri
             ):

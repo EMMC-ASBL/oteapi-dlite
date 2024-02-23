@@ -1,9 +1,17 @@
 """NumNy-related utility functions."""
 
+from typing import TYPE_CHECKING
+
 import numpy as np
 
+if TYPE_CHECKING:  # pragma: no cover
+    from collections.abc import Sequence
+    from typing import Any, Optional
 
-def dict2recarray(excel_dict, names=None):
+
+def dict2recarray(
+    excel_dict: dict[str, "Any"], names: "Optional[Sequence[str]]" = None
+) -> np.recarray:
     """Converts a dict returned by the Excel parser to a numpy rec array.
 
     If `names` is None, the record names are inferred from `excel_dict`.
