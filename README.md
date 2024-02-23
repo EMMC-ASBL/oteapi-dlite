@@ -1,6 +1,5 @@
 [![DOI](https://zenodo.org/badge/455070691.svg)](https://zenodo.org/badge/latestdoi/455070691)
 
-
 # OTEAPI DLite Plugin
 
 All strategies implemented in this plugin (except for `create_collection`) assumes that you have the UUID of a DLite collection with the key `collection_id` in the `session`:
@@ -20,6 +19,8 @@ Further reading:
 - [OTE-API Core Documentation](https://emmc-asbl.github.io/oteapi-core)
 - [OTE-API Services Documentation](https://github.com/EMMC-ASBL/oteapi-services)
 - [DLite](https://github.com/SINTEF/dlite)
+
+A list and documentation for all the strategies in this plugin can be found [here](https://EMMC-ASBL.github.io/oteapi-dlite/latest/all_strategies).
 
 ## License and copyright
 
