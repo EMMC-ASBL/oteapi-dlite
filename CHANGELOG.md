@@ -1,6 +1,32 @@
 # Changelog
 
-## [v0.1.6](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.6) (2023-10-25)
+## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.7...HEAD)
+
+**Closed issues:**
+
+- Document functionality/features [\#196](https://github.com/EMMC-ASBL/oteapi-dlite/issues/196)
+- Reenable update-docs-api-reference in ci workflow [\#83](https://github.com/EMMC-ASBL/oteapi-dlite/issues/83)
+
+## [v0.1.7](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.7) (2024-02-23)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.6...v0.1.7)
+
+**Closed issues:**
+
+- `mypy` update detects new type error [\#212](https://github.com/EMMC-ASBL/oteapi-dlite/issues/212)
+
+**Merged pull requests:**
+
+- Add tuple as input type in `parse_excel.infer_metadata()` [\#213](https://github.com/EMMC-ASBL/oteapi-dlite/pull/213) ([ajeklund](https://github.com/ajeklund))
+- Update documentation preparation [\#209](https://github.com/EMMC-ASBL/oteapi-dlite/pull/209) ([CasperWA](https://github.com/CasperWA))
+- \[Auto-generated\] Update dependencies [\#200](https://github.com/EMMC-ASBL/oteapi-dlite/pull/200) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#198](https://github.com/EMMC-ASBL/oteapi-dlite/pull/198) ([TEAM4-0](https://github.com/TEAM4-0))
+- Added new filter strategy [\#195](https://github.com/EMMC-ASBL/oteapi-dlite/pull/195) ([jesper-friis](https://github.com/jesper-friis))
+- Added "store\_collection" option to generate strategy [\#184](https://github.com/EMMC-ASBL/oteapi-dlite/pull/184) ([jesper-friis](https://github.com/jesper-friis))
+
+## [v0.1.6](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.6) (2023-10-26)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.5...v0.1.6)
 
