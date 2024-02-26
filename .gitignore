@@ -17,3 +17,6 @@ dist/
 
 # Documentation
 site/
+
+# Jupyter
+.ipynb_checkpoints

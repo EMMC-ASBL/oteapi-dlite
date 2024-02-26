@@ -167,7 +167,7 @@ dataMappings = [
 # Resource Config for mpr files
 cansDataConfig = ResourceConfig(
     downloadUrl="https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/151-partial-pipeline-example/examples/partial-pipeline/data/Hitachi_imageName1.txt",
-    mediaType="application/parse-txt",
+    mediaType="parser/txt",
     configuration={
         "splitBy": "=",
         "metadata": "http://onto-ns.com/meta/matchmaker/demo/0.2/image",

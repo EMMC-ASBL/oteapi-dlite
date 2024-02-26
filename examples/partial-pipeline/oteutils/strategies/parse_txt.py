@@ -1,16 +1,16 @@
 """Strategy that parses resource id and return all associated download links."""
-import requests
-from pydantic import Field
-from pydantic.dataclasses import dataclass
+
 from typing import TYPE_CHECKING, Optional
+
+import dlite
+import requests
+from pydantic import Field, HttpUrl
+from pydantic.dataclasses import dataclass
+from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig, SessionUpdate
+from oteapi_dlite.utils import get_collection, update_collection
+
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
-from pydantic import Field, HttpUrl
-from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig, SessionUpdate
-import dlite
-
-from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
-
 
 
 class TXTConfig(AttrDict):
@@ -51,10 +51,10 @@ class TXTParseConfig(ResourceConfig):
     """File download strategy filter config."""
 
     mediaType: str = Field(
-        "application/parse-txt",
+        "parser/txt",
         const=True,
-        description=ResourceConfig.__fields__[
-            "mediaType"].field_info.description,
+        description=ResourceConfig.model_fields[
+            "mediaType"].description,
     )
 
     datacache_config: Optional[DataCacheConfig] = Field(
@@ -79,13 +79,7 @@ class SessionUpdateTXTParse(SessionUpdate):
 
 @dataclass
 class TXTDataParseStrategy:
-    """Parse strategy for TXT.
-
-    **Registers strategies**:
-
-    - `("mediaType", "application/parse-txt")`
-
-    """
+    """Parse strategy for TXT."""
 
     parse_config: TXTParseConfig
 

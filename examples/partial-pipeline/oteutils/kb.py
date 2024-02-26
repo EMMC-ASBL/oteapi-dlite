@@ -6,7 +6,7 @@ import json
 from uuid import uuid4
 from SPARQLWrapper import SPARQLWrapper, BASIC, POST, JSON
 from otelib import OTEClient
-from graphviz import Digraph
+
 from oteapi.models.genericconfig import AttrDict
 from oteapi.models.datacacheconfig import DataCacheConfig
 from oteapi.models.filterconfig import FilterConfig
@@ -18,7 +18,7 @@ from oteapi.models.sessionupdate import SessionUpdate
 from oteapi.models.transformationconfig import TransformationConfig
 from oteapi.models.triplestoreconfig import TripleStoreConfig
 MAP = rdflib.Namespace("http://emmo.info/domain-mappings#")
-from tripper import Triplestore
+
 BASE_URL = "http://localhost:3030"
 DATASET = "OTE2"
 def _sparql_query(query):

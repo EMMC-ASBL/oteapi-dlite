@@ -1,4 +1,0 @@
-graphviz
-oteapi-core
-#otelib
-SPARQLWrapper

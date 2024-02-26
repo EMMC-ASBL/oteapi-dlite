@@ -1,19 +1,19 @@
 """Strategy that parses resource id and return all associated download links."""
-import requests
-from pydantic import Field
-from pydantic.dataclasses import dataclass
+
 from typing import TYPE_CHECKING, Optional
+
+import dlite
+import requests
+from galvani import BioLogic as BL
+from oteapi.datacache import DataCache
+from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig, SessionUpdate
+from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
+import pandas as pd
+from pydantic import Field, HttpUrl
+from pydantic.dataclasses import dataclass
+
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Dict
-from pydantic import Field, HttpUrl
-from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig, SessionUpdate
-import dlite
-from oteapi.datacache import DataCache
-import pandas as pd
-from dlite.datamodel import DataModel
-from galvani import BioLogic as BL
-from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
-
 
 
 class MPRConfig(AttrDict):
@@ -54,10 +54,10 @@ class MPRParseConfig(ResourceConfig):
     """File download strategy filter config."""
 
     mediaType: str = Field(
-        "application/parse-mpr",
+        "parser/mpr",
         const=True,
-        description=ResourceConfig.__fields__[
-            "mediaType"].field_info.description,
+        description=ResourceConfig.model_fields[
+            "mediaType"].description,
     )
 
     datacache_config: Optional[DataCacheConfig] = Field(
@@ -89,13 +89,7 @@ class SessionUpdateMPRParse(SessionUpdate):
 
 @dataclass
 class MPRDataParseStrategy:
-    """Parse strategy for MPR.
-
-    **Registers strategies**:
-
-    - `("mediaType", "application/parse-mpr")`
-
-    """
+    """Parse strategy for MPR."""
 
     parse_config: MPRParseConfig
 

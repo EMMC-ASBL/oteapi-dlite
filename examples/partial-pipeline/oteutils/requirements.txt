@@ -1,5 +1,0 @@
-graphviz
-oteapi-core
-otelib
-SPARQLWrapper
-tripper

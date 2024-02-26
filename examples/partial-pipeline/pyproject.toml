@@ -1,0 +1,46 @@
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "oteutils"
+
+[project]
+name = "partial-pipeline-demo"
+version = "0.1.0"
+authors = [
+    {name = "Thomas Hagelien", email = "thomas.f.hagelien@sintef.no"},
+    {name = "Anders Eklund", email = "anders.eklund@sintef.no"},
+    {name = "Treesa Joseph", email = "treesa.joseph@sintef.no"},
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+]
+requires-python = "~=3.9"
+dynamic = ["description"]
+
+dependencies = [
+    "galvani~=0.3.0",
+    "graphviz~=0.20.1",
+    "oteapi-core~=0.6.1",
+    "otelib~=0.4.1",
+    "pandas~=2.2.1",
+    "SPARQLWrapper~=2.0.0",
+    "tripper~=0.2.14",
+]
+
+# [project.optional-dependencies]
+
+
+[project.entry-points."oteapi.parse"]
+"oteutils.parser/mpr" = "oteutils.strategies.parse_mpr:MPRDataParseStrategy"
+"oteutils.parser/txt" = "oteutils.strategies.parse_txt:TXTDataParseStrategy"
