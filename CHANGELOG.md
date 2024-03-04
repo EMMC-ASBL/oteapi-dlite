@@ -2,12 +2,23 @@
 
 ## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
 
-[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.7...HEAD)
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.2.0...HEAD)
 
-**Closed issues:**
+**Implemented enhancements:**
 
-- Document functionality/features [\#196](https://github.com/EMMC-ASBL/oteapi-dlite/issues/196)
-- Reenable update-docs-api-reference in ci workflow [\#83](https://github.com/EMMC-ASBL/oteapi-dlite/issues/83)
+- Migrate to pydantic v2 [\#187](https://github.com/EMMC-ASBL/oteapi-dlite/issues/187)
+
+## [v0.2.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.2.0) (2024-02-23)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.7...v0.2.0)
+
+**Fixed bugs:**
+
+- Move pre-commit dependency to `docs` requirements [\#215](https://github.com/EMMC-ASBL/oteapi-dlite/pull/215) ([CasperWA](https://github.com/CasperWA))
+
+**Merged pull requests:**
+
+- Migrate to pydantic v2 [\#192](https://github.com/EMMC-ASBL/oteapi-dlite/pull/192) ([CasperWA](https://github.com/CasperWA))
 
 ## [v0.1.7](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.7) (2024-02-23)
 
@@ -16,6 +27,8 @@
 **Closed issues:**
 
 - `mypy` update detects new type error [\#212](https://github.com/EMMC-ASBL/oteapi-dlite/issues/212)
+- Document functionality/features [\#196](https://github.com/EMMC-ASBL/oteapi-dlite/issues/196)
+- Reenable update-docs-api-reference in ci workflow [\#83](https://github.com/EMMC-ASBL/oteapi-dlite/issues/83)
 
 **Merged pull requests:**
 
