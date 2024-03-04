@@ -51,6 +51,7 @@ class SerialiseConfig(AttrDict):
         Optional[str], Field(description="A reference to a DLite collection.")
     ] = None
 
+
 class SerialiseFilterConfig(FilterConfig):
     """Filter config for serialise."""
 
@@ -74,21 +75,21 @@ class SerialiseStrategy:
 
     filter_config: SerialiseFilterConfig
 
-    def initialize(
-        self
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
         if self.filter_config.configuration.collection_id:
-            return DLiteSessionUpdate(collection_id=self.filter_config.configuration.collection_id)
+            return DLiteSessionUpdate(
+                collection_id=self.filter_config.configuration.collection_id
+            )
         return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
-    def get(
-        self
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteSessionUpdate:
         """Execute the strategy."""
         config = self.filter_config.configuration
 
-        coll = get_collection(collection_id=self.filter_config.configuration.collection_id)
+        coll = get_collection(
+            collection_id=self.filter_config.configuration.collection_id
+        )
 
         storage = dlite.Storage(
             driver_or_url=config.driver,

@@ -80,6 +80,7 @@ class DLiteQueryConfig(AttrDict):
         Optional[str], Field(description="A reference to a DLite collection.")
     ] = None
 
+
 class DLiteFilterConfig(FilterConfig):
     """DLite generate strategy config."""
 
@@ -104,17 +105,15 @@ class DLiteFilterStrategy:
 
     filter_config: DLiteFilterConfig
 
-    def initialize(
-        self
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
         if self.filter_config.configuration.collection_id:
-            return DLiteSessionUpdate(collection_id=self.filter_config.configuration.collection_id)
+            return DLiteSessionUpdate(
+                collection_id=self.filter_config.configuration.collection_id
+            )
         return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
-    def get(
-        self
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteSessionUpdate:
         """Execute the strategy."""
         # pylint: disable=too-many-branches
         config = self.filter_config.configuration
@@ -125,7 +124,9 @@ class DLiteFilterStrategy:
         )
 
         instdict = {}  # Map instance labels to [uuid, metaURI]
-        coll = get_collection(collection_id=self.filter_config.configuration.collection_id)
+        coll = get_collection(
+            collection_id=self.filter_config.configuration.collection_id
+        )
         for s, _, o in coll.get_relations(p="_has-uuid"):
             instdict[s] = [o]
         for s, _, o in coll.get_relations(p="_has-meta"):
@@ -173,4 +174,8 @@ class DLiteFilterStrategy:
             coll.remove(label)
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=get_collection(collection_id=self.filter_config.configuration.collection_id).uuid)
+        return DLiteSessionUpdate(
+            collection_id=get_collection(
+                collection_id=self.filter_config.configuration.collection_id
+            ).uuid
+        )

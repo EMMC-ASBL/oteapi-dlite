@@ -65,6 +65,7 @@ class DLiteExcelParseConfig(AttrDict):
         Optional[str], Field(description="A reference to a DLite collection.")
     ] = None
 
+
 class DLiteExcelParseResourceConfig(ResourceConfig):
     """DLite excel parse strategy resource config."""
 
@@ -104,9 +105,7 @@ class DLiteExcelStrategy:
 
     parse_config: DLiteExcelParseResourceConfig
 
-    def initialize(
-        self
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
         if self.parse_config.configuration.collection_id:
             return DLiteSessionUpdate(
@@ -114,9 +113,7 @@ class DLiteExcelStrategy:
             )
         return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
-    def get(
-        self
-    ) -> DLiteExcelSessionUpdate:
+    def get(self) -> DLiteExcelSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
@@ -164,7 +161,9 @@ class DLiteExcelStrategy:
             inst[name] = rec[name]
 
         # Insert inst into collection
-        coll = get_collection(collection_id=self.parse_config.configuration.collection_id)
+        coll = get_collection(
+            collection_id=self.parse_config.configuration.collection_id
+        )
         coll.add(config.label, inst)
 
         update_collection(coll)

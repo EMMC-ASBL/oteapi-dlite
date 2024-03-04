@@ -7,9 +7,9 @@ import numpy as np
 from oteapi.datacache import DataCache
 from oteapi.models import ResourceConfig
 from oteapi.strategies.parse.image import (
+    ImageConfig,
     ImageDataParseStrategy,
     ImageParserConfig,
-    ImageConfig,
 )
 from PIL import Image
 from pydantic import Field
