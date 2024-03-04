@@ -24,6 +24,9 @@ class DLiteMappingStrategyConfig(AttrDict):
             description="URI of the datamodel that is mapped.",
         ),
     ] = None
+    collection_id: Annotated[
+        Optional[str], Field(description="A reference to a DLite collection.")
+    ] = None
 
 
 class DLiteMappingConfig(MappingConfig):
@@ -49,11 +52,11 @@ class DLiteMappingStrategy:
 
     mapping_config: DLiteMappingConfig
 
-    def initialize(
-        self, session: Optional[dict[str, "Any"]] = None
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteSessionUpdate:
         """Initialize strategy."""
-        coll = get_collection(session)
+        coll = get_collection(
+            collection_id=self.mapping_config.configuration.collection_id
+        )
         ts = Triplestore(backend="collection", collection=coll)
 
         if self.mapping_config.prefixes:
@@ -74,8 +77,10 @@ class DLiteMappingStrategy:
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
-    def get(
-        self, session: Optional[dict[str, "Any"]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteSessionUpdate:
         """Execute strategy and return a dictionary."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        if self.mapping_config.configuration.collection_id:
+            return DLiteSessionUpdate(
+                collection_id=self.mapping_config.configuration.collection_id
+            )
+        return DLiteSessionUpdate(collection_id=get_collection().uuid)

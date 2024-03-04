@@ -133,16 +133,15 @@ class DLiteGenerateStrategy:
 
     generate_config: DLiteGenerateConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, "Any"]] = None,
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        if self.generate_config.configuration.collection_id:
+            return DLiteSessionUpdate(
+                collection_id=self.generate_config.configuration.collection_id
+            )
+        return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
-    def get(
-        self, session: Optional[dict[str, "Any"]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
@@ -165,7 +164,7 @@ class DLiteGenerateStrategy:
             )
         )
 
-        coll = get_collection(session, config.collection_id)
+        coll = get_collection(collection_id=config.collection_id)
 
         if config.label:
             inst = coll[config.label]

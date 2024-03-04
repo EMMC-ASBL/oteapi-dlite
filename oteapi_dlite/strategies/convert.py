@@ -115,7 +115,9 @@ class DLiteConvertStrategyConfig(AttrDict):
             description="Output instances.",
         ),
     ] = []
-
+    collection_id: Annotated[
+        Optional[str], Field(description="A reference to a DLite collection.")
+    ] = None
 
 class DLiteConvertConfig(FunctionConfig):
     """DLite convert strategy resource config."""
@@ -140,14 +142,15 @@ class DLiteConvertStrategy:
     convert_config: DLiteConvertConfig
 
     def initialize(
-        self,
-        session: Optional[dict[str, "Any"]] = None,
+        self
     ) -> DLiteSessionUpdate:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        if self.convert_config.configuration.collection_id:
+            return DLiteSessionUpdate(collection_id=self.convert_config.configuration.collection_id)
+        return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
     def get(
-        self, session: Optional[dict[str, "Any"]] = None
+        self
     ) -> DLiteSessionUpdate:
         """Execute the strategy.
 
@@ -165,7 +168,7 @@ class DLiteConvertStrategy:
         module = importlib.import_module(config.module_name, config.package)
         function = getattr(module, config.function_name)
 
-        coll = get_collection(session)
+        coll = get_collection(collection_id=self.convert_config.configuration.collection_id)
 
         instances = []
         for i, input_config in enumerate(config.inputs):

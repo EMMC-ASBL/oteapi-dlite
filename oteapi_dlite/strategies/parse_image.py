@@ -9,7 +9,7 @@ from oteapi.models import ResourceConfig
 from oteapi.strategies.parse.image import (
     ImageDataParseStrategy,
     ImageParserConfig,
-    ImageParserResourceConfig,
+    ImageConfig,
 )
 from PIL import Image
 from pydantic import Field
@@ -35,6 +35,9 @@ class DLiteImageConfig(ImageParserConfig):
             description="Label to assign to the image in the collection.",
         ),
     ] = "image"
+    collection_id: Annotated[
+        Optional[str], Field(description="A reference to a DLite collection.")
+    ] = None
 
 
 class DLiteImageResourceConfig(ResourceConfig):
@@ -65,15 +68,15 @@ class DLiteImageParseStrategy:
 
     parse_config: DLiteImageResourceConfig
 
-    def initialize(
-        self, session: "Optional[dict[str, Any]]" = None
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        if self.parse_config.configuration.collection_id:
+            return DLiteSessionUpdate(
+                collection_id=self.parse_config.configuration.collection_id
+            )
+        return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
-    def get(
-        self, session: "Optional[dict[str, Any]]" = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific
@@ -96,12 +99,10 @@ class DLiteImageParseStrategy:
             **config.model_dump(), extra="ignore"
         )
         conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
-        core_config = ImageParserResourceConfig(**conf)
+        core_config = ImageConfig(**conf)
 
-        parse_strategy_session = ImageDataParseStrategy(core_config).initialize(
-            session
-        )
-        output = ImageDataParseStrategy(core_config).get(parse_strategy_session)
+        ImageDataParseStrategy(core_config).initialize()
+        output = ImageDataParseStrategy(core_config).get()
 
         cache = DataCache()
         data = cache.get(output["image_key"])
@@ -123,9 +124,9 @@ class DLiteImageParseStrategy:
         inst = meta(dimensions=data.shape)
         inst["data"] = data
 
-        LOGGER.info("session: %s", session)
-
-        coll = get_collection(session)
+        coll = get_collection(
+            collection_id=self.parse_config.configuration.collection_id
+        )
         coll.add(config.image_label, inst)
 
         update_collection(coll)

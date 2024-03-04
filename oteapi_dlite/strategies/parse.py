@@ -26,6 +26,9 @@ class DLiteParseConfig(AttrDict):
             description='Name of DLite driver (ex: "json").',
         ),
     ] = None
+    collection_id: Annotated[
+        Optional[str], Field(description="A reference to a DLite collection.")
+    ] = None
     location: Annotated[
         Optional[str],
         Field(
@@ -86,16 +89,11 @@ class DLiteParseStrategy:
 
     parse_config: DLiteParseResourceConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, "Any"]] = None,
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
-    def get(
-        self, session: Optional[dict[str, "Any"]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
@@ -129,8 +127,6 @@ class DLiteParseStrategy:
         else:
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
-            elif session and "key" in session:
-                key = session["key"]
             else:
                 raise ValueError(
                     "either `location` or `datacache_config.accessKey` must be "
@@ -153,7 +149,9 @@ class DLiteParseStrategy:
                 )
 
         # Insert inst into collection
-        coll = get_collection(session)
+        coll = get_collection(
+            collection_id=self.parse_config.configuration.collection_id
+        )
         coll.add(config.label, inst)
 
         # __TODO__

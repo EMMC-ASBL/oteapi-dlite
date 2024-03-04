@@ -61,7 +61,9 @@ class DLiteExcelParseConfig(AttrDict):
             description="Path to metadata storage",
         ),
     ] = None
-
+    collection_id: Annotated[
+        Optional[str], Field(description="A reference to a DLite collection.")
+    ] = None
 
 class DLiteExcelParseResourceConfig(ResourceConfig):
     """DLite excel parse strategy resource config."""
@@ -103,14 +105,17 @@ class DLiteExcelStrategy:
     parse_config: DLiteExcelParseResourceConfig
 
     def initialize(
-        self,
-        session: Optional[dict[str, "Any"]] = None,
+        self
     ) -> DLiteSessionUpdate:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        if self.parse_config.configuration.collection_id:
+            return DLiteSessionUpdate(
+                collection_id=self.parse_config.configuration.collection_id
+            )
+        return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
     def get(
-        self, session: Optional[dict[str, "Any"]] = None
+        self
     ) -> DLiteExcelSessionUpdate:
         """Execute the strategy.
 
@@ -132,7 +137,7 @@ class DLiteExcelStrategy:
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
         parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
-        columns: dict[str, "Any"] = parser.get(session)["data"]
+        columns: dict[str, "Any"] = parser.get()["data"]
 
         names, units = zip(
             *[split_column_name(column) for column in columns.keys()]
@@ -159,7 +164,7 @@ class DLiteExcelStrategy:
             inst[name] = rec[name]
 
         # Insert inst into collection
-        coll = get_collection(session)
+        coll = get_collection(collection_id=self.parse_config.configuration.collection_id)
         coll.add(config.label, inst)
 
         update_collection(coll)
