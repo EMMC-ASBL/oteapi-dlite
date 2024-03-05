@@ -20,7 +20,7 @@ class DLiteStorageConfig(AttrDict):
     """Configuration for a generic DLite storage filter.
 
     The DLite storage driver to can be specified using either the `driver`
-    or `mediaType` field.
+    or `functionType` field.
 
     Where the output should be written, is specified using either the
     `location` or `datacache_config.accessKey` field.
@@ -34,7 +34,7 @@ class DLiteStorageConfig(AttrDict):
             description='Name of DLite driver (ex: "json").',
         ),
     ] = None
-    mediaType: Annotated[
+    functionType: Annotated[
         Optional[str],
         Field(
             description='Media type for DLite driver (ex: "application/json").',
@@ -127,7 +127,7 @@ class DLiteGenerateStrategy:
 
     **Registers strategies**:
 
-    - `("mediaType", "application/vnd.dlite-generate")`
+    - `("functionType", "application/vnd.dlite-generate")`
 
     """
 
@@ -160,21 +160,20 @@ class DLiteGenerateStrategy:
             config.driver
             if config.driver
             else get_driver(
-                mediaType=config.mediaType,
+                mediaType=config.functionType,
             )
         )
 
         coll = get_collection(collection_id=config.collection_id)
-
-        if config.label:
-            inst = coll[config.label]
-        elif config.datamodel:
+        if config.datamodel:
             instances = coll.get_instances(
                 metaid=config.datamodel,
                 property_mappings=True,
                 allow_incomplete=config.allow_incomplete,
             )
             inst = next(instances)
+        elif config.label:
+            inst = coll[config.label]
         elif config.store_collection:
             if config.store_collection_id:
                 inst = coll.copy(newid=config.store_collection_id)
@@ -184,7 +183,6 @@ class DLiteGenerateStrategy:
             raise ValueError(
                 "One of `label` or `datamodel` configurations should be given."
             )
-
         # Save instance
         if config.location:
             inst.save(driver, config.location, config.options)
@@ -199,7 +197,6 @@ class DLiteGenerateStrategy:
                 inst.save(driver, "{tmpdir}/data", config.options)
                 with open(f"{tmpdir}/data", "rb") as f:
                     cache.add(f.read(), key=key)
-
         # __TODO__
         # Can we safely assume that all strategies in a pipeline will be
         # executed in the same Python interpreter?  If not, we should write

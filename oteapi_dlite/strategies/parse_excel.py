@@ -98,7 +98,7 @@ class DLiteExcelStrategy:
 
     **Registers strategies**:
 
-    - `("mediaType",
+    - `("parserType",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")`
 
     """
@@ -130,7 +130,7 @@ class DLiteExcelStrategy:
 
         xlsx_config = self.parse_config.model_dump()
         xlsx_config["configuration"] = config.excel_config
-        xlsx_config["mediaType"] = (
+        xlsx_config["parserType"] = (
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
         parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)

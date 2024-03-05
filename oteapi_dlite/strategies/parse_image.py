@@ -57,12 +57,12 @@ class DLiteImageParseStrategy:
 
     **Registers strategies**:
 
-    - `("mediaType", "image/vnd.dlite-gif")`
-    - `("mediaType", "image/vnd.dlite-jpeg")`
-    - `("mediaType", "image/vnd.dlite-jpg")`
-    - `("mediaType", "image/vnd.dlite-jp2")`
-    - `("mediaType", "image/vnd.dlite-png")`
-    - `("mediaType", "image/vnd.dlite-tiff")`
+    - `("parserType", "image/vnd.dlite-gif")`
+    - `("parserType", "image/vnd.dlite-jpeg")`
+    - `("parserType", "image/vnd.dlite-jpg")`
+    - `("parserType", "image/vnd.dlite-jp2")`
+    - `("parserType", "image/vnd.dlite-png")`
+    - `("parserType", "image/vnd.dlite-tiff")`
 
     """
 
@@ -98,7 +98,7 @@ class DLiteImageParseStrategy:
         conf["configuration"] = ImageParserConfig(
             **config.model_dump(), extra="ignore"
         )
-        conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
+        conf["parserType"] = "image/" + conf["parserType"].split("-")[-1]
         core_config = ImageConfig(**conf)
 
         ImageDataParseStrategy(core_config).initialize()
