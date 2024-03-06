@@ -107,8 +107,8 @@ class DLiteJsonStrategy:
         try:
             # Update dlite storage paths if provided
             if config.storagePath:
-                for storage_path in config.storage_path.split("|"):
-                    dlite.storage_path.append(storage_path)
+                for storagePath in config.storagePath.split("|"):
+                    dlite.storage_path.append(storagePath)
         except Exception as e:
             print(f"Error during update of DLite storage path: {e}")
             raise RuntimeError("Failed to update DLite storage path.") from e
