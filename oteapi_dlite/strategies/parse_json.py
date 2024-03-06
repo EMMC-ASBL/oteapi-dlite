@@ -119,6 +119,10 @@ class DLiteJsonStrategy:
         """
         config = self.parse_config.configuration
 
+        if config.storage_path is not None:
+                for storage_path in config.storage_path.split("|"):
+                    dlite.storage_path.append(storage_path)
+                    
         config1 = self.parse_config.model_dump()
         config1["configuration"] = config
         config1["parserType"] = (
