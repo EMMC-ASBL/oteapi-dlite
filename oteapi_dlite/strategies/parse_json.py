@@ -115,12 +115,14 @@ class DLiteJsonStrategy:
 
         try:
             # Instantiate and use JSON parser from oteapi core
-            json_parser = create_strategy("parser/json", config.model_dump())
+            json_parser = create_strategy(
+                "parser", {"parserType": "parser/json", "configuration": config}
+            )
             columns = json_parser.get()["content"]
         except Exception as e:
-            # Handle errors that occur during JSON parser instantiation or 
-            # data retrieval. You can log the exception, raise a custom 
-            # exception, or handle it as needed. For example, logging the 
+            # Handle errors that occur during JSON parser instantiation or
+            # data retrieval. You can log the exception, raise a custom
+            # exception, or handle it as needed. For example, logging the
             # error and raising a custom exception:
             print(f"Error during JSON parsing: {e}")
             raise RuntimeError("Failed to parse JSON data.") from e
