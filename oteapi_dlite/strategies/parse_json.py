@@ -25,16 +25,6 @@ if TYPE_CHECKING:  # pragma: no cover
 class DLiteJsonParseConfig(AttrDict):
     """Configuration for DLite Excel parser."""
 
-    metadata: Annotated[
-        Optional[HttpUrl],
-        Field(
-            description=(
-                "URI of DLite metadata to return.  If not provided, the "
-                "metadata will be inferred from the excel file."
-            ),
-        ),
-    ] = None
-
     id: Annotated[
         Optional[str], Field(description="Optional id on new instance.")
     ] = None
@@ -46,7 +36,7 @@ class DLiteJsonParseConfig(AttrDict):
         ),
     ] = "json-data"
 
-    storage_path: Annotated[
+    storagePath: Annotated[
         Optional[str],
         Field(
             description="Path to metadata storage",
@@ -57,7 +47,7 @@ class DLiteJsonParseConfig(AttrDict):
     ] = None
 
 
-class DLiteJsonParseConfig(ParserConfig):
+class DLiteJsonStrategyConfig(ParserConfig):
     """DLite excel parse strategy  config."""
 
     configuration: Annotated[
@@ -94,15 +84,12 @@ class DLiteJsonStrategy:
 
     """
 
-    parse_config: DLiteJsonParseConfig
+    parse_config: DLiteJsonStrategyConfig
 
     def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
-        if self.parse_config.configuration.collection_id:
-            return DLiteSessionUpdate(
-                collection_id=self.parse_config.configuration.collection_id
-            )
-        return DLiteSessionUpdate(collection_id=get_collection().uuid)
+        collection_id = self.parse_config.collection_id or get_collection().uuid
+        return DLiteSessionUpdate(collection_id=collection_id)
 
     def get(self) -> DLiteJsonSessionUpdate:
         """Execute the strategy.
@@ -119,33 +106,34 @@ class DLiteJsonStrategy:
         """
         config = self.parse_config.configuration
 
-        if config.storage_path is not None:
-                for storage_path in config.storage_path.split("|"):
-                    dlite.storage_path.append(storage_path)
-                    
-        config1 = self.parse_config.model_dump()
-        config1["configuration"] = config
-        config1["parserType"] = (
-            "parser/json"
-        )
-        parser: "IParseStrategy" = JSONDataParseStrategy(config1)
-        columns: dict[str, "Any"] = parser.get()['content']
-        
-        
+        # Update dlite storage paths if provided
+        if config.storagePath:
+            for storage_path in config.storage_path.split("|"):
+                dlite.storage_path.append(storage_path)
+
+        # Instantiate and use JSON parser
+        json_parser_config = {
+            "configuration": config.dict(),
+            "parserType": "parser/json",
+        }
+        json_parser = JSONDataParseStrategy(json_parser_config)
+        columns = json_parser.get()["content"]
+
+        # Create DLite instance
         meta = get_meta(self.parse_config.entity)
         inst = meta(dimensions={})
-        names=list(columns.keys())
-
-        for name in names:
+        for name in list(columns.keys()):
             inst[name] = columns[name]
+
+        # Add collection and add the entity instance
         coll = get_collection(
             collection_id=self.parse_config.configuration.collection_id
-        )        
+        )
         coll.add(config.label, inst)
         update_collection(coll)
+
         return DLiteJsonSessionUpdate(
             collection_id=coll.uuid,
             inst_uuid=inst.uuid,
             label=config.label,
         )
-
