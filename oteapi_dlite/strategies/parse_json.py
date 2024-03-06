@@ -5,20 +5,17 @@ from typing import TYPE_CHECKING, Annotated, Optional
 
 import dlite
 from oteapi.models import AttrDict, ParserConfig
-from oteapi.strategies.parse.application_json import (
-    JSONDataParseStrategy,
-)
-from pydantic import Field, HttpUrl
+from oteapi.plugins import create_strategy
 from pydantic.dataclasses import dataclass
+from pydantic import Field
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
+from oteapi_dlite.utils import get_collection, update_collection
 from oteapi_dlite.utils.utils import get_meta
+
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Union
-
-    from oteapi.interfaces import IParseStrategy
 
 
 class DLiteJsonParseConfig(AttrDict):
@@ -118,16 +115,13 @@ class DLiteJsonStrategy:
 
         try:
             # Instantiate and use JSON parser from oteapi core
-            json_parser_config = {
-                "configuration": config.model_dump_json(),
-                "parserType": "parser/json",
-            }
-            json_parser = JSONDataParseStrategy(**json_parser_config)
+            json_parser = create_strategy("parser/json", config.model_dump())
             columns = json_parser.get()["content"]
         except Exception as e:
-            # Handle errors that occur during JSON parser instantiation or data retrieval
-            # You can log the exception, raise a custom exception, or handle it as needed
-            # For example, logging the error and raising a custom exception:
+            # Handle errors that occur during JSON parser instantiation or 
+            # data retrieval. You can log the exception, raise a custom 
+            # exception, or handle it as needed. For example, logging the 
+            # error and raising a custom exception:
             print(f"Error during JSON parsing: {e}")
             raise RuntimeError("Failed to parse JSON data.") from e
 
