@@ -104,18 +104,30 @@ class DLiteJsonStrategy:
 
         """
         config = self.parse_config.configuration
+        try:
         # Update dlite storage paths if provided
-        if config.storagePath:
-            for storage_path in config.storage_path.split("|"):
-                dlite.storage_path.append(storage_path)
+            if config.storagePath:
+                for storage_path in config.storage_path.split("|"):
+                    dlite.storage_path.append(storage_path)
+        except Exception as e:
+            print(f"Error during update of DLite storage path: {e}")
+            raise RuntimeError("Failed to update DLite storage path.") from e
 
-        # Instantiate and use JSON parser from oteapi core
-        json_parser_config = {
-            "configuration": config.dict(),
-            "parserType": "parser/json",
-        }
-        json_parser = JSONDataParseStrategy(**json_parser_config)
-        columns = json_parser.get()["content"]
+
+        try:
+            # Instantiate and use JSON parser from oteapi core
+            json_parser_config = {
+                "configuration": config.dict(),
+                "parserType": "parser/json",
+            }
+            json_parser = JSONDataParseStrategy(**json_parser_config)
+            columns = json_parser.get()["content"]
+        except Exception as e:
+            # Handle errors that occur during JSON parser instantiation or data retrieval
+            # You can log the exception, raise a custom exception, or handle it as needed
+            # For example, logging the error and raising a custom exception:
+            print(f"Error during JSON parsing: {e}")
+            raise RuntimeError("Failed to parse JSON data.") from e
 
         # Create DLite instance
         meta = get_meta(self.parse_config.entity)
