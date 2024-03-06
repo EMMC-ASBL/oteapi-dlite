@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Annotated, Optional
 import dlite
 from oteapi.models import AttrDict, ParserConfig
 from oteapi.strategies.parse.application_json import (
-    JSONParserConfig,
     JSONDataParseStrategy,
 )
 from pydantic import Field, HttpUrl
@@ -105,18 +104,17 @@ class DLiteJsonStrategy:
 
         """
         config = self.parse_config.configuration
-
         # Update dlite storage paths if provided
         if config.storagePath:
             for storage_path in config.storage_path.split("|"):
                 dlite.storage_path.append(storage_path)
 
-        # Instantiate and use JSON parser
+        # Instantiate and use JSON parser from oteapi core
         json_parser_config = {
             "configuration": config.dict(),
             "parserType": "parser/json",
         }
-        json_parser = JSONDataParseStrategy(json_parser_config)
+        json_parser = JSONDataParseStrategy(**json_parser_config)
         columns = json_parser.get()["content"]
 
         # Create DLite instance
