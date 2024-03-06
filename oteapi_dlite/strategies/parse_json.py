@@ -1,4 +1,4 @@
-"""Strategy for parsing an Excel spreadsheet to a DLite instance."""
+"""Strategy for JSON parsing."""
 
 # pylint: disable=unused-argument
 from typing import TYPE_CHECKING, Annotated, Optional
@@ -87,8 +87,11 @@ class DLiteJsonStrategy:
 
     def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
-        collection_id = self.parse_config.collection_id or get_collection().uuid
-        return DLiteSessionUpdate(collection_id=collection_id)
+        if self.parse_config.configuration.collection_id:
+            return DLiteSessionUpdate(
+                collection_id=self.parse_config.configuration.collection_id
+            )
+        return DLiteSessionUpdate(collection_id=get_collection().uuid)
 
     def get(self) -> DLiteJsonSessionUpdate:
         """Execute the strategy.
@@ -105,7 +108,7 @@ class DLiteJsonStrategy:
         """
         config = self.parse_config.configuration
         try:
-        # Update dlite storage paths if provided
+            # Update dlite storage paths if provided
             if config.storagePath:
                 for storage_path in config.storage_path.split("|"):
                     dlite.storage_path.append(storage_path)
@@ -113,11 +116,10 @@ class DLiteJsonStrategy:
             print(f"Error during update of DLite storage path: {e}")
             raise RuntimeError("Failed to update DLite storage path.") from e
 
-
         try:
             # Instantiate and use JSON parser from oteapi core
             json_parser_config = {
-                "configuration": config.dict(),
+                "configuration": config.model_dump_json(),
                 "parserType": "parser/json",
             }
             json_parser = JSONDataParseStrategy(**json_parser_config)
