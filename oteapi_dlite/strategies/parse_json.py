@@ -116,7 +116,10 @@ class DLiteJsonStrategy:
         try:
             # Instantiate and use JSON parser from oteapi core
             json_parser = create_strategy(
-                "parse", {"parserType": "parser/json", "configuration": config}
+                "parse", {
+                    "parserType": "parser/json", 
+                    "entity": self.parse_config.entity,
+                    "configuration": config}
             )
             columns = json_parser.get()["content"]
         except Exception as e:
