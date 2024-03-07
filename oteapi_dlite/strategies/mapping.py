@@ -79,8 +79,8 @@ class DLiteMappingStrategy:
 
     def get(self) -> DLiteSessionUpdate:
         """Execute strategy and return a dictionary."""
-        if self.mapping_config.configuration.collection_id:
-            return DLiteSessionUpdate(
-                collection_id=self.mapping_config.configuration.collection_id
-            )
-        return DLiteSessionUpdate(collection_id=get_collection().uuid)
+        collection_id = (
+            self.mapping_config.configuration.collection_id
+            or get_collection().uuid
+        )
+        return DLiteSessionUpdate(collection_id=collection_id)

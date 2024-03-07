@@ -6,13 +6,12 @@ from typing import TYPE_CHECKING, Annotated, Optional
 import dlite
 from oteapi.models import AttrDict, ParserConfig
 from oteapi.plugins import create_strategy
-from pydantic.dataclasses import dataclass
 from pydantic import Field
+from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, update_collection
 from oteapi_dlite.utils.utils import get_meta
-
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Union
@@ -84,11 +83,11 @@ class DLiteJsonStrategy:
 
     def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
-        if self.parse_config.configuration.collection_id:
-            return DLiteSessionUpdate(
-                collection_id=self.parse_config.configuration.collection_id
-            )
-        return DLiteSessionUpdate(collection_id=get_collection().uuid)
+        collection_id = (
+            self.parse_config.configuration.collection_id
+            or get_collection().uuid
+        )
+        return DLiteSessionUpdate(collection_id=collection_id)
 
     def get(self) -> DLiteJsonSessionUpdate:
         """Execute the strategy.
@@ -116,10 +115,12 @@ class DLiteJsonStrategy:
         try:
             # Instantiate and use JSON parser from oteapi core
             json_parser = create_strategy(
-                "parse", {
-                    "parserType": "parser/json", 
+                "parse",
+                {
+                    "parserType": "parser/json",
                     "entity": self.parse_config.entity,
-                    "configuration": config}
+                    "configuration": config,
+                },
             )
             columns = json_parser.get()["content"]
         except Exception as e:

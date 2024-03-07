@@ -135,11 +135,11 @@ class DLiteGenerateStrategy:
 
     def initialize(self) -> DLiteSessionUpdate:
         """Initialize."""
-        if self.generate_config.configuration.collection_id:
-            return DLiteSessionUpdate(
-                collection_id=self.generate_config.configuration.collection_id
-            )
-        return DLiteSessionUpdate(collection_id=get_collection().uuid)
+        collection_id = (
+            self.generate_config.configuration.collection_id
+            or get_collection().uuid
+        )
+        return DLiteSessionUpdate(collection_id=collection_id)
 
     def get(self) -> DLiteSessionUpdate:
         """Execute the strategy.

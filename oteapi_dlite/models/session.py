@@ -1,6 +1,7 @@
 """Pydantic data models for DLite."""
 
 from typing import Annotated, Optional
+
 from oteapi.models.genericconfig import AttrDict
 from pydantic import Field
 
