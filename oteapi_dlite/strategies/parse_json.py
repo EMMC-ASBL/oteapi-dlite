@@ -32,7 +32,7 @@ class DLiteJsonParseConfig(AttrDict):
         ),
     ] = "json-data"
 
-    storagePath: Annotated[
+    storage_path: Annotated[
         Optional[str],
         Field(
             description="Path to metadata storage",
@@ -106,9 +106,9 @@ class DLiteJsonStrategy:
         config = self.parse_config.configuration
         try:
             # Update dlite storage paths if provided
-            if config.storagePath:
-                for storagePath in config.storagePath.split("|"):
-                    dlite.storage_path.append(storagePath)
+            if config.storage_path:
+                for storage_path in config.storage_path.split("|"):
+                    dlite.storage_path.append(storage_path)
         except Exception as e:
             print(f"Error during update of DLite storage path: {e}")
             raise RuntimeError("Failed to update DLite storage path.") from e
