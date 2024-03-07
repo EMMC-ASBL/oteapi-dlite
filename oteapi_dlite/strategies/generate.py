@@ -3,7 +3,7 @@
 # pylint: disable=unused-argument,invalid-name
 import tempfile
 from typing import TYPE_CHECKING, Annotated, Optional
-import pint
+
 from oteapi.datacache import DataCache
 from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
 from pydantic import Field
@@ -163,15 +163,13 @@ class DLiteGenerateStrategy:
                 mediaType=config.functionType,
             )
         )
-        ureg=pint.UnitRegistry()
-        ureg.define("m = 0.01 * cm")
 
         coll = get_collection(collection_id=config.collection_id)
         if config.datamodel:
             instances = coll.get_instances(
                 metaid=config.datamodel,
                 property_mappings=True,
-                allow_incomplete=config.allow_incomplete, quantity=ureg.Quantity
+                allow_incomplete=config.allow_incomplete,
             )
             inst = next(instances)
         elif config.label:
