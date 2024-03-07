@@ -3,6 +3,7 @@
 # pylint: disable=unused-argument,invalid-name
 from typing import TYPE_CHECKING, Annotated, Optional
 
+from enum import Enum
 from oteapi.models import AttrDict, MappingConfig
 from pydantic import AnyUrl
 from pydantic.dataclasses import Field, dataclass
@@ -13,6 +14,16 @@ from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
+
+
+class BackendEnum(str, Enum):
+    """
+    Defines the currently available triplestore backends
+    """
+
+    fuseki = "fuseki"
+    stardog = "stardog"
+    graphdb = "graphdb"
 
 
 class DLiteMappingStrategyConfig(AttrDict):
@@ -26,6 +37,54 @@ class DLiteMappingStrategyConfig(AttrDict):
     ] = None
     collection_id: Annotated[
         Optional[str], Field(description="A reference to a DLite collection.")
+    ] = None
+    backend: Annotated[
+        BackendEnum,
+        Field(
+            description=(
+                "Specifies the triplestore backend to be used."
+                "Options include 'fuseki', 'stardog', and 'graphdb'"
+            )
+        ),
+    ] = BackendEnum.fuseki
+    base_iri: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "The base IRI used as a starting point for generating IRIs for "
+                "the resources in the mapping process."
+            )
+        ),
+    ] = None
+    triplestore_url: Annotated[
+        Optional[str],
+        Field(description="The URL of the triplestore service endpoint."),
+    ] = None
+    database: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "The name of the database within the triplestore backend."
+            )
+        ),
+    ] = None
+    username: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "The username required for authenticating with the "
+                "triplestore backend, if applicable."
+            )
+        ),
+    ] = None
+    password: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "The password associated with the username for "
+                "authentication purposes. "
+            )
+        ),
     ] = None
 
 
@@ -57,7 +116,14 @@ class DLiteMappingStrategy:
         coll = get_collection(
             collection_id=self.mapping_config.configuration.collection_id
         )
-        ts = Triplestore(backend="collection", collection=coll)
+        ts = Triplestore(
+            backend=self.mapping_config.configuration.backend,
+            base_iri=self.mapping_config.configuration.base_iri,
+            triplestore_url=self.mapping_config.configuration.triplestore_url,
+            database=self.mapping_config.configuration.database,
+            uname=self.mapping_config.configuration.username,
+            pwd=self.mapping_config.configuration.password,
+        )
 
         if self.mapping_config.prefixes:
             for prefix, iri in self.mapping_config.prefixes.items():
@@ -79,8 +145,10 @@ class DLiteMappingStrategy:
 
     def get(self) -> DLiteSessionUpdate:
         """Execute strategy and return a dictionary."""
-        collection_id = (
-            self.mapping_config.configuration.collection_id
-            or get_collection().uuid
+        return DLiteSessionUpdate(
+            collection_id=(
+                self.mapping_config.configuration.collection_id
+                if self.mapping_config.configuration.collection_id
+                else get_collection().uuid
+            )
         )
-        return DLiteSessionUpdate(collection_id=collection_id)
