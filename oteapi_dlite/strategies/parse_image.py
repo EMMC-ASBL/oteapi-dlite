@@ -1,7 +1,7 @@
 """Strategy class for parsing an image to a DLite instance."""
 
 import logging
-from typing import TYPE_CHECKING, Annotated
+from typing import TYPE_CHECKING, Annotated, Optional
 
 import numpy as np
 from oteapi.datacache import DataCache
@@ -19,7 +19,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, get_meta, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Optional
+    from typing import Any
 
 
 LOGGER = logging.getLogger("oteapi_dlite.strategies")
