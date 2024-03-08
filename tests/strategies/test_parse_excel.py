@@ -41,12 +41,12 @@ def test_parse_excel(static_files: "Path") -> None:
     cache.add(coll.asjson(), key=coll.uuid)
 
     parser = DLiteExcelStrategy(config)
-    session.update(parser.initialize(session))
+    session.update(parser.initialize())
 
     # Note that initialize() and get() are called on different parser
     # instances...
     parser: "IParseStrategy" = DLiteExcelStrategy(config)
-    parser.get(session)
+    parser.get()
 
     inst = coll.get("excel-data")
 

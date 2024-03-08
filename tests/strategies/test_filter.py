@@ -42,10 +42,10 @@ coll0 = coll.copy()
 session = {"collection_id": coll0.uuid}
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize(session))
+session.update(strategy.initialize())
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.get(session))
+session.update(strategy.get())
 
 assert set(coll0.get_labels()) == set(
     [

@@ -2,7 +2,7 @@
 
 # pylint: disable=unused-argument,invalid-name
 import tempfile
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import TYPE_CHECKING, Annotated
 
 from oteapi.datacache import DataCache
 from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
@@ -13,7 +13,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
+    from typing import Any, Optional
 
 
 class DLiteStorageConfig(AttrDict):
@@ -189,8 +189,6 @@ class DLiteGenerateStrategy:
         else:
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
-            elif "key" in session:  # type: ignore
-                key = "generate_data"
 
             cache = DataCache()
             with tempfile.TemporaryDirectory() as tmpdir:

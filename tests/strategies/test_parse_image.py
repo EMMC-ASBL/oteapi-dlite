@@ -94,7 +94,7 @@ def test_image(
     }
     cache.add(coll.asjson(), key=coll.uuid)
     parser: "IParseStrategy" = DLiteImageParseStrategy(config)
-    output: "DLiteSessionUpdate" = parser.get(session)
+    output: "DLiteSessionUpdate" = parser.get()
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 

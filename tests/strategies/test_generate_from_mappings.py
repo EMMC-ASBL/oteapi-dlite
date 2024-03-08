@@ -72,7 +72,7 @@ cache.add(coll.asjson(), key=coll.uuid)
 session = {"collection_id": coll.uuid}
 
 mapper = DLiteMappingStrategy(config1)
-session.update(mapper.initialize(session))
+session.update(mapper.initialize())
 
 generator = DLiteGenerateStrategy(config2)
-session.update(generator.get(session))
+session.update(generator.get())

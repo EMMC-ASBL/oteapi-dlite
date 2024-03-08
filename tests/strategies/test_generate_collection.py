@@ -40,10 +40,10 @@ session = {"collection_id": coll.uuid}
 DataCache().add(coll.asjson(), key=coll.uuid)
 
 generator = DLiteGenerateStrategy(config)
-session.update(generator.initialize(session))
+session.update(generator.initialize())
 
 generator = DLiteGenerateStrategy(config)
-session.update(generator.get(session))
+session.update(generator.get())
 
 
 # Check that the data in the newly created generated json file matches our

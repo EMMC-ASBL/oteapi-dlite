@@ -24,7 +24,7 @@ def test_mapping_without_prefixes() -> None:
 
     mapper = DLiteMappingStrategy(config)
     session = mapper.initialize()
-    session.update(mapper.get(session))
+    session.update(mapper.get())
 
     collection = get_collection(session)
     relations = set(collection.get_relations())
@@ -61,7 +61,7 @@ def test_mapping_with_prefixes() -> None:
 
     mapper = DLiteMappingStrategy(config)
     session = mapper.initialize()
-    session.update(mapper.get(session))
+    session.update(mapper.get())
 
     coll = get_collection(session)
 

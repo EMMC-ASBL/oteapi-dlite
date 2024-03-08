@@ -34,7 +34,7 @@ def test_serialise(tmp_path: "Path") -> None:
     DataCache().add(coll.asjson(), key=coll.uuid)
 
     serialiser: "IFilterStrategy" = SerialiseStrategy(config)
-    session.update(serialiser.initialize(session))
+    session.update(serialiser.initialize())
 
     # Imitate other filters adding stuff to the collection
     coll.add_relation("subject", "predicate", "object")
@@ -46,6 +46,6 @@ def test_serialise(tmp_path: "Path") -> None:
     coll.add("image", image)
 
     serialiser: "IFilterStrategy" = SerialiseStrategy(config)
-    session.update(serialiser.get(session))
+    session.update(serialiser.get())
 
     assert (tmp_path / "coll.json").exists()
