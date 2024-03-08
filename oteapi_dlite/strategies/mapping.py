@@ -116,14 +116,17 @@ class DLiteMappingStrategy:
         coll = get_collection(
             collection_id=self.mapping_config.configuration.collection_id
         )
-        ts = Triplestore(
-            backend=self.mapping_config.configuration.backend,
-            base_iri=self.mapping_config.configuration.base_iri,
-            triplestore_url=self.mapping_config.configuration.triplestore_url,
-            database=self.mapping_config.configuration.database,
-            uname=self.mapping_config.configuration.username,
-            pwd=self.mapping_config.configuration.password,
-        )
+        if self.mapping_config.configuration.backend:
+            ts = Triplestore(
+                backend=self.mapping_config.configuration.backend,
+                base_iri=self.mapping_config.configuration.base_iri,
+                triplestore_url=self.mapping_config.configuration.triplestore_url,
+                database=self.mapping_config.configuration.database,
+                uname=self.mapping_config.configuration.username,
+                pwd=self.mapping_config.configuration.password,
+            )
+        else: 
+            ts = Triplestore(backend="collection", collection=coll)
 
         if self.mapping_config.prefixes:
             for prefix, iri in self.mapping_config.prefixes.items():
