@@ -68,10 +68,10 @@ coll1 = coll.copy()
 session = {"collection_id": coll1.uuid}
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize(session))
+session.update(strategy.initialize())
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.get(session))
+session.update(strategy.get())
 
 assert set(coll1.get_labels()) == set(
     [
@@ -96,10 +96,10 @@ coll2 = coll.copy()
 session = {"collection_id": coll2.uuid}
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize(session))
+session.update(strategy.initialize())
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.get(session))
+session.update(strategy.get())
 
 assert set(coll2.get_labels()) == set(
     [
@@ -123,10 +123,10 @@ coll3 = coll.copy()
 session = {"collection_id": coll3.uuid}
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize(session))
+session.update(strategy.initialize())
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.get(session))
+session.update(strategy.get())
 
 assert set(coll3.get_labels()) == set(
     [
