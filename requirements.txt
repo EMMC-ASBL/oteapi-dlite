@@ -1,6 +1,6 @@
 DLite-Python>=0.4.5,<1.0
 numpy>=1.21,<2
-oteapi-core>=0.6.0,<1
+oteapi-core @ git+https://github.com/EMMC-ASBL/oteapi-core@master
 Pillow>=9.0.1,<11
 # psycopg2-binary!=2.9.6
 # pydantic>=2.4.2,<3  # Indirect requirement
