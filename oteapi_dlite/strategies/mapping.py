@@ -39,14 +39,14 @@ class DLiteMappingStrategyConfig(AttrDict):
         Optional[str], Field(description="A reference to a DLite collection.")
     ] = None
     backend: Annotated[
-        BackendEnum,
+        Optional[BackendEnum],
         Field(
             description=(
                 "Specifies the triplestore backend to be used."
                 "Options include 'fuseki', 'stardog', and 'graphdb'"
             )
         ),
-    ] = BackendEnum.fuseki
+    ] = None
     base_iri: Annotated[
         Optional[str],
         Field(
