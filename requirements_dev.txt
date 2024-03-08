@@ -1,4 +1,4 @@
-git+https://github.com/EMMC-ASBL/otelib@add-create-parser#egg=otelib
+otelib @ git+https://github.com/EMMC-ASBL/otelib@add-create-parser#egg=otelib
 pylint~=3.1
 pytest~=8.0
 pytest-cov~=4.1
