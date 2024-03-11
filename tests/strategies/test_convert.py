@@ -8,6 +8,7 @@ resultfile = outputdir / "result.yaml"
 client = OTEClient("python")
 
 energy_resource = client.create_parser(
+    entity="http://onto-ns.com/meta/0.1/Energy",
     parserType="application/vnd.dlite-parse",
     configuration={
         "driver": "yaml",
@@ -18,6 +19,7 @@ energy_resource = client.create_parser(
 )
 
 forces_resource = client.create_parser(
+    entity="http://onto-ns.com/meta/0.1/Forces",
     parserType="application/vnd.dlite-parse",
     configuration={
         "driver": "yaml",

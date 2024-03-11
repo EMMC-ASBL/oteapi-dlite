@@ -33,5 +33,5 @@ def test_parse_excel(static_files: "Path") -> None:
 
     inst = coll.get("json-data")
     assert inst.theta0 == 50
-    assert inst.k == 50
+    assert inst.k == 0.02
     assert inst.d == 0.0005
