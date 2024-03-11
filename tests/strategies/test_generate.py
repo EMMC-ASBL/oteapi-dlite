@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import dlite
-from oteapi.datacache import DataCache
 
 from oteapi_dlite.strategies.generate import (
     DLiteGenerateConfig,

@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import dlite
-from oteapi.datacache import DataCache
 from tripper import EMMO, MAP, Namespace
 
 from oteapi_dlite.strategies.generate import (
