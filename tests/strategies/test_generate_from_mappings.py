@@ -50,8 +50,8 @@ config2 = DLiteGenerateConfig(
         "driver": "json",
         "location": str(outdir / "results.json"),
         "options": "mode=w",
+        "collection_id": coll.uuid,
     },
-    configuration={"collection_id": coll.uuid},
 )
 
 
