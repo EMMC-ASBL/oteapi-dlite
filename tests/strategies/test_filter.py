@@ -33,19 +33,19 @@ coll.add("image4", image4)
 
 # Test simple use of query
 # Here keeping all instances with label containing "im" in the collection
+coll0 = coll.copy()
 config = DLiteFilterConfig(
     filterType="dlite/filter",
     query="^im",
-    configuration={},
+    configuration={"collection_id": coll0.uuid},
 )
-coll0 = coll.copy()
-session = {"collection_id": coll0.uuid}
+
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize())
+strategy.initialize()
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.get())
+strategy.get()
 
 assert set(coll0.get_labels()) == set(
     [
@@ -58,20 +58,17 @@ assert set(coll0.get_labels()) == set(
 
 
 # Same test as above, but use use `keep_label` instead of `query`
+coll1 = coll.copy()
 config = DLiteFilterConfig(
     filterType="dlite/filter",
-    configuration={
-        "keep_label": "^im",
-    },
+    configuration={"keep_label": "^im", "collection_id": coll1.uuid},
 )
-coll1 = coll.copy()
-session = {"collection_id": coll1.uuid}
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize())
+strategy.initialize()
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.get())
+strategy.get()
 
 assert set(coll1.get_labels()) == set(
     [
@@ -84,23 +81,22 @@ assert set(coll1.get_labels()) == set(
 
 
 # Test combining remove and keep
+coll2 = coll.copy()
 config = DLiteFilterConfig(
     filterType="dlite/filter",
     configuration={
         "remove_datamodel": Image.uri,
         "keep_label": "(image2)|(image4)",
         "keep_referred": False,
+        "collection_id": coll2.uuid,
     },
 )
-coll2 = coll.copy()
-session = {"collection_id": coll2.uuid}
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize())
+strategy.initialize()
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.get())
-
+strategy.get()
 assert set(coll2.get_labels()) == set(
     [
         "innercoll",
@@ -111,22 +107,22 @@ assert set(coll2.get_labels()) == set(
 
 
 # Test with keep_referred=True
+coll3 = coll.copy()
 config = DLiteFilterConfig(
     filterType="dlite/filter",
     configuration={
         "remove_datamodel": Image.uri,
         "keep_label": "(image2)|(image4)",
         "keep_referred": True,
+        "collection_id": coll3.uuid,
     },
 )
-coll3 = coll.copy()
-session = {"collection_id": coll3.uuid}
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize())
+strategy.initialize()
 
 strategy = DLiteFilterStrategy(config)
-session.update(strategy.get())
+strategy.get()
 
 assert set(coll3.get_labels()) == set(
     [
