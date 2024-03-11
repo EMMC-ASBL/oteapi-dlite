@@ -23,7 +23,7 @@ config = DLiteGenerateConfig(
         "driver": "json",
         "location": str(outdir / "image.json"),
         "options": "mode=w",
-        "collection_id": coll.uuid
+        "collection_id": coll.uuid,
     },
 )
 
