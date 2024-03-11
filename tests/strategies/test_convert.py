@@ -10,6 +10,7 @@ client = OTEClient("python")
 energy_resource = client.create_dataresource(
     downloadUrl=(inputdir / "energy.yaml").as_uri(),
     mediaType="application/vnd.dlite-parse",
+    resourceType="resource/url",
     configuration={
         "driver": "yaml",
         "options": "mode=r",
@@ -20,6 +21,7 @@ energy_resource = client.create_dataresource(
 forces_resource = client.create_dataresource(
     downloadUrl=(inputdir / "forces.yaml").as_uri(),
     mediaType="application/vnd.dlite-parse",
+    resourceType="resource/url",
     configuration={
         "driver": "yaml",
         "options": "mode=r",
