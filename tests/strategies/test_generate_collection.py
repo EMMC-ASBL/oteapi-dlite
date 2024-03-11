@@ -27,8 +27,6 @@ config = DLiteGenerateConfig(
     },
 )
 
-coll = dlite.Collection()
-
 Image = get_meta("http://onto-ns.com/meta/1.0/Image")
 image = Image([2, 2, 1])
 image.data = [[[1], [2]], [[3], [4]]]
