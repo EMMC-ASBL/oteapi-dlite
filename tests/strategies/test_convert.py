@@ -7,7 +7,7 @@ resultfile = outputdir / "result.yaml"
 
 client = OTEClient("python")
 
-energy_resource = client.create_parser(
+energy_parser = client.create_parser(
     entity="http://onto-ns.com/meta/0.1/Energy",
     parserType="application/vnd.dlite-parse",
     configuration={
@@ -15,10 +15,11 @@ energy_resource = client.create_parser(
         "options": "mode=r",
         "label": "energy",
         "downloadUrl": (inputdir / "energy.yaml").as_uri(),
+        "mediaType": "application/json",
     },
 )
 
-forces_resource = client.create_parser(
+forces_parser = client.create_parser(
     entity="http://onto-ns.com/meta/0.1/Forces",
     parserType="application/vnd.dlite-parse",
     configuration={
@@ -26,6 +27,7 @@ forces_resource = client.create_parser(
         "options": "mode=r",
         "label": "forces",
         "downloadUrl": (inputdir / "forces.yaml").as_uri(),
+        "mediaType": "application/json",
     },
 )
 
@@ -60,7 +62,7 @@ if resultfile.exists():
     resultfile.unlink()
 
 # Run pipeline
-pipeline = energy_resource >> forces_resource >> convert >> generate
+pipeline = energy_parser >> forces_parser >> convert >> generate
 pipeline.get()
 
 # Ensure that the result file is regenerated
