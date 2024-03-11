@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 
 import dlite
 from oteapi.datacache import DataCache
-from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig
+from oteapi.models import AttrDict, DataCacheConfig, ParserConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
@@ -68,7 +68,7 @@ class DLiteParseConfig(AttrDict):
     ] = None
 
 
-class DLiteParseResourceConfig(ResourceConfig):
+class DLiteParseResourceConfig(ParserConfig):
     """DLite parse strategy resource config."""
 
     configuration: Annotated[
