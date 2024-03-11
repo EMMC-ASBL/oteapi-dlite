@@ -23,8 +23,8 @@ config = DLiteGenerateConfig(
         "driver": "json",
         "location": str(outdir / "image.json"),
         "options": "mode=w",
+        "collection_id": coll.uuid
     },
-    configuration={"collection_id": coll.uuid},
 )
 
 Image = get_meta("http://onto-ns.com/meta/1.0/Image")
