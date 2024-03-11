@@ -32,7 +32,6 @@ def test_parse_excel(static_files: "Path") -> None:
     parser.get()
 
     inst = coll.get("json-data")
-    print(inst)
     assert inst.theta0 == 50
-    assert inst.Temperature, [293.15, 300, 320, 340]
-    # assert np.all(inst.Pressure == [100000, 200000, 300000, 400000])
+    assert inst.k == 50
+    assert inst.d == 0.0005
