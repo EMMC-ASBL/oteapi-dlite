@@ -19,24 +19,20 @@ def test_parse_excel(static_files: "Path") -> None:
     coll = dlite.Collection()
     config = (
         {
-            "downloadUrl": sample_file.as_uri(),
-            "mediaType": "json/vnd.dlite-json",
+            "entity": "http://onto-ns.com/meta/0.4/HallPetch",
+            "parserType": "json/vnd.dlite-json",
             "configuration": {
                 "collection_id": coll.uuid,
+                "downloadUrl": sample_file.as_uri(),
             },
         },
     )
-
-    parser = DLiteJsonStrategy(config)
-    parser.initialize()
-
-    # Note that initialize() and get() are called on different parser
-    # instances...
     parser: "IParseStrategy" = DLiteJsonStrategy(config)
+    parser.initialize()
     parser.get()
 
     inst = coll.get("json-data")
     print(inst)
-    # assert np.all(inst.Sample == ["A", "B", "C", "D"])
-    # assert np.allclose(inst.Temperature, [293.15, 300, 320, 340])
+    assert inst.theta0 == 50
+    assert inst.Temperature, [293.15, 300, 320, 340]
     # assert np.all(inst.Pressure == [100000, 200000, 300000, 400000])

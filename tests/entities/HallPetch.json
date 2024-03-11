@@ -1,0 +1,22 @@
+{
+    "uri": "http://onto-ns.com/meta/0.4/HallPetch",
+    "description": "Example of material properties",
+    "dimensions": {},
+    "properties": {
+        "theta0": {
+            "type": "float",
+            "unit": "MPa",
+            "description": "Friction stress"
+        },
+        "k": {
+            "type": "float",
+            "unit": "MPa*m^(1/2)",
+            "description": "Hall-Petch slope"
+        },
+        "d": {
+            "type": "float",
+            "unit": "m",
+            "description": "Average grain diameter"
+        }
+    }
+}
