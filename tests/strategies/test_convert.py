@@ -8,26 +8,22 @@ resultfile = outputdir / "result.yaml"
 client = OTEClient("python")
 
 energy_resource = client.create_parser(
-    configuration={
-        "downloadUrl": (inputdir / "energy.yaml").as_uri(),
-    },
     parserType="application/vnd.dlite-parse",
     configuration={
         "driver": "yaml",
         "options": "mode=r",
         "label": "energy",
+        "downloadUrl": (inputdir / "energy.yaml").as_uri(),
     },
 )
 
 forces_resource = client.create_parser(
-    configuration={
-        "downloadUrl": (inputdir / "forces.yaml").as_uri(),
-    },
     parserType="application/vnd.dlite-parse",
     configuration={
         "driver": "yaml",
         "options": "mode=r",
         "label": "forces",
+        "downloadUrl": (inputdir / "forces.yaml").as_uri(),
     },
 )
 
