@@ -133,8 +133,8 @@ class DLiteParseStrategy:
                 key = cacheconfig.accessKey
 
             # See if we can extract file suffix from downloadUrl
-            if self.parse_config.downloadUrl:
-                suffix = Path(str(self.parse_config.downloadUrl)).suffix
+            if self.parse_config.configuration.downloadUrl:
+                suffix = Path(str(self.parse_config.configuration.downloadUrl)).suffix
             else:
                 suffix = None
 
