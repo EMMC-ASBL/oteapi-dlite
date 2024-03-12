@@ -11,7 +11,6 @@ if TYPE_CHECKING:
 def test_serialise(tmp_path: "Path") -> None:
     """Test the serialise filter."""
     import dlite
-    from oteapi.datacache import DataCache
 
     from oteapi_dlite.strategies.serialise import (
         SerialiseFilterConfig,
@@ -19,22 +18,19 @@ def test_serialise(tmp_path: "Path") -> None:
     )
     from oteapi_dlite.utils import get_meta
 
+    coll = dlite.Collection()
     config = SerialiseFilterConfig(
         filterType="dlite_serialise",
         configuration={
             "driver": "json",
             "location": str(tmp_path / "coll.json"),
             "options": "mode=w",
-            # "labels": ["image"],
+            "collection_id": coll.uuid,
         },
     )
 
-    coll = dlite.Collection()
-    session = {"collection_id": coll.uuid}
-    DataCache().add(coll.asjson(), key=coll.uuid)
-
     serialiser: "IFilterStrategy" = SerialiseStrategy(config)
-    session.update(serialiser.initialize())
+    serialiser.initialize()
 
     # Imitate other filters adding stuff to the collection
     coll.add_relation("subject", "predicate", "object")
@@ -46,6 +42,6 @@ def test_serialise(tmp_path: "Path") -> None:
     coll.add("image", image)
 
     serialiser: "IFilterStrategy" = SerialiseStrategy(config)
-    session.update(serialiser.get())
+    serialiser.get()
 
     assert (tmp_path / "coll.json").exists()

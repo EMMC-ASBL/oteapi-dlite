@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 
 import numpy as np
 from oteapi.datacache import DataCache
-from oteapi.models import ResourceConfig
+from oteapi.models import ParserConfig
 from oteapi.strategies.parse.image import (
     ImageConfig,
     ImageDataParseStrategy,
@@ -40,7 +40,7 @@ class DLiteImageConfig(ImageParserConfig):
     ] = None
 
 
-class DLiteImageResourceConfig(ResourceConfig):
+class DLiteImageResourceConfig(ParserConfig):
     """Resource config for DLite image parser."""
 
     configuration: Annotated[

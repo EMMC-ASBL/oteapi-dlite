@@ -77,7 +77,7 @@ def test_image(
     sample_file = static_files / test_file
 
     cache = DataCache()
-
+    coll = dlite.Collection()
     orig_key = cache.add(sample_file.read_bytes())
     config = {
         "downloadUrl": sample_file.as_uri(),
@@ -85,9 +85,10 @@ def test_image(
         "configuration": {
             "image_label": "test_image",
             "crop": crop_rect,
+            "collection_id": coll.uuid,
         },
     }
-    coll = dlite.Collection()
+
     session = {
         "collection_id": coll.uuid,
         "key": orig_key,

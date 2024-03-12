@@ -12,15 +12,12 @@ def test_parse_excel(static_files: "Path") -> None:
     """Test excel parse strategy."""
     import dlite
     import numpy as np
-    from oteapi.datacache import DataCache
 
     from oteapi_dlite.strategies.parse_excel import DLiteExcelStrategy
 
     sample_file = static_files / "test_parse_excel.xlsx"
 
-    cache = DataCache()
-
-    cache_key = cache.add(sample_file.read_bytes())
+    coll = dlite.Collection()
     config = {
         "downloadUrl": sample_file.as_uri(),
         "mediaType": "application/vnd.dlite-xlsx",
@@ -29,19 +26,13 @@ def test_parse_excel(static_files: "Path") -> None:
                 "worksheet": "Sheet1",
                 "header_row": "1",
                 "row_from": "2",
+                "collection_id": coll.uuid,
             },
         },
     }
 
-    coll = dlite.Collection()
-    session = {
-        "collection_id": coll.uuid,
-        "key": cache_key,
-    }
-    cache.add(coll.asjson(), key=coll.uuid)
-
     parser = DLiteExcelStrategy(config)
-    session.update(parser.initialize())
+    parser.initialize()
 
     # Note that initialize() and get() are called on different parser
     # instances...

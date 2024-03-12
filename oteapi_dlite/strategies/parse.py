@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 
 import dlite
 from oteapi.datacache import DataCache
-from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig
+from oteapi.models import AttrDict, DataCacheConfig, ParserConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
@@ -68,7 +68,7 @@ class DLiteParseConfig(AttrDict):
     ] = None
 
 
-class DLiteParseResourceConfig(ResourceConfig):
+class DLiteParseResourceConfig(ParserConfig):
     """DLite parse strategy resource config."""
 
     configuration: Annotated[
@@ -128,7 +128,7 @@ class DLiteParseStrategy:
                 options=config.options,
                 id=config.id,
             )
-        else:
+        else: 
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
             else:
@@ -136,15 +136,14 @@ class DLiteParseStrategy:
                     "either `location` or `datacache_config.accessKey` must be "
                     "provided"
                 )
-
             # See if we can extract file suffix from downloadUrl
-            if self.parse_config.downloadUrl:
-                suffix = Path(str(self.parse_config.downloadUrl)).suffix
+            if self.parse_config.configuration.downloadUrl:
+                suffix = Path(str(self.parse_config.configuration.downloadUrl)).suffix
             else:
                 suffix = None
 
             cache = DataCache()
-            with cache.getfile(key, suffix=suffix) as location:
+            with cache.getfile(key,suffix=suffix) as location:
                 inst = dlite.Instance.from_location(
                     driver=driver,
                     location=str(location),

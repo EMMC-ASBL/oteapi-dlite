@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 import dlite
 import numpy as np
 from dlite.datamodel import DataModel
-from oteapi.models import AttrDict, ResourceConfig
+from oteapi.models import AttrDict, ParserConfig
 from oteapi.strategies.parse.excel_xlsx import (
     XLSXParseConfig,
     XLSXParseStrategy,
@@ -66,7 +66,7 @@ class DLiteExcelParseConfig(AttrDict):
     ] = None
 
 
-class DLiteExcelParseResourceConfig(ResourceConfig):
+class DLiteExcelParseResourceConfig(ParserConfig):
     """DLite excel parse strategy resource config."""
 
     configuration: Annotated[
