@@ -128,10 +128,14 @@ class DLiteParseStrategy:
                 options=config.options,
                 id=config.id,
             )
-        else:
+        else: 
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
-
+            else:
+                raise ValueError(
+                    "either `location` or `datacache_config.accessKey` must be "
+                    "provided"
+                )
             # See if we can extract file suffix from downloadUrl
             if self.parse_config.configuration.downloadUrl:
                 suffix = Path(str(self.parse_config.configuration.downloadUrl)).suffix
@@ -139,7 +143,7 @@ class DLiteParseStrategy:
                 suffix = None
 
             cache = DataCache()
-            with cache.getfile(suffix=suffix) as location:
+            with cache.getfile(key,suffix=suffix) as location:
                 inst = dlite.Instance.from_location(
                     driver=driver,
                     location=str(location),
