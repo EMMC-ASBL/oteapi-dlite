@@ -1,23 +1,29 @@
-"""Test parse strategies."""
-
+import json
+from pathlib import Path
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from pathlib import Path
+import pytest
 
+if TYPE_CHECKING:
+    from oteapi_dlite.strategies.parse_json import DLiteJsonStrategy
     from oteapi.interfaces import IParseStrategy
 
+@pytest.fixture
+def static_files() -> Path:
+    """Fixture for static files directory."""
+    return Path(__file__).parent / "static_files"
 
-def test_parse_excel(static_files: "Path") -> None:
-    """Test excel parse strategy."""
+def test_parse_json(static_files: "Path") -> None:
+    """Test json parse strategy."""
     import dlite
 
     from oteapi_dlite.strategies.parse_json import DLiteJsonStrategy
+    from oteapi_dlite.models import DLiteJsonStrategyConfig
 
     sample_file = static_files / "test_parse_json.json"
 
     coll = dlite.Collection()
-    config = (
+    config = DLiteJsonStrategyConfig.parse_obj(
         {
             "entity": "http://onto-ns.com/meta/0.4/HallPetch",
             "parserType": "json/vnd.dlite-json",
@@ -27,9 +33,9 @@ def test_parse_excel(static_files: "Path") -> None:
                 "mediaType": "application/json",
                 "resourceType": "resource/url",
             },
-        },
+        }
     )
-    parser: "IParseStrategy" = DLiteJsonStrategy(config)
+    parser: "IParseStrategy" = DLiteJsonStrategy(parse_config=config)
     parser.initialize()
     parser.get()
 
