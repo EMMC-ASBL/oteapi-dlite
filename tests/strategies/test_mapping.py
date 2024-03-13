@@ -50,12 +50,10 @@ def test_mapping_with_prefixes() -> None:
         prefixes={
             "f": "http://onto-ns.com/meta/0.1/Forces#",
             "e": "http://onto-ns.com/meta/0.1/Energy#",
-            "map": str(MAP),  # __FIXME__: prefixes should accept a Namespace
-            "emmo": str(EMMO),
         },
         triples=[
-            ("f:forces", "map:mapsTo", "emmo:Force"),
-            ("e:energy", "map:mapsTo", "emmo:PotentialEnergy"),
+            (FORCES.forces, MAP.mapsTo, EMMO.Force),
+            (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy),
         ],
     )
 
@@ -63,9 +61,9 @@ def test_mapping_with_prefixes() -> None:
     session = mapper.initialize()
     session.update(mapper.get())
 
-    coll = get_collection(session)
+    collection = get_collection(session)
 
-    relations = set(coll.get_relations())
-    assert len(list(coll.get_relations())) == len(relations)
+    relations = set(collection.get_relations())
+    assert len(list(collection.get_relations())) == len(relations)
     assert (FORCES.forces, MAP.mapsTo, EMMO.Force) in relations
     assert (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy) in relations
