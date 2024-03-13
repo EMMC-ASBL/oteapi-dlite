@@ -1,22 +1,19 @@
-from pathlib import Path
 from typing import TYPE_CHECKING
 
-import pytest
-
 if TYPE_CHECKING:
-    from oteapi_dlite.strategies.parse_json import DLiteJsonStrategy
+    from pathlib import Path
+
     from oteapi.interfaces import IParseStrategy
 
-@pytest.fixture
-def static_files() -> Path:
-    """Fixture for static files directory."""
-    return Path(__file__).parent / "static_files"
 
 def test_parse_json(static_files: "Path") -> None:
     """Test json parse strategy."""
     import dlite
 
-    from oteapi_dlite.strategies.parse_json import DLiteJsonStrategy, DLiteJsonStrategyConfig
+    from oteapi_dlite.strategies.parse_json import (
+        DLiteJsonStrategy,
+        DLiteJsonStrategyConfig,
+    )
 
     sample_file = static_files / "test_parse_json.json"
 
