@@ -1,6 +1,4 @@
 """Tests mapping strategy."""
-
-
 def test_mapping_without_prefixes() -> None:
     """Test without prefixes."""
     from tripper import EMMO, MAP, Namespace
@@ -27,9 +25,9 @@ def test_mapping_without_prefixes() -> None:
     session.update(mapper.get())
 
     collection = get_collection(session)
-    relations = set(collection.get_relations())
-    assert (FORCES.forces, MAP.mapsTo, EMMO.Force) in relations
-    assert (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy) in relations
+    relations = set((str(s), str(p), str(o)) for s, p, o in collection.get_relations())
+    assert (str(FORCES.forces), str(MAP.mapsTo), str(EMMO.Force)) in relations
+    assert (str(ENERGY.energy), str(MAP.mapsTo), str(EMMO.PotentialEnergy)) in relations
 
 
 def test_mapping_with_prefixes() -> None:
@@ -62,8 +60,7 @@ def test_mapping_with_prefixes() -> None:
     session.update(mapper.get())
 
     collection = get_collection(session)
-
-    relations = set(collection.get_relations())
+    relations = set((str(s), str(p), str(o)) for s, p, o in collection.get_relations())
     assert len(list(collection.get_relations())) == len(relations)
-    assert (FORCES.forces, MAP.mapsTo, EMMO.Force) in relations
-    assert (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy) in relations
+    assert (str(FORCES.forces), str(MAP.mapsTo), str(EMMO.Force)) in relations
+    assert (str(ENERGY.energy), str(MAP.mapsTo), str(EMMO.PotentialEnergy)) in relations
