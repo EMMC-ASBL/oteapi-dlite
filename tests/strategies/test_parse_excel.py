@@ -19,15 +19,17 @@ def test_parse_excel(static_files: "Path") -> None:
 
     coll = dlite.Collection()
     config = {
-        "downloadUrl": sample_file.as_uri(),
-        "mediaType": "application/vnd.dlite-xlsx",
+        "entity": "http://onto-ns.com/meta/0.4/Dummy_entity",
+        "parserType": "application/vnd.dlite-xlsx",
         "configuration": {
             "excel_config": {
                 "worksheet": "Sheet1",
                 "header_row": "1",
                 "row_from": "2",
-                "collection_id": coll.uuid,
             },
+            "collection_id": coll.uuid,
+            "downloadUrl": sample_file.as_uri(),
+            "mediaType": "application/vnd.dlite-xlsx",
         },
     }
 
@@ -36,7 +38,7 @@ def test_parse_excel(static_files: "Path") -> None:
 
     # Note that initialize() and get() are called on different parser
     # instances...
-    parser: "IParseStrategy" = DLiteExcelStrategy(config)
+    parser: "IParseStrategy" = DLiteExcelStrategy(parse_config=config)
     parser.get()
 
     inst = coll.get("excel-data")
