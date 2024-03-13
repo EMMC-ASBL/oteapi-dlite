@@ -1,9 +1,9 @@
 """Mapping filter strategy."""
 
 # pylint: disable=unused-argument,invalid-name
+from enum import Enum
 from typing import TYPE_CHECKING, Annotated, Optional
 
-from enum import Enum
 from oteapi.models import AttrDict, MappingConfig
 from pydantic import AnyUrl
 from pydantic.dataclasses import Field, dataclass
@@ -125,7 +125,7 @@ class DLiteMappingStrategy:
                 uname=self.mapping_config.configuration.username,
                 pwd=self.mapping_config.configuration.password,
             )
-        else: 
+        else:
             ts = Triplestore(backend="collection", collection=coll)
 
         if self.mapping_config.prefixes:
