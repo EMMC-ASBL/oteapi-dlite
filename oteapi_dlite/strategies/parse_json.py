@@ -1,13 +1,19 @@
 """Strategy for JSON parsing."""
 
 # pylint: disable=unused-argument
+import sys
 from typing import TYPE_CHECKING, Annotated, Optional
 
 import dlite
-from oteapi.models import AttrDict, ParserConfig
+from oteapi.models import AttrDict, HostlessAnyUrl, ParserConfig, ResourceConfig
 from oteapi.plugins import create_strategy
 from pydantic import Field
 from pydantic.dataclasses import dataclass
+
+if sys.version_info >= (3, 10):
+    from typing import Literal
+else:
+    from typing_extensions import Literal
 
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, update_collection
@@ -31,6 +37,18 @@ class DLiteJsonParseConfig(AttrDict):
         ),
     ] = "json-data"
 
+    resourceType: Literal["resource/url"] = Field(
+        "resource/url",
+        description=ResourceConfig.model_fields["resourceType"].description,
+    )
+    downloadUrl: HostlessAnyUrl = Field(
+        ...,
+        description=ResourceConfig.model_fields["downloadUrl"].description,
+    )
+    mediaType: str = Field(
+        ...,
+        description=ResourceConfig.model_fields["mediaType"].description,
+    )
     storage_path: Annotated[
         Optional[str],
         Field(

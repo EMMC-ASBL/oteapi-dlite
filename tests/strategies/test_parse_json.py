@@ -24,6 +24,8 @@ def test_parse_excel(static_files: "Path") -> None:
             "configuration": {
                 "collection_id": coll.uuid,
                 "downloadUrl": sample_file.as_uri(),
+                "mediaType": "application/json",
+                "resourceType": "resource/url",
             },
         },
     )

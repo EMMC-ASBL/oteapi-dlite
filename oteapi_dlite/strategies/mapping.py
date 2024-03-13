@@ -120,7 +120,7 @@ class DLiteMappingStrategy:
             ts = Triplestore(
                 backend=self.mapping_config.configuration.backend,
                 base_iri=self.mapping_config.configuration.base_iri,
-                triplestore_url=self.mapping_config.configuration.triplestore_url,
+                triplestore_url=self.mapping_config.configuration.triplestore_url,  # pylint: disable=line-too-long
                 database=self.mapping_config.configuration.database,
                 uname=self.mapping_config.configuration.username,
                 pwd=self.mapping_config.configuration.password,
