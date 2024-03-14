@@ -150,7 +150,7 @@ class DLiteExcelStrategy:
         xlsx_config = self.parse_config.model_dump()
         xlsx_config["configuration"] = config.excel_config
         xlsx_config["parserType"] = (
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            "parser/excel_xlsx"
         )
         parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
         columns: dict[str, "Any"] = parser.get()["data"]
