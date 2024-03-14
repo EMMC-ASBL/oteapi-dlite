@@ -1,7 +1,7 @@
 """Strategy for JSON parsing."""
 
 import sys
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import Annotated, Optional
 
 import dlite
 from oteapi.models import AttrDict, HostlessAnyUrl, ParserConfig, ResourceConfig
@@ -108,9 +108,6 @@ class DLiteJsonStrategy:
 
         This method will be called through the strategy-specific endpoint
         of the OTE-API Services.
-
-        Parameters:
-            session: A session-specific dictionary context.
 
         Returns:
             DLite instance.
