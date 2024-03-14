@@ -30,15 +30,12 @@ def test_parse_excel(static_files: "Path") -> None:
             "collection_id": coll.uuid,
             "downloadUrl": sample_file.as_uri(),
             "mediaType": "application/vnd.dlite-xlsx",
+            "resourceType": "resource/url",
         },
     }
 
-    parser = DLiteExcelStrategy(config)
-    parser.initialize()
-
-    # Note that initialize() and get() are called on different parser
-    # instances...
     parser: "IParseStrategy" = DLiteExcelStrategy(parse_config=config)
+    parser.initialize()
     parser.get()
 
     inst = coll.get("excel-data")

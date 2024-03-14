@@ -2,17 +2,24 @@
 
 # pylint: disable=unused-argument
 import re
+import sys
 from random import getrandbits
 from typing import TYPE_CHECKING, Annotated, Optional
 
 import dlite
 import numpy as np
 from dlite.datamodel import DataModel
-from oteapi.models import AttrDict, ParserConfig
+from oteapi.models import AttrDict, HostlessAnyUrl, ParserConfig, ResourceConfig
 from oteapi.strategies.parse.excel_xlsx import (
     XLSXParseConfig,
     XLSXParseStrategy,
 )
+
+if sys.version_info >= (3, 10):
+    from typing import Literal
+else:
+    from typing_extensions import Literal
+
 from pydantic import Field, HttpUrl
 from pydantic.dataclasses import dataclass
 
@@ -64,6 +71,18 @@ class DLiteExcelParseConfig(AttrDict):
     collection_id: Annotated[
         Optional[str], Field(description="A reference to a DLite collection.")
     ] = None
+    resourceType: Literal["resource/url"] = Field(
+        "resource/url",
+        description=ResourceConfig.model_fields["resourceType"].description,
+    )
+    downloadUrl: HostlessAnyUrl = Field(
+        ...,
+        description=ResourceConfig.model_fields["downloadUrl"].description,
+    )
+    mediaType: str = Field(
+        ...,
+        description=ResourceConfig.model_fields["mediaType"].description,
+    )
 
 
 class DLiteExcelParseResourceConfig(ParserConfig):
