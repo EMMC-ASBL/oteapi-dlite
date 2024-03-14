@@ -1,6 +1,5 @@
 """Strategy for JSON parsing."""
 
-# pylint: disable=unused-argument
 import sys
 from typing import TYPE_CHECKING, Annotated, Optional
 
@@ -10,17 +9,14 @@ from oteapi.plugins import create_strategy
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-if sys.version_info >= (3, 10):
-    from typing import Literal
-else:
-    from typing_extensions import Literal
-
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, update_collection
 from oteapi_dlite.utils.utils import get_meta
 
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Union
+if sys.version_info >= (3, 10):
+    from typing import Literal
+else:
+    from typing_extensions import Literal
 
 
 class DLiteJsonParseConfig(AttrDict):
