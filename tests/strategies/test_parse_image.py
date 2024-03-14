@@ -16,16 +16,19 @@ if TYPE_CHECKING:
 
 def test_image_config() -> None:
     """Test the DLiteImageConfig class."""
-    from oteapi.models.resourceconfig import ResourceConfig
+    from oteapi.models import ParserConfig
 
     from oteapi_dlite.strategies.parse_image import DLiteImageConfig
 
-    config = ResourceConfig(
-        downloadUrl="file://dummy",
-        mediaType="image/png",
+    config = ParserConfig(
+        entity="http://onto-ns.com/meta/0.4/Dummy_entity",
+        parserType=f"image/vnd.dlite-parser",
         configuration={
             "crop": (0, 0, 100, 100),
             "image_label": "test_image",
+            "downloadUrl": "file://dummy",
+            "mediaType": "image/png",
+            "resourceType": "resource/url",
         },
     )
     image_config = DLiteImageConfig(
@@ -80,12 +83,15 @@ def test_image(
     coll = dlite.Collection()
     orig_key = cache.add(sample_file.read_bytes())
     config = {
-        "downloadUrl": sample_file.as_uri(),
-        "mediaType": f"image/vnd.dlite-{sample_file.suffix.lstrip('.')}",
+        "entity": "http://onto-ns.com/meta/0.4/Dummy_entity",
+        "parserType": f"image/vnd.dlite-{sample_file.suffix.lstrip('.')}",
         "configuration": {
             "image_label": "test_image",
             "crop": crop_rect,
             "collection_id": coll.uuid,
+            "downloadUrl": sample_file.as_uri(),
+            "mediaType": f"image/vnd.dlite-{sample_file.suffix.lstrip('.')}",
+            "resourceType": "resource/url",
         },
     }
 
