@@ -20,7 +20,7 @@ def test_parse_json(static_files: "Path") -> None:
     sample_file = static_files / "test_parse_json.json"
 
     coll = dlite.Collection()
-    config = DLiteJsonStrategyConfig.parse_obj(
+    config = DLiteJsonStrategyConfig.model_validate(
         {
             "entity": "http://onto-ns.com/meta/0.4/HallPetch",
             "parserType": "json/vnd.dlite-json",
