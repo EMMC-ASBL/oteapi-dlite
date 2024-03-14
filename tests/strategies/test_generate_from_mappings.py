@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import dlite
-from oteapi.datacache import DataCache
 from tripper import EMMO, MAP, Namespace
 
 from oteapi_dlite.strategies.generate import (
@@ -24,7 +23,7 @@ dlite.storage_path.append(entitydir)
 
 FORCES = Namespace("http://onto-ns.com/meta/0.1/Forces#")
 ENERGY = Namespace("http://onto-ns.com/meta/0.1/Energy#")
-
+coll = dlite.Collection()
 config1 = DLiteMappingConfig(
     mappingType="mappings",
     prefixes={
@@ -40,6 +39,7 @@ config1 = DLiteMappingConfig(
         ("r:forces", "map:mapsTo", "emmo:Force"),
         ("r:potential_energy", "map:mapsTo", "emmo:PotentialEnergy"),
     ],
+    configuration={"collection_id": coll.uuid},
 )
 
 config2 = DLiteGenerateConfig(
@@ -49,6 +49,7 @@ config2 = DLiteGenerateConfig(
         "driver": "json",
         "location": str(outdir / "results.json"),
         "options": "mode=w",
+        "collection_id": coll.uuid,
     },
 )
 
@@ -61,18 +62,11 @@ Forces = get_meta("http://onto-ns.com/meta/0.1/Forces")
 forces = Forces(dimensions={"natoms": 2, "ncoords": 3})
 forces.forces = [[0.1, 0.0, -3.2], [0.0, -2.3, 1.2]]  # eV/Å
 
-coll = dlite.Collection()
 coll.add("energy", energy)
 coll.add("forces", forces)
 
-# Hmm, the collection should live in a proper shared storage
-cache = DataCache()
-cache.add(coll.asjson(), key=coll.uuid)
-
-session = {"collection_id": coll.uuid}
-
 mapper = DLiteMappingStrategy(config1)
-session.update(mapper.initialize(session))
+mapper.initialize()
 
 generator = DLiteGenerateStrategy(config2)
-session.update(generator.get(session))
+generator.get()
