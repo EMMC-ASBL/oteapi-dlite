@@ -2,11 +2,11 @@
 
 from typing import Annotated, Optional
 
-from oteapi.models.genericconfig import AttrDict
+from oteapi.models import SessionUpdate
 from pydantic import Field
 
 
-class DLiteSessionUpdate(AttrDict):
+class DLiteSessionUpdate(SessionUpdate):
     """Class for returning values from DLite strategies."""
 
     collection_id: Annotated[

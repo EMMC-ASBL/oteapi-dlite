@@ -13,23 +13,20 @@ def test_mapping_without_prefixes() -> None:
 
     FORCES = Namespace("http://onto-ns.com/meta/0.1/Forces#")
     ENERGY = Namespace("http://onto-ns.com/meta/0.1/Energy#")
-    import dlite
 
-    coll = dlite.Collection()
     config = DLiteMappingConfig(
         mappingType="mappings",
         triples=[
             (FORCES.forces, MAP.mapsTo, EMMO.Force),
             (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy),
         ],
-        configuration={"collection_id": coll.uuid},
     )
 
     mapper = DLiteMappingStrategy(config)
-    mapper.initialize()
-    mapper.get()
+    session = mapper.initialize()
+    session.update(mapper.get(session))
 
-    collection = get_collection(collection_id=coll.uuid)
+    collection = get_collection(session)
     relations = set(collection.get_relations())
     assert (FORCES.forces, MAP.mapsTo, EMMO.Force) in relations
     assert (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy) in relations
@@ -47,9 +44,7 @@ def test_mapping_with_prefixes() -> None:
 
     FORCES = Namespace("http://onto-ns.com/meta/0.1/Forces#")
     ENERGY = Namespace("http://onto-ns.com/meta/0.1/Energy#")
-    import dlite
 
-    coll = dlite.Collection()
     config = DLiteMappingConfig(
         mappingType="mappings",
         prefixes={
@@ -62,14 +57,13 @@ def test_mapping_with_prefixes() -> None:
             ("f:forces", "map:mapsTo", "emmo:Force"),
             ("e:energy", "map:mapsTo", "emmo:PotentialEnergy"),
         ],
-        configuration={"collection_id": coll.uuid},
     )
 
     mapper = DLiteMappingStrategy(config)
-    mapper.initialize()
-    mapper.get()
+    session = mapper.initialize()
+    session.update(mapper.get(session))
 
-    coll = get_collection(collection_id=coll.uuid)
+    coll = get_collection(session)
 
     relations = set(coll.get_relations())
     assert len(list(coll.get_relations())) == len(relations)
