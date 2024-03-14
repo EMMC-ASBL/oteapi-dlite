@@ -1,3 +1,5 @@
+"""Test parse strategies."""
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -17,7 +19,8 @@ def test_parse_excel(static_files: "Path") -> None:
 
     coll = dlite.Collection()
     config = {
-        "parserType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "entity": "http://onto-ns.com/meta/0.4/Dummy_entity",
+        "parserType": "application/vnd.dlite-xlsx",
         "configuration": {
             "excel_config": {
                 "worksheet": "Sheet1",
@@ -26,7 +29,7 @@ def test_parse_excel(static_files: "Path") -> None:
             },
             "collection_id": coll.uuid,
             "downloadUrl": sample_file.as_uri(),
-            "mediaType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "mediaType": "application/vnd.dlite-xlsx",
             "resourceType": "resource/url",
         },
     }
