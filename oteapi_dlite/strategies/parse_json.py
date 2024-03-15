@@ -33,16 +33,16 @@ class DLiteJsonParseConfig(AttrDict):
         ),
     ] = "json-data"
 
-    resourceType: Literal["resource/url"] = Field(
+    resourceType: Optional[Literal["resource/url"]] = Field(
         "resource/url",
         description=ResourceConfig.model_fields["resourceType"].description,
     )
-    downloadUrl: HostlessAnyUrl = Field(
-        ...,
+    downloadUrl: Optional[HostlessAnyUrl] = Field(
+        None,
         description=ResourceConfig.model_fields["downloadUrl"].description,
     )
-    mediaType: str = Field(
-        ...,
+    mediaType: Optional[str] = Field(
+        None,
         description=ResourceConfig.model_fields["mediaType"].description,
     )
     storage_path: Annotated[
