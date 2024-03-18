@@ -18,8 +18,8 @@ theme:
     - navigation.instant
     - navigation.top
 
-repo_name: "oteapi-dlite"
-repo_url: "https://github.com/EMMC-ASBL/oteapi-dlite"
+repo_name: "oteapi-dlite-Mod"
+repo_url: "https://github.com/SINTEF/oteapi-dlite-Mod"
 edit_uri: ""
 
 extra:

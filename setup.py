@@ -69,11 +69,11 @@ DEV = [
 ] + DOCS
 
 setup(
-    name="oteapi-dlite",
+    name="oteapi-dlite-Mod",
     version=VERSION,
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
-    url="https://github.com/EMMC-ASBL/oteapi-dlite",
+    url="https://github.com/SINTEF/oteapi-dlite-Mod",
     description="DLite plugin for OTEAPI.",
     long_description=(TOP_DIR / "README.md").read_text(encoding="utf8"),
     long_description_content_type="text/markdown",
