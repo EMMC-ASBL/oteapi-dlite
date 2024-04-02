@@ -4,4 +4,4 @@ mkdocs~=1.5
 mkdocs-awesome-pages-plugin~=2.9
 mkdocs-material~=9.5
 mkdocstrings[python]~=0.24.1
-pre-commit~=3.6
+pre-commit~=3.7
