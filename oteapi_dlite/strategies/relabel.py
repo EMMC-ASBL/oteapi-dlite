@@ -1,18 +1,15 @@
 """A specialised strategy that finds a instances of a given datamodel
 in the collection and give them new labels."""
 
-# pylint: disable=unused-argument
-from pathlib import Path
+## pylint: disable=unused-argument
 from typing import TYPE_CHECKING, Annotated, Optional
 
-import dlite
-from oteapi.datacache import DataCache
-from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
+from oteapi.models import AttrDict, FunctionConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, get_driver, update_collection
+from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
@@ -26,7 +23,7 @@ class DLiteRelabelConfig(AttrDict):
         Field(
             description="URI of datamodel who's instance should be relabeled.",
         ),
-    ] = None
+    ]
     newlabel: Annotated[
         str,
         Field(
@@ -80,9 +77,20 @@ class DLiteRelabelStrategy:
         config = self.function_config.configuration
 
         coll = get_collection(session)
-
-        print("***", list(coll.get_labels()))
-        # instanses =
+        labels = list(coll.get_subjects(p="_has-meta", o=config.datamodel))
+        if not labels:
+            raise ValueError(
+                f"no instances to relabel of datamodel: {config.datamodel}"
+            )
+        if len(labels) > 1:
+            raise ValueError(
+                f"relabeling more than one instance is currently not supped: "
+                f"{config.datamodel}"
+            )
+        label = labels[0]
+        inst = coll.get(label)
+        coll.remove(label)
+        coll.add(config.newlabel, inst)
 
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
