@@ -1,6 +1,7 @@
 """Strategy class for parsing an image to a DLite instance."""
+
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 
 import numpy as np
 from oteapi.datacache import DataCache
@@ -11,14 +12,14 @@ from oteapi.strategies.parse.image import (
     ImageParserResourceConfig,
 )
 from PIL import Image
-from pydantic import Extra, Field
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, get_meta, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Dict, Optional
+    from typing import Any, Optional
 
 
 LOGGER = logging.getLogger("oteapi_dlite.strategies")
@@ -28,19 +29,23 @@ LOGGER.setLevel(logging.DEBUG)
 class DLiteImageConfig(ImageParserConfig):
     """Configuration for DLite image parser."""
 
-    image_label: str = Field(
-        "image",
-        description="Label to assign to the image in the collection.",
-    )
+    image_label: Annotated[
+        str,
+        Field(
+            description="Label to assign to the image in the collection.",
+        ),
+    ] = "image"
 
 
 class DLiteImageResourceConfig(ResourceConfig):
     """Resource config for DLite image parser."""
 
-    configuration: DLiteImageConfig = Field(
-        DLiteImageConfig(),
-        description="Image parse strategy-specific configuration.",
-    )
+    configuration: Annotated[
+        DLiteImageConfig,
+        Field(
+            description="Image parse strategy-specific configuration.",
+        ),
+    ] = DLiteImageConfig()
 
 
 @dataclass
@@ -61,13 +66,13 @@ class DLiteImageParseStrategy:
     parse_config: DLiteImageResourceConfig
 
     def initialize(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: "Optional[dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: "Optional[dict[str, Any]]" = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy.
 
@@ -86,10 +91,9 @@ class DLiteImageParseStrategy:
         config = self.parse_config.configuration
 
         # Configuration for ImageDataParseStrategy in oteapi-core
-        conf = self.parse_config.dict()
+        conf = self.parse_config.model_dump()
         conf["configuration"] = ImageParserConfig(
-            **config.dict(),
-            extra=Extra.ignore,
+            **config.model_dump(), extra="ignore"
         )
         conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
         core_config = ImageParserResourceConfig(**conf)
@@ -110,7 +114,10 @@ class DLiteImageParseStrategy:
                 )
             )
         if not isinstance(data, np.ndarray):
-            raise TypeError("Expected image data to be a numpy array.")
+            raise TypeError(
+                "Expected image data to be a numpy array, instead it was "
+                f"{type(data)}."
+            )
 
         meta = get_meta("http://onto-ns.com/meta/1.0/Image")
         inst = meta(dimensions=data.shape)

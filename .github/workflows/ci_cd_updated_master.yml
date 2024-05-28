@@ -84,7 +84,7 @@ jobs:
 
     - name: Set up Python 3.9
       if: env.RELEASE_RUN == 'false'
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.9
 
@@ -104,16 +104,16 @@ jobs:
     - name: Check API Reference and landing page
       if: env.RELEASE_RUN == 'false'
       run: |
-        invoke create-api-reference-docs --pre-clean
-        invoke create-docs-index
+        pre-commit run --all-files docs-api-reference
+        pre-commit run --all-files docs-landing-page
 
         if [ -n "$(git status --porcelain docs/api_reference docs/index.md)" ]; then
           echo -e "\u274c Discrepancies found !"
           echo -e "The following files in the documentation must be committed:"
           git status --porcelain docs/api_reference docs/index.md
           echo -e "\nRun:\n"
-          echo "    invoke create-api-reference-docs --pre-clean"
-          echo -e "    invoke create-docs-index\n"
+          echo "    pre-commit run --all-files docs-api-reference"
+          echo -e "    pre-commit run --all-files docs-landing-page\n"
           echo "And commit the changed files."
           exit 1
         else

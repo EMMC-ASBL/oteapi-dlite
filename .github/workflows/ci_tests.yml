@@ -9,40 +9,6 @@ on:
 
 jobs:
 
-  pre-commit:
-    runs-on: ubuntu-latest
-    # timeout-minutes: 2
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -U setuptools wheel
-
-        while IFS="" read -r line || [ -n "${line}" ]; do
-          if [[ "${line}" =~ ^pre-commit.*$ ]]; then
-            pre_commit="${line}"
-          fi
-        done < requirements_dev.txt
-
-        while IFS="" read -r line || [ -n "${line}" ]; do
-          if [[ "${line}" =~ ^invoke.*$ ]]; then
-            invoke="${line}"
-          fi
-        done < requirements_docs.txt
-
-        pip install ${pre_commit} ${invoke}
-
-    - name: Test with pre-commit
-      run: SKIP=pylint,pylint-tests,update-docs-api-reference pre-commit run --all-files
-
   pylint-safety:
     runs-on: ubuntu-latest
 
@@ -52,7 +18,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python 3.9
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.9
 
@@ -98,7 +64,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python ${{ matrix.python-version}}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version}}
 
@@ -114,8 +80,9 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage.xml
         flags: linux
 
@@ -136,7 +103,7 @@ jobs:
         fetch-depth: 2
 
     - name: Set up Python ${{ matrix.python-version}}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version}}
 
@@ -152,8 +119,9 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage.xml
         flags: windows
 
@@ -165,7 +133,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
 
@@ -186,7 +154,7 @@ jobs:
       with:
         fetch-depth: 2
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: 3.9
 
@@ -194,11 +162,11 @@ jobs:
       run: |
         python -m pip install -U pip
         pip install -U setuptools wheel
-        pip install -U -r requirements_docs.txt
+        pip install -U -r requirements_docs.txt -r requirements_dev.txt
         pip install -e .
 
     - name: Build
       run: |
-        invoke create-api-reference-docs --pre-clean
-        invoke create-docs-index
+        pre-commit run --all-files docs-api-reference
+        pre-commit run --all-files docs-landing-page
         mkdocs build --strict

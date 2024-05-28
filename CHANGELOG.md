@@ -2,15 +2,71 @@
 
 ## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
 
-[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.5...HEAD)
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.2.0...HEAD)
+
+**Implemented enhancements:**
+
+- Migrate to pydantic v2 [\#187](https://github.com/EMMC-ASBL/oteapi-dlite/issues/187)
+
+## [v0.2.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.2.0) (2024-02-23)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.7...v0.2.0)
 
 **Fixed bugs:**
 
-- Image parse strategy will change in OTEAPI Core [\#172](https://github.com/EMMC-ASBL/oteapi-dlite/issues/172)
+- Move pre-commit dependency to `docs` requirements [\#215](https://github.com/EMMC-ASBL/oteapi-dlite/pull/215) ([CasperWA](https://github.com/CasperWA))
+
+**Merged pull requests:**
+
+- Migrate to pydantic v2 [\#192](https://github.com/EMMC-ASBL/oteapi-dlite/pull/192) ([CasperWA](https://github.com/CasperWA))
+
+## [v0.1.7](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.7) (2024-02-23)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.6...v0.1.7)
+
+**Closed issues:**
+
+- `mypy` update detects new type error [\#212](https://github.com/EMMC-ASBL/oteapi-dlite/issues/212)
+- Document functionality/features [\#196](https://github.com/EMMC-ASBL/oteapi-dlite/issues/196)
+- Reenable update-docs-api-reference in ci workflow [\#83](https://github.com/EMMC-ASBL/oteapi-dlite/issues/83)
+
+**Merged pull requests:**
+
+- Add tuple as input type in `parse_excel.infer_metadata()` [\#213](https://github.com/EMMC-ASBL/oteapi-dlite/pull/213) ([ajeklund](https://github.com/ajeklund))
+- Update documentation preparation [\#209](https://github.com/EMMC-ASBL/oteapi-dlite/pull/209) ([CasperWA](https://github.com/CasperWA))
+- \[Auto-generated\] Update dependencies [\#200](https://github.com/EMMC-ASBL/oteapi-dlite/pull/200) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#198](https://github.com/EMMC-ASBL/oteapi-dlite/pull/198) ([TEAM4-0](https://github.com/TEAM4-0))
+- Added new filter strategy [\#195](https://github.com/EMMC-ASBL/oteapi-dlite/pull/195) ([jesper-friis](https://github.com/jesper-friis))
+- Added "store\_collection" option to generate strategy [\#184](https://github.com/EMMC-ASBL/oteapi-dlite/pull/184) ([jesper-friis](https://github.com/jesper-friis))
+
+## [v0.1.6](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.6) (2023-10-26)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.5...v0.1.6)
+
+**Fixed bugs:**
+
+- Pin OTEAPI Core to \< v0.6 [\#186](https://github.com/EMMC-ASBL/oteapi-dlite/issues/186)
+- "Still" getting SegFaults with DLite v0.4.x [\#179](https://github.com/EMMC-ASBL/oteapi-dlite/issues/179)
+
+**Merged pull requests:**
+
+- \[Auto-generated\] Update dependencies [\#193](https://github.com/EMMC-ASBL/oteapi-dlite/pull/193) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#191](https://github.com/EMMC-ASBL/oteapi-dlite/pull/191) ([TEAM4-0](https://github.com/TEAM4-0))
+- Update requirements on dlite [\#178](https://github.com/EMMC-ASBL/oteapi-dlite/pull/178) ([jesper-friis](https://github.com/jesper-friis))
+- Update mkdocs-material requirement from ~=9.1 to ~=9.4 [\#174](https://github.com/EMMC-ASBL/oteapi-dlite/pull/174) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Auto-generated\] Update dependencies [\#169](https://github.com/EMMC-ASBL/oteapi-dlite/pull/169) ([TEAM4-0](https://github.com/TEAM4-0))
+- Bump actions/checkout from 3 to 4 [\#167](https://github.com/EMMC-ASBL/oteapi-dlite/pull/167) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update pre-commit requirement from ~=3.3 to ~=3.4 [\#166](https://github.com/EMMC-ASBL/oteapi-dlite/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update mkdocstrings\[python\] requirement from ~=0.22.0 to ~=0.23.0 [\#165](https://github.com/EMMC-ASBL/oteapi-dlite/pull/165) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Relative file paths in tests [\#164](https://github.com/EMMC-ASBL/oteapi-dlite/pull/164) ([jesper-friis](https://github.com/jesper-friis))
 
 ## [v0.1.5](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.1.5) (2023-09-22)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.4...v0.1.5)
+
+**Fixed bugs:**
+
+- Image parse strategy will change in OTEAPI Core [\#172](https://github.com/EMMC-ASBL/oteapi-dlite/issues/172)
 
 **Merged pull requests:**
 

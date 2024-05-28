@@ -1,5 +1,5 @@
 # session
 
 ::: oteapi_dlite.models.session
-    rendering:
+    options:
       show_if_no_docstring: true

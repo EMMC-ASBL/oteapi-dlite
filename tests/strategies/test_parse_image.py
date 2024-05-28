@@ -1,4 +1,5 @@
 """Test the image formats in the image parse strategy."""
+
 # pylint: disable=too-many-locals
 from typing import TYPE_CHECKING
 
@@ -6,7 +7,7 @@ import pytest
 
 if TYPE_CHECKING:
     from pathlib import Path
-    from typing import Optional, Tuple
+    from typing import Optional
 
     from oteapi.interfaces import IParseStrategy
 
@@ -27,9 +28,21 @@ def test_image_config() -> None:
             "image_label": "test_image",
         },
     )
-    image_config = DLiteImageConfig(**config.configuration)
-    assert image_config.crop == config.configuration["crop"]
-    assert image_config.image_label == config.configuration["image_label"]
+    image_config = DLiteImageConfig(
+        **config.configuration  # pylint: disable=not-a-mapping
+    )
+    assert (
+        image_config.crop
+        == config.configuration[  # pylint: disable=unsubscriptable-object
+            "crop"
+        ]
+    )
+    assert (
+        image_config.image_label
+        == config.configuration[  # pylint: disable=unsubscriptable-object
+            "image_label"
+        ]
+    )
 
 
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
@@ -47,7 +60,7 @@ def test_image_config() -> None:
 def test_image(
     test_file: str,
     target_file: "Optional[str]",
-    crop_rect: "Optional[Tuple[int, int, int, int]]",
+    crop_rect: "Optional[tuple[int, int, int, int]]",
     static_files: "Path",
 ) -> None:
     """Test parsing an image format."""

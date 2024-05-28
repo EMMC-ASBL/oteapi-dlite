@@ -1,7 +1,8 @@
 """Generic parse strategy using DLite storage plugin."""
+
 # pylint: disable=unused-argument
 from pathlib import Path
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Annotated, Optional
 
 import dlite
 from oteapi.datacache import DataCache
@@ -12,51 +13,65 @@ from pydantic.dataclasses import dataclass
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
-if TYPE_CHECKING:
-    from typing import Any, Dict
+if TYPE_CHECKING:  # pragma: no cover
+    from typing import Any
 
 
 class DLiteParseConfig(AttrDict):
     """Configuration for generic DLite parser."""
 
-    driver: Optional[str] = Field(
-        None,
-        description='Name of DLite driver (ex: "json").',
-    )
-    location: Optional[str] = Field(
-        None,
-        description=(
-            "Explicit location of storage.  Normally data is read from the "
-            "data cache using `datacache_config.accessKey` (default: 'key')."
+    driver: Annotated[
+        Optional[str],
+        Field(
+            description='Name of DLite driver (ex: "json").',
         ),
-    )
-    options: Optional[str] = Field(
-        None,
-        description=(
-            "Comma-separated list of options passed to the DLite storage "
-            "plugin."
+    ] = None
+    location: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Explicit location of storage.  Normally data is read from the "
+                "data cache using `datacache_config.accessKey` (default: "
+                "'key')."
+            ),
         ),
-    )
-    id: Optional[str] = Field(
-        None,
-        description="If given, the id of the instance in the storage.",
-    )
-    label: str = Field(
-        ...,
-        description="Label of the new DLite instance in the collection.",
-    )
-    datacache_config: Optional[DataCacheConfig] = Field(
-        None,
-        description="Configuration options for the local data cache.",
-    )
+    ] = None
+    options: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "Comma-separated list of options passed to the DLite storage "
+                "plugin."
+            ),
+        ),
+    ] = None
+    id: Annotated[
+        Optional[str],
+        Field(
+            description="If given, the id of the instance in the storage.",
+        ),
+    ] = None
+    label: Annotated[
+        str,
+        Field(
+            description="Label of the new DLite instance in the collection.",
+        ),
+    ]
+    datacache_config: Annotated[
+        Optional[DataCacheConfig],
+        Field(
+            description="Configuration options for the local data cache.",
+        ),
+    ] = None
 
 
 class DLiteParseResourceConfig(ResourceConfig):
     """DLite parse strategy resource config."""
 
-    configuration: DLiteParseConfig = Field(
-        ..., description="DLite parse strategy-specific configuration."
-    )
+    configuration: Annotated[
+        DLiteParseConfig,
+        Field(description="DLite parse strategy-specific configuration."),
+    ]
 
 
 @dataclass
@@ -73,13 +88,13 @@ class DLiteParseStrategy:
 
     def initialize(
         self,
-        session: "Optional[Dict[str, Any]]" = None,
+        session: Optional[dict[str, "Any"]] = None,
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: "Optional[Dict[str, Any]]" = None
+        self, session: Optional[dict[str, "Any"]] = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy.
 
@@ -118,13 +133,13 @@ class DLiteParseStrategy:
                 key = session["key"]
             else:
                 raise ValueError(
-                    "either `location` or `cacheconfig.accessKey` must be "
+                    "either `location` or `datacache_config.accessKey` must be "
                     "provided"
                 )
 
             # See if we can extract file suffix from downloadUrl
             if self.parse_config.downloadUrl:
-                suffix = Path(self.parse_config.downloadUrl).suffix
+                suffix = Path(str(self.parse_config.downloadUrl)).suffix
             else:
                 suffix = None
 
@@ -153,6 +168,3 @@ class DLiteParseStrategy:
 
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
-
-
-# DLiteParseConfig.update_forward_refs()

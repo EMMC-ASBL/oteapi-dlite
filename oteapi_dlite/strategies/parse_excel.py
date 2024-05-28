@@ -1,13 +1,14 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
+
 # pylint: disable=unused-argument
 import re
 from random import getrandbits
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Annotated, Optional
 
 import dlite
 import numpy as np
 from dlite.datamodel import DataModel
-from oteapi.models import AttrDict, ResourceConfig, SessionUpdate
+from oteapi.models import AttrDict, ResourceConfig
 from oteapi.strategies.parse.excel_xlsx import (
     XLSXParseConfig,
     XLSXParseStrategy,
@@ -18,8 +19,8 @@ from pydantic.dataclasses import dataclass
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
-if TYPE_CHECKING:
-    from typing import Any, Dict
+if TYPE_CHECKING:  # pragma: no cover
+    from typing import Any, Union
 
     from oteapi.interfaces import IParseStrategy
 
@@ -27,50 +28,65 @@ if TYPE_CHECKING:
 class DLiteExcelParseConfig(AttrDict):
     """Configuration for DLite Excel parser."""
 
-    metadata: Optional[HttpUrl] = Field(
-        None,
-        description=(
-            "URI of DLite metadata to return.  If not provided, the metadata "
-            "will be inferred from the excel file."
+    metadata: Annotated[
+        Optional[HttpUrl],
+        Field(
+            description=(
+                "URI of DLite metadata to return.  If not provided, the "
+                "metadata will be inferred from the excel file."
+            ),
         ),
-    )
+    ] = None
 
-    id: Optional[str] = Field(None, description="Optional id on new instance.")
+    id: Annotated[
+        Optional[str], Field(description="Optional id on new instance.")
+    ] = None
 
-    label: Optional[str] = Field(
-        "excel-data",
-        description="Optional label for new instance in collection.",
-    )
+    label: Annotated[
+        Optional[str],
+        Field(
+            description="Optional label for new instance in collection.",
+        ),
+    ] = "excel-data"
 
-    excel_config: XLSXParseConfig = Field(
-        ...,
-        description="DLite-specific excel configurations.",
-    )
-    storage_path: Optional[str] = Field(
-        None,
-        description="Path to metadata storage",
-    )
+    excel_config: Annotated[
+        XLSXParseConfig,
+        Field(
+            description="DLite-specific excel configurations.",
+        ),
+    ]
+    storage_path: Annotated[
+        Optional[str],
+        Field(
+            description="Path to metadata storage",
+        ),
+    ] = None
 
 
 class DLiteExcelParseResourceConfig(ResourceConfig):
     """DLite excel parse strategy resource config."""
 
-    configuration: DLiteExcelParseConfig = Field(
-        ..., description="DLite excel parse strategy-specific configuration."
-    )
+    configuration: Annotated[
+        DLiteExcelParseConfig,
+        Field(description="DLite excel parse strategy-specific configuration."),
+    ]
 
 
 class DLiteExcelSessionUpdate(DLiteSessionUpdate):
     """Class for returning values from DLite excel parser."""
 
-    inst_uuid: str = Field(
-        ...,
-        description="UUID of new instance.",
-    )
-    label: str = Field(
-        ...,
-        description="Label of the new instance in the collection.",
-    )
+    inst_uuid: Annotated[
+        str,
+        Field(
+            description="UUID of new instance.",
+        ),
+    ]
+    label: Annotated[
+        str,
+        Field(
+            description="Label of the new instance in the collection.",
+        ),
+    ]
 
 
 @dataclass
@@ -88,12 +104,14 @@ class DLiteExcelStrategy:
 
     def initialize(
         self,
-        session: "Optional[Dict[str, Any]]" = None,
-    ) -> SessionUpdate:
+        session: Optional[dict[str, "Any"]] = None,
+    ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
-    def get(self, session: "Optional[Dict[str, Any]]" = None) -> SessionUpdate:
+    def get(
+        self, session: Optional[dict[str, "Any"]] = None
+    ) -> DLiteExcelSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
@@ -108,16 +126,24 @@ class DLiteExcelStrategy:
         """
         config = self.parse_config.configuration
 
-        xlsx_config = self.parse_config.dict()
+        xlsx_config = self.parse_config.model_dump()
         xlsx_config["configuration"] = config.excel_config
-        xlsx_config[
-            "mediaType"
-        ] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        xlsx_config["mediaType"] = (
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
         parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
-        columns = parser.get(session)["data"]
+        columns: dict[str, "Any"] = parser.get(session)["data"]
 
-        names, units = zip(*[split_column_name(column) for column in columns])
+        names, units = zip(
+            *[split_column_name(column) for column in columns.keys()]
+        )
         rec = dict2recarray(columns, names=names)
+
+        if not isinstance(units, (list, tuple)):
+            # This check is to satisfy mypy for the `infer_metadata` call below.
+            raise TypeError(
+                f"units must be a list or tuple, instead it was {type(units)}"
+            )
 
         if config.metadata:
             if config.storage_path is not None:
@@ -144,7 +170,7 @@ class DLiteExcelStrategy:
         )
 
 
-def split_column_name(column):
+def split_column_name(column: str) -> tuple[str, str]:
     """Split column name into a (name, unit) tuple."""
     match = re.match(r"\s*([^ ([<]+)\s*[([<]?([^] )>]*)[])>]?", column)
     if not match:
@@ -153,7 +179,7 @@ def split_column_name(column):
     return name, unit
 
 
-def infer_metadata(rec: np.recarray, units: list) -> dlite.Instance:
+def infer_metadata(rec: np.recarray, units: tuple[str, ...]) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
     rnd = getrandbits(128)
     uri = f"http://onto-ns.com/meta/1.0/generated_from_excel_{rnd:0x}"
