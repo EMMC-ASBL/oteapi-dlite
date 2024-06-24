@@ -52,9 +52,22 @@ class DLiteParseConfig(AttrDict):
         ),
     ] = None
     label: Annotated[
-        str,
+        Optional[str],
         Field(
-            description="Label of the new DLite instance in the collection.",
+            description=(
+                "Optional label of the new DLite instance in the collection."
+            ),
+        ),
+    ]
+    datamodel: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "DLite datamodel documenting the structure of the data set. "
+                "Often unused, since the datamodel is implicitly defined in "
+                "the strategy, but for a documentation point of view this is "
+                "a very important field."
+            ),
         ),
     ]
     datacache_config: Annotated[
