@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -155,7 +155,7 @@
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -1202,11 +1202,11 @@
 
 
 <a id="oteapi_dlite.strategies.generate"></a>
-  <div class="doc doc-contents first">
-  
+    <div class="doc doc-contents first">
+
       <p>Generic generate strategy using DLite storage plugin.</p>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1222,22 +1222,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.generate.DLiteGenerateConfig" class="doc doc-heading">
-          <code>DLiteGenerateConfig</code>
+            <code>DLiteGenerateConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.generate.DLiteGenerateConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.FunctionConfig">FunctionConfig</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.FunctionConfig">FunctionConfig</span></code></p>
 
-  
+
       <p>DLite generate strategy config.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">115</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">115</span>
 <span class="normal">116</span>
 <span class="normal">117</span>
 <span class="normal">118</span>
@@ -1251,9 +1251,9 @@
         <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite generate strategy-specific configuration.&quot;</span><span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1268,8 +1268,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteGenerateConfig.configuration" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">DLiteStorageConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite generate strategy-specific configuration.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">DLiteStorageConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite generate strategy-specific configuration.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1277,8 +1277,8 @@
 <a href="#oteapi_dlite.strategies.generate.DLiteGenerateConfig.configuration" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1288,8 +1288,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1298,24 +1297,24 @@
 
 
 <h2 id="oteapi_dlite.strategies.generate.DLiteGenerateStrategy" class="doc doc-heading">
-          <code>DLiteGenerateStrategy</code>
+            <code>DLiteGenerateStrategy</code>
 
 
 <a href="#oteapi_dlite.strategies.generate.DLiteGenerateStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
+    <div class="doc doc-contents ">
 
-  
+
       <p>Generic DLite generate strategy utilising DLite storage plugins.</p>
 <p><strong>Registers strategies</strong>:</p>
 <ul>
 <li><code>("mediaType", "application/vnd.dlite-generate")</code></li>
 </ul>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
 <span class="normal">127</span>
@@ -1401,8 +1400,7 @@
 <span class="normal">207</span>
 <span class="normal">208</span>
 <span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">210</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteGenerateStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite generate strategy utilising DLite storage plugins.</span>
 
@@ -1470,12 +1468,11 @@
         <span class="c1"># Save instance</span>
         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">:</span>
             <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># missing test</span>
             <span class="k">if</span> <span class="n">cacheconfig</span> <span class="ow">and</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span><span class="p">:</span>
                 <span class="n">key</span> <span class="o">=</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span>
-            <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># missing test</span>
                 <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;generate_data&quot;</span>
-
             <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
             <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
                 <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{tmpdir}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
@@ -1491,9 +1488,9 @@
         <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1508,8 +1505,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteGenerateStrategy.generate_config" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">generate_config</span><span class="p">:</span> <span class="n">DLiteGenerateConfig</span></code>
-  
+            <code class="highlight language-python"><span class="n">generate_config</span><span class="p">:</span> <span class="n">DLiteGenerateConfig</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1517,87 +1514,83 @@
 <a href="#oteapi_dlite.strategies.generate.DLiteGenerateStrategy.generate_config" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
-
 
 
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.generate.DLiteGenerateStrategy.get" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.generate.DLiteGenerateStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Execute the strategy.</p>
 <p>This method will be called through the strategy-specific endpoint
 of the OTE-API Services.</p>
 
 
-
-  <p><span class="doc-section-title">Parameters:</span></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr class="doc-section-item">
-          <td><code>session</code></td>
-          <td>
-                <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>A session-specific dictionary context.</p>
-            </div>
-          </td>
-          <td>
-                <code>None</code>
-          </td>
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
         </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>session</code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A session-specific dictionary context.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
-
-  <p><span class="doc-section-title">Returns:</span></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr class="doc-section-item">
-          <td>
-                <code><a class="autorefs autorefs-internal" title="oteapi_dlite.models.DLiteSessionUpdate" href="../../models/session/#oteapi_dlite.models.session.DLiteSessionUpdate">DLiteSessionUpdate</a></code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>SessionUpdate instance.</p>
-            </div>
-          </td>
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
         </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="oteapi_dlite.models.DLiteSessionUpdate" href="../../models/session/#oteapi_dlite.models.session.DLiteSessionUpdate">DLiteSessionUpdate</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>SessionUpdate instance.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">143</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">143</span>
 <span class="normal">144</span>
 <span class="normal">145</span>
 <span class="normal">146</span>
@@ -1664,8 +1657,7 @@ of the OTE-API Services.</p>
 <span class="normal">207</span>
 <span class="normal">208</span>
 <span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">210</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Any&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
@@ -1714,12 +1706,11 @@ of the OTE-API Services.</p>
     <span class="c1"># Save instance</span>
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">:</span>
         <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># missing test</span>
         <span class="k">if</span> <span class="n">cacheconfig</span> <span class="ow">and</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span><span class="p">:</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span>
-        <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># missing test</span>
             <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;generate_data&quot;</span>
-
         <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
         <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
             <span class="n">inst</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{tmpdir}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
@@ -1735,29 +1726,27 @@ of the OTE-API Services.</p>
     <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.generate.DLiteGenerateStrategy.initialize" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.generate.DLiteGenerateStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Initialize.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
 <span class="normal">137</span>
 <span class="normal">138</span>
 <span class="normal">139</span>
@@ -1769,8 +1758,8 @@ of the OTE-API Services.</p>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
 
@@ -1778,8 +1767,7 @@ of the OTE-API Services.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1788,17 +1776,17 @@ of the OTE-API Services.</p>
 
 
 <h2 id="oteapi_dlite.strategies.generate.DLiteStorageConfig" class="doc doc-heading">
-          <code>DLiteStorageConfig</code>
+            <code>DLiteStorageConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
-  
+
       <p>Configuration for a generic DLite storage filter.</p>
 <p>The DLite storage driver to can be specified using either the <code>driver</code>
 or <code>mediaType</code> field.</p>
@@ -1806,9 +1794,9 @@ or <code>mediaType</code> field.</p>
 <code>location</code> or <code>datacache_config.accessKey</code> field.</p>
 <p>Either <code>label</code> or <code>datamodel</code> should be provided.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 19</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 19</span>
 <span class="normal"> 20</span>
 <span class="normal"> 21</span>
 <span class="normal"> 22</span>
@@ -1996,9 +1984,9 @@ or <code>mediaType</code> field.</p>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -2013,8 +2001,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.allow_incomplete" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">allow_incomplete</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Whether to allow incomplete property mappings.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span></code>
-  
+            <code class="highlight language-python"><span class="n">allow_incomplete</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Whether to allow incomplete property mappings.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2023,8 +2011,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.allow_incomplete" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2033,8 +2021,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.collection_id" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">collection_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;ID of the collection to use.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">collection_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;ID of the collection to use.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2043,8 +2031,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.collection_id" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2053,8 +2041,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.datacache_config" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">datacache_config</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">DataCacheConfig</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Configuration options for the local data cache.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">datacache_config</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">DataCacheConfig</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Configuration options for the local data cache.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2063,8 +2051,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.datacache_config" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2073,8 +2061,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.datamodel" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;URI to the datamodel of the new instance.  Needed when generating the instance from mappings.  Cannot be combined with `label`&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;URI to the datamodel of the new instance.  Needed when generating the instance from mappings.  Cannot be combined with `label`&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2083,8 +2071,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.datamodel" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2093,8 +2081,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.driver" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">driver</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of DLite driver (ex: &quot;json&quot;).&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">driver</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of DLite driver (ex: &quot;json&quot;).&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2103,8 +2091,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.driver" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2113,8 +2101,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.label" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label of DLite instance in the collection to serialise.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label of DLite instance in the collection to serialise.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2123,8 +2111,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.label" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2133,8 +2121,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.location" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">location</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Location of storage to write to.  If unset to store in data cache using the key provided with `datacache_config.accessKey` (defaults to &#39;generate_data&#39;).&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">location</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Location of storage to write to.  If unset to store in data cache using the key provided with `datacache_config.accessKey` (defaults to &#39;generate_data&#39;).&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2143,8 +2131,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.location" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2153,8 +2141,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.mediaType" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">mediaType</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Media type for DLite driver (ex: &quot;application/json&quot;).&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">mediaType</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Media type for DLite driver (ex: &quot;application/json&quot;).&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2163,8 +2151,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.mediaType" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2173,8 +2161,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.options" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">options</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Comma-separated list of options passed to the DLite storage plugin.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">options</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Comma-separated list of options passed to the DLite storage plugin.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2183,8 +2171,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.options" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2193,8 +2181,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.store_collection" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">store_collection</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Whether to store the entire collection in the session instead of a single instance.  Cannot be combined with `label` or `datamodel`.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span></code>
-  
+            <code class="highlight language-python"><span class="n">store_collection</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Whether to store the entire collection in the session instead of a single instance.  Cannot be combined with `label` or `datamodel`.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2203,8 +2191,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.store_collection" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2213,8 +2201,8 @@ or <code>mediaType</code> field.</p>
 
 
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.store_collection_id" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">store_collection_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Used together with `store_collection` If given, store a copy of the collection with this id.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">store_collection_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Used together with `store_collection` If given, store a copy of the collection with this id.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2223,8 +2211,8 @@ or <code>mediaType</code> field.</p>
 <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.store_collection_id" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2234,8 +2222,7 @@ or <code>mediaType</code> field.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -2244,7 +2231,7 @@ or <code>mediaType</code> field.</p>
 
   </div>
 
-  </div>
+    </div>
 
 </div>
 
@@ -2318,7 +2305,7 @@ or <code>mediaType</code> field.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.a7c05c9e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
     
   </body>

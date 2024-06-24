@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -155,7 +155,7 @@
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -1196,11 +1196,11 @@
 
 
 <a id="oteapi_dlite.strategies.parse_excel"></a>
-  <div class="doc doc-contents first">
-  
+    <div class="doc doc-contents first">
+
       <p>Strategy for parsing an Excel spreadsheet to a DLite instance.</p>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1216,22 +1216,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig" class="doc doc-heading">
-          <code>DLiteExcelParseConfig</code>
+            <code>DLiteExcelParseConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
-  
+
       <p>Configuration for DLite Excel parser.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -1303,9 +1303,9 @@
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1320,8 +1320,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.excel_config" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">excel_config</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">XLSXParseConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite-specific excel configurations.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">excel_config</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">XLSXParseConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite-specific excel configurations.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1329,8 +1329,8 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.excel_config" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1339,8 +1339,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.id" class="doc doc-heading">
-          <code class="highlight language-python"><span class="nb">id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Optional id on new instance.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="nb">id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Optional id on new instance.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1349,8 +1349,8 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.id" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1359,8 +1359,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.label" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Optional label for new instance in collection.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;excel-data&#39;</span></code>
-  
+            <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Optional label for new instance in collection.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;excel-data&#39;</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1369,8 +1369,8 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.label" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1379,8 +1379,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.metadata" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">metadata</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">HttpUrl</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;URI of DLite metadata to return.  If not provided, the metadata will be inferred from the excel file.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">metadata</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">HttpUrl</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;URI of DLite metadata to return.  If not provided, the metadata will be inferred from the excel file.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1389,8 +1389,8 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.metadata" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1399,8 +1399,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.storage_path" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">storage_path</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Path to metadata storage&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">storage_path</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Path to metadata storage&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1409,8 +1409,8 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.storage_path" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1420,8 +1420,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1430,22 +1429,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseResourceConfig" class="doc doc-heading">
-          <code>DLiteExcelParseResourceConfig</code>
+            <code>DLiteExcelParseResourceConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelParseResourceConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.ResourceConfig">ResourceConfig</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.ResourceConfig">ResourceConfig</span></code></p>
 
-  
+
       <p>DLite excel parse strategy resource config.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">66</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">66</span>
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
@@ -1459,9 +1458,9 @@
         <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite excel parse strategy-specific configuration.&quot;</span><span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1476,8 +1475,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseResourceConfig.configuration" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">DLiteExcelParseConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite excel parse strategy-specific configuration.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">DLiteExcelParseConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite excel parse strategy-specific configuration.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1485,8 +1484,8 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelParseResourceConfig.configuration" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1496,8 +1495,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1506,22 +1504,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate" class="doc doc-heading">
-          <code>DLiteExcelSessionUpdate</code>
+            <code>DLiteExcelSessionUpdate</code>
 
 
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><a class="autorefs autorefs-internal" title="oteapi_dlite.models.DLiteSessionUpdate" href="../../models/session/#oteapi_dlite.models.session.DLiteSessionUpdate">DLiteSessionUpdate</a></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="oteapi_dlite.models.DLiteSessionUpdate" href="../../models/session/#oteapi_dlite.models.session.DLiteSessionUpdate">DLiteSessionUpdate</a></code></p>
 
-  
+
       <p>Class for returning values from DLite excel parser.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">75</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">75</span>
 <span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span>
@@ -1551,9 +1549,9 @@
         <span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1568,8 +1566,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate.inst_uuid" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">inst_uuid</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;UUID of new instance.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">inst_uuid</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;UUID of new instance.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1577,8 +1575,8 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate.inst_uuid" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1587,8 +1585,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate.label" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label of the new instance in the collection.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label of the new instance in the collection.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1596,8 +1594,8 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate.label" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1607,8 +1605,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1617,15 +1614,15 @@
 
 
 <h2 id="oteapi_dlite.strategies.parse_excel.DLiteExcelStrategy" class="doc doc-heading">
-          <code>DLiteExcelStrategy</code>
+            <code>DLiteExcelStrategy</code>
 
 
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
+    <div class="doc doc-contents ">
 
-  
+
       <p>Parse strategy for Excel files.</p>
 <p><strong>Registers strategies</strong>:</p>
 <ul>
@@ -1633,9 +1630,9 @@
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")</code></li>
 </ul>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 92</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 92</span>
 <span class="normal"> 93</span>
 <span class="normal"> 94</span>
 <span class="normal"> 95</span>
@@ -1793,9 +1790,9 @@
             <span class="n">label</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
         <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1810,8 +1807,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelStrategy.parse_config" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">parse_config</span><span class="p">:</span> <span class="n">DLiteExcelParseResourceConfig</span></code>
-  
+            <code class="highlight language-python"><span class="n">parse_config</span><span class="p">:</span> <span class="n">DLiteExcelParseResourceConfig</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1819,87 +1816,83 @@
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelStrategy.parse_config" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
-
 
 
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelStrategy.get" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Execute the strategy.</p>
 <p>This method will be called through the strategy-specific endpoint
 of the OTE-API Services.</p>
 
 
-
-  <p><span class="doc-section-title">Parameters:</span></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr class="doc-section-item">
-          <td><code>session</code></td>
-          <td>
-                <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>A session-specific dictionary context.</p>
-            </div>
-          </td>
-          <td>
-                <code>None</code>
-          </td>
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
         </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>session</code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A session-specific dictionary context.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
-
-  <p><span class="doc-section-title">Returns:</span></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr class="doc-section-item">
-          <td>
-                <code><a class="autorefs autorefs-internal" title="oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate" href="#oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate">DLiteExcelSessionUpdate</a></code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>DLite instance.</p>
-            </div>
-          </td>
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
         </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate" href="#oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate">DLiteExcelSessionUpdate</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>DLite instance.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
@@ -2017,29 +2010,27 @@ of the OTE-API Services.</p>
         <span class="n">label</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelStrategy.initialize" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.parse_excel.DLiteExcelStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Initialize.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">105</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
@@ -2051,8 +2042,8 @@ of the OTE-API Services.</p>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
 
@@ -2060,30 +2051,27 @@ of the OTE-API Services.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
-
 
 
 <div class="doc doc-object doc-function">
 
 
-
 <h2 id="oteapi_dlite.strategies.parse_excel.infer_metadata" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.parse_excel.infer_metadata" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Infer dlite metadata from recarray <code>rec</code>.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">182</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">182</span>
 <span class="normal">183</span>
 <span class="normal">184</span>
 <span class="normal">185</span>
@@ -2111,29 +2099,27 @@ of the OTE-API Services.</p>
         <span class="n">metadata</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">ptype</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;nrows&quot;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="n">units</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
 <h2 id="oteapi_dlite.strategies.parse_excel.split_column_name" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.parse_excel.split_column_name" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Split column name into a (name, unit) tuple.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">173</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">173</span>
 <span class="normal">174</span>
 <span class="normal">175</span>
 <span class="normal">176</span>
@@ -2147,8 +2133,8 @@ of the OTE-API Services.</p>
     <span class="n">name</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">unit</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
 
@@ -2156,7 +2142,7 @@ of the OTE-API Services.</p>
 
   </div>
 
-  </div>
+    </div>
 
 </div>
 
@@ -2230,7 +2216,7 @@ of the OTE-API Services.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.a7c05c9e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
     
   </body>

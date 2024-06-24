@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -155,7 +155,7 @@
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -1076,11 +1076,11 @@
 
 
 <a id="oteapi_dlite.strategies.serialise"></a>
-  <div class="doc doc-contents first">
-  
+    <div class="doc doc-contents first">
+
       <p>Filter for serialisation using DLite.</p>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1096,22 +1096,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.serialise.SerialiseConfig" class="doc doc-heading">
-          <code>SerialiseConfig</code>
+            <code>SerialiseConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.serialise.SerialiseConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
-  
+
       <p>DLite serialise-specific configurations.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
@@ -1173,9 +1173,9 @@
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1190,8 +1190,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.serialise.SerialiseConfig.driver" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">driver</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of DLite plugin used for serialisation.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">driver</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of DLite plugin used for serialisation.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1199,8 +1199,8 @@
 <a href="#oteapi_dlite.strategies.serialise.SerialiseConfig.driver" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1209,8 +1209,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.serialise.SerialiseConfig.labels" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">labels</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Optional sequence of labels in the collection to serialise.  The default is to serialise the entire collection.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">labels</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Optional sequence of labels in the collection to serialise.  The default is to serialise the entire collection.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1219,8 +1219,8 @@
 <a href="#oteapi_dlite.strategies.serialise.SerialiseConfig.labels" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1229,8 +1229,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.serialise.SerialiseConfig.location" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">location</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Path or URL to serialise to.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">location</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Path or URL to serialise to.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1238,8 +1238,8 @@
 <a href="#oteapi_dlite.strategies.serialise.SerialiseConfig.location" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1248,8 +1248,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.serialise.SerialiseConfig.options" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">options</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Options passed to the driver.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></code>
-  
+            <code class="highlight language-python"><span class="n">options</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Options passed to the driver.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1258,8 +1258,8 @@
 <a href="#oteapi_dlite.strategies.serialise.SerialiseConfig.options" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1269,8 +1269,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1279,22 +1278,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.serialise.SerialiseFilterConfig" class="doc doc-heading">
-          <code>SerialiseFilterConfig</code>
+            <code>SerialiseFilterConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.serialise.SerialiseFilterConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.FilterConfig">FilterConfig</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.FilterConfig">FilterConfig</span></code></p>
 
-  
+
       <p>Filter config for serialise.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
@@ -1312,9 +1311,9 @@
         <span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1329,8 +1328,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.serialise.SerialiseFilterConfig.configuration" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">SerialiseConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Serialise-specific configurations.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">SerialiseConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Serialise-specific configurations.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1338,8 +1337,8 @@
 <a href="#oteapi_dlite.strategies.serialise.SerialiseFilterConfig.configuration" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1349,8 +1348,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1359,24 +1357,24 @@
 
 
 <h2 id="oteapi_dlite.strategies.serialise.SerialiseStrategy" class="doc doc-heading">
-          <code>SerialiseStrategy</code>
+            <code>SerialiseStrategy</code>
 
 
 <a href="#oteapi_dlite.strategies.serialise.SerialiseStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
+    <div class="doc doc-contents ">
 
-  
+
       <p>Filter for serialisation using DLite.</p>
 <p><strong>Registers strategies</strong>:</p>
 <ul>
 <li><code>("filterType", "dlite_serialise")</code></li>
 </ul>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 63</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 63</span>
 <span class="normal"> 64</span>
 <span class="normal"> 65</span>
 <span class="normal"> 66</span>
@@ -1456,9 +1454,9 @@
         <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1473,8 +1471,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.serialise.SerialiseStrategy.filter_config" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">filter_config</span><span class="p">:</span> <span class="n">SerialiseFilterConfig</span></code>
-  
+            <code class="highlight language-python"><span class="n">filter_config</span><span class="p">:</span> <span class="n">SerialiseFilterConfig</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1482,31 +1480,29 @@
 <a href="#oteapi_dlite.strategies.serialise.SerialiseStrategy.filter_config" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
-
 
 
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.serialise.SerialiseStrategy.get" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.serialise.SerialiseStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Execute the strategy.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 81</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 81</span>
 <span class="normal"> 82</span>
 <span class="normal"> 83</span>
 <span class="normal"> 84</span>
@@ -1550,29 +1546,27 @@
     <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.serialise.SerialiseStrategy.initialize" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.serialise.SerialiseStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Initialize.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">75</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/serialise.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">75</span>
 <span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span>
@@ -1582,8 +1576,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
 
@@ -1591,8 +1585,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1601,7 +1594,7 @@
 
   </div>
 
-  </div>
+    </div>
 
 </div>
 
@@ -1675,7 +1668,7 @@
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.a7c05c9e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
     
   </body>

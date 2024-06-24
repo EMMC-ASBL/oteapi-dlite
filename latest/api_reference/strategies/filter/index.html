@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -155,7 +155,7 @@
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -1094,11 +1094,11 @@
 
 
 <a id="oteapi_dlite.strategies.filter"></a>
-  <div class="doc doc-contents first">
-  
+    <div class="doc doc-contents first">
+
       <p>Filter that removes all but specified instances in the collection.</p>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1114,22 +1114,22 @@
 
 
 <h2 id="oteapi_dlite.strategies.filter.DLiteFilterConfig" class="doc doc-heading">
-          <code>DLiteFilterConfig</code>
+            <code>DLiteFilterConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.filter.DLiteFilterConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.FilterConfig">FilterConfig</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.FilterConfig">FilterConfig</span></code></p>
 
-  
+
       <p>DLite generate strategy config.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">81</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">81</span>
 <span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
@@ -1143,9 +1143,9 @@
         <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite filter strategy-specific configuration.&quot;</span><span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1160,8 +1160,8 @@
 
 
 <h3 id="oteapi_dlite.strategies.filter.DLiteFilterConfig.configuration" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">DLiteQueryConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite filter strategy-specific configuration.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">DLiteQueryConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite filter strategy-specific configuration.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1169,8 +1169,8 @@
 <a href="#oteapi_dlite.strategies.filter.DLiteFilterConfig.configuration" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1180,8 +1180,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1190,15 +1189,15 @@
 
 
 <h2 id="oteapi_dlite.strategies.filter.DLiteFilterStrategy" class="doc doc-heading">
-          <code>DLiteFilterStrategy</code>
+            <code>DLiteFilterStrategy</code>
 
 
 <a href="#oteapi_dlite.strategies.filter.DLiteFilterStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
+    <div class="doc doc-contents ">
 
-  
+
       <p>Filter that removes all but specified instances in the collection.</p>
 <p>The <code>query</code> configuration should be a regular expression matching labels
 to keep in the collection.  All other labels will be removed.</p>
@@ -1207,9 +1206,9 @@ to keep in the collection.  All other labels will be removed.</p>
 <li><code>("filterType", "dlite/filter")</code></li>
 </ul>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 90</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 90</span>
 <span class="normal"> 91</span>
 <span class="normal"> 92</span>
 <span class="normal"> 93</span>
@@ -1377,9 +1376,9 @@ to keep in the collection.  All other labels will be removed.</p>
         <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1394,8 +1393,8 @@ to keep in the collection.  All other labels will be removed.</p>
 
 
 <h3 id="oteapi_dlite.strategies.filter.DLiteFilterStrategy.filter_config" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">filter_config</span><span class="p">:</span> <span class="n">DLiteFilterConfig</span></code>
-  
+            <code class="highlight language-python"><span class="n">filter_config</span><span class="p">:</span> <span class="n">DLiteFilterConfig</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1403,31 +1402,29 @@ to keep in the collection.  All other labels will be removed.</p>
 <a href="#oteapi_dlite.strategies.filter.DLiteFilterStrategy.filter_config" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
-
 
 
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.filter.DLiteFilterStrategy.get" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.filter.DLiteFilterStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Execute the strategy.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
@@ -1551,29 +1548,27 @@ to keep in the collection.  All other labels will be removed.</p>
     <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.filter.DLiteFilterStrategy.initialize" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.filter.DLiteFilterStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Initialize.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">105</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
@@ -1585,8 +1580,8 @@ to keep in the collection.  All other labels will be removed.</p>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
 
@@ -1594,8 +1589,7 @@ to keep in the collection.  All other labels will be removed.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1604,17 +1598,17 @@ to keep in the collection.  All other labels will be removed.</p>
 
 
 <h2 id="oteapi_dlite.strategies.filter.DLiteQueryConfig" class="doc doc-heading">
-          <code>DLiteQueryConfig</code>
+            <code>DLiteQueryConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.filter.DLiteQueryConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
-  
+
       <p>Configuration for the DLite filter strategy.</p>
 <p>First the <code>remove_label</code> and <code>remove_datamodel</code> configurations are
 used to mark matching instances for removal.  If neither
@@ -1627,9 +1621,9 @@ an instance not marked for removal is also unmarked for removal.</p>
 <p>Finally, the instances that are still marked for removal are removed
 from the collection.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
@@ -1749,9 +1743,9 @@ from the collection.</p>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1766,8 +1760,8 @@ from the collection.</p>
 
 
 <h3 id="oteapi_dlite.strategies.filter.DLiteQueryConfig.keep_datamodel" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">keep_datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Regular expression matching datamodel URIs to keep in collection. This configuration overrides `remove_label` and `remove_datamodel`.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">keep_datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Regular expression matching datamodel URIs to keep in collection. This configuration overrides `remove_label` and `remove_datamodel`.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1776,8 +1770,8 @@ from the collection.</p>
 <a href="#oteapi_dlite.strategies.filter.DLiteQueryConfig.keep_datamodel" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1786,8 +1780,8 @@ from the collection.</p>
 
 
 <h3 id="oteapi_dlite.strategies.filter.DLiteQueryConfig.keep_label" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">keep_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Regular expression matching labels to keep. This configuration overrides `remove_label` and `remove_datamodel`. Alias for the FilterStrategy `query` configuration, that is inherited from the oteapi-core Filter data model.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">keep_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Regular expression matching labels to keep. This configuration overrides `remove_label` and `remove_datamodel`. Alias for the FilterStrategy `query` configuration, that is inherited from the oteapi-core Filter data model.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1796,8 +1790,8 @@ from the collection.</p>
 <a href="#oteapi_dlite.strategies.filter.DLiteQueryConfig.keep_label" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1806,8 +1800,8 @@ from the collection.</p>
 
 
 <h3 id="oteapi_dlite.strategies.filter.DLiteQueryConfig.keep_referred" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">keep_referred</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Whether to keep all instances in the collection that are directly or indirectly referred to (via ref-types or collections) by kept instances.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span></code>
-  
+            <code class="highlight language-python"><span class="n">keep_referred</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Whether to keep all instances in the collection that are directly or indirectly referred to (via ref-types or collections) by kept instances.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1816,8 +1810,8 @@ from the collection.</p>
 <a href="#oteapi_dlite.strategies.filter.DLiteQueryConfig.keep_referred" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1826,8 +1820,8 @@ from the collection.</p>
 
 
 <h3 id="oteapi_dlite.strategies.filter.DLiteQueryConfig.remove_datamodel" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">remove_datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Regular expression matching datamodel URIs to remove.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">remove_datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Regular expression matching datamodel URIs to remove.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1836,8 +1830,8 @@ from the collection.</p>
 <a href="#oteapi_dlite.strategies.filter.DLiteQueryConfig.remove_datamodel" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1846,8 +1840,8 @@ from the collection.</p>
 
 
 <h3 id="oteapi_dlite.strategies.filter.DLiteQueryConfig.remove_label" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">remove_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Regular expression matching labels to remove.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">remove_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Regular expression matching labels to remove.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1856,8 +1850,8 @@ from the collection.</p>
 <a href="#oteapi_dlite.strategies.filter.DLiteQueryConfig.remove_label" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1867,8 +1861,7 @@ from the collection.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1877,7 +1870,7 @@ from the collection.</p>
 
   </div>
 
-  </div>
+    </div>
 
 </div>
 
@@ -1951,7 +1944,7 @@ from the collection.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.a7c05c9e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
     
   </body>

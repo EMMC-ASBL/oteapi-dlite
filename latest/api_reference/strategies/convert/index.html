@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -155,7 +155,7 @@
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -1262,12 +1262,12 @@
 
 
 <a id="oteapi_dlite.strategies.convert"></a>
-  <div class="doc doc-contents first">
-  
+    <div class="doc doc-contents first">
+
       <p>Generic function strategy that converts zero or more input instances
 to zero or more new output instances.</p>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1283,22 +1283,22 @@ to zero or more new output instances.</p>
 
 
 <h2 id="oteapi_dlite.strategies.convert.DLiteConvertConfig" class="doc doc-heading">
-          <code>DLiteConvertConfig</code>
+            <code>DLiteConvertConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.FunctionConfig">FunctionConfig</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.FunctionConfig">FunctionConfig</span></code></p>
 
-  
+
       <p>DLite convert strategy resource config.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
 <span class="normal">123</span>
@@ -1312,9 +1312,9 @@ to zero or more new output instances.</p>
         <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite convert strategy-specific configuration.&quot;</span><span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1329,8 +1329,8 @@ to zero or more new output instances.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertConfig.configuration" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">DLiteConvertStrategyConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite convert strategy-specific configuration.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">DLiteConvertStrategyConfig</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;DLite convert strategy-specific configuration.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1338,8 +1338,8 @@ to zero or more new output instances.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertConfig.configuration" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1349,8 +1349,7 @@ to zero or more new output instances.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1359,23 +1358,23 @@ to zero or more new output instances.</p>
 
 
 <h2 id="oteapi_dlite.strategies.convert.DLiteConvertInputConfig" class="doc doc-heading">
-          <code>DLiteConvertInputConfig</code>
+            <code>DLiteConvertInputConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertInputConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
-  
+
       <p>Configuration for input instance to generic DLite converter.</p>
 <p>At least one of <code>label</code> or <code>datamodel</code> should be given.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
@@ -1423,9 +1422,9 @@ to zero or more new output instances.</p>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1440,8 +1439,8 @@ to zero or more new output instances.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertInputConfig.datamodel" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;URI of data model.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;URI of data model.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1450,8 +1449,8 @@ to zero or more new output instances.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertInputConfig.datamodel" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1460,8 +1459,8 @@ to zero or more new output instances.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertInputConfig.label" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label of the instance.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label of the instance.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1470,8 +1469,8 @@ to zero or more new output instances.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertInputConfig.label" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1480,8 +1479,8 @@ to zero or more new output instances.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertInputConfig.property_mappings" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">property_mappings</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Whether to infer instance from property mappings.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span></code>
-  
+            <code class="highlight language-python"><span class="n">property_mappings</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Whether to infer instance from property mappings.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1490,8 +1489,8 @@ to zero or more new output instances.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertInputConfig.property_mappings" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1501,8 +1500,7 @@ to zero or more new output instances.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1511,22 +1509,22 @@ to zero or more new output instances.</p>
 
 
 <h2 id="oteapi_dlite.strategies.convert.DLiteConvertOutputConfig" class="doc doc-heading">
-          <code>DLiteConvertOutputConfig</code>
+            <code>DLiteConvertOutputConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertOutputConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
-  
+
       <p>Configuration for output instance to generic DLite converter.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
@@ -1556,9 +1554,9 @@ to zero or more new output instances.</p>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1573,8 +1571,8 @@ to zero or more new output instances.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertOutputConfig.datamodel" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;URI of data model.  Used for documentation.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;URI of data model.  Used for documentation.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1583,8 +1581,8 @@ to zero or more new output instances.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertOutputConfig.datamodel" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1593,8 +1591,8 @@ to zero or more new output instances.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertOutputConfig.label" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label to use when storing the instance.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label to use when storing the instance.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -1603,8 +1601,8 @@ to zero or more new output instances.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertOutputConfig.label" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -1614,8 +1612,7 @@ to zero or more new output instances.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1624,15 +1621,15 @@ to zero or more new output instances.</p>
 
 
 <h2 id="oteapi_dlite.strategies.convert.DLiteConvertStrategy" class="doc doc-heading">
-          <code>DLiteConvertStrategy</code>
+            <code>DLiteConvertStrategy</code>
 
 
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
+    <div class="doc doc-contents ">
 
-  
+
       <p>Generic DLite convert strategy for converting zero or more input
 instances to zero or more output instances.</p>
 <p><strong>Registers strategies</strong>:</p>
@@ -1640,9 +1637,9 @@ instances to zero or more output instances.</p>
 <li><code>("functionType", "application/vnd.dlite-convert")</code></li>
 </ul>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span>
@@ -1780,9 +1777,9 @@ instances to zero or more output instances.</p>
         <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1797,8 +1794,8 @@ instances to zero or more output instances.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategy.convert_config" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">convert_config</span><span class="p">:</span> <span class="n">DLiteConvertConfig</span></code>
-  
+            <code class="highlight language-python"><span class="n">convert_config</span><span class="p">:</span> <span class="n">DLiteConvertConfig</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -1806,87 +1803,83 @@ instances to zero or more output instances.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.convert_config" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
-
 
 
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategy.get" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.get" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Execute the strategy.</p>
 <p>This method will be called through the strategy-specific endpoint
 of the OTE-API Services.</p>
 
 
-
-  <p><span class="doc-section-title">Parameters:</span></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr class="doc-section-item">
-          <td><code>session</code></td>
-          <td>
-                <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>A session-specific dictionary context.</p>
-            </div>
-          </td>
-          <td>
-                <code>None</code>
-          </td>
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
         </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>session</code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A session-specific dictionary context.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
-
-  <p><span class="doc-section-title">Returns:</span></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr class="doc-section-item">
-          <td>
-                <code><a class="autorefs autorefs-internal" title="oteapi_dlite.models.DLiteSessionUpdate" href="../../models/session/#oteapi_dlite.models.session.DLiteSessionUpdate">DLiteSessionUpdate</a></code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>SessionUpdate instance.</p>
-            </div>
-          </td>
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
         </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="oteapi_dlite.models.DLiteSessionUpdate" href="../../models/session/#oteapi_dlite.models.session.DLiteSessionUpdate">DLiteSessionUpdate</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>SessionUpdate instance.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
 <span class="normal">150</span>
 <span class="normal">151</span>
 <span class="normal">152</span>
@@ -1984,29 +1977,27 @@ of the OTE-API Services.</p>
     <span class="n">update_collection</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategy.initialize" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategy.initialize" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Initialize.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">142</span>
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">142</span>
 <span class="normal">143</span>
 <span class="normal">144</span>
 <span class="normal">145</span>
@@ -2018,8 +2009,8 @@ of the OTE-API Services.</p>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteSessionUpdate</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
 
@@ -2027,8 +2018,7 @@ of the OTE-API Services.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -2037,22 +2027,22 @@ of the OTE-API Services.</p>
 
 
 <h2 id="oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig" class="doc doc-heading">
-          <code>DLiteConvertStrategyConfig</code>
+            <code>DLiteConvertStrategyConfig</code>
 
 
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
-  
+
       <p>Configuration for generic DLite converter.</p>
 
-            <details class="quote">
-              <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 66</span>
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/strategies/convert.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 66</span>
 <span class="normal"> 67</span>
 <span class="normal"> 68</span>
 <span class="normal"> 69</span>
@@ -2156,9 +2146,9 @@ of the OTE-API Services.</p>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -2173,8 +2163,8 @@ of the OTE-API Services.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.function_name" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">function_name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of convert function.  It will be pased the input instances as arguments and should return a sequence of output instances.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">function_name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of convert function.  It will be pased the input instances as arguments and should return a sequence of output instances.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -2182,8 +2172,8 @@ of the OTE-API Services.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.function_name" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2192,8 +2182,8 @@ of the OTE-API Services.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.inputs" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">inputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">DLiteConvertInputConfig</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Input instances.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[]</span></code>
-  
+            <code class="highlight language-python"><span class="n">inputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">DLiteConvertInputConfig</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Input instances.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2202,8 +2192,8 @@ of the OTE-API Services.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.inputs" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2212,8 +2202,8 @@ of the OTE-API Services.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.module_name" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">module_name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of Python module containing the convertion function.&#39;</span><span class="p">)]</span></code>
-  
+            <code class="highlight language-python"><span class="n">module_name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of Python module containing the convertion function.&#39;</span><span class="p">)]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
@@ -2221,8 +2211,8 @@ of the OTE-API Services.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.module_name" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2231,8 +2221,8 @@ of the OTE-API Services.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.outputs" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">outputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">DLiteConvertOutputConfig</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Output instances.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[]</span></code>
-  
+            <code class="highlight language-python"><span class="n">outputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">DLiteConvertOutputConfig</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Output instances.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[]</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2241,8 +2231,8 @@ of the OTE-API Services.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.outputs" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2251,8 +2241,8 @@ of the OTE-API Services.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.package" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">package</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Used when performing a relative import of the converter function.  It specifies the package to use as the anchor point from which to resolve the relative import to an absolute import.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">package</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Used when performing a relative import of the converter function.  It specifies the package to use as the anchor point from which to resolve the relative import to an absolute import.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2261,8 +2251,8 @@ of the OTE-API Services.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.package" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2271,8 +2261,8 @@ of the OTE-API Services.</p>
 
 
 <h3 id="oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.pypi_package" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">pypi_package</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Package name on PyPI.  This field is currently only informative, but might be used in the future for automatic package installation.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
-  
+            <code class="highlight language-python"><span class="n">pypi_package</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Package name on PyPI.  This field is currently only informative, but might be used in the future for automatic package installation.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -2281,8 +2271,8 @@ of the OTE-API Services.</p>
 <a href="#oteapi_dlite.strategies.convert.DLiteConvertStrategyConfig.pypi_package" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
-  <div class="doc doc-contents ">
-  </div>
+    <div class="doc doc-contents ">
+    </div>
 
 </div>
 
@@ -2292,8 +2282,7 @@ of the OTE-API Services.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -2302,7 +2291,7 @@ of the OTE-API Services.</p>
 
   </div>
 
-  </div>
+    </div>
 
 </div>
 
@@ -2376,7 +2365,7 @@ of the OTE-API Services.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.a7c05c9e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
     
   </body>
