@@ -189,12 +189,11 @@ class DLiteGenerateStrategy:
         # Save instance
         if config.location:
             inst.save(driver, config.location, config.options)
-        else:
+        else:  # missing test
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
-            elif "key" in session:  # type: ignore
+            else:  # missing test
                 key = "generate_data"
-
             cache = DataCache()
             with tempfile.TemporaryDirectory() as tmpdir:
                 inst.save(driver, "{tmpdir}/data", config.options)
