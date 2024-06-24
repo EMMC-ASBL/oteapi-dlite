@@ -58,7 +58,7 @@ class DLiteParseConfig(AttrDict):
                 "Optional label of the new DLite instance in the collection."
             ),
         ),
-    ]
+    ] = None
     datamodel: Annotated[
         Optional[str],
         Field(
@@ -69,7 +69,7 @@ class DLiteParseConfig(AttrDict):
                 "point of view this is a very important field."
             ),
         ),
-    ]
+    ] = None
     datacache_config: Annotated[
         Optional[DataCacheConfig],
         Field(
