@@ -65,8 +65,8 @@ class DLiteParseConfig(AttrDict):
             description=(
                 "DLite datamodel documenting the structure of the data set. "
                 "Often unused, since the datamodel is implicitly defined in "
-                "the DLite driver (DLite plugin), but for a documentation point of view this is "
-                "a very important field."
+                "the DLite driver (DLite plugin), but for a documentation "
+                "point of view this is a very important field."
             ),
         ),
     ]
