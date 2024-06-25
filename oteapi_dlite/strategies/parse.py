@@ -21,11 +21,11 @@ class DLiteParseConfig(AttrDict):
     """Configuration for generic DLite parser."""
 
     driver: Annotated[
-        Optional[str],
+        str,
         Field(
             description='Name of DLite driver (ex: "json").',
         ),
-    ] = None
+    ]
     location: Annotated[
         Optional[str],
         Field(
@@ -167,7 +167,8 @@ class DLiteParseStrategy:
 
         # Insert inst into collection
         coll = get_collection(session)
-        coll.add(config.label, inst)
+        label = config.label if config.label else inst.uuid
+        coll.add(label, inst)
 
         # __TODO__
         # See

@@ -1,0 +1,16 @@
+{
+  "b8906302-5cd9-5e34-9fec-9d6101e52554":   {
+    "meta": "http://onto-ns.com/meta/0.1/Molecule",
+    "dimensions": {
+      "natoms": 2,
+      "ncoords": 3
+    },
+    "properties": {
+      "name": "H2",
+      "positions": [[-1.64097, 1.37077, 0], [-1.03814, 1.74207, 0]],
+      "symbols": ["H", "H"],
+      "masses": [1.008, 1.008],
+      "groundstate_energy": 1.34613
+    }
+  }
+}

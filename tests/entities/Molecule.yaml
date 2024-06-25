@@ -1,0 +1,35 @@
+da31ff66-98af-590c-855d-386c63617755:
+  da31ff66-98af-590c-855d-386c63617755:
+    uuid: da31ff66-98af-590c-855d-386c63617755
+    uri: http://onto-ns.com/meta/0.1/Molecule
+    meta: http://onto-ns.com/meta/0.3/EntitySchema
+    description: A minimal description of a molecules
+    dimensions:
+      natoms: Number of atoms
+      ncoords: Number coordinates. Always 3
+    properties:
+      name:
+        type: string
+        description: Name of the molecule.
+      positions:
+        type: float64
+        shape:
+        - natoms
+        - ncoords
+        unit: "\xC5ngstr\xF6m"
+        description: Atomic positions in Cartesian coordinates.
+      symbols:
+        type: string
+        shape:
+        - natoms
+        description: Chemical symbols.
+      masses:
+        type: float64
+        shape:
+        - natoms
+        unit: u
+        description: Atomic masses.
+      groundstate_energy:
+        type: float64
+        unit: eV
+        description: Molecule ground state energy.
