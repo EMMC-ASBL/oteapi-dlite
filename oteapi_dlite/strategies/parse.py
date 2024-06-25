@@ -21,11 +21,11 @@ class DLiteParseConfig(AttrDict):
     """Configuration for generic DLite parser."""
 
     driver: Annotated[
-        Optional[str],
+        str,
         Field(
             description='Name of DLite driver (ex: "json").',
         ),
-    ] = None
+    ]
     location: Annotated[
         Optional[str],
         Field(
@@ -52,11 +52,24 @@ class DLiteParseConfig(AttrDict):
         ),
     ] = None
     label: Annotated[
-        str,
+        Optional[str],
         Field(
-            description="Label of the new DLite instance in the collection.",
+            description=(
+                "Optional label of the new DLite instance in the collection."
+            ),
         ),
-    ]
+    ] = None
+    datamodel: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "DLite datamodel documenting the structure of the data set. "
+                "Often unused, since the datamodel is implicitly defined in "
+                "the DLite driver (DLite plugin), but for a documentation "
+                "point of view this is a very important field."
+            ),
+        ),
+    ] = None
     datacache_config: Annotated[
         Optional[DataCacheConfig],
         Field(
@@ -154,7 +167,8 @@ class DLiteParseStrategy:
 
         # Insert inst into collection
         coll = get_collection(session)
-        coll.add(config.label, inst)
+        label = config.label if config.label else inst.uuid
+        coll.add(label, inst)
 
         # __TODO__
         # See
