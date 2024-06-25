@@ -11,6 +11,7 @@ testdir = thisdir.parent
 entitydir = testdir / "entities"
 inputdir = testdir / "input"
 outputdir = testdir / "output"
+staticdir = testdir / "static"
 
 
 # Add utils to sys path

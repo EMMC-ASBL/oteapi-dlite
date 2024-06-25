@@ -12,17 +12,17 @@ if TYPE_CHECKING:
     from oteapi_dlite.models import DLiteSessionUpdate
 
 
-def test_parse_no_options(
-    static_files: "Path",
-) -> None:
+# if True:
+def test_parse_no_options() -> None:
     """Test the dlite-parse strategy."""
 
     import dlite
     from oteapi.datacache import DataCache
+    from paths import staticdir
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
-    sample_file = static_files / "molecule.json"
+    sample_file = staticdir / "molecule.json"
 
     cache = DataCache()
 
@@ -45,23 +45,25 @@ def test_parse_no_options(
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 
-    # How to reach the instance if we do not have a label?
-    # coll2: dlite.Collection = dlite.get_instance(session["collection_id"])
-    # inst: dlite.Instance = coll2.get("instance")
-    # assert ...
+    # Get all instances of given metaid (there should only be one instance)
+    metaid = "http://onto-ns.com/meta/0.1/Molecule"
+    instances = list(coll.get_instances(metaid=metaid))
+    assert len(instances) == 1
+    (inst,) = instances
+    assert inst.meta.uri == metaid
 
 
-def test_parse_label(
-    static_files: "Path",
-) -> None:
+# if True:
+def test_parse_label() -> None:
     """Test the dlite-parse strategy."""
 
     import dlite
     from oteapi.datacache import DataCache
+    from paths import staticdir
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
-    sample_file = static_files / "molecule.json"
+    sample_file = staticdir / "molecule.json"
 
     cache = DataCache()
 
