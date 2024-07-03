@@ -40,7 +40,6 @@ docs = [
 testing = [
     "otelib>=0.4.0,<1",
     "pytest~=7.4",
-    "pytest-celery",
     "pytest-cov~=4.1",
 ]
 dev = [
