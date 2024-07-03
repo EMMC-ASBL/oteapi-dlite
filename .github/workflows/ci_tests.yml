@@ -8,166 +8,120 @@ on:
       - 'push-action/**'  # Allow pushing to protected branches (using CasperWA/push-protected)
 
 jobs:
+  basic-tests:
+    name: External
+    uses: SINTEF/ci-cd/.github/workflows/ci_tests.yml@v2.7.4
+    with:
+      ## General settings:
+      install_extras: "[dev]"
 
-  pylint-safety:
+      ## pre-commit
+      run_pre-commit: false
+
+      ## pylint & safety
+      python_version_pylint_safety: "3.9"
+
+      # pylint-specific settings
+      run_pylint: true
+      pylint_runs: |
+        --rcfile=pyproject.toml oteapi-dlite
+        --rcfile=pyproject.toml --disable=import-outside-toplevel,redefined-outer-name tests
+
+      # safety-specific settings
+      run_safety: true
+      # 48547: RDFLib vulnerability: https://pyup.io/vulnerabilities/PVE-2022-48547/48547/
+      # 44715-44717: NumPy vulnerabilities:
+      #  https://pyup.io/vulnerabilities/CVE-2021-41495/44715/
+      #  https://pyup.io/vulnerabilities/CVE-2021-41496/44716/
+      #  https://pyup.io/vulnerabilities/CVE-2021-34141/44717/
+      # 70612: Jinja2 vulnerability. Only used as subdependency for mkdocs++ in oteapi-dlite.
+      #  https://data.safetycli.com/v/70612/97c/
+      safety_options: |
+        --ignore=48547
+        --ignore=44715
+        --ignore=44716
+        --ignore=44717
+        --ignore=70612
+
+      ## Build package
+      run_build_package: true
+      python_version_package: "3.9"
+      build_libs: flit
+      build_cmd: flit build
+
+      ## Build documentation
+      run_build_docs: true
+      python_version_docs: "3.9"
+      warnings_as_errors: true
+      use_mkdocs: true
+
+      # mkdocs-specific settings
+      update_python_api_ref: true
+      update_docs_landing_page: true
+      package_dirs: oteapi-dlite
+
+  pytest:
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
 
-    - name: Set up Python 3.9
+    steps:
+    - name: Checkout oteapi-dlite
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
-        python-version: 3.9
+        python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
+        sudo apt install graphviz
         python -m pip install -U pip
-        pip install -U setuptools wheel
-        pip install -U -r requirements.txt -r requirements_dev.txt -r requirements_docs.txt
-        pip install -e .
-        pip install safety
+        pip install -U setuptools wheel flit
+        pip install -e .[testing]
 
     - name: List installed packages
-      run: |
-        pip list
+      run: pip freeze
 
-    - name: Run pylint
-      run: pylint --rcfile=pyproject.toml --ignore-paths=tests/ --extension-pkg-whitelist='pydantic' *.py oteapi_dlite
+    - name: Test with pytest
+      run: pytest -vvv --cov-report=xml --doctest-modules
 
-    - name: Run pylint - tests
-      run: pylint --rcfile=pyproject.toml --extension-pkg-whitelist='pydantic' --disable=import-outside-toplevel,redefined-outer-name,import-error --recursive=yes tests
+    - name: Upload coverage to Codecov
+      if: matrix.python-version == '3.9' && github.repository == 'EMMC-ASBL/oteaoteapi-dlite'
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
 
-    # Ignore ID 44715 for now.
-    # See this NumPy issue for more information: https://github.com/numpy/numpy/issues/19038
-    # Remove ignoring 48547 as soon as RDFLib/rdflib#1844 has been fixed and the fix
-    # has been released.
-    # 70612 is a Jinja issue, can be ignored as only used in subdependencies for documentation
-    - name: Run safety
-      run: pip freeze | safety check --stdin --ignore 44715 --ignore 48547 --ignore 70612
+    - name: Run doctest on tutorial
+      run: python -m doctest docs/tutorial.md
 
-  pytest-linux:
+  pytest-no-extra-dependencies: # Test for basic version, without extras installed
     runs-on: ubuntu-latest
-    # timeout-minutes: 15
 
     strategy:
       fail-fast: false
       matrix:
-        # There seems to be an issue with module search in Python 3.11
-        # python-version: ["3.9", "3.10", "3.11"]
-        python-version: ["3.9", "3.10"]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
+    - name: Checkout oteapi-dlite
+      uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version}}
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version}}
-
-    - name: Install python dependencies
-      run: |
-        python -m pip install -U pip
-        pip install -U setuptools wheel
-        pip install -U -r requirements.txt -r requirements_dev.txt
-        pip install -e .
-
-    - name: Test with pytest
-      run: pytest -vvv --cov-report=xml
-
-    - name: Upload coverage to Codecov
-      if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
-      uses: codecov/codecov-action@v4
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: coverage.xml
-        flags: linux
-
-  pytest-win:
-    runs-on: windows-latest
-    # timeout-minutes: 15
-
-    strategy:
-      fail-fast: false
-      matrix:
-        # There seems to be an issue with module search in Python 3.11
-        # python-version: ["3.9", "3.10", "3.11"]
-        python-version: ["3.9", "3.10"]
-
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
-
-    - name: Set up Python ${{ matrix.python-version}}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version}}
-
-    - name: Install python dependencies
-      run: |
-        python -m pip install -U pip
-        pip install -U setuptools wheel
-        pip install -U -r requirements.txt -r requirements_dev.txt
-        pip install -e .
-
-    - name: Test with pytest
-      run: pytest -vvv --cov-report=xml
-
-    - name: Upload coverage to Codecov
-      if: matrix.python-version == 3.9 && github.repository == 'EMMC-ASBL/oteapi-dlite'
-      uses: codecov/codecov-action@v4
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: coverage.xml
-        flags: windows
-
-  build-package:
-    name: Build distribution package
-    runs-on: ubuntu-latest
-    # timeout-minutes: 5
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.9
-
-      - name: Install dependencies
-        run: |
-          python -m pip install -U pip
-          pip install -U setuptools wheel build
-
-      - name: Check building distribution
-        run: python -m build
-
-  docs:
-    name: Documentation
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
-
-    - uses: actions/setup-python@v5
-      with:
-        python-version: 3.9
+        python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
+        sudo apt install graphviz
         python -m pip install -U pip
-        pip install -U setuptools wheel
-        pip install -U -r requirements_docs.txt -r requirements_dev.txt
-        pip install -e .
+        pip install -U setuptools wheel flit
+        pip install -e .[testing-core]
 
-    - name: Build
-      run: |
-        pre-commit run --all-files docs-api-reference
-        pre-commit run --all-files docs-landing-page
-        mkdocs build --strict
+    - name: Test with pytest, but without other extra dependencies
+      run: pytest -vvv tests/
