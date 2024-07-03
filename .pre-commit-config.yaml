@@ -52,6 +52,9 @@ repos:
     hooks:
     - id: mypy
       exclude: ^tests/.*$
+      additional_dependencies:
+      - "types-requests"
+      - "pydantic>=2,<3"
 
   - repo: https://github.com/SINTEF/ci-cd
     rev: v2.7.4
