@@ -37,9 +37,14 @@ docs = [
     "mkdocs-material>=9.5.5,<10",
     "mkdocstrings[python]~=0.25.1",
 ]
+testing = [
+    "pytest~=7.4",
+    "pytest-celery",
+    "pytest-cov~=4.1",
+]
 dev = [
     "pre-commit~=3.7",
-    "oteapi-dlite[docs]",
+    "oteapi-dlite[docs,testing]",
 ]
 
 [project.urls]
