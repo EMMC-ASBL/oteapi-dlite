@@ -26,6 +26,8 @@ dependencies = [
     "numpy>=1.21,<1.27.0",
     "oteapi-core>=0.6.0,<0.6.2",
     "pydantic~=2.5",
+    "pydantic-settings~=2.0",
+    "typing-extensions~=4.8; python_version<'3.10'",
     "Pillow>=9.0.1,<11",
     "tripper>=0.1.2",
 ]
@@ -104,7 +106,7 @@ scripts_are_modules = true
 warn_unused_configs = true
 show_error_codes = true
 allow_redefinition = true
-#plugins = ["pydantic.mypy"]
+plugins = ["pydantic.mypy"]
 
 [tool.pylint.messages_control]
 max-line-length = 80
