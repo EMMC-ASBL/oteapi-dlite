@@ -19,7 +19,7 @@ jobs:
 
       # Build package
       python_package: true
-      package_dirs: oteapi-dlite
+      package_dirs: oteapi_dlite
       python_version_build: "3.9"
       build_libs: "flit"
       build_cmd: "flit build"

@@ -22,7 +22,7 @@ jobs:
       # Build & publish documentation
       update_docs: true
       update_python_api_ref: true
-      package_dirs: oteapi-dlite
+      package_dirs: oteapi_dlite
       update_docs_landing_page: true
       python_version: "3.9"
       doc_extras: "[docs]"

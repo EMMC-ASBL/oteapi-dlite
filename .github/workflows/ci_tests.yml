@@ -24,7 +24,7 @@ jobs:
       # pylint-specific settings
       run_pylint: true
       pylint_runs: |
-        --rcfile=pyproject.toml oteapi-dlite
+        --rcfile=pyproject.toml oteapi_dlite
         --rcfile=pyproject.toml --disable=import-outside-toplevel,redefined-outer-name tests
 
       # safety-specific settings
@@ -58,7 +58,7 @@ jobs:
       # mkdocs-specific settings
       update_python_api_ref: true
       update_docs_landing_page: true
-      package_dirs: oteapi-dlite
+      package_dirs: oteapi_dlite
 
   pytest:
     runs-on: ubuntu-latest
@@ -91,7 +91,7 @@ jobs:
       run: pytest -vvv --cov-report=xml --doctest-modules
 
     - name: Upload coverage to Codecov
-      if: matrix.python-version == '3.9' && github.repository == 'EMMC-ASBL/oteaoteapi-dlite'
+      if: matrix.python-version == '3.9' && github.repository == 'EMMC-ASBL/oteapi-dlite'
       uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
