@@ -60,7 +60,8 @@ jobs:
       update_docs_landing_page: true
       package_dirs: oteapi_dlite
 
-  pytest:
+  pytest-linux:
+    name: pytest (linux-py${{ matrix.python-version }})
     runs-on: ubuntu-latest
 
     strategy:
@@ -95,3 +96,54 @@ jobs:
       uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+
+  pytest-win:
+    name: pytest (windows-py${{ matrix.python-version }})
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version}}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version}}
+
+    - name: Install system dependencies
+      run: |
+        $url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9550/gs9550w64.exe"
+        $outpath = "${{ github.workspace }}\ghostscript.exe"
+        Invoke-WebRequest -Uri $url -OutFile $outpath
+        $args = @("/S")
+        Start-Process -Filepath $outpath -ArgumentList $args
+      shell: powershell
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install -U pip
+        pip install -U setuptools wheel
+        pip install -e .[testing]
+
+    - name: Test with pytest
+      run: |
+        pytest -vvv --cov-report=xml --cov=oteapi --durations=10
+        pytest --cov-report=xml:strategies.xml --cov=oteapi/strategies --durations=10
+
+    - name: Upload coverage to Codecov
+      if: matrix.python-version == '3.9' && github.repository == 'EMMC-ASBL/oteapi-core'
+      uses: codecov/codecov-action@v3
+      with:
+        files: coverage.xml
+        flags: windows
+
+    - name: Upload strategies coverage to Codecov
+      if: matrix.python-version == '3.9' && github.repository == 'EMMC-ASBL/oteapi-core'
+      uses: codecov/codecov-action@v3
+      with:
+        files: strategies.xml
+        flags: windows-strategies
