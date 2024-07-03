@@ -1,7 +1,7 @@
 """Test convert strategy."""
 
 from otelib import OTEClient
-from paths import inputdir, outputdir
+from paths import inputdir, outputdir  # pylint: disable=import-error
 
 resultfile = outputdir / "result.yaml"
 

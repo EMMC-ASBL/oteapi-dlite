@@ -18,7 +18,7 @@ def test_parse_no_options() -> None:
 
     import dlite
     from oteapi.datacache import DataCache
-    from paths import staticdir
+    from paths import staticdir  # pylint: disable=import-error
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
@@ -59,7 +59,7 @@ def test_parse_label() -> None:
 
     import dlite
     from oteapi.datacache import DataCache
-    from paths import staticdir
+    from paths import staticdir  # pylint: disable=import-error
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
