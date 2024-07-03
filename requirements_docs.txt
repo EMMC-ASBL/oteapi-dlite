@@ -1,7 +1,0 @@
-invoke~=2.2
-mike~=2.1
-mkdocs~=1.6
-mkdocs-awesome-pages-plugin~=2.9
-mkdocs-material~=9.5
-mkdocstrings[python]~=0.25.1
-pre-commit~=3.7
