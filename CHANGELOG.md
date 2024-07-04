@@ -1,16 +1,54 @@
 # Changelog
 
-## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
+## [v0.2.2](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.2.2) (2024-07-04)
 
-[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.2.0...HEAD)
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.2.1...v0.2.2)
+
+**Fixed bugs:**
+
+- pre-commit config should be updated to state `master` instead of `main` [\#242](https://github.com/EMMC-ASBL/oteapi-dlite/issues/242)
+
+**Merged pull requests:**
+
+- Consolidate docs build [\#257](https://github.com/EMMC-ASBL/oteapi-dlite/pull/257) ([CasperWA](https://github.com/CasperWA))
+- master is master and not main in pre-commit-config [\#256](https://github.com/EMMC-ASBL/oteapi-dlite/pull/256) ([francescalb](https://github.com/francescalb))
+- New ci/cd workflows based on tripper [\#255](https://github.com/EMMC-ASBL/oteapi-dlite/pull/255) ([francescalb](https://github.com/francescalb))
+
+## [v0.2.1](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.2.1) (2024-07-01)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.2.0...v0.2.1)
+
+**Merged pull requests:**
+
+- \[Auto-generated\] Update dependencies [\#253](https://github.com/EMMC-ASBL/oteapi-dlite/pull/253) ([TEAM4-0](https://github.com/TEAM4-0))
+- Made `label` optional in the parse strategy [\#252](https://github.com/EMMC-ASBL/oteapi-dlite/pull/252) ([jesper-friis](https://github.com/jesper-friis))
+- \[Auto-generated\] Update dependencies [\#251](https://github.com/EMMC-ASBL/oteapi-dlite/pull/251) ([TEAM4-0](https://github.com/TEAM4-0))
+- Update numpy requirement from \<2,\>=1.21 to \>=1.21,\<3 [\#250](https://github.com/EMMC-ASBL/oteapi-dlite/pull/250) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0 [\#249](https://github.com/EMMC-ASBL/oteapi-dlite/pull/249) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update pylint requirement from ~=3.1 to ~=3.2 [\#248](https://github.com/EMMC-ASBL/oteapi-dlite/pull/248) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Auto-generated\] Update dependencies [\#247](https://github.com/EMMC-ASBL/oteapi-dlite/pull/247) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[pre-commit.ci\] pre-commit autoupdate [\#241](https://github.com/EMMC-ASBL/oteapi-dlite/pull/241) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- Bump chuhlomin/render-template from 1.9 to 1.10 [\#238](https://github.com/EMMC-ASBL/oteapi-dlite/pull/238) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Auto-generated\] Update dependencies [\#236](https://github.com/EMMC-ASBL/oteapi-dlite/pull/236) ([TEAM4-0](https://github.com/TEAM4-0))
+- Update mkdocstrings\[python\] requirement from ~=0.24.1 to ~=0.24.3 [\#235](https://github.com/EMMC-ASBL/oteapi-dlite/pull/235) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Auto-generated\] Update dependencies [\#234](https://github.com/EMMC-ASBL/oteapi-dlite/pull/234) ([TEAM4-0](https://github.com/TEAM4-0))
+- Update pre-commit requirement from ~=3.6 to ~=3.7 [\#233](https://github.com/EMMC-ASBL/oteapi-dlite/pull/233) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update pytest-cov requirement from ~=4.1 to ~=5.0 [\#232](https://github.com/EMMC-ASBL/oteapi-dlite/pull/232) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Auto-generated\] Update dependencies [\#231](https://github.com/EMMC-ASBL/oteapi-dlite/pull/231) ([TEAM4-0](https://github.com/TEAM4-0))
+- Revert 1 remove session [\#229](https://github.com/EMMC-ASBL/oteapi-dlite/pull/229) ([Treesarj](https://github.com/Treesarj))
+- \[Auto-generated\] Update dependencies [\#228](https://github.com/EMMC-ASBL/oteapi-dlite/pull/228) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#222](https://github.com/EMMC-ASBL/oteapi-dlite/pull/222) ([TEAM4-0](https://github.com/TEAM4-0))
+- \[Auto-generated\] Update dependencies [\#218](https://github.com/EMMC-ASBL/oteapi-dlite/pull/218) ([TEAM4-0](https://github.com/TEAM4-0))
+- Bump pypa/gh-action-pypi-publish from 1.8.11 to 1.8.12 [\#217](https://github.com/EMMC-ASBL/oteapi-dlite/pull/217) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update pylint requirement from ~=3.0 to ~=3.1 [\#216](https://github.com/EMMC-ASBL/oteapi-dlite/pull/216) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v0.2.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.2.0) (2024-02-29)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.7...v0.2.0)
 
 **Implemented enhancements:**
 
 - Migrate to pydantic v2 [\#187](https://github.com/EMMC-ASBL/oteapi-dlite/issues/187)
-
-## [v0.2.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.2.0) (2024-02-23)
-
-[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.1.7...v0.2.0)
 
 **Fixed bugs:**
 
