@@ -28,5 +28,12 @@ jobs:
       doc_extras: "[docs]"
       changelog_exclude_labels: "skip_changelog,duplicate,question,invalid,wontfix"
       docs_framework: mkdocs
+      full_docs_dirs: |
+        models
+        strategies
+      landing_page_replacements: |
+        (LICENSE),(LICENSE.md)
+        https://EMMC-ASBL.github.io/oteapi-dlite/latest/,
+
     secrets:
       PAT: ${{ secrets.RELEASE_PAT }}
