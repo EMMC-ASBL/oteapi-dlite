@@ -59,6 +59,12 @@ jobs:
       update_python_api_ref: true
       update_docs_landing_page: true
       package_dirs: oteapi_dlite
+      full_docs_dirs: |
+        models
+        strategies
+      landing_page_replacements: |
+        (LICENSE),(LICENSE.md)
+        https://EMMC-ASBL.github.io/oteapi-dlite/latest/,
 
   pytest-linux:
     name: pytest (linux-py${{ matrix.python-version }})
