@@ -2,6 +2,7 @@
 
 import logging
 import sys
+from asyncio.log import logger
 from typing import Annotated, Optional
 
 import cachetools  # type: ignore
