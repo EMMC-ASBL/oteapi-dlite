@@ -18,7 +18,10 @@ from tripper import Triplestore
 from typing import Optional
 from SPARQLWrapper import JSON, SPARQLWrapper
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, update_collection
+from oteapi_dlite.utils import (
+    get_collection,
+    update_collection,
+)
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
