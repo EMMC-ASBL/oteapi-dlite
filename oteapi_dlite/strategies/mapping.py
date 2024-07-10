@@ -167,13 +167,13 @@ class DLiteMappingStrategy:
             parent_node: str | None = find_parent_node(
                 sparql_instance,
                 class_names,
-                config.graph_uri,
+                config.graph_uri,  # type:ignore
             )
             # If parent node exists, find the KG
             if parent_node:
-                graph: rdflib.Graph | None = fetch_and_populate_graph(
+                graph: rdflib.Graph = fetch_and_populate_graph(
                     sparql_instance,
-                    config.graph_uri,
+                    config.graph_uri,  # type:ignore
                     parent_node,
                 )
                 graph_triples = [(str(s), str(p), str(o)) for s, p, o in graph]
