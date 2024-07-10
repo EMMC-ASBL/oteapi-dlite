@@ -2,7 +2,6 @@
 
 import logging
 import sys
-from asyncio.log import logger
 from typing import Annotated, Optional
 
 import cachetools  # type: ignore
@@ -35,7 +34,9 @@ class Measurement(BaseModel):
     ]
 
 
-class MeasurementConfig(AttrDict):
+class MeasurementConfig(BaseModel):
+    """Measurement config"""
+
     measurement: Annotated[
         Optional[str], Field(description="measurement table name")
     ] = None
