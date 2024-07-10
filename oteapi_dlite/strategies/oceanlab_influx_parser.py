@@ -8,10 +8,10 @@ import cachetools  # type: ignore
 import dlite
 import influxdb_client
 import jinja2
-from fastapi import logger
+import logging
 from oteapi.models import AttrDict, HostlessAnyUrl, ParserConfig, ResourceConfig
 from pandas import DataFrame
-from pydantic import Field, SecretStr
+from pydantic import BaseModel, Field, SecretStr
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
@@ -199,6 +199,8 @@ class InfluxParseStrategy:
             env = jinja2.Environment(loader=jinja2.BaseLoader, autoescape=True)
             env.globals.update(enumerate=enumerate, str=str)
             bucket = f"{config.DATABASE}/{config.RETPOLICY}"
+            print("config.measurements")
+            print([measurement.dict() for measurement in config.measurements])
             configuration = {
                 "bucket": bucket,
                 "timeRange": config.time_range,
