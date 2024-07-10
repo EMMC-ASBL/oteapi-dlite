@@ -34,11 +34,6 @@ class Measurement(BaseModel):
     ]
 
 
-class MeasurementConfig(BaseModel):
-    measurement: str
-    field: str
-
-
 class InfluxParseParseConfig(AttrDict):
     """Configuration for DLite Excel parser."""
 
