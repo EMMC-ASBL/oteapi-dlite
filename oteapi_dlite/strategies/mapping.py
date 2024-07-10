@@ -170,7 +170,7 @@ class DLiteMappingStrategy:
             )
             # If parent node exists, find the KG
             if parent_node:
-                graph: rdflib.Graph = fetch_and_populate_graph(
+                graph: rdflib.Graph | None = fetch_and_populate_graph(
                     sparql_instance,
                     config.graph_uri,  # type:ignore
                     parent_node,
