@@ -6,6 +6,7 @@ from typing import Annotated, Optional
 
 import cachetools  # type: ignore
 import dlite
+from fastapi import logger
 import influxdb_client
 import jinja2
 from oteapi.models import AttrDict, HostlessAnyUrl, ParserConfig, ResourceConfig
@@ -31,6 +32,15 @@ class Measurement(BaseModel):
     field: Annotated[
         str, Field(description="The measurement's field in the DB")
     ]
+
+
+class MeasurementConfig(AttrDict):
+    measurement: Annotated[
+        Optional[str], Field(description="measurement table name")
+    ] = None
+    field: Annotated[
+        Optional[str], Field(description="column or field name")
+    ] = None
 
 
 class InfluxParseParseConfig(AttrDict):
