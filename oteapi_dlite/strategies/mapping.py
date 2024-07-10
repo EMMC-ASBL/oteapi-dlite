@@ -5,9 +5,8 @@ from __future__ import annotations
 # pylint: disable=unused-argument,invalid-name,disable=line-too-long,E1133,W0511
 from enum import Enum
 from typing import TYPE_CHECKING, Annotated, Optional
-
 import rdflib
-from fastapi import logger
+import logging
 from jinja2 import Template, TemplateError
 from oteapi.models import AttrDict, MappingConfig
 from pydantic import AnyUrl
@@ -16,9 +15,13 @@ from rdflib.exceptions import Error as RDFLibException
 from SPARQLWrapper import JSON, SPARQLWrapper
 from SPARQLWrapper.SPARQLExceptions import SPARQLWrapperException
 from tripper import Triplestore
-
+from typing import Optional
+from SPARQLWrapper import JSON, SPARQLWrapper
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, update_collection
+from oteapi_dlite.utils import (
+    get_collection,
+    update_collection,
+)
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
