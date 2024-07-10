@@ -5,22 +5,19 @@ from __future__ import annotations
 # pylint: disable=unused-argument,invalid-name
 from enum import Enum
 from typing import TYPE_CHECKING, Annotated, Optional
-from oteapi.models import AttrDict, MappingConfig
-from pydantic import AnyUrl
-from pydantic.dataclasses import Field, dataclass
-from tripper import Triplestore
-from typing import Optional
 
 import rdflib
 from jinja2 import Template, TemplateError
+from oteapi.models import AttrDict, MappingConfig
+from pydantic import AnyUrl
+from pydantic.dataclasses import Field, dataclass
 from rdflib.exceptions import Error as RDFLibException
 from SPARQLWrapper import JSON, SPARQLWrapper
 from SPARQLWrapper.SPARQLExceptions import SPARQLWrapperException
+from tripper import Triplestore
+
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import (
-    get_collection,
-    update_collection,
-)
+from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
@@ -197,6 +194,7 @@ class DLiteMappingStrategy:
                 else get_collection().uuid
             )
         )
+
 
 def populate_triplestore(ts: Triplestore, triples: list):
     ts.add_triples(
