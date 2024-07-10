@@ -218,8 +218,7 @@ def find_parent_node(
     class URIs within a specified RDF graph.
 
     Args:
-        sparql (SPARQLWrapper): An instance of SPARQLWrapper configured for the target
-            SPARQL service.
+        sparql (SPARQLWrapper): An instance of SPARQLWrapper configured for the target SPARQL service.
         class_names (list[str]): The class URIs to find a common parent for.
         graph_uri (str): The URI of the graph in which to perform the query.
 
