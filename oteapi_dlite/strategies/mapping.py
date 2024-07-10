@@ -6,6 +6,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import TYPE_CHECKING, Annotated, Optional
 
+from fastapi import logger
 import rdflib
 from jinja2 import Template, TemplateError
 from oteapi.models import AttrDict, MappingConfig
@@ -216,7 +217,8 @@ def find_parent_node(
     class URIs within a specified RDF graph.
 
     Args:
-        sparql (SPARQLWrapper): An instance of SPARQLWrapper configured for the target SPARQL service.
+        sparql (SPARQLWrapper): An instance of SPARQLWrapper configured for the target
+            SPARQL service.
         class_names (list[str]): The class URIs to find a common parent for.
         graph_uri (str): The URI of the graph in which to perform the query.
 
@@ -225,11 +227,11 @@ def find_parent_node(
 
     Raises:
         RuntimeError: If there is an error in executing or processing the SPARQL query
-        or if there is an error in rendering the SPARQL query using Jinja2 templates.
+            or if there is an error in rendering the SPARQL query using Jinja2 templates.
 
     Note:
         This function assumes that the provided `sparql` instance is already configured
-        with necessary authentication and format settings.
+            with necessary authentication and format settings.
     """
 
     try:
@@ -275,7 +277,7 @@ def find_parent_node(
             f"Jinja2 template error: {template_error}"
         ) from template_error
 
-    print("Could not find a common parent node.")
+    logger.info("Could not find a common parent node.")
     return None
 
 
@@ -307,7 +309,7 @@ def fetch_and_populate_graph(
 
     Note:
         This function assumes that the provided `sparql` instance is already configured
-        with necessary authentication and format settings.
+            with necessary authentication and format settings.
     """
     # Create a new graph if one is not provided
     graph = graph or rdflib.Graph()
@@ -355,7 +357,7 @@ def fetch_and_populate_graph(
                 )
             )
 
-        print("Graph populated with fetched triples.")
+        logger.info("Graph populated with fetched triples.")
 
     except SPARQLWrapperException as wrapper_error:
         raise RuntimeError(
