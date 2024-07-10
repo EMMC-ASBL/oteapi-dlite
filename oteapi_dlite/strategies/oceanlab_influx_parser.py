@@ -13,7 +13,6 @@ from oteapi.models import AttrDict, HostlessAnyUrl, ParserConfig, ResourceConfig
 from pandas import DataFrame
 from pydantic import BaseModel, Field, SecretStr
 from pydantic.dataclasses import dataclass
-
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, update_collection
 from oteapi_dlite.utils.utils import get_meta
