@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-# pylint: disable=unused-argument,invalid-name
+# pylint: disable=unused-argument,invalid-name,disable=line-too-long,E1133,W0511
 from enum import Enum
 from typing import TYPE_CHECKING, Annotated, Optional
 
@@ -139,7 +139,7 @@ class DLiteMappingStrategy:
             ts = Triplestore(
                 backend=self.mapping_config.configuration.backend,
                 base_iri=self.mapping_config.configuration.base_iri,
-                triplestore_url=self.mapping_config.configuration.triplestore_url,  # pylint: disable=line-too-long
+                triplestore_url=self.mapping_config.configuration.triplestore_url,
                 database=self.mapping_config.configuration.database,
                 uname=self.mapping_config.configuration.username,
                 pwd=self.mapping_config.configuration.password,
@@ -151,11 +151,11 @@ class DLiteMappingStrategy:
             for prefix, iri in self.mapping_config.prefixes.items():
                 ts.bind(prefix, iri)
         if (
-            self.mapping_config.configuration.sparql
+            self.mapping_config.configuration.sparql_endpoint
             and self.mapping_config.configuration.graph_uri
         ):
             config = self.mapping_config.configuration
-            sparql_instance = SPARQLWrapper(config.sparql)
+            sparql_instance = SPARQLWrapper(config.sparql_endpoint)
             sparql_instance.setHTTPAuth("BASIC")
             sparql_instance.setCredentials(
                 config.username,
@@ -164,14 +164,14 @@ class DLiteMappingStrategy:
             # extract class names i.e. objects from triples
             class_names = [triple[2] for triple in self.mapping_config.triples]
             # Find parent node of the class_names
-            parent_node = find_parent_node(
+            parent_node: str | None = find_parent_node(
                 sparql_instance,
                 class_names,
                 config.graph_uri,
             )
             # If parent node exists, find the KG
             if parent_node:
-                graph: rdflib.Graph = fetch_and_populate_graph(
+                graph: rdflib.Graph | None = fetch_and_populate_graph(
                     sparql_instance,
                     config.graph_uri,
                     parent_node,
@@ -197,6 +197,7 @@ class DLiteMappingStrategy:
 
 
 def populate_triplestore(ts: Triplestore, triples: list):
+    """Populate the triplestore instance"""
     ts.add_triples(
         [
             [ts.expand_iri(t) if isinstance(t, str) else t for t in triple]
