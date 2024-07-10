@@ -6,8 +6,8 @@ from __future__ import annotations
 from enum import Enum
 from typing import TYPE_CHECKING, Annotated, Optional
 
-from fastapi import logger
 import rdflib
+from fastapi import logger
 from jinja2 import Template, TemplateError
 from oteapi.models import AttrDict, MappingConfig
 from pydantic import AnyUrl
