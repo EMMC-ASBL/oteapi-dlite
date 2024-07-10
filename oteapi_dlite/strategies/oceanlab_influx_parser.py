@@ -8,7 +8,6 @@ import cachetools  # type: ignore
 import dlite
 import influxdb_client
 import jinja2
-from fastapi import logger
 from oteapi.models import AttrDict, HostlessAnyUrl, ParserConfig, ResourceConfig
 from pandas import DataFrame
 from pydantic import BaseModel, Field, SecretStr

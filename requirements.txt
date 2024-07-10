@@ -9,3 +9,4 @@ Pillow>=9.0.1,<11
 rdflib>=7.0.0
 SPARQLWrapper>=2.0.0
 tripper==0.2.15
+asyncio>=3.4.3
