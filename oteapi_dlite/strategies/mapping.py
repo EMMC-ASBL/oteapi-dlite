@@ -16,6 +16,7 @@ from rdflib.exceptions import Error as RDFLibException
 from SPARQLWrapper import JSON, SPARQLWrapper
 from SPARQLWrapper.SPARQLExceptions import SPARQLWrapperException
 from tripper import Triplestore
+
 from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import get_collection, update_collection
 
