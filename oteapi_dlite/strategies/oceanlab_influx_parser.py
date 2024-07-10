@@ -6,6 +6,7 @@ from typing import Annotated, Optional
 
 import cachetools  # type: ignore
 import dlite
+from fastapi import logger
 import influxdb_client
 import jinja2
 from oteapi.models import AttrDict, HostlessAnyUrl, ParserConfig, ResourceConfig
