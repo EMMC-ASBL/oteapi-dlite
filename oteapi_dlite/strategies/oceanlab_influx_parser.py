@@ -199,8 +199,6 @@ class InfluxParseStrategy:
             env = jinja2.Environment(loader=jinja2.BaseLoader, autoescape=True)
             env.globals.update(enumerate=enumerate, str=str)
             bucket = f"{config.DATABASE}/{config.RETPOLICY}"
-            print("config.measurements")
-            print([measurement.dict() for measurement in config.measurements])
             configuration = {
                 "bucket": bucket,
                 "timeRange": config.time_range,
