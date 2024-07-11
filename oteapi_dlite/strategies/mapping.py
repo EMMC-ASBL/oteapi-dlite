@@ -22,7 +22,7 @@ from oteapi_dlite.utils import get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
-
+logger = logging.getLogger(__name__)
 
 class BackendEnum(str, Enum):
     """
