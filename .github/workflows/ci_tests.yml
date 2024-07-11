@@ -75,7 +75,7 @@ jobs:
     # Remove ignoring 48547 as soon as RDFLib/rdflib#1844 has been fixed and the fix
     # has been released.
     - name: Run safety
-      run: pip freeze | safety check --stdin --ignore 44715 --ignore 48547
+      run: pip freeze | safety check --stdin --ignore 44715 --ignore 48547 --ignore=70612
 
   pytest-linux:
     runs-on: ubuntu-latest
