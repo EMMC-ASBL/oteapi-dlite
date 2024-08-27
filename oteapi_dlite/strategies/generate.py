@@ -2,7 +2,7 @@
 
 # pylint: disable=unused-argument,invalid-name
 import tempfile
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import TYPE_CHECKING, Annotated, Optional, Union
 
 from oteapi.datacache import DataCache
 from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
@@ -10,7 +10,12 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, get_driver, update_collection
+from oteapi_dlite.utils import (
+    get_collection,
+    get_driver,
+    get_settings,
+    update_collection,
+)
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
@@ -110,6 +115,24 @@ class DLiteStorageConfig(AttrDict):
             description="Configuration options for the local data cache.",
         ),
     ] = None
+    kb_document: Annotated[
+        Optional[Union[bool, dict]],
+        Field(
+            description=(
+                "Whether to document the generated instance in the knowledge "
+                "base."
+                "\n\n"
+                "Expects that a 'knowledge_base' settings has been added. "
+                "This settings should be a dict that can be passed as "
+                "keyword arguments to `tripper.Triplestore()`."
+                "\n\n"
+                "This option may optionally be provided as a dict with "
+                "additional documentation of the driver. "
+                "The dict should map OWL properties to either tripper "
+                "literals or IRIs."
+            ),
+        ),
+    ] = None
 
 
 class DLiteGenerateConfig(FunctionConfig):
@@ -160,9 +183,7 @@ class DLiteGenerateStrategy:
         driver = (
             config.driver
             if config.driver
-            else get_driver(
-                mediaType=config.mediaType,
-            )
+            else get_driver(mediaType=config.mediaType)
         )
 
         coll = get_collection(session, config.collection_id)
@@ -199,6 +220,23 @@ class DLiteGenerateStrategy:
                 inst.save(driver, "{tmpdir}/data", config.options)
                 with open(f"{tmpdir}/data", "rb") as f:
                     cache.add(f.read(), key=key)
+
+        # Store documentation of this instance in the knowledge base
+        if config.kb_document is not None:
+            kb_settings = get_settings(session, "knowledge_base")
+            if not kb_settings:
+                raise KeyError(
+                    "The `kb_document` configuration requires that a "
+                    "'knowledge_base' settings.  It can be added with the "
+                    "application/vnd.dlite-settings strategy."
+                )
+
+            # pylint: disable=import-outside-toplevel
+            from tripper import Triplestore  # No hard dependency on tripper
+
+            ts = Triplestore(**kb_settings)
+
+            # ts.
 
         # __TODO__
         # Can we safely assume that all strategies in a pipeline will be

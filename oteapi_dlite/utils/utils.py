@@ -1,12 +1,14 @@
 """Utility functions for OTEAPI DLite plugin."""
 
 # pylint: disable=invalid-name
+import json
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 import dlite
 from dlite.mappings import instantiate
 from oteapi.datacache import DataCache
+from oteapi.models import SessionUpdate
 from tripper import Triplestore
 
 from oteapi_dlite.utils.exceptions import CollectionNotFound
@@ -174,3 +176,52 @@ def get_instance(
         **kwargs,
     )
     return inst
+
+
+def add_settings(
+    session: "Union[dict[str, Any], None]",
+    label: str,
+    settings: "Union[dict, list, str, int, float, bool, NoneType]",
+):
+    """Store settings to the session.
+
+    Arguments:
+        session: An OTEAPI session object.
+        label: Label of settings to add.
+        settings: A JSON-serialisable Python object with the settings
+            to store.
+
+    Returns:
+        A SessionUpdate instance with the added settings.
+    """
+    if session is None:
+        session = {}
+
+    # For now we store settings in the session.  This makes "settings"
+    # independent of oteapi-dlite.
+    d = session.get("settings", {})
+
+    if label in d:
+        raise KeyError(f"Setting with this label already exists: '{label}'")
+    d[label] = json.dumps(settings)
+
+    # Update the session with new settings
+    session["settings"] = d
+
+    return SessionUpdate(settings=d)
+
+
+def get_settings(session: "Union[dict[str, Any], None]", label: str):
+    """Retrieve settings from the session.
+
+    Arguments:
+        session: An OTEAPI session object.
+        label: Label of settings to retrieve.
+
+    Returns:
+        Python object with the settings or None if no settings exists
+        with this label.
+    """
+    session = session or {}
+    d = session.get("settings", {})
+    return json.loads(d[label]) if label in d else None
