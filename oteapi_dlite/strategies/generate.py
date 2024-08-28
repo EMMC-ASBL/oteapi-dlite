@@ -1,8 +1,8 @@
 """Generic generate strategy using DLite storage plugin."""
 
-# pylint: disable=unused-argument,invalid-name
+# pylint: disable=unused-argument,invalid-name,too-many-branches,too-many-locals
 import tempfile
-from typing import TYPE_CHECKING, Annotated, Optional, Union
+from typing import TYPE_CHECKING, Annotated, Optional
 
 from oteapi.datacache import DataCache
 from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
@@ -115,21 +115,30 @@ class DLiteStorageConfig(AttrDict):
             description="Configuration options for the local data cache.",
         ),
     ] = None
-    kb_document: Annotated[
-        Optional[Union[bool, dict]],
+    kb_document_iri: Annotated[
+        Optional[str],
         Field(
             description=(
-                "Whether to document the generated instance in the knowledge "
-                "base."
+                "If given, document the generated instance in the knowledge "
+                "base using as an individual with this IRI."
                 "\n\n"
-                "Expects that a 'knowledge_base' settings has been added. "
-                "This settings should be a dict that can be passed as "
-                "keyword arguments to `tripper.Triplestore()`."
+                "Expects that a 'tripper.triplestore' settings has been "
+                "added. This settings should be a dict that can be passed "
+                "as keyword arguments to `tripper.Triplestore()`."
+            ),
+        ),
+    ] = None
+    kb_document_context: Annotated[
+        Optional[dict],
+        Field(
+            description=(
+                "If `kb_document_iri` is given, this configuration adds "
+                "will add additional context to the documentation of the "
+                "generated instance."
                 "\n\n"
-                "This option may optionally be provided as a dict with "
-                "additional documentation of the driver. "
-                "The dict should map OWL properties to either tripper "
-                "literals or IRIs."
+                "This configuration should be a dict mapping providing the "
+                "additional documentation of the driver. It should map OWL "
+                "properties to either tripper literals or IRIs."
             ),
         ),
     ] = None
@@ -222,21 +231,39 @@ class DLiteGenerateStrategy:
                     cache.add(f.read(), key=key)
 
         # Store documentation of this instance in the knowledge base
-        if config.kb_document is not None:
-            kb_settings = get_settings(session, "knowledge_base")
+        if config.kb_document_iri:
+            kb_settings = get_settings(session, "tripper.triplestore")
             if not kb_settings:
                 raise KeyError(
-                    "The `kb_document` configuration requires that a "
-                    "'knowledge_base' settings.  It can be added with the "
+                    "The `kb_document_iri` configuration requires that a "
+                    "'tripper.triplestore' settings has been added using the "
                     "application/vnd.dlite-settings strategy."
                 )
 
+            # Import here to avoid hard dependencies on tripper.
             # pylint: disable=import-outside-toplevel
-            from tripper import Triplestore  # No hard dependency on tripper
+            from tripper import Triplestore
+            from tripper.convert import save_container
 
+            resource = {
+                "dataresource": {
+                    "downloadUrl": config.location,
+                    "mediaType": config.mediaType,
+                    "configuration": {
+                        "metadata": config.datamodel,
+                        "driver": config.driver,
+                        "options": config.options,
+                    },
+                }
+            }
             ts = Triplestore(**kb_settings)
+            save_container(
+                ts, resource, config.kb_document_iri, recognised_keys="basic"
+            )
 
-            # ts.
+            if config.kb_document_context:
+                for prop, val in config.kb_document_context:
+                    ts.add((config.kb_document_iri, prop, val))
 
         # __TODO__
         # Can we safely assume that all strategies in a pipeline will be

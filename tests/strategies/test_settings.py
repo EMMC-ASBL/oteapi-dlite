@@ -16,8 +16,11 @@ if True:
         },
     }
     session = {}
+
     strategy = SettingsStrategy(config)
     strategy.initialize(session)
+
+    strategy = SettingsStrategy(config)
     strategy.get(session)
 
     assert get_settings(session, "mySettings") == my_settings
