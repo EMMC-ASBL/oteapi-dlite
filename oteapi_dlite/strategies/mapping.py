@@ -242,15 +242,27 @@ def find_parent_node(
         {% macro sparql_query(class_names, graph_uri) %}
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
         SELECT ?parentClass
         WHERE {
-          GRAPH <{{ graph_uri }}> {
-            ?class rdfs:subClassOf* ?parentClass .
-            FILTER(
-                {% for class_name in class_names -%}
-                    ?class = <{{ class_name }}>{{ " ||" if not loop.last }}
-                {% endfor %})
-          }
+            GRAPH <{{ graph_uri }}> {
+                {
+                # Subclass traversal to find parent classes
+                ?class rdfs:subClassOf* ?parentClass .
+                FILTER(
+                    {% for class_name in class_names -%}
+                        ?class = <{{ class_name }}>{{ " ||" if not loop.last }}
+                    {% endfor %}
+                )
+                }
+            UNION
+                {
+                # Explicitly include owl:Thing as a parent class
+                VALUES ?class { {% for class_name in class_names -%} <{{ class_name }}> {% endfor %} }
+                BIND(owl:Thing AS ?parentClass)
+                }
+            }
         }
         {% endmacro %}
         """
@@ -321,33 +333,53 @@ def fetch_and_populate_graph(
         sparql.setReturnFormat(JSON)
 
         query = f"""
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX fno: <https://w3id.org/function/ontology#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX fno: <https://w3id.org/function/ontology#>
+PREFIX emmo: <http://emmo.info/domain-mappings#>
+PREFIX oteio: <http://emmo.info/oteio#>
 
-        SELECT ?subject ?predicate ?object
-        WHERE {{
-           GRAPH <{graph_uri}> {{
-            ?subject ?predicate ?object .
-            ?subject rdfs:subClassOf* <{parent_node}> .
-            FILTER (?predicate IN (
-                rdfs:subClassOf,
-                skos:prefLabel,
-                rdfs:subPropertyOf,
-                rdfs:domain,
-                rdfs:range,
-                rdf:type,
-                owl:propertyDisjointWith,
-                fno:expects,
-                fno:predicate,
-                fno:type,
-                fno:returns,
-                fno:executes))
-           }}
-        }}
-        """
+SELECT DISTINCT ?subject ?predicate ?object
+WHERE {{
+  GRAPH <{graph_uri}> {{
+
+    # Match all subclasses of the parent class
+    ?subclass rdfs:subClassOf* <{parent_node}> .
+
+    # Retrieve all relevant triples for these subclasses and their individuals
+    {{
+      # Subclasses themselves and their relationships
+      ?subclass ?predicate ?object .
+      BIND(?subclass AS ?subject)
+    }} UNION {{
+      # Individuals of these subclasses and their properties
+      ?subject rdf:type ?subclass .
+      ?subject ?predicate ?object .
+    }}
+
+    # Ensure subject, predicate, and object are not empty
+    FILTER(BOUND(?subject) && BOUND(?predicate) && BOUND(?object))
+
+    # Filter by the specific predicates
+    FILTER (?predicate IN (
+        rdfs:label,
+        rdf:type,
+        rdf:about,
+        owl:propertyDisjointWith,
+        fno:expects,
+        fno:predicate,
+        fno:type,
+        fno:returns,
+        fno:executes,
+        oteio:hasPythonFunctionName,
+        oteio:hasPythonModuleName,
+        oteio:hasPypiPackageName,
+        emmo:mapsTo))
+  }}
+}}
+"""
         sparql.setQuery(query)
 
         results = sparql.query().convert()
@@ -359,7 +391,6 @@ def fetch_and_populate_graph(
                     rdflib.URIRef(result["object"]["value"]),
                 )
             )
-
         logger.info("Graph populated with fetched triples.")
 
     except SPARQLWrapperException as wrapper_error:
