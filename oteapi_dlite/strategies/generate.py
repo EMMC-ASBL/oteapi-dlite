@@ -248,22 +248,37 @@ class DLiteGenerateStrategy:
             resource = {
                 "dataresource": {
                     "downloadUrl": config.location,
-                    "mediaType": config.mediaType,
+                    "mediaType": (
+                        config.mediaType
+                        if config.mediaType
+                        else "application/vnd.dlite-parse"
+                    ),
                     "configuration": {
-                        "metadata": config.datamodel,
+                        "metadata": (
+                            config.datamodel
+                            if config.datamodel
+                            else inst.meta.uri
+                        ),
                         "driver": config.driver,
                         "options": config.options,
                     },
                 }
             }
-            ts = Triplestore(**kb_settings)
-            save_container(
-                ts, resource, config.kb_document_iri, recognised_keys="basic"
-            )
 
-            if config.kb_document_context:
-                for prop, val in config.kb_document_context:
-                    ts.add((config.kb_document_iri, prop, val))
+            ts = Triplestore(**kb_settings)
+            try:
+                save_container(
+                    ts,
+                    resource,
+                    config.kb_document_iri,
+                    recognised_keys="basic",
+                )
+
+                if config.kb_document_context:
+                    for prop, val in config.kb_document_context.items():
+                        ts.add((config.kb_document_iri, prop, val))
+            finally:
+                ts.close()
 
         # __TODO__
         # Can we safely assume that all strategies in a pipeline will be

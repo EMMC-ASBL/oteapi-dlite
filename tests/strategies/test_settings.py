@@ -1,7 +1,8 @@
 """Test settings strategy."""
 
-if True:
-    # def test_settings() -> None:
+
+# if True:
+def test_settings() -> None:
     """Test the settings strategy."""
 
     from oteapi_dlite.strategies.settings import SettingsStrategy

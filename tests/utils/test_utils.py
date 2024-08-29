@@ -1,7 +1,8 @@
 """Tests for oteapi-dlite.utils"""
 
-if True:
-    # def test_settings():
+
+# if True:
+def test_settings():
     """Test add_settings() and get_settings()."""
     from oteapi_dlite.utils import add_settings, get_settings
 
