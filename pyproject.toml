@@ -72,14 +72,14 @@ Package = "https://pypi.org/project/oteapi-dlite"
 "oteapi_dlite.image/vnd.dlite-image" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
 
 # To be removed
-"oteapi_dlite.application/vnd.dlite-json" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
-"oteapi_dlite.application/vnd.dlite-yaml" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
-"oteapi_dlite.image/vnd.dlite-gif" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-jpeg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-jpg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-jp2" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-png" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-tiff" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.application/vnd.dlite-json" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
+#"oteapi_dlite.application/vnd.dlite-yaml" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-gif" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-jpeg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-jpg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-jp2" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-png" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-tiff" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
 
 [project.entry-points."oteapi.function"]
 "oteapi_dlite.application/vnd.dlite-generate" = "oteapi_dlite.strategies.generate:DLiteGenerateStrategy"
