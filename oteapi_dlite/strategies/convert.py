@@ -44,6 +44,12 @@ class DLiteConvertInputConfig(AttrDict):
             description="Whether to infer instance from property mappings.",
         ),
     ] = False
+    options: Annotated[
+        Optional[dict],
+        Field(
+            description="Extra options",
+        ),
+    ] = {}
 
 
 class DLiteConvertOutputConfig(AttrDict):
@@ -161,7 +167,6 @@ class DLiteConvertStrategy:
             SessionUpdate instance.
         """
         config = self.convert_config.configuration
-
         module = importlib.import_module(config.module_name, config.package)
         function = getattr(module, config.function_name)
 
@@ -169,13 +174,13 @@ class DLiteConvertStrategy:
 
         instances = []
         for i, input_config in enumerate(config.inputs):
-            input_config = config.inputs[i]
+            options = input_config.options
             if input_config.label:
                 instances.append(
                     coll.get(input_config.label, input_config.datamodel)
                 )
             elif input_config.datamodel:
-                inst = coll.get_instances(
+                inst = coll.get_instances(  # this one is not in use at all....
                     metaid=input_config.datamodel,
                     property_mappings=input_config.property_mappings,
                     # More to do: add more arguments...
@@ -185,8 +190,7 @@ class DLiteConvertStrategy:
                     "either `label` or `datamodel` must be specified in "
                     f"inputs[{i}]"
                 )
-
-        outputs = function(*instances)
+        outputs = function(*instances, **options)
         if isinstance(outputs, dlite.Instance):
             outputs = [outputs]
 

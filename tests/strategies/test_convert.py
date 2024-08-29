@@ -3,8 +3,8 @@
 from otelib import OTEClient
 from paths import inputdir, outputdir  # pylint: disable=import-error
 
-
-def test_convert():
+# def test_convert():
+if True:
     """
     Test convert strategy
     """
@@ -47,6 +47,22 @@ def test_convert():
         },
     )
 
+    convert2 = client.create_function(
+        functionType="application/vnd.dlite-convert",
+        configuration={
+            "module_name": "test_package.convert_module_2",
+            "function_name": "converter",
+            "inputs": [
+                {"label": "energy"},
+                {"label": "forces"},
+                {"options": {"module_option": "extra"}},
+            ],
+            "outputs": [
+                {"label": "result"},
+            ],
+        },
+    )
+
     generate = client.create_function(
         functionType="application/vnd.dlite-generate",
         configuration={
@@ -63,6 +79,17 @@ def test_convert():
 
     # Run pipeline
     pipeline = energy_resource >> forces_resource >> convert >> generate
+    pipeline.get()
+
+    # Ensure that the result file is regenerated
+    assert resultfile.exists()
+
+    # Remove result file, so that we can check that it is generated
+    if resultfile.exists():
+        resultfile.unlink()
+
+    # Run pipeline  with the second convert function
+    pipeline = energy_resource >> forces_resource >> convert2 >> generate
     pipeline.get()
 
     # Ensure that the result file is regenerated
