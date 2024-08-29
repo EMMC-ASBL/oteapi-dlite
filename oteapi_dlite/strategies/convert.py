@@ -44,12 +44,6 @@ class DLiteConvertInputConfig(AttrDict):
             description="Whether to infer instance from property mappings.",
         ),
     ] = False
-    options: Annotated[
-        Optional[dict],
-        Field(
-            description="Extra options",
-        ),
-    ] = {}
 
 
 class DLiteConvertOutputConfig(AttrDict):
@@ -121,6 +115,12 @@ class DLiteConvertStrategyConfig(AttrDict):
             description="Output instances.",
         ),
     ] = []
+    options: Annotated[
+        Optional[dict],
+        Field(
+            description="Extra options",
+        ),
+    ] = {}
 
 
 class DLiteConvertConfig(FunctionConfig):
@@ -169,12 +169,12 @@ class DLiteConvertStrategy:
         config = self.convert_config.configuration
         module = importlib.import_module(config.module_name, config.package)
         function = getattr(module, config.function_name)
+        options = config.options
 
         coll = get_collection(session)
 
         instances = []
         for i, input_config in enumerate(config.inputs):
-            options = input_config.options
             if input_config.label:
                 instances.append(
                     coll.get(input_config.label, input_config.datamodel)

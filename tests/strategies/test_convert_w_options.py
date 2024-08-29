@@ -36,7 +36,7 @@ def test_convert():
         functionType="application/vnd.dlite-convert",
         configuration={
             "module_name": "test_package.convert_module",
-            "function_name": "converter",
+            "function_name": "converter_w_options",
             "inputs": [
                 {"label": "energy"},
                 {"label": "forces"},
@@ -44,6 +44,7 @@ def test_convert():
             "outputs": [
                 {"label": "result"},
             ],
+            "options": {"test_option": "fun"},
         },
     )
 
