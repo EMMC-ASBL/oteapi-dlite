@@ -182,7 +182,7 @@ def add_settings(
     session: "Union[dict[str, Any], None]",
     label: str,
     settings: "Union[dict, list, str, int, float, bool, NoneType]",
-):
+) -> SessionUpdate:
     """Store settings to the session.
 
     Arguments:
@@ -211,7 +211,7 @@ def add_settings(
     return SessionUpdate(settings=d)
 
 
-def get_settings(session: "Union[dict[str, Any], None]", label: str):
+def get_settings(session: "Union[dict[str, Any], None]", label: str) -> "Any":
     """Retrieve settings from the session.
 
     Arguments:
