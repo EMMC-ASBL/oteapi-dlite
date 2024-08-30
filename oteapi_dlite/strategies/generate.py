@@ -119,8 +119,10 @@ class DLiteStorageConfig(AttrDict):
         Optional[str],
         Field(
             description=(
+                "IRI of a class in the ontology."
+                "\n\n"
                 "If given, document the generated instance in the knowledge "
-                "base using as an individual with this IRI."
+                "base as an instance of this class."
                 "\n\n"
                 "Expects that a 'tripper.triplestore' settings has been "
                 "added. This settings should be a dict that can be passed "

@@ -22,9 +22,11 @@ class SettingsConfig(AttrDict):
     """Configuration for a generic "settings" filter.
 
     This strategy stores settings in the session such that they are
-    available for other strategies later in the pipeline.
+    available for other strategies.  For this to work, this strategy
+    should be added to the end of the pipeline (since it uses the
+    `initiate()` method).
 
-    The settings are stored as a JSON string and can be accessed
+    The settings are stored as a JSON string, which can be accessed
     by its label.
 
     """
