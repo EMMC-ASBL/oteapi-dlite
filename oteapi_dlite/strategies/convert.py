@@ -180,11 +180,12 @@ class DLiteConvertStrategy:
                     coll.get(input_config.label, input_config.datamodel)
                 )
             elif input_config.datamodel:
-                inst = coll.get_instances(  # this one is not in use at all....
+                inst = coll.get_instances(
                     metaid=input_config.datamodel,
                     property_mappings=input_config.property_mappings,
                     # More to do: add more arguments...
                 )
+                instances.append(inst)
             else:
                 raise ValueError(
                     "either `label` or `datamodel` must be specified in "
