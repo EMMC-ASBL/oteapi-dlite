@@ -44,7 +44,7 @@ def test_convert():
             "outputs": [
                 {"label": "result"},
             ],
-            "options": {"test_option": "fun"},
+            "kwargs": {"test_option": "fun"},
         },
     )
 

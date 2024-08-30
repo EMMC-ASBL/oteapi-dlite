@@ -115,10 +115,11 @@ class DLiteConvertStrategyConfig(AttrDict):
             description="Output instances.",
         ),
     ] = []
-    options: Annotated[
+    kwargs: Annotated[
         Optional[dict],
         Field(
-            description="Additional keyword arguments passed to the convert function.",
+            description="Additional keyword arguments passed "
+            "to the convert function.",
         ),
     ] = {}
 
@@ -169,7 +170,7 @@ class DLiteConvertStrategy:
         config = self.convert_config.configuration
         module = importlib.import_module(config.module_name, config.package)
         function = getattr(module, config.function_name)
-        options = config.options
+        kwargs = config.kwargs
 
         coll = get_collection(session)
 
@@ -191,7 +192,7 @@ class DLiteConvertStrategy:
                     "either `label` or `datamodel` must be specified in "
                     f"inputs[{i}]"
                 )
-        outputs = function(*instances, **options)
+        outputs = function(*instances, **kwargs)
         if isinstance(outputs, dlite.Instance):
             outputs = [outputs]
 
