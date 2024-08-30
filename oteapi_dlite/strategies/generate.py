@@ -21,6 +21,14 @@ if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
 
 
+# Constants
+hasInput = "https://w3id.org/emmo#EMMO_36e69413_8c59_4799_946c_10b05d266e22"
+
+
+class KBError(ValueError):
+    """Invalud data in knowledge base."""
+
+
 class DLiteStorageConfig(AttrDict):
     """Configuration for a generic DLite storage filter.
 
@@ -139,6 +147,22 @@ class DLiteStorageConfig(AttrDict):
                 "This configuration should be a dict mapping providing the "
                 "additional documentation of the driver. It should map OWL "
                 "properties to either tripper literals or IRIs."
+            ),
+        ),
+    ] = None
+    kb_document_computation: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "If `kb_document_iri` is given, this configuration adds "
+                "will document what computation that created the current "
+                "output instance and what input instances that went into the "
+                "computation."
+                "\n\n"
+                "The value should be the IRI of a computation class."
+                "\n\n"
+                "Note: It is assumed that there exists only one instance of "
+                "the data models for the input to the computation."
             ),
         ),
     ] = None
@@ -277,6 +301,26 @@ class DLiteGenerateStrategy:
                 if config.kb_document_context:
                     for prop, val in config.kb_document_context.items():
                         ts.add((config.kb_document_iri, prop, val))
+
+                if config.kb_document_computation:
+                    restrictions = ts.restrictions(
+                        config.kb_document_computation, hasInput
+                    )
+                    for r in restrictions:
+                        indv = inputs.append(r["value"])
+                        d = load_container(ts, indv, recognised_keys="basic")
+                        metaid = (
+                            d.get("dataresource", {})
+                            .get("configuration", {})
+                            .get("metadata")
+                        )
+                        if not metaid:
+                            raise KBError(
+                                f"expected that individual '{indv}' is "
+                                "documented as an OTEAPI dataresource with "
+                                "of explicit metadata"
+                            )
+
             finally:
                 ts.close()
 

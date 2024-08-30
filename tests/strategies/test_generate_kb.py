@@ -3,15 +3,15 @@
 # pylint: disable=too-many-locals
 
 
-# if True:
-def test_generate_kb():
+if True:
+    # def test_generate_kb():
     """Test generate with kb documentation enabled."""
     from pathlib import Path
 
     import dlite
     from oteapi.datacache import DataCache
-    from tripper import EMMO, RDF, Triplestore
-    from tripper.convert import load_container
+    from tripper import OWL, RDF, RDFS, Namespace, Triplestore
+    from tripper.convert import load_container, save_container
 
     from oteapi_dlite.strategies.generate import DLiteGenerateStrategy
     from oteapi_dlite.strategies.settings import SettingsStrategy
@@ -20,9 +20,52 @@ def test_generate_kb():
     thisdir = Path(__file__).resolve().parent
     outdir = thisdir / ".." / "output"
 
-    # Create/clear KB
+    EMMO = Namespace(
+        iri="https://w3id.org/emmo#",
+        label_annotations=True,
+        check=True,
+    )
+
+    # Populate KB with some data
     kb = outdir / "kb.ttl"
-    kb.write_text("")
+    ts = Triplestore(backend="rdflib")
+    ts.add_triples(
+        [
+            (":Sim", RDF.type, OWL.Class),
+            (":Sim", RDFS.subClassOf, EMMO.Computation),
+            (":input1", RDF.type, ":Input1"),
+            (":input2", RDF.type, ":Input2"),
+        ]
+    )
+    ts.add_restriction(":Sim", EMMO.hasInput, ":Input1", "exactly", 1)
+    ts.add_restriction(":Sim", EMMO.hasInput, ":Input2", "exactly", 1)
+    ts.add_restriction(":Sim", EMMO.hasOutput, ":Output", "exactly", 1)
+    input1 = {
+        "dataresource": {
+            "type": ":Input1",
+            "downloadUrl": "file1.json",
+            "mediaType": "application/vnd.dlite-parse",
+            "configuration": {
+                "metadata": "http://onto-ns.com/meta/ex/0.1/Input1",
+                "driver": "json",
+            },
+        },
+    }
+    input2 = {
+        "dataresource": {
+            "type": ":Input2",
+            "downloadUrl": "file2.yaml",
+            "mediaType": "application/vnd.dlite-parse",
+            "configuration": {
+                "metadata": "http://onto-ns.com/meta/ex/0.1/Input2",
+                "driver": "yaml",
+            },
+        },
+    }
+    save_container(ts, input1, ":input1", recognised_keys="basic")
+    save_container(ts, input2, ":input2", recognised_keys="basic")
+    ts.serialize(kb)
+    ts.close()
 
     iri = "https://example.org/data/mydata"
 
