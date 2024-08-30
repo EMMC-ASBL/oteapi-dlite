@@ -115,6 +115,13 @@ class DLiteConvertStrategyConfig(AttrDict):
             description="Output instances.",
         ),
     ] = []
+    kwargs: Annotated[
+        Optional[dict],
+        Field(
+            description="Additional keyword arguments passed "
+            "to the convert function.",
+        ),
+    ] = {}
 
 
 class DLiteConvertConfig(FunctionConfig):
@@ -161,15 +168,14 @@ class DLiteConvertStrategy:
             SessionUpdate instance.
         """
         config = self.convert_config.configuration
-
         module = importlib.import_module(config.module_name, config.package)
         function = getattr(module, config.function_name)
+        kwargs = config.kwargs
 
         coll = get_collection(session)
 
         instances = []
         for i, input_config in enumerate(config.inputs):
-            input_config = config.inputs[i]
             if input_config.label:
                 instances.append(
                     coll.get(input_config.label, input_config.datamodel)
@@ -180,13 +186,13 @@ class DLiteConvertStrategy:
                     property_mappings=input_config.property_mappings,
                     # More to do: add more arguments...
                 )
+                instances.append(inst)
             else:
                 raise ValueError(
                     "either `label` or `datamodel` must be specified in "
                     f"inputs[{i}]"
                 )
-
-        outputs = function(*instances)
+        outputs = function(*instances, **kwargs)
         if isinstance(outputs, dlite.Instance):
             outputs = [outputs]
 
