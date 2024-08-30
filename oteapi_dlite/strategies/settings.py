@@ -42,7 +42,7 @@ class SettingsConfig(AttrDict):
         Union[dict, list, str, int, float, bool, NoneType],
         Field(
             description=(
-                "The configurations to store, represented as a Python "
+                "The configurations to be stored, represented as a Python "
                 "object that can be serialised to JSON."
             ),
         ),
