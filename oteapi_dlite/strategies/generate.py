@@ -133,7 +133,7 @@ class DLiteStorageConfig(AttrDict):
         Field(
             description=(
                 "If `kb_document_iri` is given, this configuration adds "
-                "will add additional context to the documentation of the "
+                "additional context to the documentation of the "
                 "generated instance."
                 "\n\n"
                 "This configuration should be a dict mapping providing the "
