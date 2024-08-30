@@ -24,7 +24,7 @@ class SettingsConfig(AttrDict):
     This strategy stores settings in the session such that they are
     available for other strategies later in the pipeline.
 
-    The settings are stored as a JSON string and can be accessed
+    The settings are stored as a JSON string which can be accessed
     by its label.
 
     """
