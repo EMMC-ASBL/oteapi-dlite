@@ -118,7 +118,7 @@ class DLiteConvertStrategyConfig(AttrDict):
     options: Annotated[
         Optional[dict],
         Field(
-            description="Extra options",
+            description="Additional keyword arguments passed to the convert function.",
         ),
     ] = {}
 
