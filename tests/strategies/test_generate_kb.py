@@ -10,7 +10,7 @@ def test_generate_kb():
 
     import dlite
     from oteapi.datacache import DataCache
-    from tripper import EMMO, RDF, Triplestore
+    from tripper import RDF, Triplestore
     from tripper.convert import load_container
 
     from oteapi_dlite.strategies.generate import DLiteGenerateStrategy
@@ -20,11 +20,13 @@ def test_generate_kb():
     thisdir = Path(__file__).resolve().parent
     outdir = thisdir / ".." / "output"
 
+    isDescriptionFor = (
+        "https://w3id.org/emmo#EMMO_7159549c_16a3_4dd3_b37d_e992ad0b0879"
+    )
+
     # Create/clear KB
     kb = outdir / "kb.ttl"
     kb.write_text("")
-
-    iri = "https://example.org/data/mydata"
 
     kb_kwargs = {"backend": "rdflib", "triplestore_url": str(kb)}
     settings_config = {
@@ -34,7 +36,6 @@ def test_generate_kb():
             "settings": kb_kwargs,
         },
     }
-
     config = {
         "functionType": "application/vnd.dlite-generate",
         "configuration": {
@@ -42,8 +43,8 @@ def test_generate_kb():
             "driver": "json",
             "location": str(outdir / "image.json"),
             "options": "mode=w",
-            "kb_document_iri": iri,
-            "kb_document_context": {RDF.type: EMMO.DataSet},
+            "kb_document_class": ":MyData",
+            "kb_document_context": {isDescriptionFor: ":MyMaterial"},
         },
     }
 
@@ -83,9 +84,16 @@ def test_generate_kb():
 
     # Check data documentation in KB
     ts = Triplestore(**kb_kwargs)
-    doc = load_container(ts, iri, recognised_keys="basic")
+
+    # Get IRI of the created individual
+    iri = ts.value(predicate=RDF.type, object=":MyData")
+
+    doc = load_container(
+        ts, iri, recognised_keys="basic", ignore_unrecognised=True
+    )
     assert doc == {
         "dataresource": {
+            "type": ":MyData",
             "downloadUrl": str((outdir / "image.json")),
             "mediaType": "application/vnd.dlite-parse",
             "configuration": {
@@ -95,4 +103,4 @@ def test_generate_kb():
             },
         },
     }
-    assert ts.has(iri, RDF.type, EMMO.DataSet)
+    assert ts.has(iri, RDF.type, ":MyData")
