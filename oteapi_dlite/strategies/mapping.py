@@ -240,18 +240,18 @@ def find_parent_node(
     try:
         template_str = """
         {% macro sparql_query(class_names, graph_uri) %}
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        SELECT ?parentClass
-        WHERE {
-          GRAPH <{{ graph_uri }}> {
-            ?class rdfs:subClassOf* ?parentClass .
-            FILTER(
-                {% for class_name in class_names -%}
-                    ?class = <{{ class_name }}>{{ " ||" if not loop.last }}
-                {% endfor %})
-          }
-        }
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            SELECT ?parentClass
+            WHERE {
+                GRAPH <{{ graph_uri }}> {
+                    ?class rdfs:subClassOf* ?parentClass .
+                    FILTER(
+                        {% for class_name in class_names -%}
+                            ?class = <{{ class_name }}>{{ " ||" if not loop.last }}
+                        {% endfor %})
+                }
+            }
         {% endmacro %}
         """
 
@@ -326,26 +326,47 @@ def fetch_and_populate_graph(
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX fno: <https://w3id.org/function/ontology#>
+        PREFIX emmo: <http://emmo.info/domain-mappings#>
+        PREFIX oteio: <http://emmo.info/oteio#>
 
-        SELECT ?subject ?predicate ?object
+        SELECT DISTINCT ?subject ?predicate ?object
         WHERE {{
-           GRAPH <{graph_uri}> {{
+        GRAPH <{graph_uri}> {{
+
+            # Match all subclasses of the parent class
+            ?subclass rdfs:subClassOf* <{parent_node}> .
+
+            # Retrieve all relevant triples for these subclasses and their individuals
+            {{
+            # Subclasses themselves and their relationships
+            ?subclass ?predicate ?object .
+            BIND(?subclass AS ?subject)
+            }} UNION {{
+            # Individuals of these subclasses and their properties
+            ?subject rdf:type ?subclass .
             ?subject ?predicate ?object .
-            ?subject rdfs:subClassOf* <{parent_node}> .
+            }}
+
+            # Ensure subject, predicate, and object are not empty
+            FILTER(BOUND(?subject) && BOUND(?predicate) && BOUND(?object))
+
+            # Filter by the specific predicates
             FILTER (?predicate IN (
                 rdfs:subClassOf,
-                skos:prefLabel,
-                rdfs:subPropertyOf,
-                rdfs:domain,
-                rdfs:range,
+                rdfs:label,
                 rdf:type,
+                rdf:about,
                 owl:propertyDisjointWith,
                 fno:expects,
                 fno:predicate,
                 fno:type,
                 fno:returns,
-                fno:executes))
-           }}
+                fno:executes,
+                oteio:hasPythonFunctionName,
+                oteio:hasPythonModuleName,
+                oteio:hasPypiPackageName,
+                emmo:mapsTo))
+        }}
         }}
         """
         sparql.setQuery(query)
@@ -359,7 +380,6 @@ def fetch_and_populate_graph(
                     rdflib.URIRef(result["object"]["value"]),
                 )
             )
-
         logger.info("Graph populated with fetched triples.")
 
     except SPARQLWrapperException as wrapper_error:
