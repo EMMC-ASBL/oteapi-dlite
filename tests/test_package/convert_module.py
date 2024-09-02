@@ -5,6 +5,8 @@ from pathlib import Path
 import dlite
 import numpy as np
 
+from oteapi_dlite.utils.exceptions import OteapiDliteException
+
 thisdir = Path(__file__).resolve().parent
 entitydir = thisdir.parent / "entities"
 
@@ -17,6 +19,18 @@ def converter(energy, forces):
     result = Result(dimensions=forces.dimensions)
     result.potential_energy = energy.energy
     result.forces = forces.forces
+    return result
+
+
+def converter_w_options(energy, forces, test_option):
+    """Converter should fail if options not passed to it."""
+    if test_option != "fun":
+        raise OteapiDliteException
+    Result = dlite.get_instance("http://onto-ns.com/meta/0.1/Result")
+    result = Result(dimensions=forces.dimensions)
+    result.potential_energy = energy.energy
+    result.forces = forces.forces
+
     return result
 
 

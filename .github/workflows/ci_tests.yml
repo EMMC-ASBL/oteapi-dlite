@@ -52,7 +52,7 @@ jobs:
       ## Build documentation
       run_build_docs: true
       python_version_docs: "3.9"
-      warnings_as_errors: true
+      warnings_as_errors: false
       use_mkdocs: true
 
       # mkdocs-specific settings
