@@ -1,6 +1,7 @@
 """Generic generate strategy using DLite storage plugin."""
 
 # pylint: disable=unused-argument,invalid-name,too-many-branches,too-many-locals
+import os
 import tempfile
 from typing import TYPE_CHECKING, Annotated, Optional
 
@@ -23,6 +24,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
 # Constants
 hasInput = "https://w3id.org/emmo#EMMO_36e69413_8c59_4799_946c_10b05d266e22"
+hasOutput = "https://w3id.org/emmo#EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840"
 
 
 class KBError(ValueError):
@@ -123,30 +125,58 @@ class DLiteStorageConfig(AttrDict):
             description="Configuration options for the local data cache.",
         ),
     ] = None
-    kb_document_iri: Annotated[
+    kb_document_class: Annotated[
         Optional[str],
         Field(
             description=(
-                "If given, document the generated instance in the knowledge "
-                "base using as an individual with this IRI."
+                "IRI of a class in the ontology."
                 "\n\n"
-                "Expects that a 'tripper.triplestore' settings has been "
-                "added. This settings should be a dict that can be passed "
+                "If given, the generated DLite instance is documented in the "
+                "knowledge base as an instance of this class."
+                "\n\n"
+                "Expects that the 'tripper.triplestore' setting has been "
+                "set using the SettingsStrategy (vnd.dlite-settings). "
+                "This settings should be a dict that can be passed "
                 "as keyword arguments to `tripper.Triplestore()`."
+                "\n\n"
+                "Example of adding expected settings using OTELib:\n"
+                "\n\n"
+                ">>> kb_settings = client.create_filter(\n"
+                "...     filterType='application/vnd.dlite-settings',\n"
+                "...     configuration={\n"
+                "...         'label': 'tripper.triplestore',\n"
+                "...         'settings': {\n"
+                "...             'backend': 'rdflib',\n"
+                "...             'triplestore_url': '/path/to/local/kb.ttl',\n"
+                "...         },\n"
+                "...     },\n"
+                "... )\n"
+                ">>> generate = client.create_function(...)\n"
+                ">>> pipeline = ... >> generate >> kb_settings\n"
+                ">>> pipeline.get()\n"
             ),
         ),
     ] = None
+    kb_document_base_iri: Annotated[
+        str, Field(description="Base IRI or prefix for created individuals.")
+    ] = ":"
     kb_document_context: Annotated[
         Optional[dict],
         Field(
             description=(
-                "If `kb_document_iri` is given, this configuration adds "
-                "will add additional context to the documentation of the "
-                "generated instance."
+                "If `kb_document_class` is given, this configuration will add "
+                "additional context to the documentation of the generated "
+                "individual."
+                "\n\n"
+                "This might be useful to make it easy to later access the "
+                "generated individual."
                 "\n\n"
                 "This configuration should be a dict mapping providing the "
                 "additional documentation of the driver. It should map OWL "
                 "properties to either tripper literals or IRIs."
+                "\n\n"
+                "Example: `{RDF.type: ONTO.MyDataSet, "
+                "EMMO.isDescriptionFor: ONTO.MyMaterial}`"
             ),
         ),
     ] = None
@@ -154,15 +184,15 @@ class DLiteStorageConfig(AttrDict):
         Optional[str],
         Field(
             description=(
+                "IRI of a computation subclass."
+                "\n\n"
                 "If `kb_document_iri` is given, this configuration adds "
-                "will document what computation that created the current "
-                "output instance and what input instances that went into the "
-                "computation."
+                "an individual of the given computation subclass to the "
+                "knowledge base and connect it to its input and output "
+                "individuals."
                 "\n\n"
-                "The value should be the IRI of a computation class."
-                "\n\n"
-                "Note: It is assumed that there exists only one instance of "
-                "the data models for the input to the computation."
+                "Note: It is assumed that there exists only one individual "
+                "of the input and output subclasses."
             ),
         ),
     ] = None
@@ -210,6 +240,7 @@ class DLiteGenerateStrategy:
         Returns:
             SessionUpdate instance.
         """
+        # pylint: disable=too-many-statements
         config = self.generate_config.configuration
         cacheconfig = config.datacache_config
 
@@ -255,22 +286,29 @@ class DLiteGenerateStrategy:
                     cache.add(f.read(), key=key)
 
         # Store documentation of this instance in the knowledge base
-        if config.kb_document_iri:
+        if config.kb_document_class:
+
+            # Import here to avoid hard dependencies on tripper.
+            # pylint: disable=import-outside-toplevel
+            from tripper import RDF, Triplestore
+            from tripper.convert import save_container
+
             kb_settings = get_settings(session, "tripper.triplestore")
             if not kb_settings:
                 raise KeyError(
-                    "The `kb_document_iri` configuration requires that a "
+                    "The `kb_document_class` configuration requires that a "
                     "'tripper.triplestore' settings has been added using the "
                     "application/vnd.dlite-settings strategy."
                 )
 
-            # Import here to avoid hard dependencies on tripper.
-            # pylint: disable=import-outside-toplevel
-            from tripper import Triplestore
-            from tripper.convert import save_container
-
+            # IRI of new individual
+            iri = individual_iri(
+                class_iri=config.kb_document_class,
+                base_iri=config.kb_document_base_iri,
+            )
             resource = {
                 "dataresource": {
+                    "type": config.kb_document_class,
                     "downloadUrl": config.location,
                     "mediaType": (
                         config.mediaType
@@ -289,37 +327,39 @@ class DLiteGenerateStrategy:
                 }
             }
 
+            triples = [(iri, RDF.type, config.kb_document_class)]
+            if config.kb_document_context:
+                for prop, val in config.kb_document_context.items():
+                    triples.append((iri, prop, val))
+
             ts = Triplestore(**kb_settings)
             try:
-                save_container(
-                    ts,
-                    resource,
-                    config.kb_document_iri,
-                    recognised_keys="basic",
-                )
-
-                if config.kb_document_context:
-                    for prop, val in config.kb_document_context.items():
-                        ts.add((config.kb_document_iri, prop, val))
-
                 if config.kb_document_computation:
+                    comput = individual_iri(
+                        class_iri=config.kb_document_computation,
+                        base_iri=config.kb_document_base_iri,
+                    )
+                    triples.extend(
+                        [
+                            (comput, RDF.type, config.kb_document_computation),
+                            (comput, hasOutput, iri),
+                        ]
+                    )
                     restrictions = ts.restrictions(
                         config.kb_document_computation, hasInput
                     )
                     for r in restrictions:
-                        indv = inputs.append(r["value"])
-                        d = load_container(ts, indv, recognised_keys="basic")
-                        metaid = (
-                            d.get("dataresource", {})
-                            .get("configuration", {})
-                            .get("metadata")
-                        )
-                        if not metaid:
-                            raise KBError(
-                                f"expected that individual '{indv}' is "
-                                "documented as an OTEAPI dataresource with "
-                                "of explicit metadata"
-                            )
+                        target_class = r["value"]
+                        indv = ts.value(predicate=RDF.type, object=target_class)
+                        triples.append((comput, r["property"], indv))
+
+                save_container(
+                    ts,
+                    resource,
+                    iri,
+                    recognised_keys="basic",
+                )
+                ts.add_triples(triples)
 
             finally:
                 ts.close()
@@ -332,3 +372,24 @@ class DLiteGenerateStrategy:
 
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
+
+
+def individual_iri(class_iri, base_iri=":", randbytes=6):
+    """Return an IRI for an individual of a class.
+
+    Arguments:
+        class_iri: IRI of the class to create an individual of.
+        base_iri: Base IRI of the created individual.
+        randbytes: Number of random bytes to include in the returned IRI.
+
+    Returns:
+        IRI of a new individual.
+
+    """
+    basename = (
+        class_iri.split(":", 1)[-1]
+        .rsplit("/", 1)[-1]
+        .rsplit("#", 1)[-1]
+        .lower()
+    )
+    return f"{base_iri}{basename}-{os.urandom(6).hex()}"

@@ -3,9 +3,11 @@
 # pylint: disable=too-many-locals
 
 
-if True:
-    # def test_generate_kb():
+# if True:
+def test_generate_kb():
     """Test generate with kb documentation enabled."""
+    # pylint: disable=too-many-statements
+
     from pathlib import Path
 
     import dlite
@@ -26,9 +28,10 @@ if True:
         check=True,
     )
 
-    # Populate KB with some data
+    # Create/clear KB
     kb = outdir / "kb.ttl"
     ts = Triplestore(backend="rdflib")
+    ts.bind("", "http://myproj.org/kb#")
     ts.add_triples(
         [
             (":Sim", RDF.type, OWL.Class),
@@ -67,8 +70,6 @@ if True:
     ts.serialize(kb)
     ts.close()
 
-    iri = "https://example.org/data/mydata"
-
     kb_kwargs = {"backend": "rdflib", "triplestore_url": str(kb)}
     settings_config = {
         "filterType": "application/vnd.dlite-settings",
@@ -77,7 +78,6 @@ if True:
             "settings": kb_kwargs,
         },
     }
-
     config = {
         "functionType": "application/vnd.dlite-generate",
         "configuration": {
@@ -85,8 +85,9 @@ if True:
             "driver": "json",
             "location": str(outdir / "image.json"),
             "options": "mode=w",
-            "kb_document_iri": iri,
-            "kb_document_context": {RDF.type: EMMO.DataSet},
+            "kb_document_class": ":MyData",
+            "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
+            "kb_document_computation": ":Sim",
         },
     }
 
@@ -126,9 +127,16 @@ if True:
 
     # Check data documentation in KB
     ts = Triplestore(**kb_kwargs)
-    doc = load_container(ts, iri, recognised_keys="basic")
+
+    # Get IRI of the created data individual
+    iri = ts.value(predicate=RDF.type, object=":MyData")
+
+    doc = load_container(
+        ts, iri, recognised_keys="basic", ignore_unrecognised=True
+    )
     assert doc == {
         "dataresource": {
+            "type": ":MyData",
             "downloadUrl": str((outdir / "image.json")),
             "mediaType": "application/vnd.dlite-parse",
             "configuration": {
@@ -138,4 +146,15 @@ if True:
             },
         },
     }
-    assert ts.has(iri, RDF.type, EMMO.DataSet)
+
+    # Check kb_document_class
+    assert ts.has(iri, RDF.type, ":MyData")
+
+    # Check kb_document_context
+    assert ts.has(iri, EMMO.isDescriptionFor, ":MyMaterial")
+
+    # Check: kb_document_computation
+    sim = ts.value(predicate=RDF.type, object=":Sim")
+    assert ts.has(sim, EMMO.hasInput, ":input1")
+    assert ts.has(sim, EMMO.hasInput, ":input2")
+    assert ts.has(sim, EMMO.hasOutput, iri)
