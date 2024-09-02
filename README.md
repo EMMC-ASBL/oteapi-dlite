@@ -20,7 +20,7 @@ Further reading:
 - [OTE-API Services Documentation](https://github.com/EMMC-ASBL/oteapi-services)
 - [DLite](https://github.com/SINTEF/dlite)
 
-A list and documentation for all the strategies in this plugin can be found [here](https://EMMC-ASBL.github.io/oteapi-dlite/latest/all_strategies).
+
 
 ## License and copyright
 

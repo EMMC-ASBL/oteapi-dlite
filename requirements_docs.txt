@@ -1,3 +1,4 @@
+griffe<1.0  # This is necessary until mkdocstrings fully supports griffe v1
 invoke~=2.2
 mike~=2.0
 mkdocs~=1.5
