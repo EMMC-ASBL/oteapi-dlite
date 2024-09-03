@@ -2,8 +2,10 @@
 
 from otelib import OTEClient
 from paths import inputdir, outputdir  # pylint: disable=import-error
+from yaml import safe_load
 
 
+# if True:
 def test_convert():
     """
     Test convert strategy
@@ -67,3 +69,14 @@ def test_convert():
 
     # Ensure that the result file is regenerated
     assert resultfile.exists()
+
+    # Check result content
+    with open(resultfile, "r", encoding="utf8") as f:
+        dct = safe_load(f)
+    _, d = dct.popitem()
+    assert d["meta"] == "http://onto-ns.com/meta/0.1/Result"
+    assert d["dimensions"] == {"natoms": 2, "ncoords": 3}
+    assert d["properties"] == {
+        "potential_energy": 2.1,
+        "forces": [[0.1, 0.0, 0.3], [0.5, 0.0, 0.0]],
+    }
