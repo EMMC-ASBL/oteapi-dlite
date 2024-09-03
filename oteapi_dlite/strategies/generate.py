@@ -345,12 +345,28 @@ class DLiteGenerateStrategy:
                             (comput, hasOutput, iri),
                         ]
                     )
+
+                    # Relate computation individual `comput` to its
+                    # input individuals.
+                    #
+                    # This simple implementation works against KB.  It
+                    # assumes that the input of
+                    # `kb_document_computation` is documented in the
+                    # KB and that there only exists one individual of each
+                    # input class.
+                    #
+                    # In the case of multiple individuals of the input
+                    # classes, the workflow executer must be involded
+                    # in the documentation.  It can either do the
+                    # documentation itself or provide a callback
+                    # providing the needed info, which can be called
+                    # from this strategy.
                     restrictions = ts.restrictions(
                         config.kb_document_computation, hasInput
                     )
                     for r in restrictions:
-                        target_class = r["value"]
-                        indv = ts.value(predicate=RDF.type, object=target_class)
+                        input_class = r["value"]
+                        indv = ts.value(predicate=RDF.type, object=input_class)
                         triples.append((comput, r["property"], indv))
 
                 save_container(
