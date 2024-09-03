@@ -6,12 +6,14 @@
 # if True:
 def test_generate_kb():
     """Test generate with kb documentation enabled."""
+    # pylint: disable=too-many-statements
+
     from pathlib import Path
 
     import dlite
     from oteapi.datacache import DataCache
-    from tripper import RDF, Triplestore
-    from tripper.convert import load_container
+    from tripper import OWL, RDF, RDFS, Namespace, Triplestore
+    from tripper.convert import load_container, save_container
 
     from oteapi_dlite.strategies.generate import DLiteGenerateStrategy
     from oteapi_dlite.strategies.settings import SettingsStrategy
@@ -20,13 +22,53 @@ def test_generate_kb():
     thisdir = Path(__file__).resolve().parent
     outdir = thisdir / ".." / "output"
 
-    isDescriptionFor = (
-        "https://w3id.org/emmo#EMMO_7159549c_16a3_4dd3_b37d_e992ad0b0879"
+    EMMO = Namespace(
+        iri="https://w3id.org/emmo#",
+        label_annotations=True,
+        check=True,
     )
 
     # Create/clear KB
     kb = outdir / "kb.ttl"
-    kb.write_text("")
+    ts = Triplestore(backend="rdflib")
+    ts.bind("", "http://myproj.org/kb#")
+    ts.add_triples(
+        [
+            (":Sim", RDF.type, OWL.Class),
+            (":Sim", RDFS.subClassOf, EMMO.Computation),
+            (":input1", RDF.type, ":Input1"),
+            (":input2", RDF.type, ":Input2"),
+        ]
+    )
+    ts.add_restriction(":Sim", EMMO.hasInput, ":Input1", "exactly", 1)
+    ts.add_restriction(":Sim", EMMO.hasInput, ":Input2", "exactly", 1)
+    ts.add_restriction(":Sim", EMMO.hasOutput, ":Output", "exactly", 1)
+    input1 = {
+        "dataresource": {
+            "type": ":Input1",
+            "downloadUrl": "file1.json",
+            "mediaType": "application/vnd.dlite-parse",
+            "configuration": {
+                "metadata": "http://onto-ns.com/meta/ex/0.1/Input1",
+                "driver": "json",
+            },
+        },
+    }
+    input2 = {
+        "dataresource": {
+            "type": ":Input2",
+            "downloadUrl": "file2.yaml",
+            "mediaType": "application/vnd.dlite-parse",
+            "configuration": {
+                "metadata": "http://onto-ns.com/meta/ex/0.1/Input2",
+                "driver": "yaml",
+            },
+        },
+    }
+    save_container(ts, input1, ":input1", recognised_keys="basic")
+    save_container(ts, input2, ":input2", recognised_keys="basic")
+    ts.serialize(kb)
+    ts.close()
 
     kb_kwargs = {"backend": "rdflib", "triplestore_url": str(kb)}
     settings_config = {
@@ -44,7 +86,9 @@ def test_generate_kb():
             "location": str(outdir / "image.json"),
             "options": "mode=w",
             "kb_document_class": ":MyData",
-            "kb_document_context": {isDescriptionFor: ":MyMaterial"},
+            "kb_document_base_iri": "http://ex.com#",
+            "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
+            "kb_document_computation": ":Sim",
         },
     }
 
@@ -85,8 +129,9 @@ def test_generate_kb():
     # Check data documentation in KB
     ts = Triplestore(**kb_kwargs)
 
-    # Get IRI of the created individual
+    # Get IRI of the created data individual
     iri = ts.value(predicate=RDF.type, object=":MyData")
+    assert iri.startswith("http://ex.com#mydata-")
 
     doc = load_container(
         ts, iri, recognised_keys="basic", ignore_unrecognised=True
@@ -103,4 +148,16 @@ def test_generate_kb():
             },
         },
     }
+
+    # Check kb_document_class
     assert ts.has(iri, RDF.type, ":MyData")
+
+    # Check kb_document_context
+    assert ts.has(iri, EMMO.isDescriptionFor, ":MyMaterial")
+
+    # Check: kb_document_computation
+    sim = ts.value(predicate=RDF.type, object=":Sim")
+    assert sim.startswith("http://ex.com#sim-")
+    assert ts.has(sim, EMMO.hasInput, ":input1")
+    assert ts.has(sim, EMMO.hasInput, ":input2")
+    assert ts.has(sim, EMMO.hasOutput, iri)

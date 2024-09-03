@@ -22,6 +22,15 @@ if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
 
 
+# Constants
+hasInput = "https://w3id.org/emmo#EMMO_36e69413_8c59_4799_946c_10b05d266e22"
+hasOutput = "https://w3id.org/emmo#EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840"
+
+
+class KBError(ValueError):
+    """Invalid data in knowledge base."""
+
+
 class DLiteStorageConfig(AttrDict):
     """Configuration for a generic DLite storage filter.
 
@@ -154,6 +163,9 @@ class DLiteStorageConfig(AttrDict):
             ),
         ),
     ] = None
+    kb_document_base_iri: Annotated[
+        str, Field(description="Base IRI or prefix for created individuals.")
+    ] = ":"
     kb_document_context: Annotated[
         Optional[dict],
         Field(
@@ -171,6 +183,35 @@ class DLiteStorageConfig(AttrDict):
                 "\n\n"
                 "Example: `{RDF.type: ONTO.MyDataSet, "
                 "EMMO.isDescriptionFor: ONTO.MyMaterial}`"
+            ),
+        ),
+    ] = None
+    kb_document_computation: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "IRI of a computation subclass."
+                "\n\n"
+                "Requires `kb_document_class`, and is used to "
+                "document the computation (model) that the "
+                "individual (of `kb_document_class`) to be documented "
+                "is output of."
+                "When `kb_document_computation` is given a new individual of "
+                "the computation subclass is created. Input and "
+                "output datasets are documented using the relation "
+                " `emmo:hasInput` and `emmo:hasOutput`, "
+                "respectively.  The individual of `kb_document_class` is "
+                "one of the output individuals."
+                "\n\n"
+                "Note: This configuration relies on several assumptions:\n"
+                "  - The `kb_document_computation` class exists in the "
+                "knowledge base and is related to its input and output "
+                "dataset classes via `emmo:hasInput` and `emmo:hasOutput` "
+                "restrictions, respectively.\n"
+                "  - There exists only one individual of each input dataset "
+                "class.\n"
+                "  - There exists at most one individual of each output "
+                "dataset class.\n"
             ),
         ),
     ] = None
@@ -218,6 +259,7 @@ class DLiteGenerateStrategy:
         Returns:
             SessionUpdate instance.
         """
+        # pylint: disable=too-many-statements
         config = self.generate_config.configuration
         cacheconfig = config.datacache_config
 
@@ -279,11 +321,10 @@ class DLiteGenerateStrategy:
                 )
 
             # IRI of new individual
-            base = (
-                config.kb_document_class.rsplit("/", 1)[-1].rsplit("#", 1)[-1]
-            ).lower()
-            iri = f"{base}-{os.urandom(6).hex()}"
-
+            iri = individual_iri(
+                class_iri=config.kb_document_class,
+                base_iri=config.kb_document_base_iri,
+            )
             resource = {
                 "dataresource": {
                     "type": config.kb_document_class,
@@ -312,6 +353,57 @@ class DLiteGenerateStrategy:
 
             ts = Triplestore(**kb_settings)
             try:
+                if config.kb_document_computation:
+                    comput = individual_iri(
+                        class_iri=config.kb_document_computation,
+                        base_iri=config.kb_document_base_iri,
+                    )
+                    triples.extend(
+                        [
+                            (comput, RDF.type, config.kb_document_computation),
+                            (comput, hasOutput, iri),
+                        ]
+                    )
+
+                    # Relate computation individual `comput` to its
+                    # input individuals.
+                    #
+                    # This simple implementation works against KB.  It
+                    # assumes that the input of
+                    # `kb_document_computation` is documented in the
+                    # KB and that there only exists one individual of each
+                    # input class.
+                    #
+                    # In the case of multiple individuals of the input
+                    # classes, the workflow executer must be involded
+                    # in the documentation.  It can either do the
+                    # documentation itself or provide a callback
+                    # providing the needed info, which can be called
+                    # from this strategy.
+
+                    # Relate to input dataset individuals
+                    restrictions = ts.restrictions(
+                        config.kb_document_computation, hasInput
+                    )
+                    for r in restrictions:
+                        input_class = r["value"]
+                        indv = ts.value(predicate=RDF.type, object=input_class)
+                        triples.append((comput, r["property"], indv))
+
+                    # Add output dataset individuals
+                    restrictions = ts.restrictions(
+                        config.kb_document_computation, hasOutput
+                    )
+                    for r in restrictions:
+                        output_class = r["value"]
+                        indv = ts.value(
+                            predicate=RDF.type,
+                            object=output_class,
+                            default=None,
+                        )
+                        if indv and indv != iri:
+                            triples.append((comput, r["property"], indv))
+
                 save_container(
                     ts,
                     resource,
@@ -331,3 +423,24 @@ class DLiteGenerateStrategy:
 
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
+
+
+def individual_iri(class_iri, base_iri=":", randbytes=6):
+    """Return an IRI for an individual of a class.
+
+    Arguments:
+        class_iri: IRI of the class to create an individual of.
+        base_iri: Base IRI of the created individual.
+        randbytes: Number of random bytes to include in the returned IRI.
+
+    Returns:
+        IRI of a new individual.
+
+    """
+    basename = (
+        class_iri.split(":", 1)[-1]
+        .rsplit("/", 1)[-1]
+        .rsplit("#", 1)[-1]
+        .lower()
+    )
+    return f"{base_iri}{basename}-{os.urandom(6).hex()}"
