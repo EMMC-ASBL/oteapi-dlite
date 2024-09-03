@@ -28,7 +28,7 @@ hasOutput = "https://w3id.org/emmo#EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840"
 
 
 class KBError(ValueError):
-    """Invalud data in knowledge base."""
+    """Invalid data in knowledge base."""
 
 
 class DLiteStorageConfig(AttrDict):
