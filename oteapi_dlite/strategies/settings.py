@@ -17,14 +17,19 @@ if TYPE_CHECKING:  # pragma: no cover
 # Must add this explicitly to make mypy happy
 NoneType = type(None)
 
+# Python object that is JSON serialisable
+JSONSerialisable = Union[dict, list, str, int, float, bool, NoneType]
+
 
 class SettingsConfig(AttrDict):
     """Configuration for a generic "settings" filter.
 
     This strategy stores settings in the session such that they are
-    available for other strategies later in the pipeline.
+    available for other strategies.  For this to work, this strategy
+    should be added to the end of the pipeline (since it uses the
+    `initiate()` method).
 
-    The settings are stored as a JSON string and can be accessed
+    The settings are stored as a JSON string which can be accessed
     by its label.
 
     """
@@ -39,10 +44,10 @@ class SettingsConfig(AttrDict):
         ),
     ]
     settings: Annotated[
-        Union[dict, list, str, int, float, bool, NoneType],
+        JSONSerialisable,
         Field(
             description=(
-                "The configurations to store, represented as a Python "
+                "The configurations to be stored, represented as a Python "
                 "object that can be serialised to JSON."
             ),
         ),
