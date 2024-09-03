@@ -79,6 +79,8 @@ plugins:
             docstring_options:
               replace_admonitions: true
   - awesome-pages
+  - autorefs:
+      resolve_closest: false
 
 nav:
   - Home: index.md
