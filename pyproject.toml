@@ -24,11 +24,11 @@ dynamic = ["version"]
 dependencies = [
     # Core dependencies
     "DLite-Python>=0.4.5,<1.0",
-    "numpy>=1.21,<1.27.0",
+    "numpy>=1.21,<2.0.3",
     "oteapi-core>=0.6.0,<0.6.2",
-    "pydantic>=2.1,<2.6",
-    "pydantic-settings>=2.0,<2.2",
-    "typing-extensions>=4.8; python_version<'3.10'",
+    "pydantic~=2.8",
+    "pydantic-settings~=2.4",
+    "typing-extensions~=4.12; python_version < '3.10'",
     "Pillow>=9.0.1,<11",
     #"tripper>=0.3.4",  # Wait for this version to be released
     "tripper @ git+https://github.com/EMMC-ASBL/tripper.git@master"
@@ -40,18 +40,18 @@ docs = [
     "mkdocs>=1.5.3,<1.7",
     "mkdocs-awesome-pages-plugin~=2.9",
     "mkdocs-material>=9.5.5,<10",
-    "mkdocstrings[python]~=0.25.1",
+    "mkdocstrings[python]~=0.26.0",
 ]
 testing = [
     "PyYAML>=5.4.1,<7",
     "otelib>=0.4.0,<1",
-    "pytest~=7.4",
-    "pytest-cov~=4.1",
+    "pytest>=7.4.0,<9",
+    "pytest-cov>=4.1.0,<6",
     "rdflib>=5.0.0,<8",
     "pylint>=3.0.0,<4",
 ]
 dev = [
-    "pre-commit~=3.7",
+    "pre-commit~=3.8",
     "oteapi-dlite[docs,testing]",
 ]
 
