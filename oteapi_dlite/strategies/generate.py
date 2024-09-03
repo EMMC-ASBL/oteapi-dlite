@@ -195,16 +195,20 @@ class DLiteStorageConfig(AttrDict):
                 "If `kb_document_class` is given, this configuration "
                 "adds documentation to the knowledge base of a "
                 "computation.  It creates a new individual of "
-                "`kb_document_computation` and relates it to its input "
-                "datasets using `EMMO.hasInput`.  It will also be related to "
-                "the `kb_document_class` individual using `EMMO.hasOutput`."
+                "`kb_document_computation` and relates it to its input and "
+                "output datasets using `emmo:hasInput` and `emmo:hasOutput`, "
+                "respectively.  The individual of `kb_document_class` is "
+                "one of the output individuals."
                 "\n\n"
                 "Note: This configuration relies on several assumptions:\n"
                 "  - The `kb_document_computation` class exists in the "
-                "knowledge base and is related to its input datasets classes "
-                "via `EMMO.hasInput` restrictions.\n"
+                "knowledge base and is related to its input and output "
+                "dataset classes via `emmo:hasInput` and `emmo:hasOutput` "
+                "restrictions, respectively.\n"
                 "  - There exists only one individual of each input dataset "
                 "class.\n"
+                "  - There exists at most one individual of each output "
+                "dataset class.\n"
             ),
         ),
     ] = None
@@ -373,6 +377,8 @@ class DLiteGenerateStrategy:
                     # documentation itself or provide a callback
                     # providing the needed info, which can be called
                     # from this strategy.
+
+                    # Relate to input dataset individuals
                     restrictions = ts.restrictions(
                         config.kb_document_computation, hasInput
                     )
@@ -380,6 +386,20 @@ class DLiteGenerateStrategy:
                         input_class = r["value"]
                         indv = ts.value(predicate=RDF.type, object=input_class)
                         triples.append((comput, r["property"], indv))
+
+                    # Add output dataset individuals
+                    restrictions = ts.restrictions(
+                        config.kb_document_computation, hasOutput
+                    )
+                    for r in restrictions:
+                        output_class = r["value"]
+                        indv = ts.value(
+                            predicate=RDF.type,
+                            object=output_class,
+                            default=None,
+                        )
+                        if indv and indv != iri:
+                            triples.append((comput, r["property"], indv))
 
                 save_container(
                     ts,
