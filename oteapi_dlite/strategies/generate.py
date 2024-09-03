@@ -1,6 +1,7 @@
 """Generic generate strategy using DLite storage plugin."""
 
-# pylint: disable=unused-argument,invalid-name
+# pylint: disable=unused-argument,invalid-name,too-many-branches,too-many-locals
+import os
 import tempfile
 from typing import TYPE_CHECKING, Annotated, Optional
 
@@ -10,7 +11,12 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, get_driver, update_collection
+from oteapi_dlite.utils import (
+    get_collection,
+    get_driver,
+    get_settings,
+    update_collection,
+)
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
@@ -110,6 +116,64 @@ class DLiteStorageConfig(AttrDict):
             description="Configuration options for the local data cache.",
         ),
     ] = None
+    kb_document_class: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "IRI of a class in the ontology."
+                "\n\n"
+                "If given, the generated DLite instance is documented in the "
+                "knowledge base as an instance of this class."
+                "\n\n"
+                "Expects that the 'tripper.triplestore' setting has been "
+                "set using the SettingsStrategy (vnd.dlite-settings). "
+                "This settings should be a dict that can be passed "
+                "as keyword arguments to `tripper.Triplestore()`."
+                "\n\n"
+                "Example of adding expected settings using OTELib:\n"
+                "\n\n"
+                ">>> kb_settings = client.create_filter(\n"
+                "...     filterType='application/vnd.dlite-settings',\n"
+                "...     configuration={\n"
+                "...         'label': 'tripper.triplestore',\n"
+                "...         'settings': {\n"
+                "...             'backend': 'rdflib',\n"
+                "...             'triplestore_url': '/path/to/local/kb.ttl',\n"
+                "...         },\n"
+                "...     },\n"
+                "... )\n"
+                ">>> generate = client.create_function(\n"
+                "...     functionType='application/vnd.dlite-generate'\n"
+                "...     configuration={\n"
+                "...         kb_document_class='http://example.com#MyClass'\n"
+                "...         ...\n"
+                "...     },\n"
+                "... )\n"
+                ">>> pipeline = ... >> generate >> kb_settings\n"
+                ">>> pipeline.get()\n"
+            ),
+        ),
+    ] = None
+    kb_document_context: Annotated[
+        Optional[dict],
+        Field(
+            description=(
+                "If `kb_document_class` is given, this configuration will add "
+                "additional context to the documentation of the generated "
+                "individual."
+                "\n\n"
+                "This might be useful to make it easy to later access the "
+                "generated individual."
+                "\n\n"
+                "This configuration should be a dict mapping providing the "
+                "additional documentation of the driver. It should map OWL "
+                "properties to either tripper literals or IRIs."
+                "\n\n"
+                "Example: `{RDF.type: ONTO.MyDataSet, "
+                "EMMO.isDescriptionFor: ONTO.MyMaterial}`"
+            ),
+        ),
+    ] = None
 
 
 class DLiteGenerateConfig(FunctionConfig):
@@ -160,9 +224,7 @@ class DLiteGenerateStrategy:
         driver = (
             config.driver
             if config.driver
-            else get_driver(
-                mediaType=config.mediaType,
-            )
+            else get_driver(mediaType=config.mediaType)
         )
 
         coll = get_collection(session, config.collection_id)
@@ -199,6 +261,67 @@ class DLiteGenerateStrategy:
                 inst.save(driver, "{tmpdir}/data", config.options)
                 with open(f"{tmpdir}/data", "rb") as f:
                     cache.add(f.read(), key=key)
+
+        # Store documentation of this instance in the knowledge base
+        if config.kb_document_class:
+
+            # Import here to avoid hard dependencies on tripper.
+            # pylint: disable=import-outside-toplevel
+            from tripper import RDF, Triplestore
+            from tripper.convert import save_container
+
+            kb_settings = get_settings(session, "tripper.triplestore")
+            if not kb_settings:
+                raise KeyError(
+                    "The `kb_document_class` configuration requires that a "
+                    "'tripper.triplestore' settings has been added using the "
+                    "application/vnd.dlite-settings strategy."
+                )
+
+            # IRI of new individual
+            base = (
+                config.kb_document_class.rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+            ).lower()
+            iri = f"{base}-{os.urandom(6).hex()}"
+
+            resource = {
+                "dataresource": {
+                    "type": config.kb_document_class,
+                    "downloadUrl": config.location,
+                    "mediaType": (
+                        config.mediaType
+                        if config.mediaType
+                        else "application/vnd.dlite-parse"
+                    ),
+                    "configuration": {
+                        "metadata": (
+                            config.datamodel
+                            if config.datamodel
+                            else inst.meta.uri
+                        ),
+                        "driver": config.driver,
+                        "options": config.options,
+                    },
+                }
+            }
+
+            triples = [(iri, RDF.type, config.kb_document_class)]
+            if config.kb_document_context:
+                for prop, val in config.kb_document_context.items():
+                    triples.append((iri, prop, val))
+
+            ts = Triplestore(**kb_settings)
+            try:
+                save_container(
+                    ts,
+                    resource,
+                    iri,
+                    recognised_keys="basic",
+                )
+                ts.add_triples(triples)
+
+            finally:
+                ts.close()
 
         # __TODO__
         # Can we safely assume that all strategies in a pipeline will be
