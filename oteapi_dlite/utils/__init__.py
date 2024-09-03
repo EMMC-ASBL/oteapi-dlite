@@ -5,10 +5,12 @@ This module provide some utility functions.
 
 from .nputils import dict2recarray
 from .utils import (
+    add_settings,
     get_collection,
     get_driver,
     get_instance,
     get_meta,
+    get_settings,
     update_collection,
 )
 
@@ -19,4 +21,6 @@ __all__ = (
     "get_instance",
     "get_collection",
     "update_collection",
+    "add_settings",
+    "get_settings",
 )

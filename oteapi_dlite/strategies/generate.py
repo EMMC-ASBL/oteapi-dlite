@@ -1,6 +1,7 @@
 """Generic generate strategy using DLite storage plugin."""
 
-# pylint: disable=unused-argument,invalid-name
+# pylint: disable=unused-argument,invalid-name,too-many-branches,too-many-locals
+import os
 import tempfile
 from typing import TYPE_CHECKING, Annotated, Optional
 
@@ -10,10 +11,24 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, get_driver, update_collection
+from oteapi_dlite.utils import (
+    get_collection,
+    get_driver,
+    get_settings,
+    update_collection,
+)
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
+
+
+# Constants
+hasInput = "https://w3id.org/emmo#EMMO_36e69413_8c59_4799_946c_10b05d266e22"
+hasOutput = "https://w3id.org/emmo#EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840"
+
+
+class KBError(ValueError):
+    """Invalid data in knowledge base."""
 
 
 class DLiteStorageConfig(AttrDict):
@@ -110,6 +125,96 @@ class DLiteStorageConfig(AttrDict):
             description="Configuration options for the local data cache.",
         ),
     ] = None
+    kb_document_class: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "IRI of a class in the ontology."
+                "\n\n"
+                "If given, the generated DLite instance is documented in the "
+                "knowledge base as an instance of this class."
+                "\n\n"
+                "Expects that the 'tripper.triplestore' setting has been "
+                "set using the SettingsStrategy (vnd.dlite-settings). "
+                "This settings should be a dict that can be passed "
+                "as keyword arguments to `tripper.Triplestore()`."
+                "\n\n"
+                "Example of adding expected settings using OTELib:\n"
+                "\n\n"
+                ">>> kb_settings = client.create_filter(\n"
+                "...     filterType='application/vnd.dlite-settings',\n"
+                "...     configuration={\n"
+                "...         'label': 'tripper.triplestore',\n"
+                "...         'settings': {\n"
+                "...             'backend': 'rdflib',\n"
+                "...             'triplestore_url': '/path/to/local/kb.ttl',\n"
+                "...         },\n"
+                "...     },\n"
+                "... )\n"
+                ">>> generate = client.create_function(\n"
+                "...     functionType='application/vnd.dlite-generate'\n"
+                "...     configuration={\n"
+                "...         kb_document_class='http://example.com#MyClass'\n"
+                "...         ...\n"
+                "...     },\n"
+                "... )\n"
+                ">>> pipeline = ... >> generate >> kb_settings\n"
+                ">>> pipeline.get()\n"
+            ),
+        ),
+    ] = None
+    kb_document_base_iri: Annotated[
+        str, Field(description="Base IRI or prefix for created individuals.")
+    ] = ":"
+    kb_document_context: Annotated[
+        Optional[dict],
+        Field(
+            description=(
+                "If `kb_document_class` is given, this configuration will add "
+                "additional context to the documentation of the generated "
+                "individual."
+                "\n\n"
+                "This might be useful to make it easy to later access the "
+                "generated individual."
+                "\n\n"
+                "This configuration should be a dict mapping providing the "
+                "additional documentation of the driver. It should map OWL "
+                "properties to either tripper literals or IRIs."
+                "\n\n"
+                "Example: `{RDF.type: ONTO.MyDataSet, "
+                "EMMO.isDescriptionFor: ONTO.MyMaterial}`"
+            ),
+        ),
+    ] = None
+    kb_document_computation: Annotated[
+        Optional[str],
+        Field(
+            description=(
+                "IRI of a computation subclass."
+                "\n\n"
+                "Requires `kb_document_class`, and is used to "
+                "document the computation (model) that the "
+                "individual (of `kb_document_class`) to be documented "
+                "is output of."
+                "When `kb_document_computation` is given a new individual of "
+                "the computation subclass is created. Input and "
+                "output datasets are documented using the relation "
+                " `emmo:hasInput` and `emmo:hasOutput`, "
+                "respectively.  The individual of `kb_document_class` is "
+                "one of the output individuals."
+                "\n\n"
+                "Note: This configuration relies on several assumptions:\n"
+                "  - The `kb_document_computation` class exists in the "
+                "knowledge base and is related to its input and output "
+                "dataset classes via `emmo:hasInput` and `emmo:hasOutput` "
+                "restrictions, respectively.\n"
+                "  - There exists only one individual of each input dataset "
+                "class.\n"
+                "  - There exists at most one individual of each output "
+                "dataset class.\n"
+            ),
+        ),
+    ] = None
 
 
 class DLiteGenerateConfig(FunctionConfig):
@@ -154,15 +259,14 @@ class DLiteGenerateStrategy:
         Returns:
             SessionUpdate instance.
         """
+        # pylint: disable=too-many-statements
         config = self.generate_config.configuration
         cacheconfig = config.datacache_config
 
         driver = (
             config.driver
             if config.driver
-            else get_driver(
-                mediaType=config.mediaType,
-            )
+            else get_driver(mediaType=config.mediaType)
         )
 
         coll = get_collection(session, config.collection_id)
@@ -200,6 +304,117 @@ class DLiteGenerateStrategy:
                 with open(f"{tmpdir}/data", "rb") as f:
                     cache.add(f.read(), key=key)
 
+        # Store documentation of this instance in the knowledge base
+        if config.kb_document_class:
+
+            # Import here to avoid hard dependencies on tripper.
+            # pylint: disable=import-outside-toplevel
+            from tripper import RDF, Triplestore
+            from tripper.convert import save_container
+
+            kb_settings = get_settings(session, "tripper.triplestore")
+            if not kb_settings:
+                raise KeyError(
+                    "The `kb_document_class` configuration requires that a "
+                    "'tripper.triplestore' settings has been added using the "
+                    "application/vnd.dlite-settings strategy."
+                )
+
+            # IRI of new individual
+            iri = individual_iri(
+                class_iri=config.kb_document_class,
+                base_iri=config.kb_document_base_iri,
+            )
+            resource = {
+                "dataresource": {
+                    "type": config.kb_document_class,
+                    "downloadUrl": config.location,
+                    "mediaType": (
+                        config.mediaType
+                        if config.mediaType
+                        else "application/vnd.dlite-parse"
+                    ),
+                    "configuration": {
+                        "metadata": (
+                            config.datamodel
+                            if config.datamodel
+                            else inst.meta.uri
+                        ),
+                        "driver": config.driver,
+                        "options": config.options,
+                    },
+                }
+            }
+
+            triples = [(iri, RDF.type, config.kb_document_class)]
+            if config.kb_document_context:
+                for prop, val in config.kb_document_context.items():
+                    triples.append((iri, prop, val))
+
+            ts = Triplestore(**kb_settings)
+            try:
+                if config.kb_document_computation:
+                    comput = individual_iri(
+                        class_iri=config.kb_document_computation,
+                        base_iri=config.kb_document_base_iri,
+                    )
+                    triples.extend(
+                        [
+                            (comput, RDF.type, config.kb_document_computation),
+                            (comput, hasOutput, iri),
+                        ]
+                    )
+
+                    # Relate computation individual `comput` to its
+                    # input individuals.
+                    #
+                    # This simple implementation works against KB.  It
+                    # assumes that the input of
+                    # `kb_document_computation` is documented in the
+                    # KB and that there only exists one individual of each
+                    # input class.
+                    #
+                    # In the case of multiple individuals of the input
+                    # classes, the workflow executer must be involded
+                    # in the documentation.  It can either do the
+                    # documentation itself or provide a callback
+                    # providing the needed info, which can be called
+                    # from this strategy.
+
+                    # Relate to input dataset individuals
+                    restrictions = ts.restrictions(
+                        config.kb_document_computation, hasInput
+                    )
+                    for r in restrictions:
+                        input_class = r["value"]
+                        indv = ts.value(predicate=RDF.type, object=input_class)
+                        triples.append((comput, r["property"], indv))
+
+                    # Add output dataset individuals
+                    restrictions = ts.restrictions(
+                        config.kb_document_computation, hasOutput
+                    )
+                    for r in restrictions:
+                        output_class = r["value"]
+                        indv = ts.value(
+                            predicate=RDF.type,
+                            object=output_class,
+                            default=None,
+                        )
+                        if indv and indv != iri:
+                            triples.append((comput, r["property"], indv))
+
+                save_container(
+                    ts,
+                    resource,
+                    iri,
+                    recognised_keys="basic",
+                )
+                ts.add_triples(triples)
+
+            finally:
+                ts.close()
+
         # __TODO__
         # Can we safely assume that all strategies in a pipeline will be
         # executed in the same Python interpreter?  If not, we should write
@@ -208,3 +423,24 @@ class DLiteGenerateStrategy:
 
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
+
+
+def individual_iri(class_iri, base_iri=":", randbytes=6):
+    """Return an IRI for an individual of a class.
+
+    Arguments:
+        class_iri: IRI of the class to create an individual of.
+        base_iri: Base IRI of the created individual.
+        randbytes: Number of random bytes to include in the returned IRI.
+
+    Returns:
+        IRI of a new individual.
+
+    """
+    basename = (
+        class_iri.split(":", 1)[-1]
+        .rsplit("/", 1)[-1]
+        .rsplit("#", 1)[-1]
+        .lower()
+    )
+    return f"{base_iri}{basename}-{os.urandom(6).hex()}"
