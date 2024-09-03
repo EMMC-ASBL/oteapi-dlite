@@ -86,6 +86,7 @@ def test_generate_kb():
             "location": str(outdir / "image.json"),
             "options": "mode=w",
             "kb_document_class": ":MyData",
+            "kb_document_base_iri": "http://ex.com#",
             "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
             "kb_document_computation": ":Sim",
         },
@@ -130,6 +131,7 @@ def test_generate_kb():
 
     # Get IRI of the created data individual
     iri = ts.value(predicate=RDF.type, object=":MyData")
+    assert iri.startswith("http://ex.com#mydata-")
 
     doc = load_container(
         ts, iri, recognised_keys="basic", ignore_unrecognised=True
@@ -155,6 +157,7 @@ def test_generate_kb():
 
     # Check: kb_document_computation
     sim = ts.value(predicate=RDF.type, object=":Sim")
+    assert sim.startswith("http://ex.com#sim-")
     assert ts.has(sim, EMMO.hasInput, ":input1")
     assert ts.has(sim, EMMO.hasInput, ":input2")
     assert ts.has(sim, EMMO.hasOutput, iri)
