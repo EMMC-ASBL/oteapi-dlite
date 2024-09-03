@@ -93,7 +93,6 @@ Package = "https://pypi.org/project/oteapi-dlite"
 [project.entry-points."oteapi.function"]
 "oteapi_dlite.application/vnd.dlite-generate" = "oteapi_dlite.strategies.generate:DLiteGenerateStrategy"
 "oteapi_dlite.application/vnd.dlite-convert" = "oteapi_dlite.strategies.convert:DLiteConvertStrategy"
-"oteapi_dlite.application/vnd.dlite-settings" = "oteapi_dlite.strategies.settings:SettingsStrategy"
 
 [project.entry-points."oteapi.resource"]
 
