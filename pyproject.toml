@@ -25,11 +25,12 @@ dependencies = [
     "DLite-Python>=0.4.5,<1.0",
     "numpy>=1.21,<1.27.0",
     "oteapi-core>=0.6.0,<0.6.2",
-    "pydantic~=2.5",
-    "pydantic-settings~=2.0",
-    "typing-extensions~=4.8; python_version<'3.10'",
+    "pydantic>=2.1,<2.6",
+    "pydantic-settings>=2.0,<2.2",
+    "typing-extensions>=4.8; python_version<'3.10'",
     "Pillow>=9.0.1,<11",
-    "tripper>=0.1.2",
+    #"tripper>=0.1.2",
+    "tripper @ git+https://github.com/EMMC-ASBL/tripper.git@master"
 ]
 
 [project.optional-dependencies]
