@@ -65,28 +65,31 @@ Package = "https://pypi.org/project/oteapi-dlite"
 [project.entry-points."oteapi.download"]
 
 [project.entry-points."oteapi.filter"]
-"oteapi_dlite.dlite/filter" = "oteapi_dlite.strategies.filter:DLiteFilterStrategy"
+#"oteapi_dlite.dlite/filter" = "oteapi_dlite.strategies.filter:DLiteFilterStrategy"
+"oteapi_dlite.application/vnd.dlite-filter" = "oteapi_dlite.strategies.filter:DLiteFilterStrategy"
+"oteapi_dlite.application/vnd.dlite-settings" = "oteapi_dlite.strategies.settings:SettingsStrategy"
+
 [project.entry-points."oteapi.mapping"]
 "oteapi_dlite.mappings" = "oteapi_dlite.strategies.mapping:DLiteMappingStrategy"
+
 [project.entry-points."oteapi.parse"]
 "oteapi_dlite.application/vnd.dlite-parse" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
 "oteapi_dlite.application/vnd.dlite-xlsx" = "oteapi_dlite.strategies.parse_excel:DLiteExcelStrategy"
 "oteapi_dlite.image/vnd.dlite-image" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
 
 # To be removed
-"oteapi_dlite.application/vnd.dlite-json" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
-"oteapi_dlite.application/vnd.dlite-yaml" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
-"oteapi_dlite.image/vnd.dlite-gif" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-jpeg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-jpg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-jp2" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-png" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-"oteapi_dlite.image/vnd.dlite-tiff" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.application/vnd.dlite-json" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
+#"oteapi_dlite.application/vnd.dlite-yaml" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-gif" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-jpeg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-jpg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-jp2" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-png" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
+#"oteapi_dlite.image/vnd.dlite-tiff" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
 
 [project.entry-points."oteapi.function"]
 "oteapi_dlite.application/vnd.dlite-generate" = "oteapi_dlite.strategies.generate:DLiteGenerateStrategy"
 "oteapi_dlite.application/vnd.dlite-convert" = "oteapi_dlite.strategies.convert:DLiteConvertStrategy"
-"oteapi_dlite.application/vnd.dlite-settings" = "oteapi_dlite.strategies.settings:SettingsStrategy"
 
 [project.entry-points."oteapi.resource"]
 
