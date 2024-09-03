@@ -195,12 +195,16 @@ class DLiteStorageConfig(AttrDict):
                 "If `kb_document_class` is given, this configuration "
                 "adds documentation to the knowledge base of a "
                 "computation.  It creates a new individual of "
-                "`kb_document_computation` and relates this individual "
-                "to its input and output datasets using `EMMO.hasInput` "
-                "and `EMMO.hasOutput`."
+                "`kb_document_computation` and relates it to its input "
+                "datasets using `EMMO.hasInput`.  It will also be related to "
+                "the `kb_document_class` individual using `EMMO.hasOutput`."
                 "\n\n"
-                "Note: It is assumed that there exists only one individual "
-                "of the input and output subclasses."
+                "Note: This configuration relies on several assumptions:\n"
+                "  - The `kb_document_computation` class exists in the "
+                "knowledge base and is related to its input datasets classes "
+                "via `EMMO.hasInput` restrictions.\n"
+                "  - There exists only one individual of each input dataset "
+                "class.\n"
             ),
         ),
     ] = None
