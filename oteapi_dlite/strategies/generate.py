@@ -192,7 +192,7 @@ class DLiteStorageConfig(AttrDict):
             description=(
                 "IRI of a computation subclass."
                 "\n\n"
-                "If `kb_document_iri` is given, this configuration adds "
+                "If `kb_document_class` is given, this configuration adds "
                 "an individual of the given computation subclass to the "
                 "knowledge base and connect it to its input and output "
                 "individuals."
