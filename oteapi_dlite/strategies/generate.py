@@ -149,7 +149,6 @@ class DLiteStorageConfig(AttrDict):
                 "...         ...\n"
                 "...     },\n"
                 "... )\n"
-                ">>> generate = client.create_function(...)\n"
                 ">>> pipeline = ... >> generate >> kb_settings\n"
                 ">>> pipeline.get()\n"
             ),
