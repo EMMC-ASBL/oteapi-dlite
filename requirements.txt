@@ -3,7 +3,7 @@ DLite-Python>=0.4.5,<1.0
 influxdb_client>=1.44.0
 jinja2>=3.1.4
 numpy>=1.21,<2
-oteapi-core @ git+https://github.com/EMMC-ASBL/oteapi-core@master
+oteapi-core~=0.7.0.dev2
 pandas>=2.2.2
 Pillow>=9.0.1,<11
 rdflib>=7.0.0
