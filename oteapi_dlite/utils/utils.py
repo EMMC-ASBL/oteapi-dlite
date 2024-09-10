@@ -2,6 +2,7 @@
 
 # pylint: disable=invalid-name
 import json
+from numbers import Number
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -9,12 +10,13 @@ import dlite
 from dlite.mappings import instantiate
 from oteapi.datacache import DataCache
 from oteapi.models import SessionUpdate
-from tripper import Triplestore
 
 from oteapi_dlite.utils.exceptions import CollectionNotFound
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any, Optional, Union
+
+    from tripper import Triplestore
 
     NoneType = type(None)
 
@@ -71,7 +73,9 @@ def get_collection(
     """
     cache = DataCache()
 
-    session = session or {}
+    if session is None:
+        session = {}
+
     id_ = collection_id or session.get("collection_id")
 
     # Storing the collection in the datacache is not scalable.
@@ -144,7 +148,8 @@ def get_driver(
 
 def get_instance(
     meta: "Union[str, dlite.Metadata]",
-    collection: dlite.Collection,
+    session: "Optional[dict[str, Any]]" = None,
+    collection: "Optional[dlite.Collection]" = None,
     routedict: "Optional[dict]" = None,
     instance_id: "Optional[str]" = None,
     allow_incomplete: bool = False,
@@ -154,7 +159,9 @@ def get_instance(
 
     Arguments:
         meta: Metadata to instantiate.  Typically its URI.
+        session: An OTEAPI session object.
         collection: The collection with instances and mappings.
+            The default is to get the collection from `session`.
 
     Some less used optional arguments:
         routedict: Dict mapping property names to route number to select for
@@ -165,7 +172,23 @@ def get_instance(
             of the returned instance.
         kwargs: Additional arguments passed to dlite.mappings.instantiate().
     """
-    ts = Triplestore(backend="collection", collection=collection)
+    # Import here to avoid a hard dependency on tripper.
+    # pylint: disable=import-outside-toplevel,too-many-arguments
+    from tripper import Triplestore
+
+    if collection is None:
+        if session is None:
+            raise TypeError(
+                "get_instance() requires that either `session` or "
+                "`collection` argument is given."
+            )
+        collection = get_collection(session)
+
+    if session:
+        ts = get_triplestore(session)
+    else:
+        ts = Triplestore(backend="collection", collection=collection)
+
     inst = instantiate(
         meta=meta,
         instances=list(collection.get_instances()),
@@ -222,6 +245,97 @@ def get_settings(session: "Union[dict[str, Any], None]", label: str) -> "Any":
         Python object with the settings or None if no settings exists
         with this label.
     """
-    session = session or {}
+    if session is None:
+        session = {}
+
     d = session.get("settings", {})
     return json.loads(d[label]) if label in d else None
+
+
+def get_triplestore(
+    session: "dict[str, Any]",
+) -> "Triplestore":
+    """Return a tripper.Triplestore instance for the current session.
+
+    If a 'tripper.triplestore' setting has been added with the
+    SettingsStrategy, it will be used to configure the returned
+    triplestore instance.  Otherwise the session collection will be
+    used.
+    """
+    # Import here to avoid a hard dependency on tripper.
+    # pylint: disable=import-outside-toplevel
+    from tripper import Triplestore
+
+    kb_settings = get_settings(session, "tripper.triplestore")
+    if kb_settings:
+        ts = Triplestore(**kb_settings)
+    else:
+        coll = get_collection(session)
+        ts = Triplestore(backend="collection", collection=coll)
+    return ts
+
+
+class TypeMismatchError(TypeError):
+    """Raised by update_dict() if there is a mismatch in value types
+    between the `dct` and `update` dictionaries.
+    """
+
+
+class RemoveItem:
+    """Singleton class used by update_dict() to indicate items that should
+    be removed in the source dictionary."""
+
+
+def update_dict(dct: dict, update: "Optional[dict]") -> dict:
+    """Update dictionary `dct` using dictionary `update`.
+
+    This function differ from `dict.update()` in that it updates
+    sub-directories recursively, instead of replacing them with the
+    content of `update`.
+
+    If `update` has `RemoveItem` as a value, the corresponding item
+    in `dct` will be removed.
+
+    Arguments:
+        dct: Dict to update.
+        update: Dict used to update `conf` with.
+
+    Returns:
+        The updated dict `dct`.
+
+    Raises:
+        TypeMismatchError if there is a mismatch in value types
+        between the `dct` and `update` dictionaries.  Conversion
+        between different number types is accepted.
+
+    """
+    if not update:
+        return dct
+
+    for k, v in dct.items():
+        if k in update:
+
+            if update[k] is RemoveItem:
+                del dct[k]
+                continue
+
+            if not (
+                (isinstance(update[k], Number) and isinstance(v, Number))
+                or isinstance(update[k], type(v))
+            ):
+                raise TypeMismatchError(
+                    f"type of `update['{k}']` ({type(update[k])!r}) is not a "
+                    f"subclass of the type of `dct['{k}']` ({type(v)!r})"
+                )
+
+            if isinstance(v, dict):
+                update_dict(v, update[k])
+            else:
+                dct[k] = update[k]
+
+    # Add new items to `dct`
+    for k, v in update.items():
+        if k not in dct:
+            dct[k] = v
+
+    return dct

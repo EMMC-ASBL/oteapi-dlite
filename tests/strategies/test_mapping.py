@@ -22,9 +22,13 @@ def test_mapping_without_prefixes() -> None:
         ],
     )
 
-    mapper = DLiteMappingStrategy(config)
-    session = mapper.initialize()
-    session.update(mapper.get(session))
+    session = {}
+
+    strategy = DLiteMappingStrategy(config)
+    session.update(strategy.initialize(session))
+
+    strategy = DLiteMappingStrategy(config)
+    session.update(strategy.get(session))
 
     collection = get_collection(session)
     relations = set(collection.get_relations())
