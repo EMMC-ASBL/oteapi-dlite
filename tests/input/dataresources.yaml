@@ -1,0 +1,85 @@
+---
+
+version: 1
+
+prefixes:
+  ss3: "http://open-model.eu/ontologies/ss3#"
+  ss3kb: "http://open-model.eu/ontologies/ss3kb#"
+
+
+# Documentation of existing data sources and sinks that will be placed in the
+# knowledge base.
+data_resources:
+
+  ss3kb:abaqus_config1:
+    - dataresource:
+        type: ss3:AbaqusConfiguration
+        # Zip file containing the Abaqus configuration files
+        downloadUrl: file://tests/testfiles/input_data/abaqus_conf.zip
+        mediaType: application/vnd.dlite-parse
+        configuration:
+          metadata: http://www.sintef.no/calm/0.1/AbaqusConfiguration
+          driver: abaqus_configuration
+          options: "inputfile=CementModel_Final_contact.inp;ppfile=OpenODB7.py"
+
+  # Aluminium material card, dataset 1
+  ss3kb:abaqus_materialcard_al1:
+    - dataresource:
+        type: ss3:AluminiumMaterialCard
+        downloadUrl: file://tests/testfiles/input_data/material_card_al.json
+        mediaType: application/vnd.dlite-parse
+        configuration:
+          metadata: http://www.sintef.no/calm/0.1/AluminiumMaterialCard
+          driver: "json"
+
+  # Concrete material card, dataset 1
+  ss3kb:abaqus_materialcard_concrete1:
+    - dataresource:
+        type: ss3:ConcreteMaterialCard
+        downloadUrl: file://tests/testfiles/input_data/material_card_concrete.json
+        mediaType: application/vnd.dlite-parse
+        configuration:
+          metadata: http://www.sintef.no/calm/0.1/ConcreteMaterialCard
+          driver: "json"
+
+  # Documentation of Yieldstrength dataset
+  ss3kb:yieldstrength1:
+    - dataresource:
+        type: ss3:YieldStrength
+        downloadUrl: file://tests/test_dlite_plugins/output/yieldstress-output.txt
+        mediaType: application/vnd.dlite-parse
+        configuration:
+          metadata: http://onto-ns.com/meta/calm/0.1/YieldStress
+          driver: "yieldstress"
+
+
+  ss3kb:tabulated_elastoplastic1:
+    - dataresource:
+        type: ss3:TabulatedElastoPlastic
+        downloadUrl: https://raw.githubusercontent.com/H2020-OpenModel/Public/main/data/SS3/tabulated_elasto_plastic.json
+        mediaType: application/vnd.dlite-parse
+        configuration:
+          metadata: http://www.sintef.no/calm/0.1/TabulatedElastoPlastic
+          driver: json
+
+  # Documentation of alloy composition
+  ss3kb:alloy_composition1:
+    - dataresource:
+        type: ss3:EffectiveAlloyComposition
+        downloadUrl: file://tests/testfiles/input_data/alloy_composition.csv
+        mediaType: application/vnd.dlite-parse
+        configuration:
+          metadata: http://onto-ns.com/meta/calm/0.1/AlloyComposition
+          driver: alloy_composition
+          options: dialect=excel
+
+  # Documentation of heat treatment profile
+  ss3kb:alloy_heat_treatment1:
+    - dataresource:
+        type: ss3:HeatTreatment
+        downloadUrl: file://tests/testfiles/input_data/heat_treatment.csv
+        mediaType: application/vnd.dlite-parse
+        configuration:
+          metadata: http://onto-ns.com/meta/calm/0.1/HeatTreatment
+          driver: heat_treatment
+          options: dialect=excel

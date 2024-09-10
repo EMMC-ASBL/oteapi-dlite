@@ -4,6 +4,7 @@ This module provide some utility functions.
 """
 
 from .nputils import dict2recarray
+from .rdf import save, to_triples  # , load
 from .utils import (
     add_settings,
     get_collection,
@@ -15,12 +16,15 @@ from .utils import (
 )
 
 __all__ = (
-    "dict2recarray",
-    "get_driver",
-    "get_meta",
-    "get_instance",
-    "get_collection",
-    "update_collection",
     "add_settings",
+    "dict2recarray",
+    "get_collection",
+    "get_driver",
+    "get_instance",
+    "get_meta",
     "get_settings",
+    # "load",
+    "save",
+    "to_triples",
+    "update_collection",
 )
