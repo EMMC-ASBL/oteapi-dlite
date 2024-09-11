@@ -147,11 +147,14 @@ def to_triples(
                 iris.add(firi)
 
                 # Special case, should be replaced with context strategy
-                if filtertype == "dataresource" and "type" in conf:
-                    conf = conf.copy()
-                    triples.append(
-                        (iri, RDF.type, expand_iri(conf.pop("type"), prefixes))
-                    )
+                print("***", filtertype)
+                if filtertype == "dataresource":
+                    triples.append((firi, RDF.type, DCAT.Distribution))
+                    triples.append((iri, DCAT.distribution, firi))
+                    if "type" in conf:
+                        conf = conf.copy()
+                        obj = expand_iri(conf.pop("type"), prefixes)
+                        triples.append((iri, RDF.type, obj))
 
                 for k, v in conf.items():
                     if isinstance(v, str):
@@ -166,14 +169,17 @@ def to_triples(
                         obj = parse_literal(v)
                     triples.append((firi, _IRIS[k], obj))
 
-                hasFilter = _IRIS[filtertype]
-                filter_iri = hasFilter.replace(OTEIO.has, str(OTEIO))
-                triples.append((iri, hasFilter, firi))
-                triples.append((firi, RDF.type, filter_iri))
+                # hasFilter = _IRIS[filtertype]
+                # filter_iri = hasFilter.replace(OTEIO.has, str(OTEIO))
+                # triples.append((iri, hasFilter, firi))
+                # triples.append((firi, RDF.type, filter_iri))
+                triples.append((iri, OTEIO.hasFilter, firi))
+                triples.append((firi, RDF.type, OTEIO.Filter))
+                triples.append((firi, OTEIO.filterType, Literal(filtertype)))
                 if prev_firi:
-                    triples.append((prev_firi, OTEIO.nextFilter, firi))
+                    triples.append((prev_firi, OTEIO.hasNextFilter, firi))
                 else:
-                    triples.append((iri, OTEIO.beginFilter, firi))
+                    triples.append((iri, OTEIO.hasBeginFilter, firi))
                 prev_firi = firi
 
     return triples
