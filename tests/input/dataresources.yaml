@@ -18,7 +18,7 @@ data_resources:
         downloadUrl: file://tests/testfiles/input_data/abaqus_conf.zip
         mediaType: application/vnd.dlite-parse
         configuration:
-          metadata: http://www.sintef.no/calm/0.1/AbaqusConfiguration
+          datamodel: http://www.sintef.no/calm/0.1/AbaqusConfiguration
           driver: abaqus_configuration
           options: "inputfile=CementModel_Final_contact.inp;ppfile=OpenODB7.py"
 
@@ -29,7 +29,7 @@ data_resources:
         downloadUrl: file://tests/testfiles/input_data/material_card_al.json
         mediaType: application/vnd.dlite-parse
         configuration:
-          metadata: http://www.sintef.no/calm/0.1/AluminiumMaterialCard
+          datamodel: http://www.sintef.no/calm/0.1/AluminiumMaterialCard
           driver: "json"
 
   # Concrete material card, dataset 1
@@ -39,7 +39,7 @@ data_resources:
         downloadUrl: file://tests/testfiles/input_data/material_card_concrete.json
         mediaType: application/vnd.dlite-parse
         configuration:
-          metadata: http://www.sintef.no/calm/0.1/ConcreteMaterialCard
+          datamodel: http://www.sintef.no/calm/0.1/ConcreteMaterialCard
           driver: "json"
 
   # Documentation of Yieldstrength dataset
@@ -49,7 +49,7 @@ data_resources:
         downloadUrl: file://tests/test_dlite_plugins/output/yieldstress-output.txt
         mediaType: application/vnd.dlite-parse
         configuration:
-          metadata: http://onto-ns.com/meta/calm/0.1/YieldStress
+          datamodel: http://onto-ns.com/meta/calm/0.1/YieldStress
           driver: "yieldstress"
 
 
@@ -59,7 +59,7 @@ data_resources:
         downloadUrl: https://raw.githubusercontent.com/H2020-OpenModel/Public/main/data/SS3/tabulated_elasto_plastic.json
         mediaType: application/vnd.dlite-parse
         configuration:
-          metadata: http://www.sintef.no/calm/0.1/TabulatedElastoPlastic
+          datamodel: http://www.sintef.no/calm/0.1/TabulatedElastoPlastic
           driver: json
 
   # Documentation of alloy composition
@@ -69,7 +69,7 @@ data_resources:
         downloadUrl: file://tests/testfiles/input_data/alloy_composition.csv
         mediaType: application/vnd.dlite-parse
         configuration:
-          metadata: http://onto-ns.com/meta/calm/0.1/AlloyComposition
+          datamodel: http://onto-ns.com/meta/calm/0.1/AlloyComposition
           driver: alloy_composition
           options: dialect=excel
 
@@ -80,6 +80,6 @@ data_resources:
         downloadUrl: file://tests/testfiles/input_data/heat_treatment.csv
         mediaType: application/vnd.dlite-parse
         configuration:
-          metadata: http://onto-ns.com/meta/calm/0.1/HeatTreatment
+          datamodel: http://onto-ns.com/meta/calm/0.1/HeatTreatment
           driver: heat_treatment
           options: dialect=excel

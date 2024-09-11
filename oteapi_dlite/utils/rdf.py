@@ -52,14 +52,14 @@ _IRIS = {
     "label": RDFS.label,
     "comment": RDFS.comment,
     "mapsTo": MAP.mapsTo,
-    "dataresource": OTEIO.DataResourceStrategy,
     #
     # Add these data properties to OTEIO
-    "parse": OTEIO.hasParseStrategy,
-    "generate": OTEIO.hasGenerateStrategy,
-    "mapping": OTEIO.hasMappingStrategy,
-    "function": OTEIO.hasFunctionStrategy,
-    "transformation": OTEIO.hasTransformationStrategy,
+    "dataresource": OTEIO.hasDataResourceFilter,
+    "parse": OTEIO.hasParseFilter,
+    "generate": OTEIO.hasGenerateFilter,
+    "mapping": OTEIO.hasMappingFilter,
+    "function": OTEIO.hasFunctionFilter,
+    "transformation": OTEIO.hasTransformationFilter,
     "configuration": OTEIO.hasConfiguration,
 }
 
@@ -137,14 +137,14 @@ def to_triples(
         # Should be explicit with context strategy
         triples.append((iri, RDF.type, EMMO.DataSet))
 
-        prev_siri = None
-        for strategy in pipeline:
-            for filtertype, conf in strategy.items():
+        prev_firi = None
+        for filter in pipeline:  # pylint: disable=redefined-builtin
+            for filtertype, conf in filter.items():
                 n = 1
                 while f"{iri}_{filtertype}{n}" in iris:
                     n += 1
-                siri = f"{iri}_{filtertype}{n}"
-                iris.add(siri)
+                firi = f"{iri}_{filtertype}{n}"
+                iris.add(firi)
 
                 # Special case, should be replaced with context strategy
                 if filtertype == "dataresource" and "type" in conf:
@@ -164,14 +164,16 @@ def to_triples(
 
                     else:
                         obj = parse_literal(v)
-                    triples.append((siri, _IRIS[k], obj))
+                    triples.append((firi, _IRIS[k], obj))
 
-                triples.append((siri, RDF.type, OTEIO.Strategy))
-                triples.append((iri, EMMO.hasPart, siri))
-                if prev_siri:
-                    triples.append((prev_siri, EMMO.hasNext, siri))
+                hasFilter = _IRIS[filtertype]
+                filter_iri = hasFilter.replace(OTEIO.has, str(OTEIO))
+                triples.append((iri, hasFilter, firi))
+                triples.append((firi, RDF.type, filter_iri))
+                if prev_firi:
+                    triples.append((prev_firi, OTEIO.nextFilter, firi))
                 else:
-                    triples.append((iri, EMMO.hasBeginTile, siri))
-                prev_siri = siri
+                    triples.append((iri, OTEIO.beginFilter, firi))
+                prev_firi = firi
 
     return triples
