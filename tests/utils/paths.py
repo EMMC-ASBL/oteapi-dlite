@@ -7,3 +7,4 @@ thisdir = Path(__file__).resolve().parent
 testdir = thisdir.parent
 inputdir = testdir / "input"
 outputdir = testdir / "output"
+datamodeldir = testdir / "datamodels"

@@ -15,7 +15,8 @@ data_resources:
     - dataresource:
         type: ss3:AbaqusConfiguration
         # Zip file containing the Abaqus configuration files
-        downloadUrl: file://tests/testfiles/input_data/abaqus_conf.zip
+        #downloadUrl: file://tests/testfiles/input_data/abaqus_conf.zip
+        downloadUrl: https://github.com/H2020-OpenModel/SS3_wrappers/raw/main/tests/testfiles/input_data/abaqus_conf.zip
         mediaType: application/vnd.dlite-parse
         configuration:
           datamodel: http://www.sintef.no/calm/0.1/AbaqusConfiguration
@@ -26,7 +27,8 @@ data_resources:
   ss3kb:abaqus_materialcard_al1:
     - dataresource:
         type: ss3:AluminiumMaterialCard
-        downloadUrl: file://tests/testfiles/input_data/material_card_al.json
+        #downloadUrl: file://tests/testfiles/input_data/material_card_al.json
+        downloadUrl: https://github.com/H2020-OpenModel/SS3_wrappers/raw/main/tests/testfiles/input_data/material_card_al.json
         mediaType: application/vnd.dlite-parse
         configuration:
           datamodel: http://www.sintef.no/calm/0.1/AluminiumMaterialCard
@@ -36,7 +38,8 @@ data_resources:
   ss3kb:abaqus_materialcard_concrete1:
     - dataresource:
         type: ss3:ConcreteMaterialCard
-        downloadUrl: file://tests/testfiles/input_data/material_card_concrete.json
+        #downloadUrl: file://tests/testfiles/input_data/material_card_concrete.json
+        downloadUrl: https://github.com/H2020-OpenModel/SS3_wrappers/raw/main/tests/testfiles/input_data/material_card_concrete.json
         mediaType: application/vnd.dlite-parse
         configuration:
           datamodel: http://www.sintef.no/calm/0.1/ConcreteMaterialCard
@@ -46,7 +49,8 @@ data_resources:
   ss3kb:yieldstrength1:
     - dataresource:
         type: ss3:YieldStrength
-        downloadUrl: file://tests/test_dlite_plugins/output/yieldstress-output.txt
+        #downloadUrl: file://tests/test_dlite_plugins/output/yieldstress-output.txt
+        downloadUrl: https://github.com/H2020-OpenModel/SS3_wrappers/raw/main/tests/testfiles/input_data/yieldstress-output.txt
         mediaType: application/vnd.dlite-parse
         configuration:
           datamodel: http://onto-ns.com/meta/calm/0.1/YieldStress
@@ -66,7 +70,8 @@ data_resources:
   ss3kb:alloy_composition1:
     - dataresource:
         type: ss3:EffectiveAlloyComposition
-        downloadUrl: file://tests/testfiles/input_data/alloy_composition.csv
+        #downloadUrl: file://tests/testfiles/input_data/alloy_composition.csv
+        downloadUrl: https://github.com/H2020-OpenModel/SS3_wrappers/raw/main/tests/testfiles/input_data/alloy_composition.csv
         mediaType: application/vnd.dlite-parse
         configuration:
           datamodel: http://onto-ns.com/meta/calm/0.1/AlloyComposition
@@ -77,7 +82,8 @@ data_resources:
   ss3kb:alloy_heat_treatment1:
     - dataresource:
         type: ss3:HeatTreatment
-        downloadUrl: file://tests/testfiles/input_data/heat_treatment.csv
+        #downloadUrl: file://tests/testfiles/input_data/heat_treatment.csv
+        downloadUrl: https://github.com/H2020-OpenModel/SS3_wrappers/raw/main/tests/testfiles/input_data/heat_treatment.csv
         mediaType: application/vnd.dlite-parse
         configuration:
           datamodel: http://onto-ns.com/meta/calm/0.1/HeatTreatment
