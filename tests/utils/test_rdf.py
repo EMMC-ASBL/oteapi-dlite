@@ -118,7 +118,7 @@ if True:
 
     data2 = """
     {
-      "@context": "file:///home/friisj/prosjekter/EMMC/OntoTrans/oteapi-dlite/tests/input/context.json",
+      "@context": "file:///home/friisj/prosjekter/EMMC/OntoTrans/oteapi-dlite/oteapi_dlite/context/context.json",
       "datasets": [
         {
           "@id": "http://open-model.eu/ontologies/ss3kb#aa6082",
