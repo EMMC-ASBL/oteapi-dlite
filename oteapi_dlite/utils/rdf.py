@@ -1,25 +1,20 @@
 """RDF serialisation of OTEAPI data documentation using EMMO."""
 
+import io
+import json
 import re
-from typing import TYPE_CHECKING
+import warnings
+from copy import deepcopy
+from typing import TYPE_CHECKING, Sequence
 
-from tripper import (
-    DCAT,
-    DCTERMS,
-    EMMO,
-    MAP,
-    OTEIO,
-    RDF,
-    RDFS,
-    XSD,
-    Literal,
-    Triplestore,
-)
-from tripper.errors import NamespaceError
-from tripper.utils import parse_literal
+from tripper import DCAT, OTEIO, Triplestore
+from tripper.utils import as_python
+
+# from tripper.errors import NamespaceError
+# from tripper.utils import parse_literal
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Optional, Sequence
+    from typing import Any, List, Mapping, Optional, Union
 
 
 # Pytest can't cope with this
@@ -29,167 +24,198 @@ if TYPE_CHECKING:  # pragma: no cover
 #     check=True,
 # )
 
-emmo_DataSet = "https://w3id.org/emmo#EMMO_194e367c_9783_4bf5_96d0_9ad597d48d9a"
 
-# Known IRIs
-_IRIS = {
-    "downloadUrl": DCAT.downloadURL,
-    "mediaType": DCAT.mediaType,
-    "accessUrl": DCAT.accessURL,
-    "accessService": DCAT.accessService,
-    "keyword": DCAT.keyword,
-    "license": DCTERMS.license,
-    "accessRights": DCTERMS.accessRights,
-    "publisher": DCTERMS.publisher,
-    "description": DCTERMS.description,
-    "creator": DCTERMS.creator,
-    "contributor": DCTERMS.contributor,
-    "title": DCTERMS.title,
-    "available": DCTERMS.available,
-    "bibliographicCitation": DCTERMS.bibliographicCitation,
-    "conformsTo": DCTERMS.conformsTo,
-    "created": DCTERMS.created,
-    "references": DCTERMS.references,
-    "isReplacedBy": DCTERMS.isReplacedBy,
-    "requires": DCTERMS.requires,
-    "label": RDFS.label,
-    "comment": RDFS.comment,
-    "mapsTo": MAP.mapsTo,
-    #
-    # Add these data properties to OTEIO
-    "dataresource": OTEIO.hasDataResourceFilter,
-    "parse": OTEIO.hasParseFilter,
-    "generate": OTEIO.hasGenerateFilter,
-    "mapping": OTEIO.hasMappingFilter,
-    "function": OTEIO.hasFunctionFilter,
-    "transformation": OTEIO.hasTransformationFilter,
-    "configuration": OTEIO.hasConfiguration,
-}
-
-# Regular expression matching a prefixed IRI
-_MATCH_PREFIXED_IRI = re.compile(
-    r"^([a-z][a-z0-9]*):([a-zA-Z_][a-zA-Z0-9_+-]*)$"
+CONTEXT = (
+    "file:///home/friisj/prosjekter/EMMC/OntoTrans/oteapi-dlite/"
+    "oteapi_dlite/context/context.json"
 )
-_MATCH_ANYURI = re.compile(r"^([a-z][a-z0-9]*)://(.*)$")
+
+_MATCH_PREFIXED_IRI = re.compile(r"^([a-z0-9]*):([a-zA-Z_][a-zA-Z0-9_+-]*)$")
+
+DataSet = "https://w3id.org/emmo#EMMO_194e367c_9783_4bf5_96d0_9ad597d48d9a"
 
 
-def save(
+def save_dataset(
     ts: Triplestore,
-    data_resources: dict,
+    dataset: "Union[dict, str]",
+    distribution: "Optional[Union[dict, List[dict]]]" = None,
+    datasink: "Optional[Union[dict, List[dict]]]" = None,
     prefixes: "Optional[dict]" = None,
-    version: str = "1.0",
-):
-    """Save a OTEAPI dict representation of a data resource to triplestore.
+) -> dict:
+    # pylint: disable=line-too-long,too-many-branches
+    """Save a dict representation of dataset documentation to a triplestore.
 
     Arguments:
         ts: Triplestore to save to.
-        data_resources: OTEAPI dict representation of the data resources
-            to save.
-        prefixes: Namespace prefixes.
-        version: Version number.
+        dataset: A dict documenting a new dataset or an IRI referring to an
+            existing dataset.
+
+            If this is a dict, the keys may be either properties of
+            [dcat:Dataset](https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset)
+            (without the prefix) or one of the following keywords:
+              - "@id": Dataset IRI.  Must always be given.
+              - "@type": IRI of a specific dataset subclass. Typically is used
+                to refer to a specific subclass of `emmo:DataSet`, providing a
+                semantic description of this dataset.
+        distribution: A dict or a list of dicts documenting specific
+            realisations of the dataset.  The keys may be either properties of
+            [dcat:Distribution](https://www.w3.org/TR/vocab-dcat-3/#Class:Distribution)
+            (not prefixed with a namespace) or any of the following keys:
+               - "@id": Distribution IRI. Must always be given.
+               - "parser": Sub-dict documenting an OTEAPI parser.
+               - "mapping": Sub-dict documenting OTEAPI mappings.
+        datasink: A dict or a list of dicts documenting specific  sink for this
+            dataset.
+        prefixes: Namespace prefixes that should be recognised as values.
+
+    Returns:
+        Updated copy of `dataset`.
+
+    SeeAlso:
+        __TODO__: add URL to further documentation and examples.
     """
-    ts.bind("oteio", OTEIO)
-    ts.bind("emmo", EMMO)
+    if isinstance(dataset, str):
+        dataset = load_dataset(ts, dataset)
+    else:
+        dataset = dataset.copy()
+
+    if "@id" not in dataset:
+        raise ValueError("dataset must have an '@id' key")
+
+    add(dataset, "@context", CONTEXT)
+
+    # Add distribution and datasink
+    for k, v, type_ in [
+        ("distribution", distribution, DCAT.Distribution),
+        ("datasink", datasink, OTEIO.DataSink),
+    ]:
+        if v:
+            if isinstance(v, str):
+                raise TypeError(f"'{k}' should not be a string ('{k}')")
+            if not isinstance(v, Sequence):
+                v = [v]
+            v = deepcopy(v)  # Make sure we have a deep copy of v
+
+            for e in v:
+                add(e, "@type", type_)
+            # add(v, "@type", type_)
+
+            if k not in dataset:
+                dataset[k] = v
+            elif isinstance(dataset[k], str):
+                raise TypeError(
+                    f"dataset['{k}'] should not be a string ('{dataset[k]}')"
+                )
+            elif isinstance(dataset[k], Sequence):
+                dataset[k].extend(v)
+            else:
+                dataset[k] = [dataset[k]] + v
+
+    # Expand prefixes
+    _expand_prefixes(dataset, prefixes if prefixes else {})
+
+    # Append dcat:Dataset to @type
+    add(dataset, "@type", DCAT.Dataset)
+
+    # Bind prefixes
+    default_prefixes = {
+        "adms": "http://www.w3.org/ns/adms#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "dcterms": "http://purl.org/dc/terms/",
+        "dctype": "http://purl.org/dc/dcmitype/",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "odrl": "http://www.w3.org/ns/odrl/2/",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "schema": "http://schema.org/",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "spdx": "http://spdx.org/rdf/terms#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "emmo": "https://w3id.org/emmo#",
+        "oteio": "https://w3id.org/emmo/domain/oteio#",
+    }
     if prefixes:
-        for prefix, ns in prefixes.items():
-            ts.bind(prefix, ns)
+        default_prefixes.update(prefixes)
+    for prefix, ns in default_prefixes.items():
+        ts.bind(prefix, ns)
 
-    ts.add_triples(
-        to_triples(data_resources, prefixes=prefixes, version=version)
-    )
+    # Write json-ld data to temporary rdflib triplestore
+    f = io.StringIO(json.dumps(dataset))
+    ts2 = Triplestore(backend="rdflib")
+    ts2.parse(f, format="json-ld")
+
+    # Add triples from temporary triplestore
+    ts.add_triples(ts2.triples())
+
+    ts2.close()  # explicit close ts2
+
+    return dataset
 
 
-def expand_iri(iri: str, prefixes: dict):
+def load_dataset(ts: Triplestore, iri: str) -> dict:
+    """Load dataset from triplestore.
+
+    Arguments:
+        ts: Triplestore to load dataset from.
+        iri: IRI of the dataset to load.
+
+    Returns:
+        Dict-representation of the loaded dataset.
+    """
+    dataset = {
+        k: as_python(v) for k, v in ts.predicate_objects(ts.expand_iri(iri))
+    }
+
+    return dataset
+
+
+def add(d: dict, key: str, value: "Any") -> None:
+    """Append key-value pair to dict `d`.
+
+    If `key` already exists in `d`, its value is converted to a list and
+    `value` is appended to it.  Values are not duplicated.
+    """
+    if key not in d:
+        d[key] = value
+    else:
+        klst = d[key] if isinstance(d[key], list) else [d[key]]
+        vlst = value if isinstance(value, list) else [value]
+        v = list(set(klst).union(vlst))
+        d[key] = v[0] if len(v) == 1 else sorted(v)
+
+
+def _expand_prefixes(d: dict, prefixes: dict) -> None:
+    """Recursively expand IRI prefixes in the values of dict `d`."""
+    for k, v in d.items():
+        if isinstance(v, str):
+            d[k] = expand_iri(v, prefixes)
+        elif isinstance(v, list):
+            _expand_elements(v, prefixes)
+        elif isinstance(v, dict):
+            _expand_prefixes(v, prefixes)
+
+
+def _expand_elements(lst: list, prefixes: dict) -> None:
+    """Recursively expand IRI prefixes in the elements of list `lst`."""
+    for i, e in enumerate(lst):
+        if isinstance(e, str):
+            lst[i] = expand_iri(e, prefixes)
+        elif isinstance(e, list):
+            _expand_elements(e, prefixes)
+        elif isinstance(e, dict):
+            _expand_prefixes(e, prefixes)
+
+
+def expand_iri(iri: str, prefixes: dict) -> str:
     """Return the full IRI if `iri` is prefixed.  Otherwise `iri` is
     returned."""
     match = re.match(_MATCH_PREFIXED_IRI, iri)
     if match:
         prefix, name = match.groups()
-        if prefix not in prefixes:
-            raise NamespaceError(f"unknown namespace: {prefix}")
-        return f"{prefixes[prefix]}{name}"
+        if prefix in prefixes:
+            return f"{prefixes[prefix]}{name}"
+        warnings.warn(f'Undefined prefix "{prefix}" in IRI: {iri}')
     return iri
-
-
-def to_triples(
-    data_resources: dict,
-    prefixes: "Optional[dict]" = None,
-    version: str = "1.0",  # pylint: disable=unused-argument
-) -> list:
-    """Returns OTEAPI dict representation of a data resource as a list
-    of RDF triples.
-
-    Arguments:
-        data_resources: OTEAPI dict representation of the data resources
-            to save.
-        prefixes: Namespace prefixes.
-        version: Version number.
-
-    Returns:
-        List of RDF-triples.
-    """
-    # pylint: disable=too-many-locals,too-many-nested-blocks,too-many-branches
-    if prefixes is None:
-        prefixes = {}
-
-    iris = set()
-    triples = []
-    for iri, pipeline in data_resources.items():
-        iri = expand_iri(iri, prefixes)
-
-        # Should be explicit with context strategy
-        triples.append((iri, RDF.type, emmo_DataSet))
-
-        prev_firi = None
-        for filter in pipeline:  # pylint: disable=redefined-builtin
-            for filtertype, conf in filter.items():
-                n = 1
-                while f"{iri}_{filtertype}{n}" in iris:
-                    n += 1
-                firi = f"{iri}_{filtertype}{n}"
-                iris.add(firi)
-
-                # Special case, should be replaced with context strategy
-                if filtertype == "dataresource":
-                    triples.append((firi, RDF.type, DCAT.Distribution))
-                    triples.append((iri, DCAT.distribution, firi))
-                    if "type" in conf:
-                        conf = conf.copy()
-                        obj = expand_iri(conf.pop("type"), prefixes)
-                        triples.append((iri, RDF.type, obj))
-                        triples.append((iri, RDF.type, DCAT.Dataset))
-
-                    ### Add datasets...
-                    if False:
-                        import dlite
-                        from dlite.dataset import metadata_to_rdf
-
-                        c = conf["configuration"]
-                        dm = c["datamodel"]
-                        meta = dlite.get_instance(dm)
-                        triples.extend(metadata_to_rdf(meta))
-                        triples.append((iri, RDF.type, dm))
-
-                for k, v in conf.items():
-                    if isinstance(v, str):
-                        if re.match(_MATCH_PREFIXED_IRI, v):
-                            obj = expand_iri(v, prefixes)
-                        elif re.match(_MATCH_ANYURI, v):
-                            obj = Literal(v, datatype=XSD.anyURI)
-                        else:
-                            obj = parse_literal(v)
-
-                    else:
-                        obj = parse_literal(v)
-                    triples.append((firi, _IRIS[k], obj))
-
-                # triples.append((iri, OTEIO.hasFilter, firi))
-                triples.append((firi, RDF.type, OTEIO.Filter))
-                triples.append((firi, OTEIO.filterType, Literal(filtertype)))
-                if prev_firi:
-                    triples.append((prev_firi, OTEIO.hasNextFilter, firi))
-                else:
-                    triples.append((iri, OTEIO.hasBeginFilter, firi))
-                prev_firi = firi
-
-    return triples

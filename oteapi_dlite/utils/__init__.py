@@ -4,7 +4,7 @@ This module provide some utility functions.
 """
 
 from .nputils import dict2recarray
-from .rdf import save, to_triples  # , load
+from .rdf import load_dataset, save_dataset
 from .utils import (
     add_settings,
     get_collection,
@@ -23,8 +23,7 @@ __all__ = (
     "get_instance",
     "get_meta",
     "get_settings",
-    # "load",
-    "save",
-    "to_triples",
+    "load_dataset",
+    "save_dataset",
     "update_collection",
 )
