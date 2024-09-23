@@ -25,8 +25,8 @@ if True:
     triples = to_triples(data_resources, prefixes=prefixes, version=version)
 
     ts = Triplestore("rdflib")
-    save(ts, data_resources, prefixes=prefixes, version=version)
-    ts.serialize(outputdir / "dataresources.ttl")
+    # save(ts, data_resources, prefixes=prefixes, version=version)
+    # ts.serialize(outputdir / "dataresources.ttl")
 
     # from tripper import OWL, RDF
     # ts.add_triples(
@@ -36,6 +36,7 @@ if True:
     #     ]
     # )
 
+    import io
     import json
 
     import rdflib
@@ -43,34 +44,114 @@ if True:
     data = """
     {
       "@context": {
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "dcterms": "http://purl.org/dc/terms/",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "ss3": "http://open-model.eu/ontologies/ss3#",
+        "ss3kb": "http://open-model.eu/ontologies/ss3kb#",
+        "emmo": "https://w3id.org/emmo#",
+        "oteio": "https://w3id.org/emmo/domain/oteio#",
+
         "prefixes": {
-          "ss3": "https://w3id.org/emmo/application/ss3",
-          "ss3kb": "https://w3id.org/emmo/application/ss3kb",
-          "oteio": "https://w3id.org/emmo/application/oteio"
+          "@type": "oteio:prefix",
+          "ss3": "http://open-model.eu/ontologies/ss3#",
+          "ss3kb": "http://open-model.eu/ontologies/ss3kb#"
         },
-        "data_resources": {
-          "@id": "https://w3id.org/emmo/domain/oteio#DataResource",
+        "datasets": {
+          "@type": "dcat:DataSet",
+          "keyword": "dcat:keyword",
+          "title": "dcterms:title",
+          "description": "dcterms:description"
+        },
+        "distribution": {
+          "@type": "dcat:Distribution",
+          "type": "https://w3id.org/emmo/domain/oteio#DataResource",
           "@container": "@list"
         },
-        "filters": {
-          "@id": "https://w3id.org/emmo/domain/oteio#Filter",
-          "@container": "@list"
+        "parse": {
+          "@type": "oteio:StructuralDocumentation",
+          "datamodel": "oteio:datamodel"
+        },
+        "mapping": {
+          "@type": "oteio:SemanticDocumentation",
+          "statement": {
+            "@type": "rdf:Statement",
+            "@container": "@list"
+          }
         }
       },
 
-      "data_resources": [
+      "datasets": [
         {
           "@id": "ss3kb:aa6082",
           "@type": "ss3:ReinforcementMaterialCard",
-          "filters": [
-            {
-              "@type": "oteio:DataResource"
+          "distribution": {
+            "@type": "oteio:DataResource",
+            "title": "My data.",
+            "parse": {
+              "datamodel": "http://onto-ns.com/meta/ss3/0.1/MyData",
+              "mapping": {
+                "statement": [
+                  {
+                    "subject": "a",
+                    "predicate": "b",
+                    "object": "c"
+                  },
+                  {
+                    "subject": "d",
+                    "predicate": "e",
+                    "object": "f"
+                  }
+                ]
+              }
             }
-          ]
+          }
         }
       ]
     }
     """
 
+    data2 = """
+    {
+      "@context": "file:///home/friisj/prosjekter/EMMC/OntoTrans/oteapi-dlite/tests/input/context.json",
+      "datasets": [
+        {
+          "@id": "http://open-model.eu/ontologies/ss3kb#aa6082",
+          "type": "http://open-model.eu/ontologies/ss3#ReinforcementMaterialCard",
+          "distribution": {
+            "type": "https://w3id.org/emmo/domain/oteio#DataResource",
+            "title": "My data.",
+            "parse": {
+              "datamodel": "http://onto-ns.com/meta/ss3/0.1/MyData",
+              "mapping": {
+                "statement": [
+                  {
+                    "subject": "a",
+                    "predicate": "b",
+                    "object": "c"
+                  },
+                  {
+                    "subject": "d",
+                    "predicate": "e",
+                    "object": "f"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+"""
+
     # Check syntax
-    json.loads(data)
+    json.loads(data2)
+
+    f = io.StringIO(data2)
+    ts.parse(f, format="json-ld")
+    print(ts.serialize())

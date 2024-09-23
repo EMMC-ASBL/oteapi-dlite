@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "dcat": "http://www.w3.org/ns/dcat#" ,
+    "dct": "http://purl.org/dc/terms/" ,
+    "dctype": "http://purl.org/dc/dcmitype/" ,
+    "foaf": "http://xmlns.com/foaf/0.1/" ,
+    "owl": "http://www.w3.org/2002/07/owl#" ,
+    "prov": "http://www.w3.org/ns/prov#" ,
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#" ,
+    "schema": "http://schema.org/" ,
+    "skos": "http://www.w3.org/2004/02/skos/core#" ,
+    "vcard": "http://www.w3.org/2006/vcard/ns#" ,
+    "xsd": "http://www.w3.org/2001/XMLSchema#" ,
+    "emmo": "https://w3id.org/emmo#",
+    "oteio": "https://w3id.org/emmo/domain/oteio#",
+    "ss3": "http://open-model.eu/ontologies/ss3#",
+    "sskb": "http://open-model.eu/ontologies/ss3kb#",
+
+    "keyword": "dcat:keyword",
+    "title": "dcterms:title",
+    "description": "dcterms:description",
+
+    "type": "rdf:type",
+    "datamodel": "oteio:hasDatamodel",
+
+    "subject": "rdf:subject",
+    "predicate": "rdf:predicate",
+    "object": "rdf:object",
+
+    "prefixes": {
+      "@id": "oteio:prefix",
+      "@type": "@id"
+    },
+
+    "datasets": {
+      "@id": "dcat:DataSet",
+      "@type": "@id",
+      "@container": "@list"
+    },
+    "distribution": {
+      "@id": "dcat:Distribution",
+      "@type": "@id"
+    },
+    "parse": {
+      "@id": "oteio:StructuralDocumentation",
+      "@type": "@id"
+    },
+    "mapping": {
+      "@id": "oteio:SemanticDocumentation",
+      "@type": "@id"
+    },
+    "statement": {
+      "@id": "rdf:Statement",
+      "@type": "@id",
+      "@container": "@list"
+    }
+  }
+}
