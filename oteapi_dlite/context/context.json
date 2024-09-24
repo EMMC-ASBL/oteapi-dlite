@@ -1,5 +1,7 @@
 {
   "@context": {
+    "@version": 1.1,
+
     "adms": "http://www.w3.org/ns/adms#",
     "dcat": "http://www.w3.org/ns/dcat#",
     "dcterms": "http://purl.org/dc/terms/",
@@ -61,44 +63,38 @@
     "temporalResolution": "dcat:temporalResolution",
     "format": "dcterms:format",
     "checksum": "spdx:checksum",
+
     "dataResource": "oteio:dataResource",
+    "parser": "oteio:parser",
     "generator": "oteio:generator",
     "mapping": "oteio:mapping",
-    "parser": "oteio:hasParser",
+    "function": "oteio:function",
+    "filter": "oteio:filter",
 
-    "configuration": "oteio:hasConfiguration",
+    "parserType": "oteio:parserType",
+    "generatorType": "oteio:generatorType",
+    "functionType": "oteio:functionType",
+    "filterType": "oteio:filterType",
+
+    "datasink": "oteio:hasDatasink",
     "datamodel": "oteio:hasDatamodel",
-    "prefix": "oteio:hasPrefix",
-    "statement": "oteio:hasStatement",
     "subject": "rdf:subject",
     "predicate": "rdf:predicate",
     "object": "rdf:object",
 
     "prefixes": {
       "@id": "oteio:prefix",
-      "@type": "@id"
+      "@type": "@json"
     },
 
-    "dataset": {
-      "@id": "dcat:DataSet",
-      "@type": "@id",
-      "@container": "@list"
+    "configuration": {
+      "@id": "oteio:hasConfiguration",
+      "@type": "@json"
     },
-    "distribution": {
-      "@id": "dcat:Distribution",
-      "@type": "@id"
-    },
-    "parse": {
-      "@id": "oteio:StructuralDocumentation",
-      "@type": "@id"
-    },
-    "mapping": {
-      "@id": "oteio:SemanticDocumentation",
-      "@type": "@id"
-    },
+
     "statement": {
-      "@id": "rdf:Statement",
-      "@type": "@id",
+      "@id": "oteio:statement",
+      "@type": "rdf:Statement",
       "@container": "@list"
     }
   }

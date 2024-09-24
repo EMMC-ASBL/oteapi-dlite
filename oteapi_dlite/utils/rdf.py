@@ -4,10 +4,10 @@ import io
 import json
 import re
 import warnings
-from copy import deepcopy
-from typing import TYPE_CHECKING, Sequence
+from typing import TYPE_CHECKING
 
-from tripper import DCAT, OTEIO, Triplestore
+import requests
+from tripper import DCAT, OTEIO, RDF, Triplestore
 from tripper.utils import as_python
 
 # from tripper.errors import NamespaceError
@@ -29,6 +29,12 @@ CONTEXT = (
     "file:///home/friisj/prosjekter/EMMC/OntoTrans/oteapi-dlite/"
     "oteapi_dlite/context/context.json"
 )
+
+# __TODO__: Update URI when merged to master
+# CONTEXT = (
+#    "https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/"
+#    "rdf-serialisation/oteapi_dlite/context/context.json"
+# )
 
 _MATCH_PREFIXED_IRI = re.compile(r"^([a-z0-9]*):([a-zA-Z_][a-zA-Z0-9_+-]*)$")
 
@@ -90,26 +96,13 @@ def save_dataset(
         ("datasink", datasink, OTEIO.DataSink),
     ]:
         if v:
-            if isinstance(v, str):
-                raise TypeError(f"'{k}' should not be a string ('{k}')")
-            if not isinstance(v, Sequence):
-                v = [v]
-            v = deepcopy(v)  # Make sure we have a deep copy of v
-
-            for e in v:
-                add(e, "@type", type_)
-            # add(v, "@type", type_)
-
-            if k not in dataset:
-                dataset[k] = v
-            elif isinstance(dataset[k], str):
-                raise TypeError(
-                    f"dataset['{k}'] should not be a string ('{dataset[k]}')"
-                )
-            elif isinstance(dataset[k], Sequence):
-                dataset[k].extend(v)
+            add(dataset, k, v)
+        if k in dataset:
+            if isinstance(dataset[k], list):
+                for d in dataset[k]:
+                    add(d, "@type", type_)
             else:
-                dataset[k] = [dataset[k]] + v
+                add(dataset[k], "@type", type_)
 
     # Expand prefixes
     _expand_prefixes(dataset, prefixes if prefixes else {})
@@ -165,11 +158,99 @@ def load_dataset(ts: Triplestore, iri: str) -> dict:
     Returns:
         Dict-representation of the loaded dataset.
     """
-    dataset = {
-        k: as_python(v) for k, v in ts.predicate_objects(ts.expand_iri(iri))
+    if CONTEXT.startswith("file://"):
+        with open(CONTEXT[7:], "r", encoding="utf-8") as f:
+            context = json.load(f)["@context"]
+    else:
+        r = requests.get(CONTEXT, allow_redirects=True, timeout=3)
+        context = json.loads(r.content)["@context"]
+
+    print("*** context", context)
+
+    shortnames = {
+        ts.expand_iri(v): k
+        for k, v in context.items()
+        if isinstance(v, str) and not v.endswith(("#", "/"))
     }
+    shortnames.setdefault(RDF.type, "@type")
+    shortnames.setdefault(OTEIO.prefix, "prefixes")
+    shortnames.setdefault(OTEIO.hasConfiguration, "configuration")
+    shortnames.setdefault(OTEIO.statement, "statement")
+
+    dataset: dict = {}
+    for p, o in ts.predicate_objects(ts.expand_iri(iri)):
+        add(dataset, shortnames.get(p, p), as_python(o))
+    _update_dataset(ts, iri, dataset, context, shortnames)
+    add(dataset, "@id", iri)
 
     return dataset
+
+
+def _update_dataset(
+    ts: Triplestore, iri: str, dct: dict, context: dict, shortnames: dict
+) -> None:
+    """Recursively update dict-representation of dataset."""
+    nested = ("distribution", "datasink", "parser", "generator", "mapping")
+
+    for name in nested:
+        if name in dct:
+            v = dct[name] if isinstance(dct[name], list) else [dct[name]]
+            for i, node in enumerate(v):
+                d: dict = {}
+                for p, o in ts.predicate_objects(ts.expand_iri(node)):
+                    add(d, shortnames.get(p, p), as_python(o))
+                if isinstance(dct[name], list):
+                    dct[name][i] = d
+                else:
+                    dct[name] = d
+                _update_dataset(ts, node, d, context, shortnames)
+
+            # if isinstance(dct[name], list):
+            #    for i, node in enumerate(dct[name]):
+            #        d = {}
+            #        for p, o in ts.predicate_objects(ts.expand_iri(node)):
+            #            add(d, shortnames.get(p, p), as_python(o))
+            #        dct[name][i] = d
+            #        _update_dataset(ts, node, d, context, shortnames)
+            # else:
+            #    d = {}
+            #    for p, o in ts.predicate_objects(ts.expand_iri(dct[name])):
+            #        add(d, shortnames.get(p, p), as_python(o))
+            #    dct[name] = d
+            #    _update_dataset(ts, name, d, context, shortnames)
+
+    if "statement" in dct:
+        (iri,) = ts.objects(predicate=OTEIO.statement)
+        dct["statement"] = load_statements(ts, iri)
+
+
+def load_list(ts: Triplestore, iri: str):
+    """Load and return RDF list whos first node is `iri`."""
+    lst = []
+    for p, o in ts.predicate_objects(iri):
+        if p == RDF.first:
+            lst.append(o)
+        elif p == RDF.rest:
+            lst.extend(load_list(ts, o))
+    return lst
+
+
+def load_statements(ts: Triplestore, iri: str):
+    """Load and return list of spo statements from triplestore, with `iri`
+    being the first node in the list of statements.
+    """
+    statements = []
+    for node in load_list(ts, iri):
+        d = {}
+        for p, o in ts.predicate_objects(node):
+            if p == RDF.subject:
+                d["subject"] = as_python(o)
+            elif p == RDF.predicate:
+                d["predicate"] = as_python(o)
+            elif p == RDF.object:
+                d["object"] = as_python(o)
+        statements.append(d)
+    return sorted(statements, key=lambda d: sorted(d.items()))
 
 
 def add(d: dict, key: str, value: "Any") -> None:

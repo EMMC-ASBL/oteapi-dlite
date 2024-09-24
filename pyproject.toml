@@ -29,6 +29,7 @@ dependencies = [
     "pydantic>=2.1,<2.6",
     "pydantic-settings>=2.0,<2.2",
     "typing-extensions>=4.8; python_version<'3.10'",
+    "requests>=2.0.0,<2.32.4",
     "Pillow>=9.0.1,<11",
     #"tripper>=0.3.4",  # Wait for this version to be released
     "tripper @ git+https://github.com/EMMC-ASBL/tripper.git@master"
