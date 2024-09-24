@@ -4,6 +4,8 @@ import io
 import json
 import re
 import warnings
+
+# from pathlib import Path
 from typing import TYPE_CHECKING
 
 import requests
@@ -24,17 +26,15 @@ if TYPE_CHECKING:  # pragma: no cover
 #     check=True,
 # )
 
-
-CONTEXT = (
-    "file:///home/friisj/prosjekter/EMMC/OntoTrans/oteapi-dlite/"
-    "oteapi_dlite/context/context.json"
-)
+# CONTEXT = (
+#     (Path(__file__).parent.parent / "context" / "context.json").as_uri()
+# )
 
 # __TODO__: Update URI when merged to master
-# CONTEXT = (
-#    "https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/"
-#    "rdf-serialisation/oteapi_dlite/context/context.json"
-# )
+CONTEXT = (
+    "https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/"
+    "rdf-serialisation/oteapi_dlite/context/context.json"
+)
 
 _MATCH_PREFIXED_IRI = re.compile(r"^([a-z0-9]*):([a-zA-Z_][a-zA-Z0-9_+-]*)$")
 

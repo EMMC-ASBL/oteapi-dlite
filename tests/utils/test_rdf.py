@@ -2,8 +2,8 @@
 
 
 # if True:
-def test_to_triples():
-    """Test to_triples()."""
+def test_save_and_load_dataset():
+    """Test save_dataset() and load_dataset()."""
 
     # from paths import inputdir, outputdir
     from tripper import Triplestore
