@@ -4,11 +4,28 @@
 # if True:
 def test_save_and_load_dataset():
     """Test save_dataset() and load_dataset()."""
+    # pylint: disable=too-many-locals
+
+    import os
 
     # from paths import inputdir, outputdir
     from tripper import Triplestore
 
     from oteapi_dlite.utils import load_dataset, save_dataset
+    from oteapi_dlite.utils.rdf import load_dataset_sparql
+
+    backend = "rdflib"
+    # backend = "fuseki"
+
+    # Settings for Fuseki backend
+    TRIPLESTORE_HOST = os.getenv("TRIPLESTORE_HOST", "localhost")
+    TRIPLESTORE_PORT = os.getenv("TRIPLESTORE_PORT", "3030")
+    fuseki_args = {
+        "backend": "fuseki",
+        "base_iri": "http://example.com/ontology#",
+        "triplestore_url": f"http://{TRIPLESTORE_HOST}:{TRIPLESTORE_PORT}",
+        "database": "openmodel",
+    }
 
     dataset = {
         "@id": "ex:mydata",
@@ -42,8 +59,14 @@ def test_save_and_load_dataset():
         "ex": "http://example.com#",
     }
 
+    # Connect to triplestore
+    if backend == "fuseki":
+        ts = Triplestore(**fuseki_args)
+        ts.remove_database(**fuseki_args)
+    else:
+        ts = Triplestore("rdflib")
+
     # Store dict representation of the dataset to triplestore
-    ts = Triplestore("rdflib")
     ds = save_dataset(ts, dataset, prefixes=prefixes)
     repr1 = set(ts.triples())
 
@@ -59,3 +82,7 @@ def test_save_and_load_dataset():
     # Ensure that both dict and triplestore representations are equal
     assert ds2 == ds
     assert repr2 == repr1
+
+    # Load dataset using SPARQL
+    dd = load_dataset_sparql(ts, iri=EX.mydata)
+    assert dd == d

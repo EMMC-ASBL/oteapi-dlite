@@ -1,5 +1,6 @@
 """RDF serialisation of OTEAPI data documentation using EMMO."""
 
+import functools
 import io
 import json
 import re
@@ -111,25 +112,7 @@ def save_dataset(
     add(dataset, "@type", DCAT.Dataset)
 
     # Bind prefixes
-    default_prefixes = {
-        "adms": "http://www.w3.org/ns/adms#",
-        "dcat": "http://www.w3.org/ns/dcat#",
-        "dcterms": "http://purl.org/dc/terms/",
-        "dctype": "http://purl.org/dc/dcmitype/",
-        "foaf": "http://xmlns.com/foaf/0.1/",
-        "odrl": "http://www.w3.org/ns/odrl/2/",
-        "owl": "http://www.w3.org/2002/07/owl#",
-        "prov": "http://www.w3.org/ns/prov#",
-        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-        "schema": "http://schema.org/",
-        "skos": "http://www.w3.org/2004/02/skos/core#",
-        "spdx": "http://spdx.org/rdf/terms#",
-        "vcard": "http://www.w3.org/2006/vcard/ns#",
-        "xsd": "http://www.w3.org/2001/XMLSchema#",
-        "emmo": "https://w3id.org/emmo#",
-        "oteio": "https://w3id.org/emmo/domain/oteio#",
-    }
+    default_prefixes = get_prefixes()
     if prefixes:
         default_prefixes.update(prefixes)
     for prefix, ns in default_prefixes.items():
@@ -142,7 +125,6 @@ def save_dataset(
 
     # Add triples from temporary triplestore
     ts.add_triples(ts2.triples())
-
     ts2.close()  # explicit close ts2
 
     return dataset
@@ -158,24 +140,8 @@ def load_dataset(ts: Triplestore, iri: str) -> dict:
     Returns:
         Dict-representation of the loaded dataset.
     """
-    if CONTEXT.startswith("file://"):
-        with open(CONTEXT[7:], "r", encoding="utf-8") as f:
-            context = json.load(f)["@context"]
-    else:
-        r = requests.get(CONTEXT, allow_redirects=True, timeout=3)
-        context = json.loads(r.content)["@context"]
-
-    print("*** context", context)
-
-    shortnames = {
-        ts.expand_iri(v): k
-        for k, v in context.items()
-        if isinstance(v, str) and not v.endswith(("#", "/"))
-    }
-    shortnames.setdefault(RDF.type, "@type")
-    shortnames.setdefault(OTEIO.prefix, "prefixes")
-    shortnames.setdefault(OTEIO.hasConfiguration, "configuration")
-    shortnames.setdefault(OTEIO.statement, "statement")
+    context = get_context()
+    shortnames = get_shortnames()
 
     dataset: dict = {}
     for p, o in ts.predicate_objects(ts.expand_iri(iri)):
@@ -184,6 +150,80 @@ def load_dataset(ts: Triplestore, iri: str) -> dict:
     add(dataset, "@id", iri)
 
     return dataset
+
+
+def load_dataset_sparql(ts: Triplestore, iri: str) -> dict:
+    """Like load_dataset(), but queries the triplestore with SPARQL.
+
+    Arguments:
+        ts: Triplestore to load dataset from.
+        iri: IRI of the dataset to load.
+
+    Returns:
+        Dict-representation of the loaded dataset.
+    """
+    query = f"""
+    PREFIX : <http://example.com#>
+    CONSTRUCT {{ ?s ?p ?o }}
+    WHERE {{
+      <{iri}> (:|!:)* ?o .
+      ?s ?p ?o .
+    }}
+    """
+    triples = ts.query(query)
+    ts2 = Triplestore(backend="rdflib")
+    ts2.add_triples(triples)
+    dataset = load_dataset(ts2, iri)
+    ts2.close()
+    return dataset
+
+
+@functools.cache
+def get_context(timeout: float = 5) -> dict:
+    """Return context as a dict."""
+    if CONTEXT.startswith("file://"):
+        with open(CONTEXT[7:], "r", encoding="utf-8") as f:
+            context = json.load(f)["@context"]
+    else:
+        r = requests.get(CONTEXT, allow_redirects=True, timeout=timeout)
+        context = json.loads(r.content)["@context"]
+    return context
+
+
+def get_prefixes(timeout: float = 5) -> dict:
+    """Loads the context and returns a dict mapping prefixes to
+    their namespace URL."""
+    context = get_context(timeout=timeout)
+    prefixes = {
+        k: v
+        for k, v in context.items()
+        if isinstance(v, str) and v.endswith(("#", "/"))
+    }
+    return prefixes
+
+
+def get_shortnames(timeout: float = 5) -> dict:
+    """Loads the context and returns a dict mapping IRIs to their
+    short names defined in the context."""
+    context = get_context(timeout=timeout)
+    prefixes = get_prefixes()
+    shortnames = {
+        _expand_prefix(v, prefixes): k
+        for k, v in context.items()
+        if isinstance(v, str) and not v.endswith(("#", "/"))
+    }
+    shortnames.setdefault(RDF.type, "@type")
+    shortnames.setdefault(OTEIO.prefix, "prefixes")
+    shortnames.setdefault(OTEIO.hasConfiguration, "configuration")
+    shortnames.setdefault(OTEIO.statement, "statement")
+    return shortnames
+
+
+def _expand_prefix(s: str, prefixes: dict) -> str:
+    """Replace prefix in s."""
+    for prefix, ns in prefixes.items():
+        s = re.sub(f"^{prefix}:", ns, s, count=1)
+    return s
 
 
 def _update_dataset(
@@ -205,20 +245,7 @@ def _update_dataset(
                     dct[name] = d
                 _update_dataset(ts, node, d, context, shortnames)
 
-            # if isinstance(dct[name], list):
-            #    for i, node in enumerate(dct[name]):
-            #        d = {}
-            #        for p, o in ts.predicate_objects(ts.expand_iri(node)):
-            #            add(d, shortnames.get(p, p), as_python(o))
-            #        dct[name][i] = d
-            #        _update_dataset(ts, node, d, context, shortnames)
-            # else:
-            #    d = {}
-            #    for p, o in ts.predicate_objects(ts.expand_iri(dct[name])):
-            #        add(d, shortnames.get(p, p), as_python(o))
-            #    dct[name] = d
-            #    _update_dataset(ts, name, d, context, shortnames)
-
+    # Special handling of statements
     if "statement" in dct:
         (iri,) = ts.objects(predicate=OTEIO.statement)
         dct["statement"] = load_statements(ts, iri)
