@@ -17,8 +17,8 @@ from tripper.utils import as_python
 # from tripper.utils import parse_literal
 
 if TYPE_CHECKING:  # pragma: no cover
+    from pathlib import Path
     from typing import Any, List, Mapping, Optional, Union
-
 
 # Pytest can't cope with this
 # EMMO = Namespace(
@@ -28,13 +28,13 @@ if TYPE_CHECKING:  # pragma: no cover
 # )
 
 # CONTEXT = (
-#     (Path(__file__).parent.parent / "context" / "context.json").as_uri()
-# )
+#     Path(__file__).parent.parent / "context" / "0.1" / "context.json"
+# ).as_uri()
 
 # __TODO__: Update URI when merged to master
 CONTEXT = (
     "https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/"
-    "rdf-serialisation/oteapi_dlite/context/context.json"
+    "rdf-serialisation/oteapi_dlite/context/0.1/context.json"
 )
 
 _MATCH_PREFIXED_IRI = re.compile(r"^([a-z0-9]*):([a-zA-Z_][a-zA-Z0-9_+-]*)$")
@@ -327,3 +327,7 @@ def expand_iri(iri: str, prefixes: dict) -> str:
             return f"{prefixes[prefix]}{name}"
         warnings.warn(f'Undefined prefix "{prefix}" in IRI: {iri}')
     return iri
+
+
+# def save_datadoc(ts: Triplestore, filename: "Union[str,Path]"):
+#    """Populate triplestore with data documentation in YAML."""
