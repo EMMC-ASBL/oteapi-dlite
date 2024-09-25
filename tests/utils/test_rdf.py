@@ -1,5 +1,11 @@
 """Test RDF serialisation."""
 
+from pathlib import Path
+
+thisdir = Path(__file__).resolve().parent
+testdir = thisdir.parent
+inputdir = testdir / "input"
+
 
 # if True:
 def test_save_and_load_dataset():
@@ -46,7 +52,7 @@ def test_save_and_load_dataset():
                         "aa": "http://aa.org#",
                         "bb": "http://bb.org#",
                     },
-                    "statement": [
+                    "statements": [
                         {"subject": "a", "predicate": "b", "object": "c"},
                         {"subject": "d", "predicate": "e", "object": "f"},
                     ],
@@ -86,3 +92,14 @@ def test_save_and_load_dataset():
     # Load dataset using SPARQL
     dd = load_dataset_sparql(ts, iri=EX.mydata)
     assert dd == d
+
+
+def test_datadoc():
+    """Test storing data documentation to triplestore."""
+    from tripper import Triplestore
+
+    from oteapi_dlite.utils.rdf import store_datadoc
+
+    ts = Triplestore("rdflib")
+    # pylint: disable=unused-variable
+    d = store_datadoc(ts, inputdir / "datasets.yaml")

@@ -31,6 +31,7 @@ dependencies = [
     "typing-extensions>=4.8; python_version<'3.10'",
     "requests>=2.0.0,<2.32.4",
     "Pillow>=9.0.1,<11",
+    "PyYAML>=5.4.1,<7",
     #"tripper>=0.3.4",  # Wait for this version to be released
     "tripper @ git+https://github.com/EMMC-ASBL/tripper.git@master"
 ]
@@ -44,7 +45,6 @@ docs = [
     "mkdocstrings[python]~=0.25.1",
 ]
 testing = [
-    "PyYAML>=5.4.1,<7",
     "otelib>=0.4.0,<1",
     "pytest~=7.4",
     "pytest-cov~=4.1",

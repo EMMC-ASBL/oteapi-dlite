@@ -78,6 +78,8 @@
 
     "datasink": "oteio:hasDatasink",
     "datamodel": "oteio:hasDatamodel",
+    "storeURL": "oteio:storeURL",
+
     "subject": "rdf:subject",
     "predicate": "rdf:predicate",
     "object": "rdf:object",
@@ -92,7 +94,7 @@
       "@type": "@json"
     },
 
-    "statement": {
+    "statements": {
       "@id": "oteio:statement",
       "@type": "rdf:Statement",
       "@container": "@list"

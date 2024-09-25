@@ -1,0 +1,60 @@
+---
+"@context": https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/rdf-serialisation/oteapi_dlite/context/0.1/context.json
+
+# This extends the list of prefixes that are already defined in the context
+prefixes:
+  ex: "http://example.com#"
+  dm: "http://onto-ns.com/meta/ss3/0.1/MyData#"
+
+# List of documented datasets
+datasets:
+  # @id and @type comes from JSON-LD. @id defines the IRI of the
+  # dataset, while @type defines the emmo:DataSet subclass which
+  # semantically documents this dataset.
+  - "@id": ex:mydata
+    "@type": ex:MyData
+    title: "My data."
+    license: CC-BY-4.0
+
+    # Data model and mappings are part of the documentation of the dataset,
+    # not its distributions or sinks
+    datamodel: http://onto-ns.com/meta/ss3/0.1/MyData
+
+    # Question: do we want to represent our mappings like this?
+    #
+    # In RDF this will be represented as a list of rdf:statement.
+    #
+    # It is possible to keep the old list of lists. In that case the
+    # mappings will be represented as a single JSON literal in RDF.
+    mappings:
+      - {subject: "dm:a", predicate: "map:mapsTo", object: "ex:A"}
+      - {subject: "dm:b", predicate: "map:mapsTo", object: "ex:B"}
+
+    # A dataset can have several distributions.
+    # A distribution correspond to a OTEAPI resource strategy.
+    #
+    # Should we use "distributions" although this is mapped to dcat:distribution?
+    distribution:
+      - downloadURL: https://raw.githubusercontent.com/H2020-OpenModel/Public/SS3_data/data/SS3/material_card_al.json
+        mediaType: application/json
+        parser:
+          parserType: application/vnd.dlite-parse
+          configuration:
+            driver: json
+            options: ""
+
+    # Is "datasink" a good name?
+    datasink:
+      # "downloadUrl" is a very misleading name. What about "storeURL"?
+      #
+      # In OTEAPI this is currently represented with a resource strategy
+      # that have downloadUrl/mediaType.
+      #
+      # Note the misspelling of dcat:downloadURL in OTEAPI.
+      - downloadUrl: mydata.yaml
+        mediaType: application/yaml
+        generator:
+          functionType: application/vnd.dlite-generate
+          configuration:
+            driver: yaml
+            options: mode=w

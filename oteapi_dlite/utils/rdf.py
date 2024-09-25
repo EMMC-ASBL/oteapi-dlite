@@ -5,11 +5,11 @@ import io
 import json
 import re
 import warnings
-
-# from pathlib import Path
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import requests
+import yaml  # type: ignore
 from tripper import DCAT, OTEIO, RDF, Triplestore
 from tripper.utils import as_python
 
@@ -17,7 +17,6 @@ from tripper.utils import as_python
 # from tripper.utils import parse_literal
 
 if TYPE_CHECKING:  # pragma: no cover
-    from pathlib import Path
     from typing import Any, List, Mapping, Optional, Union
 
 # Pytest can't cope with this
@@ -27,15 +26,15 @@ if TYPE_CHECKING:  # pragma: no cover
 #     check=True,
 # )
 
-# CONTEXT = (
-#     Path(__file__).parent.parent / "context" / "0.1" / "context.json"
-# ).as_uri()
+CONTEXT = (
+    Path(__file__).parent.parent / "context" / "0.1" / "context.json"
+).as_uri()
 
 # __TODO__: Update URI when merged to master
-CONTEXT = (
-    "https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/"
-    "rdf-serialisation/oteapi_dlite/context/0.1/context.json"
-)
+# CONTEXT = (
+#     "https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/"
+#     "rdf-serialisation/oteapi_dlite/context/0.1/context.json"
+# )
 
 _MATCH_PREFIXED_IRI = re.compile(r"^([a-z0-9]*):([a-zA-Z_][a-zA-Z0-9_+-]*)$")
 
@@ -215,7 +214,7 @@ def get_shortnames(timeout: float = 5) -> dict:
     shortnames.setdefault(RDF.type, "@type")
     shortnames.setdefault(OTEIO.prefix, "prefixes")
     shortnames.setdefault(OTEIO.hasConfiguration, "configuration")
-    shortnames.setdefault(OTEIO.statement, "statement")
+    shortnames.setdefault(OTEIO.statement, "statements")
     return shortnames
 
 
@@ -246,9 +245,9 @@ def _update_dataset(
                 _update_dataset(ts, node, d, context, shortnames)
 
     # Special handling of statements
-    if "statement" in dct:
+    if "statements" in dct:
         (iri,) = ts.objects(predicate=OTEIO.statement)
-        dct["statement"] = load_statements(ts, iri)
+        dct["statements"] = load_statements(ts, iri)
 
 
 def load_list(ts: Triplestore, iri: str):
@@ -329,5 +328,9 @@ def expand_iri(iri: str, prefixes: dict) -> str:
     return iri
 
 
-# def save_datadoc(ts: Triplestore, filename: "Union[str,Path]"):
-#    """Populate triplestore with data documentation in YAML."""
+def store_datadoc(ts: Triplestore, filename: "Union[str,Path]"):
+    """Populate triplestore with data documentation in YAML."""
+    # pylint: disable=unused-argument
+    with open(filename, "r", encoding="utf-8") as f:
+        d = yaml.safe_load(f)
+    return d
