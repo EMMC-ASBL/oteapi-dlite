@@ -146,7 +146,7 @@ def get_driver(
     raise ValueError("either `mediaType` or `accessService` must be provided")
 
 
-def get_instance(
+def get_instance(  # pylint: disable=too-many-arguments
     meta: "Union[str, dlite.Metadata]",
     session: "Optional[dict[str, Any]]" = None,
     collection: "Optional[dlite.Collection]" = None,
@@ -155,7 +155,6 @@ def get_instance(
     allow_incomplete: bool = False,
     **kwargs,
 ) -> dlite.Instance:
-    # pylint: disable=import-outside-toplevel,too-many-arguments
     """Instantiates and returns an instance of `meta`.
 
     Arguments:
@@ -174,6 +173,7 @@ def get_instance(
         kwargs: Additional arguments passed to dlite.mappings.instantiate().
     """
     # Import here to avoid a hard dependency on tripper.
+    # pylint: disable=import-outside-toplevel
     from tripper import Triplestore
 
     if collection is None:
