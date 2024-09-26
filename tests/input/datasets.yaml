@@ -29,19 +29,21 @@ datasets:
     mappings:
       - {subject: "dm:a", predicate: "map:mapsTo", object: "ex:A"}
       - {subject: "dm:b", predicate: "map:mapsTo", object: "ex:B"}
+      - ["dm:a", "map:mapsTo", "ex:A"]
+      - ["dm:b", "map:mapsTo", "ex:B"]
 
     # A dataset can have several distributions.
     # A distribution correspond to a OTEAPI resource strategy.
     #
     # Should we use "distributions" although this is mapped to dcat:distribution?
     distribution:
-      - downloadURL: https://raw.githubusercontent.com/H2020-OpenModel/Public/SS3_data/data/SS3/material_card_al.json
-        mediaType: application/json
+      - downloadURL: https://raw.githubusercontent.com/H2020-OpenModel/Public/SS3_data/data/SS3/material_card_al.csv
+        mediaType: text/csv
         parser:
           parserType: application/vnd.dlite-parse
           configuration:
-            driver: json
-            options: ""
+            driver: csv
+            options: "datamodel=..."
 
     # Is "datasink" a good name?
     datasink:
@@ -51,10 +53,10 @@ datasets:
       # that have downloadUrl/mediaType.
       #
       # Note the misspelling of dcat:downloadURL in OTEAPI.
-      - downloadUrl: mydata.yaml
-        mediaType: application/yaml
+      - downloadUrl: mydata.png
+        mediaType: image/png
         generator:
           functionType: application/vnd.dlite-generate
           configuration:
-            driver: yaml
-            options: mode=w
+            driver: image
+            options: format=png
