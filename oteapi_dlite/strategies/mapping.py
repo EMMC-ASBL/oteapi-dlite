@@ -6,10 +6,13 @@ from typing import TYPE_CHECKING, Annotated, Optional
 from oteapi.models import AttrDict, MappingConfig
 from pydantic import AnyUrl
 from pydantic.dataclasses import Field, dataclass
-from tripper import Triplestore
 
 from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import get_collection, update_collection
+from oteapi_dlite.utils import (
+    get_collection,
+    get_triplestore,
+    update_collection,
+)
 
 if TYPE_CHECKING:  # pragma: no cover
     from typing import Any
@@ -53,8 +56,10 @@ class DLiteMappingStrategy:
         self, session: Optional[dict[str, "Any"]] = None
     ) -> DLiteSessionUpdate:
         """Initialize strategy."""
-        coll = get_collection(session)
-        ts = Triplestore(backend="collection", collection=coll)
+        if session is None:
+            session = {}
+
+        ts = get_triplestore(session)
 
         if self.mapping_config.prefixes:
             for prefix, iri in self.mapping_config.prefixes.items():
@@ -71,6 +76,7 @@ class DLiteMappingStrategy:
                 ]
             )
 
+        coll = get_collection(session)
         update_collection(coll)
         return DLiteSessionUpdate(collection_id=coll.uuid)
 

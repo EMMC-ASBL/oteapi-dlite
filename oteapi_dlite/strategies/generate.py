@@ -14,8 +14,9 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import (
     get_collection,
     get_driver,
-    get_settings,
+    get_triplestore,
     update_collection,
+    update_dict,
 )
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -163,6 +164,28 @@ class DLiteStorageConfig(AttrDict):
             ),
         ),
     ] = None
+    kb_document_update: Annotated[
+        Optional[dict],
+        Field(
+            description=(
+                "Dict updating the documentation (partial pipeline) created "
+                "with `kb_document_class`."
+                "\n\n"
+                "This dict should be structured as follows: "
+                "\n\n"
+                "    {\n"
+                '      "dataresource": {...},\n'
+                '      "parse": {...}\n'
+                '      "mapping": {...}\n'
+                "    }\n"
+                "\n"
+                "where the provided items will override the the default "
+                "configurations in respective partial pipeline created by "
+                '`kb_document_class`.  Any of the items "dataresource", '
+                '"parse" and "mapping" are optional.',
+            ),
+        ),
+    ] = None
     kb_document_base_iri: Annotated[
         str, Field(description="Base IRI or prefix for created individuals.")
     ] = ":"
@@ -263,6 +286,9 @@ class DLiteGenerateStrategy:
         config = self.generate_config.configuration
         cacheconfig = config.datacache_config
 
+        if session is None:
+            session = {}
+
         driver = (
             config.driver
             if config.driver
@@ -309,49 +335,28 @@ class DLiteGenerateStrategy:
 
             # Import here to avoid hard dependencies on tripper.
             # pylint: disable=import-outside-toplevel
-            from tripper import RDF, Triplestore
+            from tripper import RDF
             from tripper.convert import save_container
 
-            kb_settings = get_settings(session, "tripper.triplestore")
-            if not kb_settings:
-                raise KeyError(
-                    "The `kb_document_class` configuration requires that a "
-                    "'tripper.triplestore' settings has been added using the "
-                    "application/vnd.dlite-settings strategy."
-                )
-
+            # kb_settings = get_settings(session, "tripper.triplestore")
+            # if not kb_settings:
+            #     raise KeyError(
+            #         "The `kb_document_class` configuration requires that a "
+            #         "'tripper.triplestore' settings has been added using the "
+            #         "application/vnd.dlite-settings strategy."
+            #     )
             # IRI of new individual
             iri = individual_iri(
                 class_iri=config.kb_document_class,
                 base_iri=config.kb_document_base_iri,
             )
-            resource = {
-                "dataresource": {
-                    "type": config.kb_document_class,
-                    "downloadUrl": config.location,
-                    "mediaType": (
-                        config.mediaType
-                        if config.mediaType
-                        else "application/vnd.dlite-parse"
-                    ),
-                    "configuration": {
-                        "metadata": (
-                            config.datamodel
-                            if config.datamodel
-                            else inst.meta.uri
-                        ),
-                        "driver": config.driver,
-                        "options": config.options,
-                    },
-                }
-            }
 
             triples = [(iri, RDF.type, config.kb_document_class)]
             if config.kb_document_context:
                 for prop, val in config.kb_document_context.items():
                     triples.append((iri, prop, val))
 
-            ts = Triplestore(**kb_settings)
+            ts = get_triplestore(session)
             try:
                 if config.kb_document_computation:
                     comput = individual_iri(
@@ -403,6 +408,42 @@ class DLiteGenerateStrategy:
                         )
                         if indv and indv != iri:
                             triples.append((comput, r["property"], indv))
+
+                # Document data source
+                resource = {
+                    "dataresource": {
+                        "type": config.kb_document_class,
+                        "downloadUrl": config.location,
+                        "mediaType": (
+                            config.mediaType
+                            if config.mediaType
+                            else "application/vnd.dlite-parse"
+                        ),
+                        "configuration": {
+                            "datamodel": (
+                                config.datamodel
+                                if config.datamodel
+                                else inst.meta.uri
+                            ),
+                            "driver": config.driver,
+                            "options": (  # Trying to be clever here...
+                                config.options.replace("mode=w", "mode=r")
+                                if config.options
+                                else config.options
+                            ),
+                        },
+                    },
+                    # "parse": {},  # No supported by OTEAPI yet...
+                    "mapping": {
+                        "mappingType": "mappings",
+                        # __TODO__
+                        # Populate prefixes and triples from mapping
+                        # strategy in current partial pipeline
+                        # "prefixes": {},
+                        # "triples": [],
+                    },
+                }
+                update_dict(resource, config.kb_document_update)
 
                 save_container(
                     ts,

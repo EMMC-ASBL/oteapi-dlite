@@ -95,6 +95,7 @@ def test_generate_kb():
             "location": str(outdir / "image.json"),
             "options": "mode=w",
             "kb_document_class": ":MyData",
+            "kb_document_update": {"dataresource": {"license": "MIT"}},
             "kb_document_base_iri": "http://ex.com#",
             "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
             "kb_document_computation": ":Sim",
@@ -138,11 +139,18 @@ def test_generate_kb():
             "type": ":MyData",
             "downloadUrl": str((outdir / "image.json")),
             "mediaType": "application/vnd.dlite-parse",
+            "license": "MIT",
             "configuration": {
                 "driver": "json",
-                "options": "mode=w",
-                "metadata": "http://onto-ns.com/meta/1.0/Image",
+                "options": "mode=r",
+                "datamodel": "http://onto-ns.com/meta/1.0/Image",
             },
+        },
+        # "parse": {}
+        "mapping": {
+            "mappingType": "mappings",
+            # "prefixes": {},
+            # "triples": [],
         },
     }
 
