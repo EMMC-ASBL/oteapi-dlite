@@ -11,12 +11,10 @@ def test_generate_kb():
     from pathlib import Path
 
     import dlite
-    from oteapi.datacache import DataCache
+    from otelib import OTEClient
     from tripper import OWL, RDF, RDFS, Namespace, Triplestore
     from tripper.convert import load_container, save_container
 
-    from oteapi_dlite.strategies.generate import DLiteGenerateStrategy
-    from oteapi_dlite.strategies.settings import SettingsStrategy
     from oteapi_dlite.utils import get_meta
 
     thisdir = Path(__file__).resolve().parent
@@ -28,7 +26,7 @@ def test_generate_kb():
         check=True,
     )
 
-    # Create/clear KB
+    # Prepare the knowledge base
     kb = outdir / "kb.ttl"
     ts = Triplestore(backend="rdflib")
     ts.bind("", "http://myproj.org/kb#")
@@ -70,50 +68,50 @@ def test_generate_kb():
     ts.serialize(kb)
     ts.close()
 
+    # Prepare data
+    Image = get_meta("http://onto-ns.com/meta/1.0/Image")
+    image = Image([2, 2, 1])
+    image.data = [[[1], [2]], [[3], [4]]]
+    image.save("yaml", outdir / "image.yaml", "mode=w")
+
+    # Prepare pipeline
     kb_kwargs = {"backend": "rdflib", "triplestore_url": str(kb)}
-    settings_config = {
-        "filterType": "application/vnd.dlite-settings",
-        "configuration": {
-            "label": "tripper.triplestore",
-            "settings": kb_kwargs,
+
+    client = OTEClient("python")
+
+    resource = client.create_dataresource(
+        downloadUrl=(outdir / "image.yaml").as_uri(),
+        mediaType="application/vnd.dlite-parse",
+        configuration={
+            "driver": "yaml",
+            "options": "mode=r",
         },
-    }
-    config = {
-        "functionType": "application/vnd.dlite-generate",
-        "configuration": {
-            "label": "image",
+    )
+    generate = client.create_function(
+        functionType="application/vnd.dlite-generate",
+        configuration={
+            "datamodel": Image.uri,
             "driver": "json",
             "location": str(outdir / "image.json"),
             "options": "mode=w",
             "kb_document_class": ":MyData",
+            "kb_document_update": {"dataresource": {"license": "MIT"}},
             "kb_document_base_iri": "http://ex.com#",
             "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
             "kb_document_computation": ":Sim",
         },
-    }
-
-    coll = dlite.Collection()
-
-    Image = get_meta("http://onto-ns.com/meta/1.0/Image")
-    image = Image([2, 2, 1])
-    image.data = [[[1], [2]], [[3], [4]]]
-    coll.add("image", image)
-
-    session = {"collection_id": coll.uuid}
-    DataCache().add(coll.asjson(), key=coll.uuid)
+    )
+    settings = client.create_filter(
+        filterType="application/vnd.dlite-settings",
+        configuration={
+            "label": "tripper.triplestore",
+            "settings": kb_kwargs,
+        },
+    )
 
     # Execute pipeline...
-    strategy = SettingsStrategy(settings_config)
-    session.update(strategy.initialize(session))
-
-    strategy = DLiteGenerateStrategy(config)
-    session.update(strategy.initialize(session))
-
-    strategy = DLiteGenerateStrategy(config)
-    session.update(strategy.get(session))
-
-    strategy = SettingsStrategy(settings_config)
-    session.update(strategy.get(session))
+    pipeline = resource >> generate >> settings
+    pipeline.get()
 
     # Check that the data in the newly created generated json file matches our
     # image instance.
@@ -141,11 +139,18 @@ def test_generate_kb():
             "type": ":MyData",
             "downloadUrl": str((outdir / "image.json")),
             "mediaType": "application/vnd.dlite-parse",
+            "license": "MIT",
             "configuration": {
                 "driver": "json",
-                "options": "mode=w",
-                "metadata": "http://onto-ns.com/meta/1.0/Image",
+                "options": "mode=r",
+                "datamodel": "http://onto-ns.com/meta/1.0/Image",
             },
+        },
+        # "parse": {}
+        "mapping": {
+            "mappingType": "mappings",
+            # "prefixes": {},
+            # "triples": [],
         },
     }
 
