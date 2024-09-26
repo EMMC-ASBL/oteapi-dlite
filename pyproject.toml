@@ -17,23 +17,23 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
 ]
-keywords = ["OTE", "OTEAPI", "LITE", "OTEAPI-DLITE"]
+keywords = ["OTE", "OTEAPI", "DLITE", "OTEAPI-DLITE"]
 requires-python = ">=3.9"
 dynamic = ["version"]
 
 dependencies = [
     # Core dependencies
     "DLite-Python>=0.4.5,<1.0",
-    "numpy>=1.21,<1.27.0",
-    "oteapi-core>=0.6.0,<0.6.2",
-    "pydantic>=2.1,<2.6",
-    "pydantic-settings>=2.0,<2.2",
-    "typing-extensions>=4.8; python_version<'3.10'",
-    "requests>=2.0.0,<2.32.4",
     "Pillow>=9.0.1,<11",
     "PyYAML>=5.4.1,<7",
+    "numpy>=1.21,<1.27.0",
+    "oteapi-core>=0.6.0,<0.6.2",
+    "pydantic>=2.1,<2.9",
+    "pydantic-settings>=2.0,<2.5",
+    "requests>=2.0.0,<2.32.4",
     #"tripper>=0.3.4",  # Wait for this version to be released
-    "tripper @ git+https://github.com/EMMC-ASBL/tripper.git@master"
+    "tripper @ git+https://github.com/EMMC-ASBL/tripper.git@master",
+    "typing-extensions>=4.8,<4.13; python_version<'3.10'",
 ]
 
 [project.optional-dependencies]
