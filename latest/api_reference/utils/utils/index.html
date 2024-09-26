@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.38">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.35f28582.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -780,6 +780,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#oteapi_dlite.utils.utils.RemoveItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      RemoveItem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.utils.utils.TypeMismatchError" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeMismatchError
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#oteapi_dlite.utils.utils.add_settings" class="md-nav__link">
     <span class="md-ellipsis">
       add_settings
@@ -834,9 +852,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#oteapi_dlite.utils.utils.get_triplestore" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_triplestore
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#oteapi_dlite.utils.utils.update_collection" class="md-nav__link">
     <span class="md-ellipsis">
       update_collection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.utils.utils.update_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_dict
     </span>
   </a>
   
@@ -902,6 +938,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#oteapi_dlite.utils.utils.RemoveItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      RemoveItem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.utils.utils.TypeMismatchError" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeMismatchError
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#oteapi_dlite.utils.utils.add_settings" class="md-nav__link">
     <span class="md-ellipsis">
       add_settings
@@ -956,9 +1010,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#oteapi_dlite.utils.utils.get_triplestore" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_triplestore
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#oteapi_dlite.utils.utils.update_collection" class="md-nav__link">
     <span class="md-ellipsis">
       update_collection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oteapi_dlite.utils.utils.update_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_dict
     </span>
   </a>
   
@@ -1001,6 +1073,72 @@
 
 
 
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="oteapi_dlite.utils.utils.RemoveItem" class="doc doc-heading">
+            <code>RemoveItem</code>
+
+
+<a href="#oteapi_dlite.utils.utils.RemoveItem" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+
+      <p>Singleton class used by update_dict() to indicate items that should
+be removed in the source dictionary.</p>
+
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">RemoveItem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Singleton class used by update_dict() to indicate items that should</span>
+<span class="sd">    be removed in the source dictionary.&quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="oteapi_dlite.utils.utils.TypeMismatchError" class="doc doc-heading">
+            <code>TypeMismatchError</code>
+
+
+<a href="#oteapi_dlite.utils.utils.TypeMismatchError" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code>TypeError</code></p>
+
+
+      <p>Raised by update_dict() if there is a mismatch in value types
+between the <code>dct</code> and <code>update</code> dictionaries.</p>
+
+              <details class="quote">
+                <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">TypeMismatchError</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised by update_dict() if there is a mismatch in value types</span>
+<span class="sd">    between the `dct` and `update` dictionaries.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+    </div>
+
+</div>
 
 
 <div class="doc doc-object doc-function">
@@ -1099,37 +1237,37 @@ to store.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">205</span>
 <span class="normal">206</span>
 <span class="normal">207</span>
 <span class="normal">208</span>
 <span class="normal">209</span>
 <span class="normal">210</span>
-<span class="normal">211</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">add_settings</span><span class="p">(</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">add_settings</span><span class="p">(</span>
     <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Union[dict[str, Any], None]&quot;</span><span class="p">,</span>
     <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">settings</span><span class="p">:</span> <span class="s2">&quot;Union[dict, list, str, int, float, bool, NoneType]&quot;</span><span class="p">,</span>
@@ -1235,9 +1373,7 @@ session.</p>
 </details>
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 53</span>
 <span class="normal"> 54</span>
 <span class="normal"> 55</span>
 <span class="normal"> 56</span>
@@ -1285,7 +1421,11 @@ session.</p>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
-<span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_collection</span><span class="p">(</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_collection</span><span class="p">(</span>
     <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">collection_id</span><span class="p">:</span> <span class="s2">&quot;Optional[str]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">:</span>
@@ -1308,7 +1448,9 @@ session.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
 
-    <span class="n">session</span> <span class="o">=</span> <span class="n">session</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="p">{}</span>
+
     <span class="n">id_</span> <span class="o">=</span> <span class="n">collection_id</span> <span class="ow">or</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;collection_id&quot;</span><span class="p">)</span>
 
     <span class="c1"># Storing the collection in the datacache is not scalable.</span>
@@ -1357,11 +1499,7 @@ session.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span>
@@ -1374,7 +1512,11 @@ session.</p>
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
-<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_driver</span><span class="p">(</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_driver</span><span class="p">(</span>
     <span class="n">mediaType</span><span class="p">:</span> <span class="s2">&quot;Optional[str]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">accessService</span><span class="p">:</span> <span class="s2">&quot;Optional[str]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="s2">&quot;NoneType&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1402,7 +1544,7 @@ session.</p>
 
 
 <h2 id="oteapi_dlite.utils.utils.get_instance" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">get_instance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">routedict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">instance_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_incomplete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">get_instance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">routedict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">instance_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_incomplete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 <a href="#oteapi_dlite.utils.utils.get_instance" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -1438,17 +1580,32 @@ session.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>collection</code></td>
+            <td><code>session</code></td>
             <td>
-                  <code><span title="dlite.Collection">Collection</span></code>
+                  <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The collection with instances and mappings.</p>
+                <p>An OTEAPI session object.</p>
               </div>
             </td>
             <td>
-                <em>required</em>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>collection</code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="dlite.Collection">Collection</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The collection with instances and mappings.
+The default is to get the collection from <code>session</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
       </tbody>
@@ -1467,11 +1624,7 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 </details>
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
 <span class="normal">150</span>
 <span class="normal">151</span>
 <span class="normal">152</span>
@@ -1500,9 +1653,34 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 <span class="normal">175</span>
 <span class="normal">176</span>
 <span class="normal">177</span>
-<span class="normal">178</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span>
     <span class="n">meta</span><span class="p">:</span> <span class="s2">&quot;Union[str, dlite.Metadata]&quot;</span><span class="p">,</span>
-    <span class="n">collection</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">,</span>
+    <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Optional[dict[str, Any]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">collection</span><span class="p">:</span> <span class="s2">&quot;Optional[dlite.Collection]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">routedict</span><span class="p">:</span> <span class="s2">&quot;Optional[dict]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">instance_id</span><span class="p">:</span> <span class="s2">&quot;Optional[str]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">allow_incomplete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1512,7 +1690,9 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        meta: Metadata to instantiate.  Typically its URI.</span>
+<span class="sd">        session: An OTEAPI session object.</span>
 <span class="sd">        collection: The collection with instances and mappings.</span>
+<span class="sd">            The default is to get the collection from `session`.</span>
 
 <span class="sd">    Some less used optional arguments:</span>
 <span class="sd">        routedict: Dict mapping property names to route number to select for</span>
@@ -1523,7 +1703,24 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 <span class="sd">            of the returned instance.</span>
 <span class="sd">        kwargs: Additional arguments passed to dlite.mappings.instantiate().</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">Triplestore</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;collection&quot;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="n">collection</span><span class="p">)</span>
+    <span class="c1"># Import here to avoid a hard dependency on tripper.</span>
+    <span class="c1"># pylint: disable=import-outside-toplevel</span>
+    <span class="c1"># pylint: disable=too-many-positional-arguments,too-many-arguments</span>
+    <span class="kn">from</span> <span class="nn">tripper</span> <span class="kn">import</span> <span class="n">Triplestore</span>
+
+    <span class="k">if</span> <span class="n">collection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;get_instance() requires that either `session` or &quot;</span>
+                <span class="s2">&quot;`collection` argument is given.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">collection</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">get_triplestore</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">Triplestore</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;collection&quot;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="n">collection</span><span class="p">)</span>
+
     <span class="n">inst</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span>
         <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
         <span class="n">instances</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">get_instances</span><span class="p">()),</span>
@@ -1556,15 +1753,15 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">118</span>
 <span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span>
-<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_meta</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_meta</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata corresponding to given uri.</span>
 
 <span class="sd">    This function may in the future be connected to a database.</span>
@@ -1670,20 +1867,22 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_settings</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Union[dict[str, Any], None]&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Any&quot;</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_settings</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="s2">&quot;Union[dict[str, Any], None]&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Any&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve settings from the session.</span>
 
 <span class="sd">    Arguments:</span>
@@ -1694,9 +1893,77 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 <span class="sd">        Python object with the settings or None if no settings exists</span>
 <span class="sd">        with this label.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">session</span> <span class="o">=</span> <span class="n">session</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="p">{}</span>
+
     <span class="n">d</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;settings&quot;</span><span class="p">,</span> <span class="p">{})</span>
     <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">label</span><span class="p">])</span> <span class="k">if</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">d</span> <span class="k">else</span> <span class="kc">None</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="oteapi_dlite.utils.utils.get_triplestore" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_triplestore</span><span class="p">(</span><span class="n">session</span><span class="p">)</span></code>
+
+<a href="#oteapi_dlite.utils.utils.get_triplestore" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Return a tripper.Triplestore instance for the current session.</p>
+<p>If a 'tripper.triplestore' setting has been added with the
+SettingsStrategy, it will be used to configure the returned
+triplestore instance.  Otherwise the session collection will be
+used.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_triplestore</span><span class="p">(</span>
+    <span class="n">session</span><span class="p">:</span> <span class="s2">&quot;dict[str, Any]&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Triplestore&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a tripper.Triplestore instance for the current session.</span>
+
+<span class="sd">    If a &#39;tripper.triplestore&#39; setting has been added with the</span>
+<span class="sd">    SettingsStrategy, it will be used to configure the returned</span>
+<span class="sd">    triplestore instance.  Otherwise the session collection will be</span>
+<span class="sd">    used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Import here to avoid a hard dependency on tripper.</span>
+    <span class="c1"># pylint: disable=import-outside-toplevel</span>
+    <span class="kn">from</span> <span class="nn">tripper</span> <span class="kn">import</span> <span class="n">Triplestore</span>
+
+    <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s2">&quot;tripper.triplestore&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">kb_settings</span><span class="p">:</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">Triplestore</span><span class="p">(</span><span class="o">**</span><span class="n">kb_settings</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">Triplestore</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;collection&quot;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="n">coll</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ts</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1747,14 +2014,14 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
-<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update collection in DataCache.</span>
 
 <span class="sd">    Parameters:</span>
@@ -1762,6 +2029,203 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
     <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">collection</span><span class="o">.</span><span class="n">asjson</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">collection</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="oteapi_dlite.utils.utils.update_dict" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">update_dict</span><span class="p">(</span><span class="n">dct</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span></code>
+
+<a href="#oteapi_dlite.utils.utils.update_dict" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Update dictionary <code>dct</code> using dictionary <code>update</code>.</p>
+<p>This function differ from <code>dict.update()</code> in that it updates
+sub-directories recursively, instead of replacing them with the
+content of <code>update</code>.</p>
+<p>If <code>update</code> has <code>RemoveItem</code> as a value, the corresponding item
+in <code>dct</code> will be removed.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>dct</code></td>
+            <td>
+                  <code>dict</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dict to update.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>update</code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[dict]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dict used to update <code>conf</code> with.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>dict</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The updated dict <code>dct</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_dict</span><span class="p">(</span><span class="n">dct</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="s2">&quot;Optional[dict]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update dictionary `dct` using dictionary `update`.</span>
+
+<span class="sd">    This function differ from `dict.update()` in that it updates</span>
+<span class="sd">    sub-directories recursively, instead of replacing them with the</span>
+<span class="sd">    content of `update`.</span>
+
+<span class="sd">    If `update` has `RemoveItem` as a value, the corresponding item</span>
+<span class="sd">    in `dct` will be removed.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        dct: Dict to update.</span>
+<span class="sd">        update: Dict used to update `conf` with.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The updated dict `dct`.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeMismatchError if there is a mismatch in value types</span>
+<span class="sd">        between the `dct` and `update` dictionaries.  Conversion</span>
+<span class="sd">        between different number types is accepted.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">update</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dct</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dct</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">update</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="n">RemoveItem</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">dct</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
+                <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">Number</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Number</span><span class="p">))</span>
+                <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+            <span class="p">):</span>
+                <span class="k">raise</span> <span class="n">TypeMismatchError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;type of `update[&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&#39;]` (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">!r}</span><span class="s2">) is not a &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;subclass of the type of `dct[&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&#39;]` (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">update_dict</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dct</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="c1"># Add new items to `dct`</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">update</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
+            <span class="n">dct</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">return</span> <span class="n">dct</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1843,10 +2307,10 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d6f25eb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
       
     
   </body>

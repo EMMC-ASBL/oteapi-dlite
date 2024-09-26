@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.38">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.35f28582.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -725,6 +725,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.kb_document_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      kb_document_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.label" class="md-nav__link">
     <span class="md-ellipsis">
       label
@@ -1268,6 +1277,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.kb_document_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      kb_document_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.label" class="md-nav__link">
     <span class="md-ellipsis">
       label
@@ -1440,13 +1458,13 @@
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteGenerateConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteGenerateConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite generate strategy config.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
@@ -1517,30 +1535,7 @@
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">252</span>
 <span class="normal">253</span>
 <span class="normal">254</span>
 <span class="normal">255</span>
@@ -1713,7 +1708,48 @@
 <span class="normal">422</span>
 <span class="normal">423</span>
 <span class="normal">424</span>
-<span class="normal">425</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DLiteGenerateStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite generate strategy utilising DLite storage plugins.</span>
 
@@ -1749,6 +1785,9 @@
         <span class="c1"># pylint: disable=too-many-statements</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_config</span><span class="o">.</span><span class="n">configuration</span>
         <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
+
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">session</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="n">driver</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">config</span><span class="o">.</span><span class="n">driver</span>
@@ -1796,49 +1835,28 @@
 
             <span class="c1"># Import here to avoid hard dependencies on tripper.</span>
             <span class="c1"># pylint: disable=import-outside-toplevel</span>
-            <span class="kn">from</span> <span class="nn">tripper</span> <span class="kn">import</span> <span class="n">RDF</span><span class="p">,</span> <span class="n">Triplestore</span>
+            <span class="kn">from</span> <span class="nn">tripper</span> <span class="kn">import</span> <span class="n">RDF</span>
             <span class="kn">from</span> <span class="nn">tripper.convert</span> <span class="kn">import</span> <span class="n">save_container</span>
 
-            <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s2">&quot;tripper.triplestore&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">kb_settings</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-                    <span class="s2">&quot;The `kb_document_class` configuration requires that a &quot;</span>
-                    <span class="s2">&quot;&#39;tripper.triplestore&#39; settings has been added using the &quot;</span>
-                    <span class="s2">&quot;application/vnd.dlite-settings strategy.&quot;</span>
-                <span class="p">)</span>
-
+            <span class="c1"># kb_settings = get_settings(session, &quot;tripper.triplestore&quot;)</span>
+            <span class="c1"># if not kb_settings:</span>
+            <span class="c1">#     raise KeyError(</span>
+            <span class="c1">#         &quot;The `kb_document_class` configuration requires that a &quot;</span>
+            <span class="c1">#         &quot;&#39;tripper.triplestore&#39; settings has been added using the &quot;</span>
+            <span class="c1">#         &quot;application/vnd.dlite-settings strategy.&quot;</span>
+            <span class="c1">#     )</span>
             <span class="c1"># IRI of new individual</span>
             <span class="n">iri</span> <span class="o">=</span> <span class="n">individual_iri</span><span class="p">(</span>
                 <span class="n">class_iri</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">kb_document_class</span><span class="p">,</span>
                 <span class="n">base_iri</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">kb_document_base_iri</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">resource</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;dataresource&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_class</span><span class="p">,</span>
-                    <span class="s2">&quot;downloadUrl&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">,</span>
-                    <span class="s2">&quot;mediaType&quot;</span><span class="p">:</span> <span class="p">(</span>
-                        <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span>
-                        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span>
-                        <span class="k">else</span> <span class="s2">&quot;application/vnd.dlite-parse&quot;</span>
-                    <span class="p">),</span>
-                    <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">(</span>
-                            <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span>
-                            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span>
-                            <span class="k">else</span> <span class="n">inst</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span>
-                        <span class="p">),</span>
-                        <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span>
-                        <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">,</span>
-                    <span class="p">},</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
 
             <span class="n">triples</span> <span class="o">=</span> <span class="p">[(</span><span class="n">iri</span><span class="p">,</span> <span class="n">RDF</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_class</span><span class="p">)]</span>
             <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_context</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_context</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="n">triples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">iri</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
 
-            <span class="n">ts</span> <span class="o">=</span> <span class="n">Triplestore</span><span class="p">(</span><span class="o">**</span><span class="n">kb_settings</span><span class="p">)</span>
+            <span class="n">ts</span> <span class="o">=</span> <span class="n">get_triplestore</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_computation</span><span class="p">:</span>
                     <span class="n">comput</span> <span class="o">=</span> <span class="n">individual_iri</span><span class="p">(</span>
@@ -1890,6 +1908,42 @@
                         <span class="p">)</span>
                         <span class="k">if</span> <span class="n">indv</span> <span class="ow">and</span> <span class="n">indv</span> <span class="o">!=</span> <span class="n">iri</span><span class="p">:</span>
                             <span class="n">triples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">comput</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;property&quot;</span><span class="p">],</span> <span class="n">indv</span><span class="p">))</span>
+
+                <span class="c1"># Document data source</span>
+                <span class="n">resource</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;dataresource&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_class</span><span class="p">,</span>
+                        <span class="s2">&quot;downloadUrl&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">,</span>
+                        <span class="s2">&quot;mediaType&quot;</span><span class="p">:</span> <span class="p">(</span>
+                            <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span>
+                            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span>
+                            <span class="k">else</span> <span class="s2">&quot;application/vnd.dlite-parse&quot;</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;datamodel&quot;</span><span class="p">:</span> <span class="p">(</span>
+                                <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span>
+                                <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span>
+                                <span class="k">else</span> <span class="n">inst</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span>
+                            <span class="p">),</span>
+                            <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span>
+                            <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">(</span>  <span class="c1"># Trying to be clever here...</span>
+                                <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;mode=w&quot;</span><span class="p">,</span> <span class="s2">&quot;mode=r&quot;</span><span class="p">)</span>
+                                <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span>
+                                <span class="k">else</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span>
+                            <span class="p">),</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
+                    <span class="c1"># &quot;parse&quot;: {},  # No supported by OTEAPI yet...</span>
+                    <span class="s2">&quot;mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;mappingType&quot;</span><span class="p">:</span> <span class="s2">&quot;mappings&quot;</span><span class="p">,</span>
+                        <span class="c1"># __TODO__</span>
+                        <span class="c1"># Populate prefixes and triples from mapping</span>
+                        <span class="c1"># strategy in current partial pipeline</span>
+                        <span class="c1"># &quot;prefixes&quot;: {},</span>
+                        <span class="c1"># &quot;triples&quot;: [],</span>
+                    <span class="p">},</span>
+                <span class="p">}</span>
+                <span class="n">update_dict</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_update</span><span class="p">)</span>
 
                 <span class="n">save_container</span><span class="p">(</span>
                     <span class="n">ts</span><span class="p">,</span>
@@ -2013,30 +2067,7 @@ of the OTE-API Services.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">271</span>
 <span class="normal">272</span>
 <span class="normal">273</span>
 <span class="normal">274</span>
@@ -2190,7 +2221,48 @@ of the OTE-API Services.</p>
 <span class="normal">422</span>
 <span class="normal">423</span>
 <span class="normal">424</span>
-<span class="normal">425</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Any&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
@@ -2207,6 +2279,9 @@ of the OTE-API Services.</p>
     <span class="c1"># pylint: disable=too-many-statements</span>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_config</span><span class="o">.</span><span class="n">configuration</span>
     <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
+
+    <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="n">driver</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">config</span><span class="o">.</span><span class="n">driver</span>
@@ -2254,49 +2329,28 @@ of the OTE-API Services.</p>
 
         <span class="c1"># Import here to avoid hard dependencies on tripper.</span>
         <span class="c1"># pylint: disable=import-outside-toplevel</span>
-        <span class="kn">from</span> <span class="nn">tripper</span> <span class="kn">import</span> <span class="n">RDF</span><span class="p">,</span> <span class="n">Triplestore</span>
+        <span class="kn">from</span> <span class="nn">tripper</span> <span class="kn">import</span> <span class="n">RDF</span>
         <span class="kn">from</span> <span class="nn">tripper.convert</span> <span class="kn">import</span> <span class="n">save_container</span>
 
-        <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s2">&quot;tripper.triplestore&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">kb_settings</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-                <span class="s2">&quot;The `kb_document_class` configuration requires that a &quot;</span>
-                <span class="s2">&quot;&#39;tripper.triplestore&#39; settings has been added using the &quot;</span>
-                <span class="s2">&quot;application/vnd.dlite-settings strategy.&quot;</span>
-            <span class="p">)</span>
-
+        <span class="c1"># kb_settings = get_settings(session, &quot;tripper.triplestore&quot;)</span>
+        <span class="c1"># if not kb_settings:</span>
+        <span class="c1">#     raise KeyError(</span>
+        <span class="c1">#         &quot;The `kb_document_class` configuration requires that a &quot;</span>
+        <span class="c1">#         &quot;&#39;tripper.triplestore&#39; settings has been added using the &quot;</span>
+        <span class="c1">#         &quot;application/vnd.dlite-settings strategy.&quot;</span>
+        <span class="c1">#     )</span>
         <span class="c1"># IRI of new individual</span>
         <span class="n">iri</span> <span class="o">=</span> <span class="n">individual_iri</span><span class="p">(</span>
             <span class="n">class_iri</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">kb_document_class</span><span class="p">,</span>
             <span class="n">base_iri</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">kb_document_base_iri</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">resource</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;dataresource&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_class</span><span class="p">,</span>
-                <span class="s2">&quot;downloadUrl&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">,</span>
-                <span class="s2">&quot;mediaType&quot;</span><span class="p">:</span> <span class="p">(</span>
-                    <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span>
-                    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span>
-                    <span class="k">else</span> <span class="s2">&quot;application/vnd.dlite-parse&quot;</span>
-                <span class="p">),</span>
-                <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">(</span>
-                        <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span>
-                        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span>
-                        <span class="k">else</span> <span class="n">inst</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span>
-                    <span class="p">),</span>
-                    <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span>
-                    <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="p">,</span>
-                <span class="p">},</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
 
         <span class="n">triples</span> <span class="o">=</span> <span class="p">[(</span><span class="n">iri</span><span class="p">,</span> <span class="n">RDF</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_class</span><span class="p">)]</span>
         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_context</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_context</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">triples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">iri</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
 
-        <span class="n">ts</span> <span class="o">=</span> <span class="n">Triplestore</span><span class="p">(</span><span class="o">**</span><span class="n">kb_settings</span><span class="p">)</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">get_triplestore</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_computation</span><span class="p">:</span>
                 <span class="n">comput</span> <span class="o">=</span> <span class="n">individual_iri</span><span class="p">(</span>
@@ -2349,6 +2403,42 @@ of the OTE-API Services.</p>
                     <span class="k">if</span> <span class="n">indv</span> <span class="ow">and</span> <span class="n">indv</span> <span class="o">!=</span> <span class="n">iri</span><span class="p">:</span>
                         <span class="n">triples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">comput</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;property&quot;</span><span class="p">],</span> <span class="n">indv</span><span class="p">))</span>
 
+            <span class="c1"># Document data source</span>
+            <span class="n">resource</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;dataresource&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_class</span><span class="p">,</span>
+                    <span class="s2">&quot;downloadUrl&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">location</span><span class="p">,</span>
+                    <span class="s2">&quot;mediaType&quot;</span><span class="p">:</span> <span class="p">(</span>
+                        <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span>
+                        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span>
+                        <span class="k">else</span> <span class="s2">&quot;application/vnd.dlite-parse&quot;</span>
+                    <span class="p">),</span>
+                    <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;datamodel&quot;</span><span class="p">:</span> <span class="p">(</span>
+                            <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span>
+                            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span>
+                            <span class="k">else</span> <span class="n">inst</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span>
+                        <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">(</span>  <span class="c1"># Trying to be clever here...</span>
+                            <span class="n">config</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;mode=w&quot;</span><span class="p">,</span> <span class="s2">&quot;mode=r&quot;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span>
+                            <span class="k">else</span> <span class="n">config</span><span class="o">.</span><span class="n">options</span>
+                        <span class="p">),</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+                <span class="c1"># &quot;parse&quot;: {},  # No supported by OTEAPI yet...</span>
+                <span class="s2">&quot;mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;mappingType&quot;</span><span class="p">:</span> <span class="s2">&quot;mappings&quot;</span><span class="p">,</span>
+                    <span class="c1"># __TODO__</span>
+                    <span class="c1"># Populate prefixes and triples from mapping</span>
+                    <span class="c1"># strategy in current partial pipeline</span>
+                    <span class="c1"># &quot;prefixes&quot;: {},</span>
+                    <span class="c1"># &quot;triples&quot;: [],</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+            <span class="n">update_dict</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">kb_document_update</span><span class="p">)</span>
+
             <span class="n">save_container</span><span class="p">(</span>
                 <span class="n">ts</span><span class="p">,</span>
                 <span class="n">resource</span><span class="p">,</span>
@@ -2389,12 +2479,12 @@ of the OTE-API Services.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">session</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Any&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteSessionUpdate</span><span class="p">:</span>
@@ -2439,8 +2529,7 @@ or <code>mediaType</code> field.</p>
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 34</span>
-<span class="normal"> 35</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 35</span>
 <span class="normal"> 36</span>
 <span class="normal"> 37</span>
 <span class="normal"> 38</span>
@@ -2622,7 +2711,30 @@ or <code>mediaType</code> field.</p>
 <span class="normal">214</span>
 <span class="normal">215</span>
 <span class="normal">216</span>
-<span class="normal">217</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a generic DLite storage filter.</span>
 
 <span class="sd">    The DLite storage driver to can be specified using either the `driver`</span>
@@ -2751,6 +2863,28 @@ or <code>mediaType</code> field.</p>
                 <span class="s2">&quot;... )</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;&gt;&gt;&gt; pipeline = ... &gt;&gt; generate &gt;&gt; kb_settings</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;&gt;&gt;&gt; pipeline.get()</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">kb_document_update</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+        <span class="n">Field</span><span class="p">(</span>
+            <span class="n">description</span><span class="o">=</span><span class="p">(</span>
+                <span class="s2">&quot;Dict updating the documentation (partial pipeline) created &quot;</span>
+                <span class="s2">&quot;with `kb_document_class`.&quot;</span>
+                <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;This dict should be structured as follows: &quot;</span>
+                <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;    {</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s1">&#39;      &quot;dataresource&quot;: {...},</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;      &quot;parse&quot;: {...}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;      &quot;mapping&quot;: {...}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s2">&quot;    }</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;where the provided items will override the the default &quot;</span>
+                <span class="s2">&quot;configurations in respective partial pipeline created by &quot;</span>
+                <span class="s1">&#39;`kb_document_class`.  Any of the items &quot;dataresource&quot;, &#39;</span>
+                <span class="s1">&#39;&quot;parse&quot; and &quot;mapping&quot; are optional.&#39;</span><span class="p">,</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -3003,6 +3137,26 @@ or <code>mediaType</code> field.</p>
 
 
 
+<h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.kb_document_update" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">kb_document_update</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Dict updating the documentation (partial pipeline) created with `kb_document_class`.</span><span class="se">\n\n</span><span class="s1">This dict should be structured as follows: </span><span class="se">\n\n</span><span class="s1">    {</span><span class="se">\n</span><span class="s1">      &quot;dataresource&quot;: {...},</span><span class="se">\n</span><span class="s1">      &quot;parse&quot;: {...}</span><span class="se">\n</span><span class="s1">      &quot;mapping&quot;: {...}</span><span class="se">\n</span><span class="s1">    }</span><span class="se">\n\n</span><span class="s1">where the provided items will override the the default configurations in respective partial pipeline created by `kb_document_class`.  Any of the items &quot;dataresource&quot;, &quot;parse&quot; and &quot;mapping&quot; are optional.&#39;</span><span class="p">))]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.kb_document_update" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
 <h3 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.label" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Label of DLite instance in the collection to serialise.&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span></code>
 
@@ -3149,8 +3303,8 @@ or <code>mediaType</code> field.</p>
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
-<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">KBError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">KBError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Invalid data in knowledge base.&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -3251,25 +3405,25 @@ or <code>mediaType</code> field.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">428</span>
-<span class="normal">429</span>
-<span class="normal">430</span>
-<span class="normal">431</span>
-<span class="normal">432</span>
-<span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
-<span class="normal">439</span>
-<span class="normal">440</span>
-<span class="normal">441</span>
-<span class="normal">442</span>
-<span class="normal">443</span>
-<span class="normal">444</span>
-<span class="normal">445</span>
-<span class="normal">446</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">individual_iri</span><span class="p">(</span><span class="n">class_iri</span><span class="p">,</span> <span class="n">base_iri</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">randbytes</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">individual_iri</span><span class="p">(</span><span class="n">class_iri</span><span class="p">,</span> <span class="n">base_iri</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">randbytes</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return an IRI for an individual of a class.</span>
 
 <span class="sd">    Arguments:</span>
@@ -3369,10 +3523,10 @@ or <code>mediaType</code> field.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d6f25eb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
       
     
   </body>
