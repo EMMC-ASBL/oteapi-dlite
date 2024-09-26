@@ -155,6 +155,7 @@ def get_instance(
     allow_incomplete: bool = False,
     **kwargs,
 ) -> dlite.Instance:
+    # pylint: disable=import-outside-toplevel,too-many-arguments
     """Instantiates and returns an instance of `meta`.
 
     Arguments:
@@ -173,7 +174,6 @@ def get_instance(
         kwargs: Additional arguments passed to dlite.mappings.instantiate().
     """
     # Import here to avoid a hard dependency on tripper.
-    # pylint: disable=import-outside-toplevel,too-many-arguments
     from tripper import Triplestore
 
     if collection is None:
