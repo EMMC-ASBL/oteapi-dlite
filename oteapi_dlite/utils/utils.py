@@ -146,7 +146,7 @@ def get_driver(
     raise ValueError("either `mediaType` or `accessService` must be provided")
 
 
-def get_instance(  # pylint: disable=too-many-arguments
+def get_instance(
     meta: "Union[str, dlite.Metadata]",
     session: "Optional[dict[str, Any]]" = None,
     collection: "Optional[dlite.Collection]" = None,
@@ -174,6 +174,7 @@ def get_instance(  # pylint: disable=too-many-arguments
     """
     # Import here to avoid a hard dependency on tripper.
     # pylint: disable=import-outside-toplevel
+    # pylint: disable=too-many-positional-arguments,too-many-arguments
     from tripper import Triplestore
 
     if collection is None:
