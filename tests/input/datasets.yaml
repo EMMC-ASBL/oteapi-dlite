@@ -1,5 +1,8 @@
 ---
-"@context": https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/rdf-serialisation/oteapi_dlite/context/0.1/context.json
+"@context": /home/friisj/prosjekter/EMMC/OntoTrans/oteapi-dlite/oteapi_dlite/context/0.2/context.json
+
+#"@context": https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/rdf-serialisation/oteapi_dlite/context/0.1/context.json
+
 
 # This extends the list of prefixes that are already defined in the context
 prefixes:
@@ -27,8 +30,6 @@ datasets:
     # It is possible to keep the old list of lists. In that case the
     # mappings will be represented as a single JSON literal in RDF.
     mappings:
-      - {subject: "dm:a", predicate: "map:mapsTo", object: "ex:A"}
-      - {subject: "dm:b", predicate: "map:mapsTo", object: "ex:B"}
       - ["dm:a", "map:mapsTo", "ex:A"]
       - ["dm:b", "map:mapsTo", "ex:B"]
 

@@ -67,7 +67,6 @@
     "dataResource": "oteio:dataResource",
     "parser": "oteio:parser",
     "generator": "oteio:generator",
-    "mapping": "oteio:mapping",
     "function": "oteio:function",
     "filter": "oteio:filter",
 
@@ -77,8 +76,8 @@
     "filterType": "oteio:filterType",
 
     "datasets": "oteio:hasDataSet",
-    "datasink": "oteio:hasDatasink",
     "datamodel": "oteio:hasDatamodel",
+    "hasDataSink": "oteio:hasDataSink",
     "storeURL": "oteio:storeURL",
     "mappingURL": "oteio.mappingURL",
     "mappingFormat": "oteio.mappingFormat",
@@ -97,10 +96,14 @@
       "@type": "@json"
     },
 
+    "mappings": {
+      "@id": "oteio:mapping",
+      "@type": "@json"
+    },
+
     "statements": {
-      "@id": "oteio:statement",
-      "@type": "rdf:Statement",
-      "@container": "@list"
+      "@id": "oteio:statements",
+      "@type": "@json"
     }
   }
 }
