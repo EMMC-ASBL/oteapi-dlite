@@ -13,8 +13,10 @@ datasets:
   - "@id": "semdata:sample3/pos1_01_grid_200x"
     # Dataset type as defined in the SEM domain ontology
     "@type": "https://w3id.com/emmo/domain/sem/0.1#"
-    title: "My data."
-    license: CC-BY-4.0
+    title: Concrete
+    description: SEM image of...
+    creator: Sigurd Wenner
+    contactPoint: "Sigurd Wenner <Sigurd.Wenner@sintef.no>"
 
     datamodel: http://onto-ns.com/meta/characterisation/0.1/SEMImage
     mappingURL: https://raw.githubusercontent.com/HEU-MatCHMaker/DataDocumentation/refs/heads/master/SEM/datamodels/SEMImage.ttl
@@ -26,7 +28,7 @@ datasets:
 
     # A dataset can have several distributions, hence a list
     distribution:
-      - downloadURL: https://github.com/HEU-MatCHMaker/DataDocumentation/blob/master/SEM/example_data/(ThermoFisher)%20pos1_01_grid_200x.tif
+      - downloadURL: https://github.com/HEU-MatCHMaker/DataDocumentation/raw/refs/heads/master/SEM/example_data/(ThermoFisher)%20pos1_01_grid_200x.tif
         mediaType: image/tiff
         parser:
           parserType: application/vnd.dlite-parse
