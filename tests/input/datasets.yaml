@@ -1,60 +1,43 @@
 ---
-"@context": /home/friisj/prosjekter/EMMC/OntoTrans/oteapi-dlite/oteapi_dlite/context/0.2/context.json
-
-#"@context": https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/rdf-serialisation/oteapi_dlite/context/0.1/context.json
-
+"@context": https://raw.githubusercontent.com/EMMC-ASBL/oteapi-dlite/refs/heads/rdf-serialisation/oteapi_dlite/context/0.2/context.json
 
 # This extends the list of prefixes that are already defined in the context
 prefixes:
-  ex: "http://example.com#"
-  dm: "http://onto-ns.com/meta/ss3/0.1/MyData#"
+  sem: "https://w3id.com/emmo/domain/sem/0.1#"
+  semdata: "http://sintef.no/data/matchmaker/SEM/"
+  dm: "http://onto-ns.com/meta/characterisation/0.1/SEMImage#"
 
 # List of documented datasets
 datasets:
-  # @id and @type comes from JSON-LD. @id defines the IRI of the
-  # dataset, while @type defines the emmo:DataSet subclass which
-  # semantically documents this dataset.
-  - "@id": ex:mydata
-    "@type": ex:MyData
+    # unique ID of the dataset
+  - "@id": "semdata:sample3/pos1_01_grid_200x"
+    # Dataset type as defined in the SEM domain ontology
+    "@type": "https://w3id.com/emmo/domain/sem/0.1#"
     title: "My data."
     license: CC-BY-4.0
 
-    # Data model and mappings are part of the documentation of the dataset,
-    # not its distributions or sinks
-    datamodel: http://onto-ns.com/meta/ss3/0.1/MyData
+    datamodel: http://onto-ns.com/meta/characterisation/0.1/SEMImage
+    mappingURL: https://raw.githubusercontent.com/HEU-MatCHMaker/DataDocumentation/refs/heads/master/SEM/datamodels/SEMImage.ttl
 
-    # Question: do we want to represent our mappings like this?
-    #
-    # In RDF this will be represented as a list of rdf:statement.
-    #
-    # It is possible to keep the old list of lists. In that case the
-    # mappings will be represented as a single JSON literal in RDF.
-    mappings:
-      - ["dm:a", "map:mapsTo", "ex:A"]
-      - ["dm:b", "map:mapsTo", "ex:B"]
+    # Contextual documentation of the dataset
+    statements:
+      - ["@id", "sem:fromSample", "semdata:sample3"]
+      - ["@id", "emmo:isDescriptionOf", "semdata:concrete1"]
 
-    # A dataset can have several distributions.
-    # A distribution correspond to a OTEAPI resource strategy.
-    #
-    # Should we use "distributions" although this is mapped to dcat:distribution?
+    # A dataset can have several distributions, hence a list
     distribution:
-      - downloadURL: https://raw.githubusercontent.com/H2020-OpenModel/Public/SS3_data/data/SS3/material_card_al.csv
-        mediaType: text/csv
+      - downloadURL: https://github.com/HEU-MatCHMaker/DataDocumentation/blob/master/SEM/example_data/(ThermoFisher)%20pos1_01_grid_200x.tif
+        mediaType: image/tiff
         parser:
           parserType: application/vnd.dlite-parse
           configuration:
-            driver: csv
-            options: "datamodel=..."
+            driver: image
+            options: "plugin=tiffile"
 
-    # Is "datasink" a good name?
+    # List of consumers of this dataset
     datasink:
-      # "downloadUrl" is a very misleading name. What about "storeURL"?
-      #
-      # In OTEAPI this is currently represented with a resource strategy
-      # that have downloadUrl/mediaType.
-      #
-      # Note the misspelling of dcat:downloadURL in OTEAPI.
-      - downloadUrl: mydata.png
+        # This simple consumer wants the data in png format
+      - storeURL: mydata.png
         mediaType: image/png
         generator:
           functionType: application/vnd.dlite-generate
