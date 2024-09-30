@@ -28,6 +28,7 @@
     "contactPoint": "dcat:contactPoint",
     "hasCurrentVersion": "dcat:hasCurrentVersion",
     "hasVersion": "dcat:hasVersion",
+    "inSeries": "dcat:inSeries",
     "keyword": "dcat:keyword",
     "landingPage": "dcat:landingPage",
     "qualifiedRelation": "dcat:qualifiedRelation",
