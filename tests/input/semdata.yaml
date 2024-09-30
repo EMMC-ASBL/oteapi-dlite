@@ -1,0 +1,30 @@
+---
+# This extends the list of prefixes that are already defined in the context
+prefixes:
+  sem: "https://w3id.com/emmo/domain/sem/0.1#"
+  semdata: "http://sintef.no/data/matchmaker/SEM/"
+  dm: "http://onto-ns.com/meta/characterisation/0.1/SEMImage#"
+
+# List of documented datasets
+datasets:
+  - "@id": "semdata:SEM_cement_batch2/77600-23-001"
+    "@type": "https://w3id.com/emmo/domain/sem/0.1#SEMImageSeries"
+    title: SEM image of cement
+    description:  Back-scattered SEM image of cement sample 3, polished with 1 µm diamond compound.
+    creator: Sigurd Wenner
+    contactPoint: "Sigurd Wenner <Sigurd.Wenner@sintef.no>"
+    inSeries: "semdata:SEM_cement_batch2"
+
+    datamodel: http://onto-ns.com/meta/characterisation/0.1/SEMImageSeries
+    mappingURL: https://raw.githubusercontent.com/HEU-MatCHMaker/DataDocumentation/refs/heads/master/SEM/datamodels/SEMImageSeries.ttl
+
+    # Contextual documentation of the dataset
+    statements:
+      - ["@id", "sem:fromSample", "semdata:sample3"]
+      - ["@id", "emmo:isDescriptionOf", "semdata:concrete1"]
+
+    subdataset:
+        downloadURL: 77600-23-_*.tif
+        mediaType: image/tiff
+
+  - "@id": "semdata:"
