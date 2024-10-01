@@ -4,6 +4,7 @@ This module provide some utility functions.
 """
 
 from .nputils import dict2recarray
+from .rdf import load_dataset, save_dataset
 from .utils import (
     RemoveItem,
     TypeMismatchError,
@@ -25,10 +26,12 @@ __all__ = (
     "dict2recarray",
     "get_collection",
     "get_driver",
-    "get_meta",
     "get_instance",
+    "get_meta",
     "get_settings",
     "get_triplestore",
+    "load_dataset",
+    "save_dataset",
     "update_collection",
     "update_dict",
 )
