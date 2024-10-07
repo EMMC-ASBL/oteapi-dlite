@@ -51,7 +51,7 @@ testing = [
     "pylint>=3.0.0,<4",
 ]
 dev = [
-    "pre-commit~=3.8",
+    "pre-commit>=3.8.0,<5",
     "oteapi-dlite[docs,testing]",
 ]
 
