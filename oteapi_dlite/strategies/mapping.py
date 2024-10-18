@@ -2,24 +2,21 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import Annotated, Optional
 
-from oteapi.models import AttrDict, MappingConfig
+from oteapi.models import MappingConfig
 from pydantic import AnyUrl
 from pydantic.dataclasses import Field, dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteConfiguration, DLiteResult
 from oteapi_dlite.utils import (
     get_collection,
     get_triplestore,
     update_collection,
 )
 
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
 
-
-class DLiteMappingStrategyConfig(AttrDict):
+class DLiteMappingStrategyConfig(DLiteConfiguration):
     """Configuration for a DLite mapping filter."""
 
     datamodel: Annotated[
@@ -53,14 +50,12 @@ class DLiteMappingStrategy:
 
     mapping_config: DLiteMappingConfig
 
-    def initialize(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize strategy."""
-        if session is None:
-            session = {}
-
-        ts = get_triplestore(session)
+        ts = get_triplestore(
+            kb_settings=self.mapping_config.configuration.settings.get("tripper.triplestore"),
+            collection_id=self.mapping_config.configuration.collection_id,
+        )
 
         if self.mapping_config.prefixes:
             for prefix, iri in self.mapping_config.prefixes.items():
@@ -77,12 +72,10 @@ class DLiteMappingStrategy:
                 ]
             )
 
-        coll = get_collection(session)
+        coll = get_collection(self.mapping_config.configuration.collection_id)
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteResult(collection_id=coll.uuid)
 
-    def get(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute strategy and return a dictionary."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(collection_id=get_collection(self.mapping_config.configuration.collection_id).uuid)

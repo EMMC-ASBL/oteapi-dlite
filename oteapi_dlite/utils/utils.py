@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 import dlite
 from dlite.mappings import instantiate
 from oteapi.datacache import DataCache
-from oteapi.models import SessionUpdate
+from oteapi.models import AttrDict
 
 from oteapi_dlite.utils.exceptions import CollectionNotFound
 
@@ -51,57 +51,42 @@ ACCESSSERVICES = {
 }
 
 
-def get_collection(
-    session: Optional[dict[str, Any]] = None,
-    collection_id: Optional[str] = None,
-) -> dlite.Collection:
+def get_collection(collection_id: "Optional[str]" = None) -> dlite.Collection:
     """Retrieve a DLite Collection.
 
-    Looks for a Collection UUID in the session.
-    If none exists, a new, empty Collection is created and stored in the
-    session.
-
-    If `collection_id` is provided, that id is used. If there already is a
-    `collection_id` in the session, that is left untouched. Otherwise
-    `collection_id` is added to the session.
+    Looks for a Collection UUID with `collection_id`.
+    If none exists or `collection_id` is not given, a new, empty Collection is
+    created and returned.
 
     Parameters:
-        session: An OTEAPI session object.
         collection_id: A specific collection ID to retrieve.
 
     Return:
-        A DLite Collection to be used throughout the OTEAPI session.
+        A DLite Collection to be used throughout the OTEAPI pipeline run.
+
     """
     cache = DataCache()
-
-    if session is None:
-        session = {}
-
-    id_ = collection_id or session.get("collection_id")
 
     # Storing the collection in the datacache is not scalable.
     # Do we really want to do that?
     #
     # Currently we check the datacache first and then ask dlite to look
     # up the collection (which is the proper and scalable solution).
-    if id_ is None:
+    if collection_id is None:
         coll = dlite.Collection()
         cache.add(coll.asjson(), key=coll.uuid)
-    elif id_ in cache:
-        coll = dlite.Instance.from_json(cache.get(id_), id=id_)
+    elif collection_id in cache:
+        coll = dlite.Instance.from_json(cache.get(collection_id), id=collection_id)
     else:
         try:
-            coll = dlite.get_instance(id_)
+            coll = dlite.get_instance(collection_id)
         except dlite.DLiteError as exc:
             raise CollectionNotFound(
-                f"Could not find DLite Collection with id {id_}"
+                f"Could not find DLite Collection with id {collection_id}"
             ) from exc
 
     if coll.meta.uri != dlite.COLLECTION_ENTITY:
-        raise CollectionNotFound(f"instance with id {id_} is not a collection")
-
-    if "collection_id" not in session:
-        session["collection_id"] = coll.uuid
+        raise CollectionNotFound(f"instance with id {collection_id} is not a collection")
 
     return coll
 
@@ -147,7 +132,7 @@ def get_driver(
 
 def get_instance(
     meta: Union[str, dlite.Metadata],
-    session: Optional[dict[str, Any]] = None,
+    collection_id: Optional[str] = None,
     collection: Optional[dlite.Collection] = None,
     routedict: Optional[dict] = None,
     instance_id: Optional[str] = None,
@@ -158,7 +143,6 @@ def get_instance(
 
     Arguments:
         meta: Metadata to instantiate.  Typically its URI.
-        session: An OTEAPI session object.
         collection: The collection with instances and mappings.
             The default is to get the collection from `session`.
 
@@ -170,22 +154,20 @@ def get_instance(
         allow_incomplete: Whether to allow not populating all properties
             of the returned instance.
         kwargs: Additional arguments passed to dlite.mappings.instantiate().
+
     """
     # Import here to avoid a hard dependency on tripper.
     from tripper import Triplestore
 
     if collection is None:
-        if session is None:
+        if collection_id is None:
             raise TypeError(
-                "get_instance() requires that either `session` or "
+                "get_instance() requires that either `collection_id` or "
                 "`collection` argument is given."
             )
-        collection = get_collection(session)
+        collection = get_collection(collection_id)
 
-    if session:
-        ts = get_triplestore(session)
-    else:
-        ts = Triplestore(backend="collection", collection=collection)
+    ts = Triplestore(backend="collection", collection=collection)
 
     return instantiate(
         meta=meta,
@@ -199,61 +181,36 @@ def get_instance(
 
 
 def add_settings(
-    session: Union[dict[str, Any], None],
     label: str,
     settings: Union[  # noqa: PYI041
         dict, list, str, int, float, bool, NoneType
     ],
-) -> SessionUpdate:
+    existing_labels: Optional[list[str]] = None
+) -> AttrDict:
     """Store settings to the session.
 
     Arguments:
-        session: An OTEAPI session object.
         label: Label of settings to add.
         settings: A JSON-serialisable Python object with the settings
             to store.
 
     Returns:
-        A SessionUpdate instance with the added settings.
+        An AttrDict instance with the added settings.
+
     """
-    if session is None:
-        session = {}
+    label_settings: dict[str, Union[dict, list, str, int, float, bool, None]] = {}
 
-    # For now we store settings in the session.  This makes "settings"
-    # independent of oteapi-dlite.
-    d = session.get("settings", {})
+    if label in existing_labels:
+        raise KeyError(f"Settings with this label already exists: {label!r}")
+    label_settings[label] = json.dumps(settings)
 
-    if label in d:
-        raise KeyError(f"Setting with this label already exists: '{label}'")
-    d[label] = json.dumps(settings)
-
-    # Update the session with new settings
-    session["settings"] = d
-
-    return SessionUpdate(settings=d)
-
-
-def get_settings(session: Union[dict[str, Any], None], label: str) -> Any:
-    """Retrieve settings from the session.
-
-    Arguments:
-        session: An OTEAPI session object.
-        label: Label of settings to retrieve.
-
-    Returns:
-        Python object with the settings or None if no settings exists
-        with this label.
-    """
-    if session is None:
-        session = {}
-
-    d = session.get("settings", {})
-    return json.loads(d[label]) if label in d else None
+    return AttrDict(settings=label_settings)
 
 
 def get_triplestore(
-    session: dict[str, Any],
-) -> Triplestore:
+    kb_settings: Optional[dict[str, Any]] = None,
+    collection_id: Optional[str] = None,
+) -> "Triplestore":
     """Return a tripper.Triplestore instance for the current session.
 
     If a 'tripper.triplestore' setting has been added with the
@@ -264,13 +221,14 @@ def get_triplestore(
     # Import here to avoid a hard dependency on tripper.
     from tripper import Triplestore
 
-    kb_settings = get_settings(session, "tripper.triplestore")
     if kb_settings:
-        ts = Triplestore(**kb_settings)
-    else:
-        coll = get_collection(session)
-        ts = Triplestore(backend="collection", collection=coll)
-    return ts
+        return Triplestore(**kb_settings)
+
+    if collection_id:
+        coll = get_collection(collection_id)
+        return Triplestore(backend="collection", collection=coll)
+
+    raise ValueError("Either of 'kb_settings' or 'collection_id' must be set.")
 
 
 class TypeMismatchError(TypeError):

@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 import dlite
 import numpy as np
 from dlite.datamodel import DataModel
-from oteapi.models import AttrDict, ResourceConfig
+from oteapi.models import ResourceConfig
 from oteapi.strategies.parse.excel_xlsx import (
     XLSXParseConfig,
     XLSXParseStrategy,
@@ -17,7 +17,7 @@ from oteapi.strategies.parse.excel_xlsx import (
 from pydantic import Field, HttpUrl
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteResult
 from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -26,7 +26,7 @@ if TYPE_CHECKING:  # pragma: no cover
     from oteapi.interfaces import IParseStrategy
 
 
-class DLiteExcelParseConfig(AttrDict):
+class DLiteExcelParseConfig(DLiteResult):
     """Configuration for DLite Excel parser."""
 
     metadata: Annotated[
@@ -73,7 +73,7 @@ class DLiteExcelParseResourceConfig(ResourceConfig):
     ]
 
 
-class DLiteExcelSessionUpdate(DLiteSessionUpdate):
+class DLiteExcelSessionUpdate(DLiteResult):
     """Class for returning values from DLite excel parser."""
 
     inst_uuid: Annotated[
@@ -103,16 +103,11 @@ class DLiteExcelStrategy:
 
     parse_config: DLiteExcelParseResourceConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, Any]] = None,
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(collection_id=get_collection(self.parse_config.configuration.collection_id).uuid)
 
-    def get(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteExcelSessionUpdate:
+    def get(self) -> DLiteExcelSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
@@ -132,8 +127,8 @@ class DLiteExcelStrategy:
         xlsx_config["mediaType"] = (
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
-        parser: IParseStrategy = XLSXParseStrategy(xlsx_config)
-        columns: dict[str, Any] = parser.get(session)["data"]
+        parser = XLSXParseStrategy(xlsx_config)
+        columns: dict[str, "Any"] = parser.get()["data"]
 
         names, units = zip(*[split_column_name(column) for column in columns])
         rec = dict2recarray(columns, names=names)
@@ -158,7 +153,7 @@ class DLiteExcelStrategy:
             inst[name] = rec[name]
 
         # Insert inst into collection
-        coll = get_collection(session)
+        coll = get_collection(config.collection_id)
         coll.add(config.label, inst)
 
         update_collection(coll)

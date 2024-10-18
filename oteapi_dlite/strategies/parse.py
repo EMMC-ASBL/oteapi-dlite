@@ -3,23 +3,35 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import Annotated, Optional
 
 import dlite
 from oteapi.datacache import DataCache
-from oteapi.models import AttrDict, DataCacheConfig, ResourceConfig
+from oteapi.models import DataCacheConfig, HostlessAnyUrl, ParserConfig, ResourceConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteResult
 from oteapi_dlite.utils import get_collection, get_driver, update_collection
 
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
 
-
-class DLiteParseConfig(AttrDict):
+class DLiteParseConfig(DLiteResult):
     """Configuration for generic DLite parser."""
+
+    # From a download strategy
+    key: Annotated[
+        Optional[str], Field(description="Cache key to a downloaded source.")
+    ] = None
+
+    # "Required" resource strategy fields
+    downloadUrl: Annotated[
+        Optional[HostlessAnyUrl],
+        Field(description=ResourceConfig.model_fields["downloadUrl"].description),
+    ] = None
+    mediaType: Annotated[
+        Optional[str],
+        Field(description=ResourceConfig.model_fields["mediaType"].description),
+    ] = None
 
     driver: Annotated[
         str,
@@ -79,7 +91,7 @@ class DLiteParseConfig(AttrDict):
     ] = None
 
 
-class DLiteParseResourceConfig(ResourceConfig):
+class DLiteParseResourceConfig(ParserConfig):
     """DLite parse strategy resource config."""
 
     configuration: Annotated[
@@ -100,26 +112,19 @@ class DLiteParseStrategy:
 
     parse_config: DLiteParseResourceConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, Any]] = None,
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(collection_id=get_collection(self.parse_config.configuration.collection_id).uuid)
 
-    def get(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
         of the OTE-API Services.
 
-        Parameters:
-            session: A session-specific dictionary context.
-
         Returns:
-            SessionUpdate instance.
+            Reference to a DLite collection ID.
+
         """
         config = self.parse_config.configuration
         cacheconfig = config.datacache_config
@@ -143,8 +148,8 @@ class DLiteParseStrategy:
         else:
             if cacheconfig and cacheconfig.accessKey:
                 key = cacheconfig.accessKey
-            elif session and "key" in session:
-                key = session["key"]
+            elif config.key:
+                key = config.key
             else:
                 raise ValueError(
                     "either `location` or `datacache_config.accessKey` must be "
@@ -152,8 +157,8 @@ class DLiteParseStrategy:
                 )
 
             # See if we can extract file suffix from downloadUrl
-            if self.parse_config.downloadUrl:
-                suffix = Path(str(self.parse_config.downloadUrl)).suffix
+            if config.downloadUrl:
+                suffix = Path(str(config.downloadUrl)).suffix
             else:
                 suffix = None
 
@@ -167,7 +172,7 @@ class DLiteParseStrategy:
                 )
 
         # Insert inst into collection
-        coll = get_collection(session)
+        coll = get_collection(config.collection_id)
         label = config.label if config.label else inst.uuid
         coll.add(label, inst)
 
@@ -182,4 +187,4 @@ class DLiteParseStrategy:
         # can be shared with the other strategies.
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteResult(collection_id=coll.uuid)

@@ -7,18 +7,15 @@ from __future__ import annotations
 
 import importlib
 from collections.abc import Sequence
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import Annotated, Optional
 
 import dlite
 from oteapi.models import AttrDict, FunctionConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteResult
 from oteapi_dlite.utils import get_collection, update_collection
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
 
 
 class DLiteConvertInputConfig(AttrDict):
@@ -64,7 +61,7 @@ class DLiteConvertOutputConfig(AttrDict):
     ] = None
 
 
-class DLiteConvertStrategyConfig(AttrDict):
+class DLiteConvertStrategyConfig(DLiteResult):
     """Configuration for generic DLite converter."""
 
     function_name: Annotated[
@@ -145,35 +142,27 @@ class DLiteConvertStrategy:
 
     """
 
-    convert_config: DLiteConvertConfig
+    function_config: DLiteConvertConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, Any]] = None,
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(collection_id=get_collection(self.function_config.configuration.collection_id).uuid)
 
-    def get(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
         of the OTE-API Services.
 
-        Parameters:
-            session: A session-specific dictionary context.
-
         Returns:
             SessionUpdate instance.
         """
-        config = self.convert_config.configuration
+        config = self.function_config.configuration
         module = importlib.import_module(config.module_name, config.package)
         function = getattr(module, config.function_name)
         kwargs = config.kwargs
 
-        coll = get_collection(session)
+        coll = get_collection(config.collection_id)
 
         instances = []
         for i, input_config in enumerate(config.inputs):
@@ -201,4 +190,4 @@ class DLiteConvertStrategy:
             coll.add(output_config.label, inst)
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteResult(collection_id=coll.uuid)

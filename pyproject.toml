@@ -25,7 +25,7 @@ dependencies = [
     # Core dependencies
     "DLite-Python>=0.4.5,<1.0",
     "numpy>=1.21,<2.0.3",
-    "oteapi-core>=0.6.0,<0.6.2",
+    "oteapi-core>=0.7.0.dev3,<1",
     "pydantic>=2.1,<2.9",
     "pydantic-settings>=2.0,<2.7",
     "typing-extensions>=4.8,<4.13; python_version<'3.10'",
@@ -44,7 +44,7 @@ docs = [
 ]
 testing = [
     "PyYAML>=5.4.1,<7",
-    "otelib>=0.4.0,<1",
+    "otelib>=0.5.0.dev1,<1",
     "rdflib>=5.0.0,<8",
     "pytest==8.3.3",
     "pytest-cov==5.0.0",
@@ -63,12 +63,7 @@ Changelog = "https://github.com/EMMC-ASBL/oteapi-dlite/blob/master/CHANGELOG.md"
 Package = "https://pypi.org/project/oteapi-dlite"
 
 # Entry points, i.e., strategy registration
-[project.entry-points."oteapi.download"]
-
 [project.entry-points."oteapi.filter"]
-# This is deprecated, use application/vnd.dlite-filter instead
-"oteapi_dlite.dlite/filter" = "oteapi_dlite.strategies.filter:DLiteFilterStrategy"
-
 "oteapi_dlite.application/vnd.dlite-filter" = "oteapi_dlite.strategies.filter:DLiteFilterStrategy"
 "oteapi_dlite.application/vnd.dlite-settings" = "oteapi_dlite.strategies.settings:SettingsStrategy"
 
@@ -80,21 +75,9 @@ Package = "https://pypi.org/project/oteapi-dlite"
 "oteapi_dlite.application/vnd.dlite-xlsx" = "oteapi_dlite.strategies.parse_excel:DLiteExcelStrategy"
 "oteapi_dlite.image/vnd.dlite-image" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
 
-# To be removed
-#"oteapi_dlite.application/vnd.dlite-json" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
-#"oteapi_dlite.application/vnd.dlite-yaml" = "oteapi_dlite.strategies.parse:DLiteParseStrategy"
-#"oteapi_dlite.image/vnd.dlite-gif" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-#"oteapi_dlite.image/vnd.dlite-jpeg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-#"oteapi_dlite.image/vnd.dlite-jpg" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-#"oteapi_dlite.image/vnd.dlite-jp2" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-#"oteapi_dlite.image/vnd.dlite-png" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-#"oteapi_dlite.image/vnd.dlite-tiff" = "oteapi_dlite.strategies.parse_image:DLiteImageParseStrategy"
-
 [project.entry-points."oteapi.function"]
 "oteapi_dlite.application/vnd.dlite-generate" = "oteapi_dlite.strategies.generate:DLiteGenerateStrategy"
 "oteapi_dlite.application/vnd.dlite-convert" = "oteapi_dlite.strategies.convert:DLiteConvertStrategy"
-
-[project.entry-points."oteapi.resource"]
 
 [tool.flit.module]
 name = "oteapi_dlite"
@@ -118,11 +101,11 @@ allow_redefinition = true
 plugins = ["pydantic.mypy"]
 
 [tool.pytest.ini_options]
-minversion = "7.0"
-addopts = "-rs --cov-report=term"
+minversion = "8.3"
+addopts = "-rs --cov=oteapi_dlite --cov-report=term-missing:skip-covered"
 filterwarnings = [
-    "ignore:.*imp module.*:DeprecationWarning",
-    "ignore:.*_yaml extension module.*:DeprecationWarning"
+    # Treat all warnings as errors
+    "error",
 ]
 
 [tool.black]
