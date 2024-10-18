@@ -1,7 +1,7 @@
 """Strategy class for parsing an image to a DLite instance."""
 
 import logging
-from typing import TYPE_CHECKING, Annotated
+from typing import Annotated
 
 import numpy as np
 from oteapi.datacache import DataCache
@@ -15,18 +15,15 @@ from PIL import Image
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteResult
 from oteapi_dlite.utils import get_collection, get_meta, update_collection
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Optional
 
 
 LOGGER = logging.getLogger("oteapi_dlite.strategies")
 LOGGER.setLevel(logging.DEBUG)
 
 
-class DLiteImageConfig(ImageParserConfig):
+class DLiteImageConfig(ImageParserConfig, DLiteResult):
     """Configuration for DLite image parser."""
 
     image_label: Annotated[
@@ -65,15 +62,11 @@ class DLiteImageParseStrategy:
 
     parse_config: DLiteImageResourceConfig
 
-    def initialize(
-        self, session: "Optional[dict[str, Any]]" = None
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(collection_id=get_collection(self.parse_config.configuration.collection_id).uuid)
 
-    def get(
-        self, session: "Optional[dict[str, Any]]" = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute the strategy.
 
         This method will be called through the strategy-specific
@@ -82,11 +75,9 @@ class DLiteImageParseStrategy:
         that is supplied in either the session (highest priority)
         or in the parser configuration (lowest priority).
 
-        Parameters:
-            session: A session-specific dictionary context.
-
         Returns:
-            DLite instance.
+            Reference to a DLite collection ID.
+
         """
         config = self.parse_config.configuration
 
@@ -98,9 +89,7 @@ class DLiteImageParseStrategy:
         conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
         core_config = ImageParserResourceConfig(**conf)
 
-        parse_strategy_session = ImageDataParseStrategy(core_config).initialize(
-            session
-        )
+        parse_strategy_session = ImageDataParseStrategy(core_config).initialize()
         output = ImageDataParseStrategy(core_config).get(parse_strategy_session)
 
         cache = DataCache()
@@ -123,10 +112,8 @@ class DLiteImageParseStrategy:
         inst = meta(dimensions=data.shape)
         inst["data"] = data
 
-        LOGGER.info("session: %s", session)
-
-        coll = get_collection(session)
+        coll = get_collection(config.collection_id)
         coll.add(config.image_label, inst)
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteResult(collection_id=coll.uuid)
