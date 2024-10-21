@@ -302,9 +302,9 @@ def update_dict(dct: dict, update: Optional[dict]) -> dict:
         The updated dict `dct`.
 
     Raises:
-        TypeMismatchError if there is a mismatch in value types
-        between the `dct` and `update` dictionaries.  Conversion
-        between different number types is accepted.
+        TypeMismatchError: If there is a mismatch in value types
+            between the `dct` and `update` dictionaries.  Conversion
+            between different number types is accepted.
 
     """
     if not update:

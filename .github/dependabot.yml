@@ -1,3 +1,8 @@
+# The dependabot checks are set on a schedule to run weekly and daily.
+# The time of day is set to be early in the morning to avoid working hours.
+# Furthermore, the time is set arbitrarily to avoid the general "high tide"
+# of all GH Actions being run at the top of the hour.
+
 version: 2
 updates:
 - package-ecosystem: pip
@@ -5,17 +10,31 @@ updates:
   schedule:
     interval: weekly
     day: monday
-    time: "05:18"
-  # Should be bigger than or equal to the total number of dependencies (currently 1+4)
-  open-pull-requests-limit: 10
-  target-branch: ci/dependabot-updates
+    time: "04:18"
+  target-branch: master
   labels:
-    - CI/CD
+    - dependencies
+    - skip_changelog
+  groups:
+    python:
+      applies-to: version-updates
+      patterns: ["*"]
+    python-security:
+      applies-to: security-updates
+      patterns: ["*"]
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
     interval: daily
-    time: "05:24"
-  target-branch: ci/dependabot-updates
+    time: "04:24"
+  target-branch: master
   labels:
     - CI/CD
+    - skip_changelog
+  groups:
+    actions:
+      applies-to: version-updates
+      patterns: ["*"]
+    actions-security:
+      applies-to: security-updates
+      patterns: ["*"]

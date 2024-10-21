@@ -466,7 +466,9 @@ class DLiteGenerateStrategy:
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
 
-def individual_iri(class_iri, base_iri=":", randbytes=6):
+def individual_iri(
+    class_iri: str, base_iri: str = ":", randbytes: int = 6
+) -> str:
     """Return an IRI for an individual of a class.
 
     Arguments:
