@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-def test_generate(outputdir: "Path") -> None:
+def test_generate(outputdir: Path) -> None:
     """Test generate strategy."""
     import dlite
     from oteapi.datacache import DataCache
@@ -59,7 +59,7 @@ def test_generate(outputdir: "Path") -> None:
     assert image2.asdict() == image_dict
 
 
-def test_store_collection(outputdir: "Path") -> None:
+def test_store_collection(outputdir: Path) -> None:
     """Test to store the entire collection with the generate strategy."""
     import dlite
     from oteapi.datacache import DataCache
@@ -106,8 +106,8 @@ def test_store_collection(outputdir: "Path") -> None:
     # to ensure that we are not just fetching it from the dlite cache...
     del coll
     with dlite.Storage("json", outputdir / "coll.json", "mode=r") as s:
-        # Assume we don't know the collection uuid, but we know that there is only
-        # one collection in the json file
+        # Assume we don't know the collection uuid, but we know that there is
+        # only one collection in the json file
         (coll_uuid,) = s.get_uuids("http://onto-ns.com/meta/0.1/Collection")
         coll = s.load(id=coll_uuid)
     assert coll.uri == "coll_id"
@@ -115,7 +115,7 @@ def test_store_collection(outputdir: "Path") -> None:
     assert coll["image"] == image
 
 
-def test_generate_kb(outputdir: "Path") -> None:
+def test_generate_kb(outputdir: Path) -> None:
     """Test generate with kb documentation enabled."""
     # pylint: disable=too-many-statements
     import dlite
@@ -247,7 +247,7 @@ def test_generate_kb(outputdir: "Path") -> None:
     assert doc == {
         "dataresource": {
             "type": ":MyData",
-            "downloadUrl": str((outputdir / "image.json")),
+            "downloadUrl": str(outputdir / "image.json"),
             "mediaType": "application/yaml",
             "license": "MIT",
             "configuration": {
@@ -278,7 +278,7 @@ def test_generate_kb(outputdir: "Path") -> None:
     assert ts.has(sim, EMMO.hasOutput, iri)
 
 
-def test_generate_from_mappings(outputdir: "Path") -> None:
+def test_generate_from_mappings(outputdir: Path) -> None:
     """Test generate from mappings."""
     import dlite
     from oteapi.datacache import DataCache
@@ -295,12 +295,8 @@ def test_generate_from_mappings(outputdir: "Path") -> None:
     )
     from oteapi_dlite.utils import get_meta
 
-    FORCES = Namespace(  # pylint: disable=unused-variable
-        "http://onto-ns.com/meta/0.1/Forces#"
-    )
-    ENERGY = Namespace(  # pylint: disable=unused-variable
-        "http://onto-ns.com/meta/0.1/Energy#"
-    )
+    FORCES = Namespace("http://onto-ns.com/meta/0.1/Forces#")  # noqa: F841
+    ENERGY = Namespace("http://onto-ns.com/meta/0.1/Energy#")  # noqa: F841
 
     coll = dlite.Collection()
 

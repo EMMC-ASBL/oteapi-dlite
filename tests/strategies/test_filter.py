@@ -7,13 +7,12 @@ from typing import TYPE_CHECKING
 import pytest
 
 if TYPE_CHECKING:
-    from typing import Tuple
 
     from dlite import Collection, Instance
 
 
 @pytest.fixture
-def initialize_collection() -> "Tuple[Collection, Instance]":
+def initialize_collection() -> tuple[Collection, Instance]:
     """Initialize a collection with some images"""
     import dlite
 
@@ -39,7 +38,7 @@ def initialize_collection() -> "Tuple[Collection, Instance]":
 
 
 def test_simple_use_of_query(
-    initialize_collection: "Tuple[Collection, Instance]",
+    initialize_collection: tuple[Collection, Instance],
 ) -> None:
     """Test simple use of query
 
@@ -65,18 +64,16 @@ def test_simple_use_of_query(
     populate_config_from_session(session, config)
     DLiteFilterStrategy(config).get()
 
-    assert set(coll.get_labels()) == set(
-        [
-            "image1",
-            "image2",
-            "image3",
-            "image4",
-        ]
-    )
+    assert set(coll.get_labels()) == {
+        "image1",
+        "image2",
+        "image3",
+        "image4",
+    }
 
 
 def test_keep_label(
-    initialize_collection: "Tuple[Collection, Instance]",
+    initialize_collection: tuple[Collection, Instance],
 ) -> None:
     """Same test as above, but use use `keep_label` instead of `query`"""
     from oteapi.utils.config_updater import populate_config_from_session
@@ -102,18 +99,16 @@ def test_keep_label(
 
     DLiteFilterStrategy(config).get()
 
-    assert set(coll.get_labels()) == set(
-        [
-            "image1",
-            "image2",
-            "image3",
-            "image4",
-        ]
-    )
+    assert set(coll.get_labels()) == {
+        "image1",
+        "image2",
+        "image3",
+        "image4",
+    }
 
 
 def test_combining_remove_and_keep(
-    initialize_collection: "Tuple[Collection, Instance]",
+    initialize_collection: tuple[Collection, Instance],
 ) -> None:
     """Test combining remove and keep"""
     from oteapi.utils.config_updater import populate_config_from_session
@@ -141,17 +136,15 @@ def test_combining_remove_and_keep(
 
     DLiteFilterStrategy(config).get()
 
-    assert set(coll.get_labels()) == set(
-        [
-            "innercoll",
-            "image2",
-            "image4",
-        ]
-    )
+    assert set(coll.get_labels()) == {
+        "innercoll",
+        "image2",
+        "image4",
+    }
 
 
 def test_keep_referred_true(
-    initialize_collection: "Tuple[Collection, Instance]",
+    initialize_collection: tuple[Collection, Instance],
 ) -> None:
     """Test with keep_referred=True"""
     from oteapi.utils.config_updater import populate_config_from_session
@@ -179,11 +172,9 @@ def test_keep_referred_true(
 
     DLiteFilterStrategy(config).get()
 
-    assert set(coll.get_labels()) == set(
-        [
-            "innercoll",
-            "image1",
-            "image2",
-            "image4",
-        ]
-    )
+    assert set(coll.get_labels()) == {
+        "innercoll",
+        "image1",
+        "image2",
+        "image4",
+    }

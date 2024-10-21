@@ -9,7 +9,7 @@ from typing import Annotated, Optional
 if sys.version_info >= (3, 9, 1):
     from typing import Literal
 else:
-    from typing_extensions import Literal
+    from typing_extensions import Literal  # type: ignore[assignment]
 
 import numpy as np
 from oteapi.datacache import DataCache

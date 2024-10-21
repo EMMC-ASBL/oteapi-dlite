@@ -6,7 +6,7 @@ import json
 import os
 import tempfile
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import TYPE_CHECKING, Annotated, Optional
 
 from oteapi.datacache import DataCache
 from oteapi.models import DataCacheConfig, FunctionConfig
@@ -323,14 +323,19 @@ class DLiteGenerateStrategy:
             from tripper.convert import save_container
 
             kb_settings = config.dlite_settings.get("tripper.triplestore")
-            if not kb_settings:
-                raise KeyError(
-                    "The `kb_document_class` configuration requires that a "
-                    "'tripper.triplestore' settings has been added using the "
-                    "application/vnd.dlite-settings strategy."
-                )
             if isinstance(kb_settings, str):
                 kb_settings = json.loads(kb_settings)
+            if kb_settings and not isinstance(kb_settings, dict):
+                raise ValueError(
+                    "The `kb_document_class` configuration expects a dict "
+                    "with settings for the tripper.triplestore."
+                )
+
+            if TYPE_CHECKING:  # pragma: no cover
+                # This block will only be run by mypy when checking typing
+                assert (
+                    isinstance(kb_settings, dict) or kb_settings is None
+                )  # nosec
 
             # IRI of new individual
             iri = individual_iri(

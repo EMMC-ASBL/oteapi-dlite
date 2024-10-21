@@ -24,7 +24,8 @@ def test_settings() -> None:
     # Mock run a pipeline that consists of just a settings strategy
     session = SettingsStrategy(filter_config=config).initialize()
 
-    # Parse config into a pydantic model to use with the populate_config_from_session function
+    # Parse config into a pydantic model to use with the
+    # populate_config_from_session function
     config = SettingsFilterConfig(**config)
     populate_config_from_session(session=session, config=config)
 

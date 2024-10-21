@@ -49,7 +49,7 @@ ACCESSSERVICES = {
 }
 
 
-def get_collection(collection_id: "Optional[str]" = None) -> dlite.Collection:
+def get_collection(collection_id: Optional[str] = None) -> dlite.Collection:
     """Retrieve a DLite Collection.
 
     Looks for a Collection UUID with `collection_id`.
@@ -183,9 +183,9 @@ def get_instance(
 
 
 def get_triplestore(
-    kb_settings: "Optional[dict[str, Any]]" = None,
-    collection_id: "Optional[str]" = None,
-) -> "Triplestore":
+    kb_settings: Optional[dict[str, Any]] = None,
+    collection_id: Optional[str] = None,
+) -> Triplestore:
     """Return a tripper.Triplestore instance for the current session.
 
     If a 'tripper.triplestore' setting has been added with the

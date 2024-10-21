@@ -7,12 +7,8 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from oteapi.interfaces import IParseStrategy
 
-    from oteapi_dlite.models import DLiteSessionUpdate
-
-
-def test_parse_no_options(staticdir: "Path") -> None:
+def test_parse_no_options(staticdir: Path) -> None:
     """Test the dlite-parse strategy."""
     import dlite
     from oteapi.datacache import DataCache
@@ -55,7 +51,7 @@ def test_parse_no_options(staticdir: "Path") -> None:
     assert inst.meta.uri == metaid
 
 
-def test_parse_label(staticdir: "Path") -> None:
+def test_parse_label(staticdir: Path) -> None:
     """Test the dlite-parse strategy."""
     import dlite
     from oteapi.datacache import DataCache

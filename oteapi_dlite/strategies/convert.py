@@ -146,7 +146,11 @@ class DLiteConvertStrategy:
 
     def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteResult(collection_id=get_collection(self.function_config.configuration.collection_id).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.function_config.configuration.collection_id
+            ).uuid
+        )
 
     def get(self) -> DLiteResult:
         """Execute the strategy.

@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-def test_convert(inputdir: "Path", outputdir: "Path") -> None:
+def test_convert(inputdir: Path, outputdir: Path) -> None:
     """
     Test convert strategy
     """
@@ -95,7 +95,7 @@ def test_convert(inputdir: "Path", outputdir: "Path") -> None:
     assert resultfile.exists()
 
     # Check result content
-    with Path(resultfile).open(encoding="utf8") as f:
+    with resultfile.open(encoding="utf8") as f:
         dct = safe_load(f)
     _, d = dct.popitem()
     assert d["meta"] == "http://onto-ns.com/meta/0.1/Result"
@@ -106,7 +106,7 @@ def test_convert(inputdir: "Path", outputdir: "Path") -> None:
     }
 
 
-def test_convert_with_options(inputdir: "Path", outputdir: "Path") -> None:
+def test_convert_with_options(inputdir: Path, outputdir: Path) -> None:
     """
     Test convert strategy
     """

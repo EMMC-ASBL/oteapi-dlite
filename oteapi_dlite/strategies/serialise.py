@@ -73,7 +73,11 @@ class SerialiseStrategy:
 
     def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteResult(collection_id=get_collection(self.filter_config.configuration.collection_id).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.filter_config.configuration.collection_id
+            ).uuid
+        )
 
     def get(self) -> DLiteResult:
         """Execute the strategy."""

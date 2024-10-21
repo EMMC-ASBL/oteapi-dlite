@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Optional
+import json
+from typing import TYPE_CHECKING, Annotated, Optional
 
 from oteapi.models import MappingConfig
 from pydantic import AnyUrl
@@ -14,6 +15,9 @@ from oteapi_dlite.utils import (
     get_triplestore,
     update_collection,
 )
+
+if TYPE_CHECKING:  # pragma: no cover
+    pass
 
 
 class DLiteMappingStrategyConfig(DLiteConfiguration):
@@ -56,10 +60,19 @@ class DLiteMappingStrategy:
 
         coll = get_collection(config.collection_id)
 
-        ts = get_triplestore(
-            kb_settings=config.dlite_settings.get("tripper.triplestore"),
-            collection_id=coll.uuid,
-        )
+        kb_settings = config.dlite_settings.get("tripper.triplestore")
+        if isinstance(kb_settings, str):
+            kb_settings = json.loads(kb_settings)
+        if kb_settings and not isinstance(kb_settings, dict):
+            raise ValueError(
+                "The `tripper.triplestore` setting must be a dictionary."
+            )
+
+        if TYPE_CHECKING:  # pragma: no cover
+            # This block will only be run by mypy when checking typing
+            assert isinstance(kb_settings, dict) or kb_settings is None  # nosec
+
+        ts = get_triplestore(kb_settings=kb_settings, collection_id=coll.uuid)
 
         if self.mapping_config.prefixes:
             for prefix, iri in self.mapping_config.prefixes.items():

@@ -1,5 +1,7 @@
 """DLite-specific data models."""
 
+from __future__ import annotations
+
 from typing import Annotated, Optional
 
 from oteapi.models import AttrDict
@@ -25,6 +27,9 @@ class DLiteConfiguration(DLiteResult):
     dlite_settings: Annotated[
         dict[str, JsonValue],
         Field(
-            description="Settings used by DLite strategies within a single pipeline run."
+            description=(
+                "Settings used by DLite strategies within a single pipeline "
+                "run."
+            )
         ),
-    ] = {}
+    ] = {}  # noqa: RUF012

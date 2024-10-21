@@ -6,7 +6,7 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "use_prefixes", (True, False), ids=["with_prefixes", "without_prefixes"]
+    "use_prefixes", [True, False], ids=["with_prefixes", "without_prefixes"]
 )
 def test_mapping_with_prefixes(use_prefixes: bool) -> None:
     """Test with prefixes."""

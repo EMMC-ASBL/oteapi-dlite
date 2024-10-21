@@ -31,7 +31,9 @@ def test_parse_excel(static_files: Path) -> None:
                 "row_from": "2",
             },
             "downloadUrl": sample_file.as_uri(),
-            "mediaType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "mediaType": (
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ),
         },
     }
 

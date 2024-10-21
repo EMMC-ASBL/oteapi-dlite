@@ -7,8 +7,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from oteapi.interfaces import IFilterStrategy
-
 
 def test_serialise(tmp_path: Path) -> None:
     """Test the serialise filter."""

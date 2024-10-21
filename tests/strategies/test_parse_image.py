@@ -10,10 +10,6 @@ if TYPE_CHECKING:
     from pathlib import Path
     from typing import Optional
 
-    from oteapi.interfaces import IParseStrategy
-
-    from oteapi_dlite.models import DLiteSessionUpdate
-
 
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
 @pytest.mark.parametrize(

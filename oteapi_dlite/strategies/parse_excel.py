@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 if sys.version_info >= (3, 9, 1):
     from typing import Literal
 else:
-    from typing_extensions import Literal
+    from typing_extensions import Literal  # type: ignore[assignment]
 
 import dlite
 import numpy as np
@@ -168,7 +168,7 @@ class DLiteExcelStrategy:
             }
         )
         parser = create_strategy("parse", xlsx_config)
-        columns: dict[str, "Any"] = parser.get()["data"]
+        columns: dict[str, Any] = parser.get()["data"]
 
         names, units = zip(*[split_column_name(column) for column in columns])
         rec = dict2recarray(columns, names=names)
