@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.3.2](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.3.2) (2024-10-21)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.3.1...v0.3.2)
+
+**Merged pull requests:**
+
+- Update tripper dependecy to have version number [\#315](https://github.com/EMMC-ASBL/oteapi-dlite/pull/315) ([francescalb](https://github.com/francescalb))
+
 ## [v0.3.1](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.3.1) (2024-10-21)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.3.0...v0.3.1)
