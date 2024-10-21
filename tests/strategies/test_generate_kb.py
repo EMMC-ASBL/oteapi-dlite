@@ -157,7 +157,7 @@ def test_generate_kb() -> None:
     assert ts.has(iri, RDF.type, ":MyData")
 
     # EMMO.isDescriptionFor is part of the release candate 3 in EMMO,
-	# and is therefore not yet resolvable.
+    # and is therefore not yet resolvable.
     # # Check kb_document_context
     # assert ts.has(iri, EMMO.isDescriptionFor, ":MyMaterial")
 
