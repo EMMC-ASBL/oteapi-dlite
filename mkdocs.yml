@@ -1,6 +1,6 @@
 site_name: "OTEAPI DLite"
 site_description: Documentation for the OTEAPI DLite package
-site_url: https://TEMMC-ASBL.github.io/oteapi-dlite
+site_url: https://EMMC-ASBL.github.io/oteapi-dlite
 copyright: Copyright &copy; 2022 SINTEF
 
 theme:
@@ -11,12 +11,12 @@ theme:
     accent: amber
   icon:
     repo: fontawesome/brands/github
-    logo: material/library-shelves
+  logo: material/library-shelves
   favicon: assets/images/favicon.png
   language: en
-  features:
-    - navigation.instant
-    - navigation.top
+  # features:
+  #   - navigation.instant
+  #   - navigation.top
 
 repo_name: "oteapi-dlite"
 repo_url: "https://github.com/EMMC-ASBL/oteapi-dlite"
@@ -44,6 +44,7 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.tilde
   - pymdownx.keys
+  - pymdownx.snippets
   - toc:
       permalink: true
 
@@ -52,19 +53,25 @@ plugins:
       lang: en
   - mkdocstrings:
       default_handler: python
+      enable_inventory: true
       handlers:
         python:
           options:
+            # General options
+            show_source: true
+            show_bases: true
+
+            # Heading options
+            heading_level: 2
             show_root_heading: false
             show_root_toc_entry: true
             show_root_full_path: true
             show_object_full_path: false
             show_category_heading: false
-            show_if_no_docstring: false
-            show_source: true
-            show_bases: true
-            group_by_category: true
-            heading_level: 2
+
+            # Members options
+            members: null
+            inherited_members: false
             filters:
               - "!^_"
               - "^__init__$"
@@ -73,21 +80,16 @@ plugins:
               - "!__config__$"
               - "!__str__$"
               - "!__repr__$"
-            members: null
-            inherited_members: false
+            group_by_category: true
+
+            # Docstring options
             docstring_style: google
             docstring_options:
               replace_admonitions: true
+            show_if_no_docstring: false
   - awesome-pages
   - autorefs:
-      resolve_closest: false
-
-nav:
-  - Home: index.md
-  - License: LICENSE.md
-  - Changelog: CHANGELOG.md
-  - all_strategies.md
-  - ... | api_reference/**
+      resolve_closest: true
 
 watch:
   - oteapi_dlite
