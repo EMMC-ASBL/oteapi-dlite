@@ -15,25 +15,6 @@ if TYPE_CHECKING:
     from oteapi_dlite.models import DLiteSessionUpdate
 
 
-def test_image_config() -> None:
-    """Test the DLiteImageConfig class."""
-    from oteapi.models.resourceconfig import ResourceConfig
-
-    from oteapi_dlite.strategies.parse_image import DLiteImageConfig
-
-    config = ResourceConfig(
-        downloadUrl="file://dummy",
-        mediaType="image/png",
-        configuration={
-            "crop": (0, 0, 100, 100),
-            "image_label": "test_image",
-        },
-    )
-    image_config = DLiteImageConfig(**config.configuration)
-    assert image_config.crop == config.configuration["crop"]
-    assert image_config.image_label == config.configuration["image_label"]
-
-
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
 @pytest.mark.parametrize(
     ("test_file", "target_file"),
@@ -69,11 +50,12 @@ def test_image(
 
     orig_key = cache.add(sample_file.read_bytes())
     config = {
-        "downloadUrl": sample_file.as_uri(),
-        "mediaType": f"image/vnd.dlite-{sample_file.suffix.lstrip('.')}",
+        "parserType": "image/vnd.dlite-image",
         "configuration": {
             "image_label": "test_image",
             "crop": crop_rect,
+            "downloadUrl": sample_file.as_uri(),
+            "mediaType": f"image/vnd.dlite-{sample_file.suffix.lstrip('.')}",
         },
     }
     coll = dlite.Collection()
@@ -81,9 +63,13 @@ def test_image(
         "collection_id": coll.uuid,
         "key": orig_key,
     }
+
+    # Mock updating the config with session content
+    # This is automatically done as part of a pipeline
+    config["configuration"].update(session)
+
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: IParseStrategy = DLiteImageParseStrategy(config)
-    output: DLiteSessionUpdate = parser.get(session)
+    output = DLiteImageParseStrategy(config).get()
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 

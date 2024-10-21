@@ -2,19 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Union
+from typing import Annotated
 
 from oteapi.models import AttrDict, FilterConfig
-from pydantic import Field
+from pydantic import Field, JsonValue
 from pydantic.dataclasses import dataclass
-
-from oteapi_dlite.utils import add_settings
 
 # Must add this explicitly to make mypy happy
 NoneType = type(None)
-
-# Python object that is JSON serialisable
-JSONSerialisable = Union[dict, list, str, int, float, bool, NoneType]
 
 
 class SettingsConfig(AttrDict):
@@ -40,7 +35,7 @@ class SettingsConfig(AttrDict):
         ),
     ]
     settings: Annotated[
-        JSONSerialisable,
+        JsonValue,
         Field(
             description=(
                 "The configurations to be stored, represented as a Python "
@@ -74,8 +69,9 @@ class SettingsStrategy:
 
     def initialize(self) -> AttrDict:
         """Store settings."""
-        config = self.settings_config.configuration
-        return add_settings(config.label, config.settings)
+        config = self.filter_config.configuration
+
+        return AttrDict(dlite_settings={config.label: config.settings})
 
     def get(self) -> AttrDict:
         """Do nothing."""

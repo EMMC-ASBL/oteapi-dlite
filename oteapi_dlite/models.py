@@ -22,8 +22,9 @@ class DLiteConfiguration(DLiteResult):
     `DLiteResult` data model.
     """
 
-    settings: Annotated[
+    dlite_settings: Annotated[
         dict[str, JsonValue],
-        Field(description="Settings used by DLite strategies within a single pipeline run."),
+        Field(
+            description="Settings used by DLite strategies within a single pipeline run."
+        ),
     ] = {}
-

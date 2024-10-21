@@ -52,9 +52,13 @@ class DLiteMappingStrategy:
 
     def initialize(self) -> DLiteResult:
         """Initialize strategy."""
+        config = self.mapping_config.configuration
+
+        coll = get_collection(config.collection_id)
+
         ts = get_triplestore(
-            kb_settings=self.mapping_config.configuration.settings.get("tripper.triplestore"),
-            collection_id=self.mapping_config.configuration.collection_id,
+            kb_settings=config.dlite_settings.get("tripper.triplestore"),
+            collection_id=coll.uuid,
         )
 
         if self.mapping_config.prefixes:
@@ -72,10 +76,13 @@ class DLiteMappingStrategy:
                 ]
             )
 
-        coll = get_collection(self.mapping_config.configuration.collection_id)
         update_collection(coll)
         return DLiteResult(collection_id=coll.uuid)
 
     def get(self) -> DLiteResult:
         """Execute strategy and return a dictionary."""
-        return DLiteResult(collection_id=get_collection(self.mapping_config.configuration.collection_id).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.mapping_config.configuration.collection_id
+            ).uuid
+        )

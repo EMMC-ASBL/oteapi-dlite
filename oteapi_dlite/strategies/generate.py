@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import tempfile
 from pathlib import Path
@@ -20,7 +21,6 @@ from oteapi_dlite.utils import (
     update_collection,
     update_dict,
 )
-
 
 # Constants
 hasInput = "https://w3id.org/emmo#EMMO_36e69413_8c59_4799_946c_10b05d266e22"
@@ -113,12 +113,6 @@ class DLiteStorageConfig(DLiteConfiguration):
             description="Whether to allow incomplete property mappings.",
         ),
     ] = False
-    collection_id: Annotated[
-        Optional[str],
-        Field(
-            description=("ID of the collection to use."),
-        ),
-    ] = None
     datacache_config: Annotated[
         Optional[DataCacheConfig],
         Field(
@@ -262,7 +256,11 @@ class DLiteGenerateStrategy:
 
     def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteResult(collection_id=get_collection(self.function_config.configuration.collection_id).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.function_config.configuration.collection_id
+            ).uuid
+        )
 
     def get(self) -> DLiteResult:
         """Execute the strategy.
@@ -324,13 +322,16 @@ class DLiteGenerateStrategy:
             from tripper import RDF
             from tripper.convert import save_container
 
-            # kb_settings = config.settings.get("tripper.triplestore")
-            # if not kb_settings:
-            #     raise KeyError(
-            #         "The `kb_document_class` configuration requires that a "
-            #         "'tripper.triplestore' settings has been added using the "
-            #         "application/vnd.dlite-settings strategy."
-            #     )
+            kb_settings = config.dlite_settings.get("tripper.triplestore")
+            if not kb_settings:
+                raise KeyError(
+                    "The `kb_document_class` configuration requires that a "
+                    "'tripper.triplestore' settings has been added using the "
+                    "application/vnd.dlite-settings strategy."
+                )
+            if isinstance(kb_settings, str):
+                kb_settings = json.loads(kb_settings)
+
             # IRI of new individual
             iri = individual_iri(
                 class_iri=config.kb_document_class,
@@ -343,7 +344,7 @@ class DLiteGenerateStrategy:
                     triples.append((iri, prop, val))
 
             ts = get_triplestore(
-                kb_settings=config.settings.get("tripper.triplestore"),
+                kb_settings=kb_settings,
                 collection_id=config.collection_id,
             )
             try:

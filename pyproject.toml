@@ -102,7 +102,7 @@ plugins = ["pydantic.mypy"]
 
 [tool.pytest.ini_options]
 minversion = "8.3"
-addopts = "-rs --cov=oteapi_dlite --cov-report=term-missing:skip-covered"
+addopts = "-rs --cov=oteapi_dlite --cov-report=term-missing:skip-covered --no-cov-on-fail"
 filterwarnings = [
     # Treat all warnings as errors
     "error",

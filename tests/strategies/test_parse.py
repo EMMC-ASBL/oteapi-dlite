@@ -5,18 +5,17 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     from oteapi.interfaces import IParseStrategy
 
     from oteapi_dlite.models import DLiteSessionUpdate
 
 
-# if True:
-def test_parse_no_options() -> None:
+def test_parse_no_options(staticdir: "Path") -> None:
     """Test the dlite-parse strategy."""
-
     import dlite
     from oteapi.datacache import DataCache
-    from paths import staticdir
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
@@ -26,10 +25,11 @@ def test_parse_no_options() -> None:
 
     orig_key = cache.add(sample_file.read_bytes())
     config = {
-        "downloadUrl": sample_file.as_uri(),
-        "mediaType": "image/vnd.dlite-parse",
+        "parserType": "application/vnd.dlite-parse",
         "configuration": {
             "driver": "json",
+            "downloadUrl": sample_file.as_uri(),
+            "mediaType": "image/vnd.dlite-parse",
         },
     }
     coll = dlite.Collection()
@@ -37,9 +37,13 @@ def test_parse_no_options() -> None:
         "collection_id": coll.uuid,
         "key": orig_key,
     }
+
+    # Mock updating the config with session content
+    # This is automatically done as part of a pipeline
+    config["configuration"].update(session)
+
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: IParseStrategy = DLiteParseStrategy(config)
-    output: DLiteSessionUpdate = parser.get(session)
+    output = DLiteParseStrategy(config).get()
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 
@@ -51,13 +55,10 @@ def test_parse_no_options() -> None:
     assert inst.meta.uri == metaid
 
 
-# if True:
-def test_parse_label() -> None:
+def test_parse_label(staticdir: "Path") -> None:
     """Test the dlite-parse strategy."""
-
     import dlite
     from oteapi.datacache import DataCache
-    from paths import staticdir
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
@@ -67,11 +68,12 @@ def test_parse_label() -> None:
 
     orig_key = cache.add(sample_file.read_bytes())
     config = {
-        "downloadUrl": sample_file.as_uri(),
-        "mediaType": "image/vnd.dlite-parse",
+        "parserType": "application/vnd.dlite-parse",
         "configuration": {
             "driver": "json",
             "label": "instance",
+            "downloadUrl": sample_file.as_uri(),
+            "mediaType": "image/vnd.dlite-parse",
         },
     }
     coll = dlite.Collection()
@@ -79,9 +81,13 @@ def test_parse_label() -> None:
         "collection_id": coll.uuid,
         "key": orig_key,
     }
+
+    # Mock updating the config with session content
+    # This is automatically done as part of a pipeline
+    config["configuration"].update(session)
+
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: IParseStrategy = DLiteParseStrategy(config)
-    output: DLiteSessionUpdate = parser.get(session)
+    output = DLiteParseStrategy(config).get()
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 

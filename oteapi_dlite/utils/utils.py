@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from numbers import Number
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -10,7 +9,6 @@ from typing import TYPE_CHECKING
 import dlite
 from dlite.mappings import instantiate
 from oteapi.datacache import DataCache
-from oteapi.models import AttrDict
 
 from oteapi_dlite.utils.exceptions import CollectionNotFound
 
@@ -76,7 +74,9 @@ def get_collection(collection_id: "Optional[str]" = None) -> dlite.Collection:
         coll = dlite.Collection()
         cache.add(coll.asjson(), key=coll.uuid)
     elif collection_id in cache:
-        coll = dlite.Instance.from_json(cache.get(collection_id), id=collection_id)
+        coll = dlite.Instance.from_json(
+            cache.get(collection_id), id=collection_id
+        )
     else:
         try:
             coll = dlite.get_instance(collection_id)
@@ -86,7 +86,9 @@ def get_collection(collection_id: "Optional[str]" = None) -> dlite.Collection:
             ) from exc
 
     if coll.meta.uri != dlite.COLLECTION_ENTITY:
-        raise CollectionNotFound(f"instance with id {collection_id} is not a collection")
+        raise CollectionNotFound(
+            f"instance with id {collection_id} is not a collection"
+        )
 
     return coll
 
@@ -180,36 +182,9 @@ def get_instance(
     )
 
 
-def add_settings(
-    label: str,
-    settings: Union[  # noqa: PYI041
-        dict, list, str, int, float, bool, NoneType
-    ],
-    existing_labels: Optional[list[str]] = None
-) -> AttrDict:
-    """Store settings to the session.
-
-    Arguments:
-        label: Label of settings to add.
-        settings: A JSON-serialisable Python object with the settings
-            to store.
-
-    Returns:
-        An AttrDict instance with the added settings.
-
-    """
-    label_settings: dict[str, Union[dict, list, str, int, float, bool, None]] = {}
-
-    if label in existing_labels:
-        raise KeyError(f"Settings with this label already exists: {label!r}")
-    label_settings[label] = json.dumps(settings)
-
-    return AttrDict(settings=label_settings)
-
-
 def get_triplestore(
-    kb_settings: Optional[dict[str, Any]] = None,
-    collection_id: Optional[str] = None,
+    kb_settings: "Optional[dict[str, Any]]" = None,
+    collection_id: "Optional[str]" = None,
 ) -> "Triplestore":
     """Return a tripper.Triplestore instance for the current session.
 
