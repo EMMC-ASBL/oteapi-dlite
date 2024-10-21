@@ -33,6 +33,7 @@ jobs:
       landing_page_replacements: |
         (LICENSE),(LICENSE.md)
         https://EMMC-ASBL.github.io/oteapi-dlite/latest/,
+        all_strategies),all_strategies.md)
 
     secrets:
       PAT: ${{ secrets.RELEASE_PAT }}

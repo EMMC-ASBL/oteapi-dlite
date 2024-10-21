@@ -102,3 +102,4 @@ repos:
       args:
       - --replacement=(LICENSE),(LICENSE.md)
       - --replacement=https://EMMC-ASBL.github.io/oteapi-dlite/latest/,
+      - --replacement=all_strategies),all_strategies.md)
