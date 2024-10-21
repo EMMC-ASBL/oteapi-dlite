@@ -27,9 +27,9 @@ dependencies = [
     "numpy>=1.21,<2.0.3",
     "oteapi-core>=0.6.0,<0.6.2",
     "pydantic>=2.1,<2.9",
-    "pydantic-settings>=2.0,<2.5",
+    "pydantic-settings>=2.0,<2.7",
     "typing-extensions>=4.8,<4.13; python_version<'3.10'",
-    "Pillow>=9.0.1,<11",
+    "Pillow>=9.0.1,<12",
     #"tripper>=0.3.4",  # Wait for this version to be released
     "tripper @ git+https://github.com/EMMC-ASBL/tripper.git@master"
 ]
@@ -47,12 +47,12 @@ testing = [
     "PyYAML>=5.4.1,<7",
     "otelib>=0.4.0,<1",
     "rdflib>=5.0.0,<8",
-    "pytest==7.4.4",
-    "pytest-cov==4.1.0",
+    "pytest==8.3.3",
+    "pytest-cov==5.0.0",
 ]
 dev = [
     "oteapi-dlite[docs,testing]",
-    "pre-commit==3.8.0",
+    "pre-commit==4.0.1",
 ]
 
 [project.urls]
