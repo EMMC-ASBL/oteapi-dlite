@@ -109,6 +109,9 @@ addopts = "-rs --cov=oteapi_dlite --cov-report=term-missing:skip-covered --no-co
 filterwarnings = [
     # Treat all warnings as errors
     "error",
+
+    # Ignore Userwarning from tripper cache in Windows
+    "ignore:.*Cannot access cache file.*:UserWarning",
 ]
 
 [tool.black]
@@ -145,11 +148,3 @@ ignore = [
   "PLR",  # Design related pylint codes
 ]
 isort.required-imports = ["from __future__ import annotations"]
-
-[tool.ruff.lint.per-file-ignores]
-"tests/**" = [
-    # "B018",  # Useless attribute access
-    # "B015",  # Pointless comparison
-    # "BLE",  # flake8-blind-except
-    # "T201",  # flake8-print
-]
