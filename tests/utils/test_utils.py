@@ -1,7 +1,9 @@
 """Tests for oteapi-dlite.utils"""
 
-
 # if True:
+from __future__ import annotations
+
+
 def test_settings():
     """Test add_settings() and get_settings()."""
     from oteapi_dlite.utils import add_settings, get_settings

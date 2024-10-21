@@ -1,5 +1,7 @@
 """Tests mapping strategy."""
 
+from __future__ import annotations
+
 
 def test_mapping_without_prefixes() -> None:
     """Test without prefixes."""

@@ -1,5 +1,7 @@
 """Filter for serialisation using DLite."""
 
+from __future__ import annotations
+
 from collections.abc import Sequence
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Optional
@@ -73,13 +75,13 @@ class SerialiseStrategy:
     filter_config: SerialiseFilterConfig
 
     def initialize(
-        self, session: Optional[dict[str, "Any"]] = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: Optional[dict[str, "Any"]] = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy."""
         config = self.filter_config.configuration

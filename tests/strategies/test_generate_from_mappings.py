@@ -1,9 +1,9 @@
 """Tests generate strategy."""
 
-# pylint: disable=too-many-locals
-
-
 # if True:
+from __future__ import annotations
+
+
 def test_generate_from_mappings():
     """Test generate from mappings."""
     from pathlib import Path
@@ -28,12 +28,8 @@ def test_generate_from_mappings():
 
     dlite.storage_path.append(entitydir)
 
-    FORCES = Namespace(  # pylint: disable=unused-variable
-        "http://onto-ns.com/meta/0.1/Forces#"
-    )
-    ENERGY = Namespace(  # pylint: disable=unused-variable
-        "http://onto-ns.com/meta/0.1/Energy#"
-    )
+    FORCES = Namespace("http://onto-ns.com/meta/0.1/Forces#")  # noqa: F841
+    ENERGY = Namespace("http://onto-ns.com/meta/0.1/Energy#")  # noqa: F841
 
     config1 = DLiteMappingConfig(
         mappingType="mappings",

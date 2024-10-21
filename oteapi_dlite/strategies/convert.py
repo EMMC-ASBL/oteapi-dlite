@@ -3,7 +3,8 @@ to zero or more new output instances.
 
 """
 
-# pylint: disable=unused-argument
+from __future__ import annotations
+
 import importlib
 from collections.abc import Sequence
 from typing import TYPE_CHECKING, Annotated, Optional
@@ -121,7 +122,7 @@ class DLiteConvertStrategyConfig(AttrDict):
             description="Additional keyword arguments passed "
             "to the convert function.",
         ),
-    ] = {}
+    ] = {}  # noqa: RUF012
 
 
 class DLiteConvertConfig(FunctionConfig):
@@ -148,13 +149,13 @@ class DLiteConvertStrategy:
 
     def initialize(
         self,
-        session: Optional[dict[str, "Any"]] = None,
+        session: Optional[dict[str, Any]] = None,
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: Optional[dict[str, "Any"]] = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy.
 

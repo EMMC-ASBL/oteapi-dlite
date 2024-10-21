@@ -1,7 +1,9 @@
 """Test convert strategy."""
 
+from __future__ import annotations
+
 from otelib import OTEClient
-from paths import inputdir, outputdir  # pylint: disable=import-error
+from paths import inputdir, outputdir
 
 
 def test_convert():
