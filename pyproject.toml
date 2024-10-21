@@ -64,6 +64,9 @@ Package = "https://pypi.org/project/oteapi-dlite"
 
 # Entry points, i.e., strategy registration
 [project.entry-points."oteapi.filter"]
+# This is deprecated, use application/vnd.dlite-filter instead
+"oteapi_dlite.dlite/filter" = "oteapi_dlite.strategies.filter:DLiteFilterStrategy"
+
 "oteapi_dlite.application/vnd.dlite-filter" = "oteapi_dlite.strategies.filter:DLiteFilterStrategy"
 "oteapi_dlite.application/vnd.dlite-settings" = "oteapi_dlite.strategies.settings:SettingsStrategy"
 
