@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 @pytest.fixture(scope="session", autouse=True)
-def load_strategies() -> None:
+def _load_strategies() -> None:
     """Load pip installed plugin strategies."""
     from oteapi.plugins import load_strategies
 

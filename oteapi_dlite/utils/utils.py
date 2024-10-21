@@ -130,7 +130,6 @@ def get_meta(uri: str) -> dlite.Instance:
 def get_driver(
     mediaType: Optional[str] = None,
     accessService: Optional[str] = None,
-    options: NoneType = None,
 ) -> str:
     """Return name of DLite driver for the given media type/access service."""
     if mediaType:
@@ -188,7 +187,7 @@ def get_instance(
     else:
         ts = Triplestore(backend="collection", collection=collection)
 
-    inst = instantiate(
+    return instantiate(
         meta=meta,
         instances=list(collection.get_instances()),
         triplestore=ts,
@@ -197,13 +196,14 @@ def get_instance(
         allow_incomplete=allow_incomplete,
         **kwargs,
     )
-    return inst
 
 
 def add_settings(
     session: Union[dict[str, Any], None],
     label: str,
-    settings: Union[dict, list, str, int, float, bool, NoneType],
+    settings: Union[  # noqa: PYI041
+        dict, list, str, int, float, bool, NoneType
+    ],
 ) -> SessionUpdate:
     """Store settings to the session.
 

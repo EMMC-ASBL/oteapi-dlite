@@ -122,7 +122,7 @@ class DLiteConvertStrategyConfig(AttrDict):
             description="Additional keyword arguments passed "
             "to the convert function.",
         ),
-    ] = {}
+    ] = {}  # noqa: RUF012
 
 
 class DLiteConvertConfig(FunctionConfig):

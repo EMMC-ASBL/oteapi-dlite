@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import tempfile
+from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Optional
 
 from oteapi.datacache import DataCache
@@ -326,8 +327,8 @@ class DLiteGenerateStrategy:
                 key = "generate_data"
             cache = DataCache()
             with tempfile.TemporaryDirectory() as tmpdir:
-                inst.save(driver, "{tmpdir}/data", config.options)
-                with open(f"{tmpdir}/data", "rb") as f:
+                inst.save(driver, f"{tmpdir}/data", config.options)
+                with Path(f"{tmpdir}/data").open("rb") as f:
                     cache.add(f.read(), key=key)
 
         # Store documentation of this instance in the knowledge base
@@ -483,4 +484,4 @@ def individual_iri(class_iri, base_iri=":", randbytes=6):
         .rsplit("#", 1)[-1]
         .lower()
     )
-    return f"{base_iri}{basename}-{os.urandom(6).hex()}"
+    return f"{base_iri}{basename}-{os.urandom(randbytes).hex()}"

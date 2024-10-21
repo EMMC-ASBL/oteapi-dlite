@@ -36,15 +36,15 @@ def test_image_config() -> None:
 
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
 @pytest.mark.parametrize(
-    "test_file, target_file",
-    (
+    ("test_file", "target_file"),
+    [
         # ("sample_1280_853.gif", "sample_150_100.gif"),
         ("sample_1280_853.jpeg", "sample_150_100.jpeg"),
         ("sample_1280_853.jpg", "sample_150_100.jpeg"),
         # ("sample1.jp2", "sample1_150_100.jp2"), DISABLED BECAUSE SLOW
         ("sample_640_426.png", None),
         ("sample_640_426.tiff", None),
-    ),
+    ],
 )
 def test_image(
     test_file: str,

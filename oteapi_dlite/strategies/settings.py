@@ -85,6 +85,8 @@ class SettingsStrategy:
         config = self.settings_config.configuration
         return add_settings(session, config.label, config.settings)
 
-    def get(self, session: Optional[dict[str, Any]] = None) -> SessionUpdate:
+    def get(
+        self, session: Optional[dict[str, Any]] = None  # noqa: ARG002
+    ) -> SessionUpdate:
         """Do nothing."""
         return SessionUpdate()
