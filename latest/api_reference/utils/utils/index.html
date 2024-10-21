@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/utils/utils/">
+        <link rel="canonical" href="https://EMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/utils/utils/">
       
       
         <link rel="prev" href="../nputils/">
@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -98,8 +98,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../.." title="OTEAPI DLite" class="md-header__button md-logo" aria-label="OTEAPI DLite" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 9V1.5h-3V9h-3V1.5h-3V9h-3V1.5H4.65V9H3v1.5h18V9zm0 4.5h-3V21h-3v-7.5h-3V21h-3v-7.5H4.65V21H3v1.5h18V21h-1.5z"/></svg>
+  <img src="../../../material/library-shelves" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -205,8 +204,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../../.." title="OTEAPI DLite" class="md-nav__button md-logo" aria-label="OTEAPI DLite" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 9V1.5h-3V9h-3V1.5h-3V9h-3V1.5H4.65V9H3v1.5h18V9zm0 4.5h-3V21h-3v-7.5h-3V21h-3v-7.5H4.65V21H3v1.5h18V21h-1.5z"/></svg>
+  <img src="../../../material/library-shelves" alt="logo">
 
     </a>
     OTEAPI DLite
@@ -1061,7 +1059,12 @@
 <a id="oteapi_dlite.utils.utils"></a>
     <div class="doc doc-contents first">
 
-      <p>Utility functions for OTEAPI DLite plugin.</p>
+        <p>Utility functions for OTEAPI DLite plugin.</p>
+
+
+
+
+
 
 
 
@@ -1088,8 +1091,13 @@
     <div class="doc doc-contents ">
 
 
-      <p>Singleton class used by update_dict() to indicate items that should
+        <p>Singleton class used by update_dict() to indicate items that should
 be removed in the source dictionary.</p>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
@@ -1121,8 +1129,13 @@ be removed in the source dictionary.</p>
               Bases: <code>TypeError</code></p>
 
 
-      <p>Raised by update_dict() if there is a mismatch in value types
+        <p>Raised by update_dict() if there is a mismatch in value types
 between the <code>dct</code> and <code>update</code> dictionaries.</p>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
@@ -1152,7 +1165,7 @@ between the <code>dct</code> and <code>update</code> dictionaries.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Store settings to the session.</p>
+        <p>Store settings to the session.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1167,7 +1180,9 @@ between the <code>dct</code> and <code>update</code> dictionaries.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>session</code></td>
+            <td>
+                <code>session</code>
+            </td>
             <td>
                   <code><span title="typing.Union">Union</span>[dict[str, <span title="typing.Any">Any</span>], None]</code>
             </td>
@@ -1181,7 +1196,9 @@ between the <code>dct</code> and <code>update</code> dictionaries.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>label</code></td>
+            <td>
+                <code>label</code>
+            </td>
             <td>
                   <code>str</code>
             </td>
@@ -1195,7 +1212,9 @@ between the <code>dct</code> and <code>update</code> dictionaries.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>settings</code></td>
+            <td>
+                <code>settings</code>
+            </td>
             <td>
                   <code><span title="typing.Union">Union</span>[dict, list, str, int, float, bool, <span title="oteapi_dlite.utils.utils.NoneType">NoneType</span>]</code>
             </td>
@@ -1319,7 +1338,7 @@ to store.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Retrieve a DLite Collection.</p>
+        <p>Retrieve a DLite Collection.</p>
 <p>Looks for a Collection UUID in the session.
 If none exists, a new, empty Collection is created and stored in the
 session.</p>
@@ -1340,7 +1359,9 @@ session.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>session</code></td>
+            <td>
+                <code>session</code>
+            </td>
             <td>
                   <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
             </td>
@@ -1354,7 +1375,9 @@ session.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>collection_id</code></td>
+            <td>
+                <code>collection_id</code>
+            </td>
             <td>
                   <code><span title="typing.Optional">Optional</span>[str]</code>
             </td>
@@ -1499,7 +1522,7 @@ session.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Return name of DLite driver for the given media type/access service.</p>
+        <p>Return name of DLite driver for the given media type/access service.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/utils/utils.py</code></summary>
@@ -1551,7 +1574,7 @@ session.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Instantiates and returns an instance of <code>meta</code>.</p>
+        <p>Instantiates and returns an instance of <code>meta</code>.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1566,7 +1589,9 @@ session.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>meta</code></td>
+            <td>
+                <code>meta</code>
+            </td>
             <td>
                   <code><span title="typing.Union">Union</span>[str, <span title="dlite.Metadata">Metadata</span>]</code>
             </td>
@@ -1580,7 +1605,9 @@ session.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>session</code></td>
+            <td>
+                <code>session</code>
+            </td>
             <td>
                   <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
             </td>
@@ -1594,7 +1621,9 @@ session.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>collection</code></td>
+            <td>
+                <code>collection</code>
+            </td>
             <td>
                   <code><span title="typing.Optional">Optional</span>[<span title="dlite.Collection">Collection</span>]</code>
             </td>
@@ -1742,7 +1771,7 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
     <div class="doc doc-contents ">
 
-      <p>Returns metadata corresponding to given uri.</p>
+        <p>Returns metadata corresponding to given uri.</p>
 <p>This function may in the future be connected to a database.</p>
 
             <details class="quote">
@@ -1781,7 +1810,7 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
     <div class="doc doc-contents ">
 
-      <p>Retrieve settings from the session.</p>
+        <p>Retrieve settings from the session.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1796,7 +1825,9 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>session</code></td>
+            <td>
+                <code>session</code>
+            </td>
             <td>
                   <code><span title="typing.Union">Union</span>[dict[str, <span title="typing.Any">Any</span>], None]</code>
             </td>
@@ -1810,7 +1841,9 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>label</code></td>
+            <td>
+                <code>label</code>
+            </td>
             <td>
                   <code>str</code>
             </td>
@@ -1909,7 +1942,7 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 
     <div class="doc doc-contents ">
 
-      <p>Return a tripper.Triplestore instance for the current session.</p>
+        <p>Return a tripper.Triplestore instance for the current session.</p>
 <p>If a 'tripper.triplestore' setting has been added with the
 SettingsStrategy, it will be used to configure the returned
 triplestore instance.  Otherwise the session collection will be
@@ -1973,7 +2006,7 @@ used.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Update collection in DataCache.</p>
+        <p>Update collection in DataCache.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1988,7 +2021,9 @@ used.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>collection</code></td>
+            <td>
+                <code>collection</code>
+            </td>
             <td>
                   <code><span title="dlite.Collection">Collection</span></code>
             </td>
@@ -2038,7 +2073,7 @@ used.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Update dictionary <code>dct</code> using dictionary <code>update</code>.</p>
+        <p>Update dictionary <code>dct</code> using dictionary <code>update</code>.</p>
 <p>This function differ from <code>dict.update()</code> in that it updates
 sub-directories recursively, instead of replacing them with the
 content of <code>update</code>.</p>
@@ -2058,7 +2093,9 @@ in <code>dct</code> will be removed.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>dct</code></td>
+            <td>
+                <code>dct</code>
+            </td>
             <td>
                   <code>dict</code>
             </td>
@@ -2072,7 +2109,9 @@ in <code>dct</code> will be removed.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>update</code></td>
+            <td>
+                <code>update</code>
+            </td>
             <td>
                   <code><span title="typing.Optional">Optional</span>[dict]</code>
             </td>
@@ -2105,6 +2144,31 @@ in <code>dct</code> will be removed.</p>
             <td>
               <div class="doc-md-description">
                 <p>The updated dict <code>dct</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="oteapi_dlite.utils.utils.TypeMismatchError" href="#oteapi_dlite.utils.utils.TypeMismatchError">TypeMismatchError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If there is a mismatch in value types
+between the <code>dct</code> and <code>update</code> dictionaries.  Conversion
+between different number types is accepted.</p>
               </div>
             </td>
           </tr>
@@ -2183,9 +2247,9 @@ in <code>dct</code> will be removed.</p>
 <span class="sd">        The updated dict `dct`.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        TypeMismatchError if there is a mismatch in value types</span>
-<span class="sd">        between the `dct` and `update` dictionaries.  Conversion</span>
-<span class="sd">        between different number types is accepted.</span>
+<span class="sd">        TypeMismatchError: If there is a mismatch in value types</span>
+<span class="sd">            between the `dct` and `update` dictionaries.  Conversion</span>
+<span class="sd">            between different number types is accepted.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">update</span><span class="p">:</span>
@@ -2251,12 +2315,6 @@ in <code>dct</code> will be removed.</p>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
-</button>
-        
       </main>
       
         <footer class="md-footer">
@@ -2299,10 +2357,10 @@ in <code>dct</code> will be removed.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>

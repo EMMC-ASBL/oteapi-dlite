@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse_excel/">
+        <link rel="canonical" href="https://EMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/parse_excel/">
       
       
         <link rel="prev" href="../parse/">
@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -100,8 +100,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../.." title="OTEAPI DLite" class="md-header__button md-logo" aria-label="OTEAPI DLite" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 9V1.5h-3V9h-3V1.5h-3V9h-3V1.5H4.65V9H3v1.5h18V9zm0 4.5h-3V21h-3v-7.5h-3V21h-3v-7.5H4.65V21H3v1.5h18V21h-1.5z"/></svg>
+  <img src="../../../material/library-shelves" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -207,8 +206,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../../.." title="OTEAPI DLite" class="md-nav__button md-logo" aria-label="OTEAPI DLite" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 9V1.5h-3V9h-3V1.5h-3V9h-3V1.5H4.65V9H3v1.5h18V9zm0 4.5h-3V21h-3v-7.5h-3V21h-3v-7.5H4.65V21H3v1.5h18V21h-1.5z"/></svg>
+  <img src="../../../material/library-shelves" alt="logo">
 
     </a>
     OTEAPI DLite
@@ -1219,7 +1217,12 @@
 <a id="oteapi_dlite.strategies.parse_excel"></a>
     <div class="doc doc-contents first">
 
-      <p>Strategy for parsing an Excel spreadsheet to a DLite instance.</p>
+        <p>Strategy for parsing an Excel spreadsheet to a DLite instance.</p>
+
+
+
+
+
 
 
 
@@ -1248,7 +1251,12 @@
               Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
 
-      <p>Configuration for DLite Excel parser.</p>
+        <p>Configuration for DLite Excel parser.</p>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
@@ -1461,7 +1469,12 @@
               Bases: <code><span title="oteapi.models.ResourceConfig">ResourceConfig</span></code></p>
 
 
-      <p>DLite excel parse strategy resource config.</p>
+        <p>DLite excel parse strategy resource config.</p>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
@@ -1536,7 +1549,12 @@
               Bases: <code><a class="autorefs autorefs-internal" title="oteapi_dlite.models.DLiteSessionUpdate" href="../../models/session/#oteapi_dlite.models.session.DLiteSessionUpdate">DLiteSessionUpdate</a></code></p>
 
 
-      <p>Class for returning values from DLite excel parser.</p>
+        <p>Class for returning values from DLite excel parser.</p>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
@@ -1644,12 +1662,17 @@
     <div class="doc doc-contents ">
 
 
-      <p>Parse strategy for Excel files.</p>
+        <p>Parse strategy for Excel files.</p>
 <p><strong>Registers strategies</strong>:</p>
 <ul>
 <li><code>("mediaType",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")</code></li>
 </ul>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
@@ -1851,7 +1874,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Execute the strategy.</p>
+        <p>Execute the strategy.</p>
 <p>This method will be called through the strategy-specific endpoint
 of the OTE-API Services.</p>
 
@@ -1868,7 +1891,9 @@ of the OTE-API Services.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>session</code></td>
+            <td>
+                <code>session</code>
+            </td>
             <td>
                   <code><span title="typing.Optional">Optional</span>[dict[str, <span title="typing.Any">Any</span>]]</code>
             </td>
@@ -1896,7 +1921,7 @@ of the OTE-API Services.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-internal" title="oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate" href="../../../all_strategies/#oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate">DLiteExcelSessionUpdate</a></code>
+                  <code><a class="autorefs autorefs-internal" title="oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate" href="#oteapi_dlite.strategies.parse_excel.DLiteExcelSessionUpdate">DLiteExcelSessionUpdate</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2039,7 +2064,7 @@ of the OTE-API Services.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Initialize.</p>
+        <p>Initialize.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
@@ -2080,7 +2105,7 @@ of the OTE-API Services.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Infer dlite metadata from recarray <code>rec</code>.</p>
+        <p>Infer dlite metadata from recarray <code>rec</code>.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
@@ -2128,7 +2153,7 @@ of the OTE-API Services.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Split column name into a (name, unit) tuple.</p>
+        <p>Split column name into a (name, unit) tuple.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/parse_excel.py</code></summary>
@@ -2178,12 +2203,6 @@ of the OTE-API Services.</p>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
-</button>
-        
       </main>
       
         <footer class="md-footer">
@@ -2226,10 +2245,10 @@ of the OTE-API Services.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>

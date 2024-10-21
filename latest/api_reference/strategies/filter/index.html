@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://TEMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/filter/">
+        <link rel="canonical" href="https://EMMC-ASBL.github.io/oteapi-dlite/latest/api_reference/strategies/filter/">
       
       
         <link rel="prev" href="../convert/">
@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -100,8 +100,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../.." title="OTEAPI DLite" class="md-header__button md-logo" aria-label="OTEAPI DLite" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 9V1.5h-3V9h-3V1.5h-3V9h-3V1.5H4.65V9H3v1.5h18V9zm0 4.5h-3V21h-3v-7.5h-3V21h-3v-7.5H4.65V21H3v1.5h18V21h-1.5z"/></svg>
+  <img src="../../../material/library-shelves" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -207,8 +206,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../../.." title="OTEAPI DLite" class="md-nav__button md-logo" aria-label="OTEAPI DLite" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 9V1.5h-3V9h-3V1.5h-3V9h-3V1.5H4.65V9H3v1.5h18V9zm0 4.5h-3V21h-3v-7.5h-3V21h-3v-7.5H4.65V21H3v1.5h18V21h-1.5z"/></svg>
+  <img src="../../../material/library-shelves" alt="logo">
 
     </a>
     OTEAPI DLite
@@ -1117,7 +1115,12 @@
 <a id="oteapi_dlite.strategies.filter"></a>
     <div class="doc doc-contents first">
 
-      <p>Filter that removes all but specified instances in the collection.</p>
+        <p>Filter that removes all but specified instances in the collection.</p>
+
+
+
+
+
 
 
 
@@ -1146,7 +1149,12 @@
               Bases: <code><span title="oteapi.models.FilterConfig">FilterConfig</span></code></p>
 
 
-      <p>DLite generate strategy config.</p>
+        <p>DLite generate strategy config.</p>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
@@ -1219,13 +1227,18 @@
     <div class="doc doc-contents ">
 
 
-      <p>Filter that removes all but specified instances in the collection.</p>
+        <p>Filter that removes all but specified instances in the collection.</p>
 <p>The <code>query</code> configuration should be a regular expression matching labels
 to keep in the collection.  All other labels will be removed.</p>
 <p><strong>Registers strategies</strong>:</p>
 <ul>
 <li><code>("filterType", "dlite/filter")</code></li>
 </ul>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
@@ -1439,7 +1452,7 @@ to keep in the collection.  All other labels will be removed.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Execute the strategy.</p>
+        <p>Execute the strategy.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
@@ -1581,7 +1594,7 @@ to keep in the collection.  All other labels will be removed.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Initialize.</p>
+        <p>Initialize.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
@@ -1626,7 +1639,7 @@ to keep in the collection.  All other labels will be removed.</p>
               Bases: <code><span title="oteapi.models.AttrDict">AttrDict</span></code></p>
 
 
-      <p>Configuration for the DLite filter strategy.</p>
+        <p>Configuration for the DLite filter strategy.</p>
 <p>First the <code>remove_label</code> and <code>remove_datamodel</code> configurations are
 used to mark matching instances for removal.  If neither
 <code>remove_label</code> or <code>remove_datamodel</code> are given, all instances are
@@ -1637,6 +1650,11 @@ for removal.</p>
 an instance not marked for removal is also unmarked for removal.</p>
 <p>Finally, the instances that are still marked for removal are removed
 from the collection.</p>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/filter.py</code></summary>
@@ -1910,12 +1928,6 @@ from the collection.</p>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
-</button>
-        
       </main>
       
         <footer class="md-footer">
@@ -1958,10 +1970,10 @@ from the collection.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>
