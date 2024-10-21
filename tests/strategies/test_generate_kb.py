@@ -1,13 +1,11 @@
 """Tests storing documentation of instance with the generate strategy."""
 
-# pylint: disable=too-many-locals
-
-
 # if True:
+from __future__ import annotations
+
+
 def test_generate_kb():
     """Test generate with kb documentation enabled."""
-    # pylint: disable=too-many-statements
-
     from pathlib import Path
 
     import dlite
@@ -137,7 +135,7 @@ def test_generate_kb():
     assert doc == {
         "dataresource": {
             "type": ":MyData",
-            "downloadUrl": str((outdir / "image.json")),
+            "downloadUrl": str(outdir / "image.json"),
             "mediaType": "application/vnd.dlite-parse",
             "license": "MIT",
             "configuration": {

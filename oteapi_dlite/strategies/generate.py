@@ -1,6 +1,7 @@
 """Generic generate strategy using DLite storage plugin."""
 
-# pylint: disable=unused-argument,invalid-name,too-many-branches,too-many-locals
+from __future__ import annotations
+
 import os
 import tempfile
 from typing import TYPE_CHECKING, Annotated, Optional
@@ -263,13 +264,13 @@ class DLiteGenerateStrategy:
 
     def initialize(
         self,
-        session: Optional[dict[str, "Any"]] = None,
+        session: Optional[dict[str, Any]] = None,
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: Optional[dict[str, "Any"]] = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy.
 
@@ -282,7 +283,6 @@ class DLiteGenerateStrategy:
         Returns:
             SessionUpdate instance.
         """
-        # pylint: disable=too-many-statements
         config = self.generate_config.configuration
         cacheconfig = config.datacache_config
 
@@ -334,7 +334,6 @@ class DLiteGenerateStrategy:
         if config.kb_document_class:
 
             # Import here to avoid hard dependencies on tripper.
-            # pylint: disable=import-outside-toplevel
             from tripper import RDF
             from tripper.convert import save_container
 

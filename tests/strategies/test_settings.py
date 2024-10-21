@@ -1,7 +1,9 @@
 """Test settings strategy."""
 
-
 # if True:
+from __future__ import annotations
+
+
 def test_settings() -> None:
     """Test the settings strategy."""
 

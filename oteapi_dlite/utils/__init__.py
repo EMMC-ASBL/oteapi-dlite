@@ -3,6 +3,8 @@
 This module provide some utility functions.
 """
 
+from __future__ import annotations
+
 from .nputils import dict2recarray
 from .utils import (
     RemoveItem,

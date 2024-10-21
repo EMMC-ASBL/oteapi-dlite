@@ -1,5 +1,7 @@
 """Pytest fixtures for `strategies/`."""
 
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 import pytest
@@ -17,7 +19,7 @@ def load_strategies() -> None:
 
 
 @pytest.fixture(scope="session")
-def repo_dir() -> "Path":
+def repo_dir() -> Path:
     """Absolute path to the repository directory."""
     from pathlib import Path
 
@@ -25,13 +27,13 @@ def repo_dir() -> "Path":
 
 
 @pytest.fixture(scope="session")
-def static_files(repo_dir: "Path") -> "Path":
+def static_files(repo_dir: Path) -> Path:
     """Absolute path to the static directory filled with test files."""
     return repo_dir / "tests" / "static"
 
 
 @pytest.fixture(scope="session")
-def entities_path(repo_dir: "Path") -> "Path":
+def entities_path(repo_dir: Path) -> Path:
     """Absolute path to the entities directory filled with test DLite
     entities."""
     return repo_dir / "tests" / "entities"

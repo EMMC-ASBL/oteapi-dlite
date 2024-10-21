@@ -1,5 +1,7 @@
 """NumNy-related utility functions."""
 
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -10,7 +12,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
 
 def dict2recarray(
-    excel_dict: dict[str, "Any"], names: "Optional[Sequence[str]]" = None
+    excel_dict: dict[str, Any], names: Optional[Sequence[str]] = None
 ) -> np.recarray:
     """Converts a dict returned by the Excel parser to a numpy rec array.
 

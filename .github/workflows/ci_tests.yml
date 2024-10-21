@@ -22,10 +22,7 @@ jobs:
       python_version_pylint_safety: "3.9"
 
       # pylint-specific settings
-      run_pylint: true
-      pylint_runs: |
-        --rcfile=pyproject.toml oteapi_dlite
-        --rcfile=pyproject.toml --disable=import-outside-toplevel,redefined-outer-name tests
+      run_pylint: false
 
       # safety-specific settings
       run_safety: true

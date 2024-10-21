@@ -1,6 +1,7 @@
 """Generic strategy for adding configurations to the session."""
 
-# pylint: disable=unused-argument,invalid-name
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, Annotated, Optional, Union
 
 from oteapi.models import AttrDict, FilterConfig, SessionUpdate
@@ -78,12 +79,12 @@ class SettingsStrategy:
 
     def initialize(
         self,
-        session: Optional[dict[str, "Any"]] = None,
+        session: Optional[dict[str, Any]] = None,
     ) -> SessionUpdate:
         """Store settings."""
         config = self.settings_config.configuration
         return add_settings(session, config.label, config.settings)
 
-    def get(self, session: Optional[dict[str, "Any"]] = None) -> SessionUpdate:
+    def get(self, session: Optional[dict[str, Any]] = None) -> SessionUpdate:
         """Do nothing."""
         return SessionUpdate()

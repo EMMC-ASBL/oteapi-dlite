@@ -1,7 +1,9 @@
 """Test convert strategy."""
 
+from __future__ import annotations
+
 from otelib import OTEClient
-from paths import inputdir, outputdir  # pylint: disable=import-error
+from paths import inputdir, outputdir
 from yaml import safe_load
 
 
@@ -71,7 +73,7 @@ def test_convert():
     assert resultfile.exists()
 
     # Check result content
-    with open(resultfile, "r", encoding="utf8") as f:
+    with open(resultfile, encoding="utf8") as f:
         dct = safe_load(f)
     _, d = dct.popitem()
     assert d["meta"] == "http://onto-ns.com/meta/0.1/Result"

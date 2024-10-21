@@ -1,6 +1,7 @@
 """Utility functions for OTEAPI DLite plugin."""
 
-# pylint: disable=invalid-name
+from __future__ import annotations
+
 import json
 from numbers import Number
 from pathlib import Path
@@ -51,8 +52,8 @@ ACCESSSERVICES = {
 
 
 def get_collection(
-    session: "Optional[dict[str, Any]]" = None,
-    collection_id: "Optional[str]" = None,
+    session: Optional[dict[str, Any]] = None,
+    collection_id: Optional[str] = None,
 ) -> dlite.Collection:
     """Retrieve a DLite Collection.
 
@@ -91,7 +92,7 @@ def get_collection(
     else:
         try:
             coll = dlite.get_instance(id_)
-        except dlite.DLiteError as exc:  # pylint: disable=no-member
+        except dlite.DLiteError as exc:
             raise CollectionNotFound(
                 f"Could not find DLite Collection with id {id_}"
             ) from exc
@@ -127,12 +128,11 @@ def get_meta(uri: str) -> dlite.Instance:
 
 
 def get_driver(
-    mediaType: "Optional[str]" = None,
-    accessService: "Optional[str]" = None,
-    options: "NoneType" = None,
+    mediaType: Optional[str] = None,
+    accessService: Optional[str] = None,
+    options: NoneType = None,
 ) -> str:
     """Return name of DLite driver for the given media type/access service."""
-    # pylint: disable=unused-argument
     if mediaType:
         if mediaType not in MEDIATYPES:
             raise ValueError("unknown DLite mediaType: {mediaType}")
@@ -147,11 +147,11 @@ def get_driver(
 
 
 def get_instance(
-    meta: "Union[str, dlite.Metadata]",
-    session: "Optional[dict[str, Any]]" = None,
-    collection: "Optional[dlite.Collection]" = None,
-    routedict: "Optional[dict]" = None,
-    instance_id: "Optional[str]" = None,
+    meta: Union[str, dlite.Metadata],
+    session: Optional[dict[str, Any]] = None,
+    collection: Optional[dlite.Collection] = None,
+    routedict: Optional[dict] = None,
+    instance_id: Optional[str] = None,
     allow_incomplete: bool = False,
     **kwargs,
 ) -> dlite.Instance:
@@ -173,8 +173,6 @@ def get_instance(
         kwargs: Additional arguments passed to dlite.mappings.instantiate().
     """
     # Import here to avoid a hard dependency on tripper.
-    # pylint: disable=import-outside-toplevel
-    # pylint: disable=too-many-positional-arguments,too-many-arguments
     from tripper import Triplestore
 
     if collection is None:
@@ -203,9 +201,9 @@ def get_instance(
 
 
 def add_settings(
-    session: "Union[dict[str, Any], None]",
+    session: Union[dict[str, Any], None],
     label: str,
-    settings: "Union[dict, list, str, int, float, bool, NoneType]",
+    settings: Union[dict, list, str, int, float, bool, NoneType],
 ) -> SessionUpdate:
     """Store settings to the session.
 
@@ -235,7 +233,7 @@ def add_settings(
     return SessionUpdate(settings=d)
 
 
-def get_settings(session: "Union[dict[str, Any], None]", label: str) -> "Any":
+def get_settings(session: Union[dict[str, Any], None], label: str) -> Any:
     """Retrieve settings from the session.
 
     Arguments:
@@ -254,8 +252,8 @@ def get_settings(session: "Union[dict[str, Any], None]", label: str) -> "Any":
 
 
 def get_triplestore(
-    session: "dict[str, Any]",
-) -> "Triplestore":
+    session: dict[str, Any],
+) -> Triplestore:
     """Return a tripper.Triplestore instance for the current session.
 
     If a 'tripper.triplestore' setting has been added with the
@@ -264,7 +262,6 @@ def get_triplestore(
     used.
     """
     # Import here to avoid a hard dependency on tripper.
-    # pylint: disable=import-outside-toplevel
     from tripper import Triplestore
 
     kb_settings = get_settings(session, "tripper.triplestore")
@@ -287,7 +284,7 @@ class RemoveItem:
     be removed in the source dictionary."""
 
 
-def update_dict(dct: dict, update: "Optional[dict]") -> dict:
+def update_dict(dct: dict, update: Optional[dict]) -> dict:
     """Update dictionary `dct` using dictionary `update`.
 
     This function differ from `dict.update()` in that it updates

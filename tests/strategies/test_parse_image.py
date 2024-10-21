@@ -1,6 +1,7 @@
 """Test the image formats in the image parse strategy."""
 
-# pylint: disable=too-many-locals
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 import pytest
@@ -28,21 +29,9 @@ def test_image_config() -> None:
             "image_label": "test_image",
         },
     )
-    image_config = DLiteImageConfig(
-        **config.configuration  # pylint: disable=not-a-mapping
-    )
-    assert (
-        image_config.crop
-        == config.configuration[  # pylint: disable=unsubscriptable-object
-            "crop"
-        ]
-    )
-    assert (
-        image_config.image_label
-        == config.configuration[  # pylint: disable=unsubscriptable-object
-            "image_label"
-        ]
-    )
+    image_config = DLiteImageConfig(**config.configuration)
+    assert image_config.crop == config.configuration["crop"]
+    assert image_config.image_label == config.configuration["image_label"]
 
 
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
@@ -59,9 +48,9 @@ def test_image_config() -> None:
 )
 def test_image(
     test_file: str,
-    target_file: "Optional[str]",
-    crop_rect: "Optional[tuple[int, int, int, int]]",
-    static_files: "Path",
+    target_file: Optional[str],
+    crop_rect: Optional[tuple[int, int, int, int]],
+    static_files: Path,
 ) -> None:
     """Test parsing an image format."""
     if crop_rect and (target_file is None or "jpeg" in target_file):
@@ -93,8 +82,8 @@ def test_image(
         "key": orig_key,
     }
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: "IParseStrategy" = DLiteImageParseStrategy(config)
-    output: "DLiteSessionUpdate" = parser.get(session)
+    parser: IParseStrategy = DLiteImageParseStrategy(config)
+    output: DLiteSessionUpdate = parser.get(session)
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 
