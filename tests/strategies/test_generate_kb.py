@@ -1,10 +1,9 @@
 """Tests storing documentation of instance with the generate strategy."""
 
-# if True:
 from __future__ import annotations
 
 
-def test_generate_kb():
+def test_generate_kb() -> None:
     """Test generate with kb documentation enabled."""
     from pathlib import Path
 
@@ -16,7 +15,7 @@ def test_generate_kb():
     from oteapi_dlite.utils import get_meta
 
     thisdir = Path(__file__).resolve().parent
-    outdir = thisdir / ".." / "output"
+    outdir = thisdir.parent / "output"
 
     EMMO = Namespace(
         iri="https://w3id.org/emmo#",
@@ -95,7 +94,8 @@ def test_generate_kb():
             "kb_document_class": ":MyData",
             "kb_document_update": {"dataresource": {"license": "MIT"}},
             "kb_document_base_iri": "http://ex.com#",
-            "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
+            # This cannot be found in EMMO, so it will be ignored...
+            # "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
             "kb_document_computation": ":Sim",
         },
     )
@@ -155,8 +155,9 @@ def test_generate_kb():
     # Check kb_document_class
     assert ts.has(iri, RDF.type, ":MyData")
 
-    # Check kb_document_context
-    assert ts.has(iri, EMMO.isDescriptionFor, ":MyMaterial")
+    # This cannot be found in EMMO, so it will be ignored...
+    # # Check kb_document_context
+    # assert ts.has(iri, EMMO.isDescriptionFor, ":MyMaterial")
 
     # Check: kb_document_computation
     sim = ts.value(predicate=RDF.type, object=":Sim")
