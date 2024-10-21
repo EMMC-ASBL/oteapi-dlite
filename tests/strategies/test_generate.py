@@ -1,9 +1,9 @@
 """Tests generate strategy."""
 
-# pylint: disable=too-many-locals
-
-
 # if True:
+from __future__ import annotations
+
+
 def test_generate():
     """Test generate strategy."""
     from pathlib import Path

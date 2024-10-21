@@ -1,5 +1,7 @@
 """Test parse strategies."""
 
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -8,7 +10,7 @@ if TYPE_CHECKING:
     from oteapi.interfaces import IParseStrategy
 
 
-def test_parse_excel(static_files: "Path") -> None:
+def test_parse_excel(static_files: Path) -> None:
     """Test excel parse strategy."""
     import dlite
     import numpy as np
@@ -45,7 +47,7 @@ def test_parse_excel(static_files: "Path") -> None:
 
     # Note that initialize() and get() are called on different parser
     # instances...
-    parser: "IParseStrategy" = DLiteExcelStrategy(config)
+    parser: IParseStrategy = DLiteExcelStrategy(config)
     parser.get(session)
 
     inst = coll.get("excel-data")

@@ -1,13 +1,14 @@
 """Tests oteapi-dlite.utils.get_instance()."""
 
-# pylint: disable=too-many-locals
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from pathlib import Path
 
 
-def test_instantiate_calcresults(entities_path: "Path") -> None:
+def test_instantiate_calcresults(entities_path: Path) -> None:
     """Test utils.get_instance().
 
     Instantiate a CalcResult - typically done in a function strategy.

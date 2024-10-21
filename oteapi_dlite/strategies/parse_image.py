@@ -1,5 +1,7 @@
 """Strategy class for parsing an image to a DLite instance."""
 
+from __future__ import annotations
+
 import logging
 from typing import TYPE_CHECKING, Annotated
 
@@ -66,13 +68,13 @@ class DLiteImageParseStrategy:
     parse_config: DLiteImageResourceConfig
 
     def initialize(
-        self, session: "Optional[dict[str, Any]]" = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: "Optional[dict[str, Any]]" = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteSessionUpdate:
         """Execute the strategy.
 

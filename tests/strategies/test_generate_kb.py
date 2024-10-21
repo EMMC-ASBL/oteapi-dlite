@@ -1,13 +1,10 @@
 """Tests storing documentation of instance with the generate strategy."""
 
-# pylint: disable=too-many-locals
+from __future__ import annotations
 
 
-# if True:
-def test_generate_kb():
+def test_generate_kb() -> None:
     """Test generate with kb documentation enabled."""
-    # pylint: disable=too-many-statements
-
     from pathlib import Path
 
     import dlite
@@ -18,7 +15,7 @@ def test_generate_kb():
     from oteapi_dlite.utils import get_meta
 
     thisdir = Path(__file__).resolve().parent
-    outdir = thisdir / ".." / "output"
+    outdir = thisdir.parent / "output"
 
     EMMO = Namespace(
         iri="https://w3id.org/emmo#",
@@ -97,7 +94,9 @@ def test_generate_kb():
             "kb_document_class": ":MyData",
             "kb_document_update": {"dataresource": {"license": "MIT"}},
             "kb_document_base_iri": "http://ex.com#",
-            "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
+            # EMMO.isDescriptionFor is part of the release candate 3 in EMMO,
+            # and is therefore not yet resolvable.
+            # "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
             "kb_document_computation": ":Sim",
         },
     )
@@ -137,7 +136,7 @@ def test_generate_kb():
     assert doc == {
         "dataresource": {
             "type": ":MyData",
-            "downloadUrl": str((outdir / "image.json")),
+            "downloadUrl": str(outdir / "image.json"),
             "mediaType": "application/vnd.dlite-parse",
             "license": "MIT",
             "configuration": {
@@ -157,8 +156,10 @@ def test_generate_kb():
     # Check kb_document_class
     assert ts.has(iri, RDF.type, ":MyData")
 
-    # Check kb_document_context
-    assert ts.has(iri, EMMO.isDescriptionFor, ":MyMaterial")
+    # EMMO.isDescriptionFor is part of the release candate 3 in EMMO,
+    # and is therefore not yet resolvable.
+    # # Check kb_document_context
+    # assert ts.has(iri, EMMO.isDescriptionFor, ":MyMaterial")
 
     # Check: kb_document_computation
     sim = ts.value(predicate=RDF.type, object=":Sim")

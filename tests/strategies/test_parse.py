@@ -1,12 +1,10 @@
 """Test the image formats in the image parse strategy."""
 
-# pylint: disable=too-many-locals
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
-    from typing import Optional
-
     from oteapi.interfaces import IParseStrategy
 
     from oteapi_dlite.models import DLiteSessionUpdate
@@ -18,7 +16,7 @@ def test_parse_no_options() -> None:
 
     import dlite
     from oteapi.datacache import DataCache
-    from paths import staticdir  # pylint: disable=import-error
+    from paths import staticdir
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
@@ -40,8 +38,8 @@ def test_parse_no_options() -> None:
         "key": orig_key,
     }
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: "IParseStrategy" = DLiteParseStrategy(config)
-    output: "DLiteSessionUpdate" = parser.get(session)
+    parser: IParseStrategy = DLiteParseStrategy(config)
+    output: DLiteSessionUpdate = parser.get(session)
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 
@@ -59,7 +57,7 @@ def test_parse_label() -> None:
 
     import dlite
     from oteapi.datacache import DataCache
-    from paths import staticdir  # pylint: disable=import-error
+    from paths import staticdir
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
@@ -82,8 +80,8 @@ def test_parse_label() -> None:
         "key": orig_key,
     }
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: "IParseStrategy" = DLiteParseStrategy(config)
-    output: "DLiteSessionUpdate" = parser.get(session)
+    parser: IParseStrategy = DLiteParseStrategy(config)
+    output: DLiteSessionUpdate = parser.get(session)
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 

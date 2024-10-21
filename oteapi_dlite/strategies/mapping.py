@@ -1,6 +1,7 @@
 """Mapping filter strategy."""
 
-# pylint: disable=unused-argument,invalid-name
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, Annotated, Optional
 
 from oteapi.models import AttrDict, MappingConfig
@@ -53,7 +54,7 @@ class DLiteMappingStrategy:
     mapping_config: DLiteMappingConfig
 
     def initialize(
-        self, session: Optional[dict[str, "Any"]] = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteSessionUpdate:
         """Initialize strategy."""
         if session is None:
@@ -72,7 +73,7 @@ class DLiteMappingStrategy:
                         ts.expand_iri(t) if isinstance(t, str) else t
                         for t in triple
                     ]
-                    for triple in self.mapping_config.triples  # pylint: disable=not-an-iterable
+                    for triple in self.mapping_config.triples
                 ]
             )
 
@@ -81,7 +82,7 @@ class DLiteMappingStrategy:
         return DLiteSessionUpdate(collection_id=coll.uuid)
 
     def get(
-        self, session: Optional[dict[str, "Any"]] = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteSessionUpdate:
         """Execute strategy and return a dictionary."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)

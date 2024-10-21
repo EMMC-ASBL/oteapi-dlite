@@ -1,5 +1,7 @@
 """Tests filter strategies."""
 
+from __future__ import annotations
+
 from pathlib import Path
 
 import dlite
@@ -47,14 +49,12 @@ session.update(strategy.initialize(session))
 strategy = DLiteFilterStrategy(config)
 session.update(strategy.get(session))
 
-assert set(coll0.get_labels()) == set(
-    [
-        "image1",
-        "image2",
-        "image3",
-        "image4",
-    ]
-)
+assert set(coll0.get_labels()) == {
+    "image1",
+    "image2",
+    "image3",
+    "image4",
+}
 
 
 # Same test as above, but use use `keep_label` instead of `query`
@@ -73,14 +73,12 @@ session.update(strategy.initialize(session))
 strategy = DLiteFilterStrategy(config)
 session.update(strategy.get(session))
 
-assert set(coll1.get_labels()) == set(
-    [
-        "image1",
-        "image2",
-        "image3",
-        "image4",
-    ]
-)
+assert set(coll1.get_labels()) == {
+    "image1",
+    "image2",
+    "image3",
+    "image4",
+}
 
 
 # Test combining remove and keep
@@ -101,13 +99,11 @@ session.update(strategy.initialize(session))
 strategy = DLiteFilterStrategy(config)
 session.update(strategy.get(session))
 
-assert set(coll2.get_labels()) == set(
-    [
-        "innercoll",
-        "image2",
-        "image4",
-    ]
-)
+assert set(coll2.get_labels()) == {
+    "innercoll",
+    "image2",
+    "image4",
+}
 
 
 # Test with keep_referred=True
@@ -128,11 +124,9 @@ session.update(strategy.initialize(session))
 strategy = DLiteFilterStrategy(config)
 session.update(strategy.get(session))
 
-assert set(coll3.get_labels()) == set(
-    [
-        "innercoll",
-        "image1",
-        "image2",
-        "image4",
-    ]
-)
+assert set(coll3.get_labels()) == {
+    "innercoll",
+    "image1",
+    "image2",
+    "image4",
+}

@@ -1,5 +1,7 @@
 """Test to store the entire collection with the generate strategy."""
 
+from __future__ import annotations
+
 from pathlib import Path
 
 import dlite

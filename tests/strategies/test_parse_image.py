@@ -1,6 +1,7 @@
 """Test the image formats in the image parse strategy."""
 
-# pylint: disable=too-many-locals
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 import pytest
@@ -28,40 +29,28 @@ def test_image_config() -> None:
             "image_label": "test_image",
         },
     )
-    image_config = DLiteImageConfig(
-        **config.configuration  # pylint: disable=not-a-mapping
-    )
-    assert (
-        image_config.crop
-        == config.configuration[  # pylint: disable=unsubscriptable-object
-            "crop"
-        ]
-    )
-    assert (
-        image_config.image_label
-        == config.configuration[  # pylint: disable=unsubscriptable-object
-            "image_label"
-        ]
-    )
+    image_config = DLiteImageConfig(**config.configuration)
+    assert image_config.crop == config.configuration["crop"]
+    assert image_config.image_label == config.configuration["image_label"]
 
 
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
 @pytest.mark.parametrize(
-    "test_file, target_file",
-    (
+    ("test_file", "target_file"),
+    [
         # ("sample_1280_853.gif", "sample_150_100.gif"),
         ("sample_1280_853.jpeg", "sample_150_100.jpeg"),
         ("sample_1280_853.jpg", "sample_150_100.jpeg"),
         # ("sample1.jp2", "sample1_150_100.jp2"), DISABLED BECAUSE SLOW
         ("sample_640_426.png", None),
         ("sample_640_426.tiff", None),
-    ),
+    ],
 )
 def test_image(
     test_file: str,
-    target_file: "Optional[str]",
-    crop_rect: "Optional[tuple[int, int, int, int]]",
-    static_files: "Path",
+    target_file: Optional[str],
+    crop_rect: Optional[tuple[int, int, int, int]],
+    static_files: Path,
 ) -> None:
     """Test parsing an image format."""
     if crop_rect and (target_file is None or "jpeg" in target_file):
@@ -93,8 +82,8 @@ def test_image(
         "key": orig_key,
     }
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: "IParseStrategy" = DLiteImageParseStrategy(config)
-    output: "DLiteSessionUpdate" = parser.get(session)
+    parser: IParseStrategy = DLiteImageParseStrategy(config)
+    output: DLiteSessionUpdate = parser.get(session)
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 

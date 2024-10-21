@@ -1,6 +1,7 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
 
-# pylint: disable=unused-argument
+from __future__ import annotations
+
 import re
 from random import getrandbits
 from typing import TYPE_CHECKING, Annotated, Optional
@@ -20,7 +21,7 @@ from oteapi_dlite.models import DLiteSessionUpdate
 from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Union
+    from typing import Any
 
     from oteapi.interfaces import IParseStrategy
 
@@ -104,13 +105,13 @@ class DLiteExcelStrategy:
 
     def initialize(
         self,
-        session: Optional[dict[str, "Any"]] = None,
+        session: Optional[dict[str, Any]] = None,
     ) -> DLiteSessionUpdate:
         """Initialize."""
         return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
 
     def get(
-        self, session: Optional[dict[str, "Any"]] = None
+        self, session: Optional[dict[str, Any]] = None
     ) -> DLiteExcelSessionUpdate:
         """Execute the strategy.
 
@@ -131,12 +132,10 @@ class DLiteExcelStrategy:
         xlsx_config["mediaType"] = (
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
-        parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
-        columns: dict[str, "Any"] = parser.get(session)["data"]
+        parser: IParseStrategy = XLSXParseStrategy(xlsx_config)
+        columns: dict[str, Any] = parser.get(session)["data"]
 
-        names, units = zip(
-            *[split_column_name(column) for column in columns.keys()]
-        )
+        names, units = zip(*[split_column_name(column) for column in columns])
         rec = dict2recarray(columns, names=names)
 
         if not isinstance(units, (list, tuple)):
