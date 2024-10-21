@@ -138,9 +138,6 @@ class DLiteExcelStrategy:
         This method will be called through the strategy-specific endpoint
         of the OTE-API Services.
 
-        Parameters:
-            session: A session-specific dictionary context.
-
         Returns:
             DLite instance.
 

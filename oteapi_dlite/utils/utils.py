@@ -146,7 +146,7 @@ def get_instance(
     Arguments:
         meta: Metadata to instantiate.  Typically its URI.
         collection: The collection with instances and mappings.
-            The default is to get the collection from `session`.
+            The default is to get the collection from `collection_id`.
 
     Some less used optional arguments:
         routedict: Dict mapping property names to route number to select for
@@ -186,11 +186,11 @@ def get_triplestore(
     kb_settings: Optional[dict[str, Any]] = None,
     collection_id: Optional[str] = None,
 ) -> Triplestore:
-    """Return a tripper.Triplestore instance for the current session.
+    """Return a tripper.Triplestore instance for the current kb_settings.
 
     If a 'tripper.triplestore' setting has been added with the
     SettingsStrategy, it will be used to configure the returned
-    triplestore instance.  Otherwise the session collection will be
+    triplestore instance.  Otherwise the provided collection ID will be
     used.
     """
     # Import here to avoid a hard dependency on tripper.
