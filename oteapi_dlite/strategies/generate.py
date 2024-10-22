@@ -2,17 +2,18 @@
 
 from __future__ import annotations
 
+import json
 import os
 import tempfile
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Optional
 
 from oteapi.datacache import DataCache
-from oteapi.models import AttrDict, DataCacheConfig, FunctionConfig
+from oteapi.models import DataCacheConfig, FunctionConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteConfiguration, DLiteResult
 from oteapi_dlite.utils import (
     get_collection,
     get_driver,
@@ -20,10 +21,6 @@ from oteapi_dlite.utils import (
     update_collection,
     update_dict,
 )
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
-
 
 # Constants
 hasInput = "https://w3id.org/emmo#EMMO_36e69413_8c59_4799_946c_10b05d266e22"
@@ -34,7 +31,7 @@ class KBError(ValueError):
     """Invalid data in knowledge base."""
 
 
-class DLiteStorageConfig(AttrDict):
+class DLiteStorageConfig(DLiteConfiguration):
     """Configuration for a generic DLite storage filter.
 
     The DLite storage driver to can be specified using either the `driver`
@@ -116,12 +113,6 @@ class DLiteStorageConfig(AttrDict):
             description="Whether to allow incomplete property mappings.",
         ),
     ] = False
-    collection_id: Annotated[
-        Optional[str],
-        Field(
-            description=("ID of the collection to use."),
-        ),
-    ] = None
     datacache_config: Annotated[
         Optional[DataCacheConfig],
         Field(
@@ -261,34 +252,27 @@ class DLiteGenerateStrategy:
 
     """
 
-    generate_config: DLiteGenerateConfig
+    function_config: DLiteGenerateConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, Any]] = None,
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.function_config.configuration.collection_id
+            ).uuid
+        )
 
-    def get(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
         of the OTE-API Services.
 
-        Parameters:
-            session: A session-specific dictionary context.
-
         Returns:
             SessionUpdate instance.
         """
-        config = self.generate_config.configuration
+        config = self.function_config.configuration
         cacheconfig = config.datacache_config
-
-        if session is None:
-            session = {}
 
         driver = (
             config.driver
@@ -296,7 +280,7 @@ class DLiteGenerateStrategy:
             else get_driver(mediaType=config.mediaType)
         )
 
-        coll = get_collection(session, config.collection_id)
+        coll = get_collection(config.collection_id)
 
         if config.label:
             inst = coll[config.label]
@@ -338,13 +322,21 @@ class DLiteGenerateStrategy:
             from tripper import RDF
             from tripper.convert import save_container
 
-            # kb_settings = get_settings(session, "tripper.triplestore")
-            # if not kb_settings:
-            #     raise KeyError(
-            #         "The `kb_document_class` configuration requires that a "
-            #         "'tripper.triplestore' settings has been added using the "
-            #         "application/vnd.dlite-settings strategy."
-            #     )
+            kb_settings = config.dlite_settings.get("tripper.triplestore")
+            if isinstance(kb_settings, str):
+                kb_settings = json.loads(kb_settings)
+            if kb_settings and not isinstance(kb_settings, dict):
+                raise ValueError(
+                    "The `kb_document_class` configuration expects a dict "
+                    "with settings for the tripper.triplestore."
+                )
+
+            if TYPE_CHECKING:  # pragma: no cover
+                # This block will only be run by mypy when checking typing
+                assert (
+                    isinstance(kb_settings, dict) or kb_settings is None
+                )  # nosec
+
             # IRI of new individual
             iri = individual_iri(
                 class_iri=config.kb_document_class,
@@ -356,7 +348,10 @@ class DLiteGenerateStrategy:
                 for prop, val in config.kb_document_context.items():
                     triples.append((iri, prop, val))
 
-            ts = get_triplestore(session)
+            ts = get_triplestore(
+                kb_settings=kb_settings,
+                collection_id=config.collection_id,
+            )
             try:
                 if config.kb_document_computation:
                     comput = individual_iri(
@@ -463,7 +458,7 @@ class DLiteGenerateStrategy:
         # other strategies.
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteResult(collection_id=coll.uuid)
 
 
 def individual_iri(
