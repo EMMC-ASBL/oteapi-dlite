@@ -1,4 +1,4 @@
-"""Test convert strategy."""
+"""Test convert strategy with options."""
 
 from __future__ import annotations
 
@@ -8,13 +8,11 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-# if True:
-def test_convert(inputdir: Path, outputdir: Path) -> None:
+def test_convert_with_options(inputdir: Path, outputdir: Path) -> None:
     """
     Test convert strategy
     """
     from otelib import OTEClient
-    from yaml import safe_load
 
     resultfile = outputdir / "result.yaml"
 
@@ -56,7 +54,7 @@ def test_convert(inputdir: Path, outputdir: Path) -> None:
         functionType="application/vnd.dlite-convert",
         configuration={
             "module_name": "test_package.convert_module",
-            "function_name": "converter",
+            "function_name": "converter_w_options",
             "inputs": [
                 {"label": "energy"},
                 {"label": "forces"},
@@ -64,6 +62,7 @@ def test_convert(inputdir: Path, outputdir: Path) -> None:
             "outputs": [
                 {"label": "result"},
             ],
+            "kwargs": {"test_option": "fun"},
         },
     )
 
@@ -94,14 +93,3 @@ def test_convert(inputdir: Path, outputdir: Path) -> None:
 
     # Ensure that the result file is regenerated
     assert resultfile.exists()
-
-    # Check result content
-    with resultfile.open(encoding="utf8") as f:
-        dct = safe_load(f)
-    _, d = dct.popitem()
-    assert d["meta"] == "http://onto-ns.com/meta/0.1/Result"
-    assert d["dimensions"] == {"natoms": 2, "ncoords": 3}
-    assert d["properties"] == {
-        "potential_energy": 2.1,
-        "forces": [[0.1, 0.0, 0.3], [0.5, 0.0, 0.0]],
-    }

@@ -1,6 +1,5 @@
-"""Tests generate strategy."""
+"""Test to store the entire collection with the generate strategy."""
 
-# if True:
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -9,8 +8,8 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-def test_generate(outputdir: Path) -> None:
-    """Test generate strategy."""
+def test_store_collection(outputdir: Path) -> None:
+    """Test to store the entire collection with the generate strategy."""
     import dlite
     from oteapi.datacache import DataCache
     from oteapi.utils.config_updater import populate_config_from_session
@@ -21,15 +20,15 @@ def test_generate(outputdir: Path) -> None:
     )
     from oteapi_dlite.utils import get_meta
 
-    coll = dlite.Collection()
+    coll = dlite.Collection("coll_id")
 
     config = DLiteGenerateConfig(
         functionType="application/vnd.dlite-generate",
         configuration={
-            "label": "image",
             "driver": "json",
-            "location": str(outputdir / "image.json"),
+            "location": str(outputdir / "coll.json"),
             "options": "mode=w",
+            "store_collection": True,
             "collection_id": coll.uuid,
         },
     )
@@ -39,6 +38,8 @@ def test_generate(outputdir: Path) -> None:
     image = Image([2, 2, 1])
     image.data = [[[1], [2]], [[3], [4]]]
     coll.add("image", image)
+    coll.add_relation("image", "rdf:type", "onto:Image")
+    coll.add_relation("image", "dcterms:title", "Madonna")
 
     DataCache().add(coll.asjson(), key=coll.uuid)
 
@@ -49,12 +50,15 @@ def test_generate(outputdir: Path) -> None:
     DLiteGenerateStrategy(config).get()
 
     # Check that the data in the newly created generated json file matches our
-    # image instance.
-    # Fefore loading the generated file, we delete the original image instance
+    # collection.
+    # Before loading the generated file, we delete the original collection
     # to ensure that we are not just fetching it from the dlite cache...
-    image_dict = image.asdict()
-    del image
-    image2 = dlite.Instance.from_location(
-        "json", outputdir / "image.json", "mode=r"
-    )
-    assert image2.asdict() == image_dict
+    del coll
+    with dlite.Storage("json", outputdir / "coll.json", "mode=r") as s:
+        # Assume we don't know the collection uuid, but we know that there is
+        # only one collection in the json file
+        (coll_uuid,) = s.get_uuids("http://onto-ns.com/meta/0.1/Collection")
+        coll = s.load(id=coll_uuid)
+    assert coll.uri == "coll_id"
+    assert coll.nrelations == 5
+    assert coll["image"] == image

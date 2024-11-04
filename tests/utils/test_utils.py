@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 
+# if True:
 def test_update_dict():
     """Test update_dict()."""
     import pytest

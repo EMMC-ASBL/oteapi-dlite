@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
+# if True:
 def test_parse_no_options(staticdir: Path) -> None:
     """Test the dlite-parse strategy."""
     import dlite
@@ -51,6 +52,7 @@ def test_parse_no_options(staticdir: Path) -> None:
     assert inst.meta.uri == metaid
 
 
+# if True:
 def test_parse_label(staticdir: Path) -> None:
     """Test the dlite-parse strategy."""
     import dlite
