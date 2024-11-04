@@ -99,6 +99,8 @@ def test_generate_kb(outputdir: Path) -> None:
             "kb_document_class": ":MyData",
             "kb_document_update": {"dataresource": {"license": "MIT"}},
             "kb_document_base_iri": "http://ex.com#",
+            # EMMO.isDescriptionFor is part of the release candate 3 in EMMO,
+            # and is therefore not yet resolvable.
             # "kb_document_context": {EMMO.isDescriptionFor: ":MyMaterial"},
             "kb_document_computation": ":Sim",
         },
@@ -159,6 +161,8 @@ def test_generate_kb(outputdir: Path) -> None:
     # Check kb_document_class
     assert ts.has(iri, RDF.type, ":MyData")
 
+    # EMMO.isDescriptionFor is part of the release candate 3 in EMMO,
+    # and is therefore not yet resolvable.
     # # Check kb_document_context
     # assert ts.has(iri, EMMO.isDescriptionFor, ":MyMaterial")
 

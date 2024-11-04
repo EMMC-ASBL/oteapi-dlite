@@ -1,5 +1,6 @@
 """Tests for oteapi-dlite.utils"""
 
+# if True:
 from __future__ import annotations
 
 
