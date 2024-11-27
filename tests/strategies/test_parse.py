@@ -5,18 +5,18 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from ..conftest import PathsTuple
 
 
 # if True:
-def test_parse_no_options(staticdir: Path) -> None:
+def test_parse_no_options(paths: PathsTuple) -> None:
     """Test the dlite-parse strategy."""
     import dlite
     from oteapi.datacache import DataCache
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
-    sample_file = staticdir / "molecule.json"
+    sample_file = paths.staticdir / "molecule.json"
 
     cache = DataCache()
 
@@ -53,14 +53,14 @@ def test_parse_no_options(staticdir: Path) -> None:
 
 
 # if True:
-def test_parse_label(staticdir: Path) -> None:
+def test_parse_label(paths: PathsTuple) -> None:
     """Test the dlite-parse strategy."""
     import dlite
     from oteapi.datacache import DataCache
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
-    sample_file = staticdir / "molecule.json"
+    sample_file = paths.staticdir / "molecule.json"
 
     cache = DataCache()
 

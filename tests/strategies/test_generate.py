@@ -6,10 +6,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from ..conftest import PathsTuple
 
 
-def test_generate(outputdir: Path) -> None:
+def test_generate(paths: PathsTuple) -> None:
     """Test generate strategy."""
     import dlite
     from oteapi.datacache import DataCache
@@ -28,7 +28,7 @@ def test_generate(outputdir: Path) -> None:
         configuration={
             "label": "image",
             "driver": "json",
-            "location": str(outputdir / "image.json"),
+            "location": str(paths.outputdir / "image.json"),
             "options": "mode=w",
             "collection_id": coll.uuid,
         },
@@ -55,6 +55,6 @@ def test_generate(outputdir: Path) -> None:
     image_dict = image.asdict()
     del image
     image2 = dlite.Instance.from_location(
-        "json", outputdir / "image.json", "mode=r"
+        "json", paths.outputdir / "image.json", "mode=r"
     )
     assert image2.asdict() == image_dict

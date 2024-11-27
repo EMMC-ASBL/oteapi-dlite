@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from ..conftest import PathsTuple
 
 
-def test_store_collection(outputdir: Path) -> None:
+def test_store_collection(paths: PathsTuple) -> None:
     """Test to store the entire collection with the generate strategy."""
     import dlite
     from oteapi.datacache import DataCache
@@ -26,7 +26,7 @@ def test_store_collection(outputdir: Path) -> None:
         functionType="application/vnd.dlite-generate",
         configuration={
             "driver": "json",
-            "location": str(outputdir / "coll.json"),
+            "location": str(paths.outputdir / "coll.json"),
             "options": "mode=w",
             "store_collection": True,
             "collection_id": coll.uuid,
@@ -54,7 +54,7 @@ def test_store_collection(outputdir: Path) -> None:
     # Before loading the generated file, we delete the original collection
     # to ensure that we are not just fetching it from the dlite cache...
     del coll
-    with dlite.Storage("json", outputdir / "coll.json", "mode=r") as s:
+    with dlite.Storage("json", paths.outputdir / "coll.json", "mode=r") as s:
         # Assume we don't know the collection uuid, but we know that there is
         # only one collection in the json file
         (coll_uuid,) = s.get_uuids("http://onto-ns.com/meta/0.1/Collection")

@@ -5,22 +5,22 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from ..conftest import PathsTuple
 
 
-def test_convert_with_options(inputdir: Path, outputdir: Path) -> None:
+def test_convert_with_options(paths: PathsTuple) -> None:
     """
     Test convert strategy
     """
     from otelib import OTEClient
 
-    resultfile = outputdir / "result.yaml"
+    resultfile = paths.outputdir / "result.yaml"
 
     client = OTEClient("python")
 
     energy_resource = client.create_dataresource(
         resourceType="resource/url",
-        downloadUrl=(inputdir / "energy.yaml").as_uri(),
+        downloadUrl=(paths.inputdir / "energy.yaml").as_uri(),
         mediaType="application/yaml",
     )
 
@@ -36,7 +36,7 @@ def test_convert_with_options(inputdir: Path, outputdir: Path) -> None:
 
     forces_resource = client.create_dataresource(
         resourceType="resource/url",
-        downloadUrl=(inputdir / "forces.yaml").as_uri(),
+        downloadUrl=(paths.inputdir / "forces.yaml").as_uri(),
         mediaType="application/yaml",
     )
 
@@ -53,7 +53,7 @@ def test_convert_with_options(inputdir: Path, outputdir: Path) -> None:
     convert = client.create_function(
         functionType="application/vnd.dlite-convert",
         configuration={
-            "module_name": "test_package.convert_module",
+            "module_name": "test_package.test_convert_module",
             "function_name": "converter_w_options",
             "inputs": [
                 {"label": "energy"},

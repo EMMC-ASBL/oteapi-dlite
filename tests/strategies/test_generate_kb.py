@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from ..conftest import PathsTuple
 
 
-def test_generate_kb(outputdir: Path) -> None:
+def test_generate_kb(paths: PathsTuple) -> None:
     """Test generate with kb documentation enabled."""
     import dlite
     from otelib import OTEClient
@@ -24,7 +24,7 @@ def test_generate_kb(outputdir: Path) -> None:
     )
 
     # Prepare the knowledge base
-    kb = outputdir / "kb.ttl"
+    kb = paths.outputdir / "kb.ttl"
     ts = Triplestore(backend="rdflib")
     ts.bind("", "http://myproj.org/kb#")
     ts.add_triples(
@@ -69,7 +69,7 @@ def test_generate_kb(outputdir: Path) -> None:
     Image = get_meta("http://onto-ns.com/meta/1.0/Image")
     image = Image([2, 2, 1])
     image.data = [[[1], [2]], [[3], [4]]]
-    image.save("yaml", outputdir / "image.yaml", "mode=w")
+    image.save("yaml", paths.outputdir / "image.yaml", "mode=w")
 
     # Prepare pipeline
     kb_kwargs = {"backend": "rdflib", "triplestore_url": str(kb)}
@@ -78,7 +78,7 @@ def test_generate_kb(outputdir: Path) -> None:
 
     resource = client.create_dataresource(
         resourceType="resource/url",
-        downloadUrl=(outputdir / "image.yaml").as_uri(),
+        downloadUrl=(paths.outputdir / "image.yaml").as_uri(),
         mediaType="application/yaml",
     )
     parse = client.create_parser(
@@ -94,7 +94,7 @@ def test_generate_kb(outputdir: Path) -> None:
         configuration={
             "datamodel": Image.uri,
             "driver": "json",
-            "location": str(outputdir / "image.json"),
+            "location": str(paths.outputdir / "image.json"),
             "options": "mode=w",
             "kb_document_class": ":MyData",
             "kb_document_update": {"dataresource": {"license": "MIT"}},
@@ -124,7 +124,7 @@ def test_generate_kb(outputdir: Path) -> None:
     image_dict = image.asdict()
     del image
     image2 = dlite.Instance.from_location(
-        "json", outputdir / "image.json", "mode=r"
+        "json", paths.outputdir / "image.json", "mode=r"
     )
     assert image2.asdict() == image_dict
 
@@ -141,7 +141,7 @@ def test_generate_kb(outputdir: Path) -> None:
     assert doc == {
         "dataresource": {
             "type": ":MyData",
-            "downloadUrl": str(outputdir / "image.json"),
+            "downloadUrl": str(paths.outputdir / "image.json"),
             "mediaType": "application/yaml",
             "license": "MIT",
             "configuration": {

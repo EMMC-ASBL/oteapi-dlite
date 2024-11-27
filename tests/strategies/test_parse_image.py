@@ -7,8 +7,9 @@ from typing import TYPE_CHECKING
 import pytest
 
 if TYPE_CHECKING:
-    from pathlib import Path
     from typing import Optional
+
+    from ..conftest import PathsTuple
 
 
 @pytest.mark.parametrize("crop_rect", [None, (100, 100, 250, 200)])
@@ -27,7 +28,7 @@ def test_image(
     test_file: str,
     target_file: Optional[str],
     crop_rect: Optional[tuple[int, int, int, int]],
-    static_files: Path,
+    paths: PathsTuple,
 ) -> None:
     """Test parsing an image format."""
     if crop_rect and (target_file is None or "jpeg" in target_file):
@@ -40,7 +41,7 @@ def test_image(
 
     from oteapi_dlite.strategies.parse_image import DLiteImageParseStrategy
 
-    sample_file = static_files / test_file
+    sample_file = paths.staticdir / test_file
 
     cache = DataCache()
 
@@ -82,7 +83,7 @@ def test_image(
             # Pixel values in instance will not match those in the
             # cropped subset of the original image, so we must compare
             # with a pre-defined target
-            target = Image.open(static_files / target_file)
+            target = Image.open(paths.staticdir / target_file)
         else:
             target = Image.open(sample_file)
     else:

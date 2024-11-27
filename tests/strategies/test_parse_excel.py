@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from ..conftest import PathsTuple
 
 
-def test_parse_excel(static_files: Path) -> None:
+def test_parse_excel(paths: PathsTuple) -> None:
     """Test excel parse strategy."""
     import dlite
     import numpy as np
@@ -17,7 +17,7 @@ def test_parse_excel(static_files: Path) -> None:
 
     from oteapi_dlite.strategies.parse_excel import DLiteExcelStrategy
 
-    sample_file = static_files / "test_parse_excel.xlsx"
+    sample_file = paths.staticdir / "test_parse_excel.xlsx"
 
     cache = DataCache()
 

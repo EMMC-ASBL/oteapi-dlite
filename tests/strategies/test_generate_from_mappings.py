@@ -6,15 +6,15 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from ..conftest import PathsTuple
 
 
-def test_generate_from_mappings(outputdir: Path) -> None:
+def test_generate_from_mappings(paths: PathsTuple) -> None:
     """Test generate from mappings."""
     import dlite
     from oteapi.datacache import DataCache
     from oteapi.utils.config_updater import populate_config_from_session
-    from tripper import EMMO, MAP, Namespace
+    from tripper import EMMO, MAP
 
     from oteapi_dlite.strategies.generate import (
         DLiteGenerateConfig,
@@ -25,9 +25,6 @@ def test_generate_from_mappings(outputdir: Path) -> None:
         DLiteMappingStrategy,
     )
     from oteapi_dlite.utils import get_meta
-
-    FORCES = Namespace("http://onto-ns.com/meta/0.1/Forces#")  # noqa: F841
-    ENERGY = Namespace("http://onto-ns.com/meta/0.1/Energy#")  # noqa: F841
 
     coll = dlite.Collection()
 
@@ -54,7 +51,7 @@ def test_generate_from_mappings(outputdir: Path) -> None:
         configuration={
             "datamodel": "http://onto-ns.com/meta/0.1/Result",
             "driver": "json",
-            "location": str(outputdir / "results.json"),
+            "location": str(paths.outputdir / "results.json"),
             "options": "mode=w",
             # Remove collection_id here when EMMC-ASBL/oteapi#545 is fixed
             "collection_id": coll.uuid,
@@ -82,7 +79,7 @@ def test_generate_from_mappings(outputdir: Path) -> None:
     DLiteGenerateStrategy(generate_config).get()
 
     # Check stored results
-    result_file = outputdir / "results.json"
+    result_file = paths.outputdir / "results.json"
     assert result_file.exists()
 
     r = dlite.Instance.from_location("json", result_file)
