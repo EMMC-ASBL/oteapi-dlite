@@ -3,13 +3,17 @@
 # if True:
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 
-def test_generate():
+if TYPE_CHECKING:
+    from ..conftest import PathsTuple
+
+
+def test_generate(paths: PathsTuple) -> None:
     """Test generate strategy."""
-    from pathlib import Path
-
     import dlite
     from oteapi.datacache import DataCache
+    from oteapi.utils.config_updater import populate_config_from_session
 
     from oteapi_dlite.strategies.generate import (
         DLiteGenerateConfig,
@@ -17,34 +21,32 @@ def test_generate():
     )
     from oteapi_dlite.utils import get_meta
 
-    thisdir = Path(__file__).resolve().parent
-    outdir = thisdir / ".." / "output"
+    coll = dlite.Collection()
 
     config = DLiteGenerateConfig(
         functionType="application/vnd.dlite-generate",
         configuration={
             "label": "image",
             "driver": "json",
-            "location": str(outdir / "image.json"),
+            "location": str(paths.outputdir / "image.json"),
             "options": "mode=w",
+            "collection_id": coll.uuid,
         },
     )
 
-    coll = dlite.Collection()
-
+    # Create an image instance and add it to the collection
     Image = get_meta("http://onto-ns.com/meta/1.0/Image")
     image = Image([2, 2, 1])
     image.data = [[[1], [2]], [[3], [4]]]
     coll.add("image", image)
 
-    session = {"collection_id": coll.uuid}
     DataCache().add(coll.asjson(), key=coll.uuid)
 
-    generator = DLiteGenerateStrategy(config)
-    session.update(generator.initialize(session))
+    session = DLiteGenerateStrategy(config).initialize()
 
-    generator = DLiteGenerateStrategy(config)
-    session.update(generator.get(session))
+    populate_config_from_session(session, config)
+
+    DLiteGenerateStrategy(config).get()
 
     # Check that the data in the newly created generated json file matches our
     # image instance.
@@ -53,6 +55,6 @@ def test_generate():
     image_dict = image.asdict()
     del image
     image2 = dlite.Instance.from_location(
-        "json", outdir / "image.json", "mode=r"
+        "json", paths.outputdir / "image.json", "mode=r"
     )
     assert image2.asdict() == image_dict

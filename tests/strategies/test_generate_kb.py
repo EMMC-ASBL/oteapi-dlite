@@ -2,20 +2,20 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 
-def test_generate_kb() -> None:
+if TYPE_CHECKING:
+    from ..conftest import PathsTuple
+
+
+def test_generate_kb(paths: PathsTuple) -> None:
     """Test generate with kb documentation enabled."""
-    from pathlib import Path
-
     import dlite
     from otelib import OTEClient
     from tripper import OWL, RDF, RDFS, Namespace, Triplestore
     from tripper.convert import load_container, save_container
 
     from oteapi_dlite.utils import get_meta
-
-    thisdir = Path(__file__).resolve().parent
-    outdir = thisdir.parent / "output"
 
     EMMO = Namespace(
         iri="https://w3id.org/emmo#",
@@ -24,7 +24,7 @@ def test_generate_kb() -> None:
     )
 
     # Prepare the knowledge base
-    kb = outdir / "kb.ttl"
+    kb = paths.outputdir / "kb.ttl"
     ts = Triplestore(backend="rdflib")
     ts.bind("", "http://myproj.org/kb#")
     ts.add_triples(
@@ -69,7 +69,7 @@ def test_generate_kb() -> None:
     Image = get_meta("http://onto-ns.com/meta/1.0/Image")
     image = Image([2, 2, 1])
     image.data = [[[1], [2]], [[3], [4]]]
-    image.save("yaml", outdir / "image.yaml", "mode=w")
+    image.save("yaml", paths.outputdir / "image.yaml", "mode=w")
 
     # Prepare pipeline
     kb_kwargs = {"backend": "rdflib", "triplestore_url": str(kb)}
@@ -77,8 +77,13 @@ def test_generate_kb() -> None:
     client = OTEClient("python")
 
     resource = client.create_dataresource(
-        downloadUrl=(outdir / "image.yaml").as_uri(),
-        mediaType="application/vnd.dlite-parse",
+        resourceType="resource/url",
+        downloadUrl=(paths.outputdir / "image.yaml").as_uri(),
+        mediaType="application/yaml",
+    )
+    parse = client.create_parser(
+        parserType="application/vnd.dlite-parse",
+        entity="http://example.org",
         configuration={
             "driver": "yaml",
             "options": "mode=r",
@@ -89,7 +94,7 @@ def test_generate_kb() -> None:
         configuration={
             "datamodel": Image.uri,
             "driver": "json",
-            "location": str(outdir / "image.json"),
+            "location": str(paths.outputdir / "image.json"),
             "options": "mode=w",
             "kb_document_class": ":MyData",
             "kb_document_update": {"dataresource": {"license": "MIT"}},
@@ -109,7 +114,7 @@ def test_generate_kb() -> None:
     )
 
     # Execute pipeline...
-    pipeline = resource >> generate >> settings
+    pipeline = resource >> parse >> generate >> settings
     pipeline.get()
 
     # Check that the data in the newly created generated json file matches our
@@ -119,7 +124,7 @@ def test_generate_kb() -> None:
     image_dict = image.asdict()
     del image
     image2 = dlite.Instance.from_location(
-        "json", outdir / "image.json", "mode=r"
+        "json", paths.outputdir / "image.json", "mode=r"
     )
     assert image2.asdict() == image_dict
 
@@ -136,8 +141,8 @@ def test_generate_kb() -> None:
     assert doc == {
         "dataresource": {
             "type": ":MyData",
-            "downloadUrl": str(outdir / "image.json"),
-            "mediaType": "application/vnd.dlite-parse",
+            "downloadUrl": str(paths.outputdir / "image.json"),
+            "mediaType": "application/yaml",
             "license": "MIT",
             "configuration": {
                 "driver": "json",
