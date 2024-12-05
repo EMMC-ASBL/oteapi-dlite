@@ -3,34 +3,50 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Annotated
+import sys
+from typing import Annotated, Optional
+
+if sys.version_info >= (3, 9, 1):
+    from typing import Literal
+else:
+    from typing_extensions import Literal  # type: ignore[assignment]
 
 import numpy as np
 from oteapi.datacache import DataCache
-from oteapi.models import ResourceConfig
-from oteapi.strategies.parse.image import (
-    ImageDataParseStrategy,
-    ImageParserConfig,
-    ImageParserResourceConfig,
-)
+from oteapi.models import ParserConfig, ResourceConfig
+from oteapi.plugins import create_strategy
+from oteapi.strategies.parse.image import ImageConfig
 from PIL import Image
-from pydantic import Field
+from pydantic import AnyHttpUrl, Field, field_validator
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteResult
 from oteapi_dlite.utils import get_collection, get_meta, update_collection
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Optional
-
 
 LOGGER = logging.getLogger("oteapi_dlite.strategies")
 LOGGER.setLevel(logging.DEBUG)
 
 
-class DLiteImageConfig(ImageParserConfig):
+class DLiteImageConfig(ImageConfig, DLiteResult):
     """Configuration for DLite image parser."""
 
+    # Resource config
+    mediaType: Annotated[
+        Optional[
+            Literal[
+                "image/vnd.dlite-jpg",
+                "image/vnd.dlite-jpeg",
+                "image/vnd.dlite-jp2",
+                "image/vnd.dlite-png",
+                "image/vnd.dlite-gif",
+                "image/vnd.dlite-tiff",
+                "image/vnd.dlite-eps",
+            ]
+        ],
+        Field(description=ResourceConfig.model_fields["mediaType"].description),
+    ] = None
+
+    # Parser config
     image_label: Annotated[
         str,
         Field(
@@ -39,8 +55,13 @@ class DLiteImageConfig(ImageParserConfig):
     ] = "image"
 
 
-class DLiteImageResourceConfig(ResourceConfig):
-    """Resource config for DLite image parser."""
+class DLiteImageParserConfig(ParserConfig):
+    """Parser config for DLite image parser."""
+
+    parserType: Annotated[
+        Literal["image/vnd.dlite-image"],
+        Field(description=ParserConfig.model_fields["parserType"].description),
+    ] = "image/vnd.dlite-image"
 
     configuration: Annotated[
         DLiteImageConfig,
@@ -48,6 +69,22 @@ class DLiteImageResourceConfig(ResourceConfig):
             description="Image parse strategy-specific configuration.",
         ),
     ] = DLiteImageConfig()
+
+    entity: Annotated[
+        AnyHttpUrl,  # Keep this type to avoid changing the original type
+        Field(description=ParserConfig.model_fields["entity"].description),
+    ] = AnyHttpUrl("http://onto-ns.com/meta/1.0/Image")
+
+    @field_validator("entity", mode="after")
+    @classmethod
+    def _validate_entity(cls, value: AnyHttpUrl) -> AnyHttpUrl:
+        """Ensure that the entity is the Image URI."""
+        fixed_uri = "http://onto-ns.com/meta/1.0/Image"
+
+        if value != AnyHttpUrl(fixed_uri):
+            raise ValueError(f"Entity must be exactly equal to: {fixed_uri}")
+
+        return value
 
 
 @dataclass
@@ -65,45 +102,46 @@ class DLiteImageParseStrategy:
 
     """
 
-    parse_config: DLiteImageResourceConfig
+    parse_config: DLiteImageParserConfig
 
-    def initialize(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.parse_config.configuration.collection_id
+            ).uuid
+        )
 
-    def get(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute the strategy.
 
         This method will be called through the strategy-specific
         endpoint of the OTE-API Services.  It assumes that the image to
         parse is stored in a data cache, and can be retrieved via a key
-        that is supplied in either the session (highest priority)
-        or in the parser configuration (lowest priority).
-
-        Parameters:
-            session: A session-specific dictionary context.
+        that is supplied in the parser configuration.
 
         Returns:
-            DLite instance.
+            Reference to a DLite collection ID.
+
         """
         config = self.parse_config.configuration
 
-        # Configuration for ImageDataParseStrategy in oteapi-core
-        conf = self.parse_config.model_dump()
-        conf["configuration"] = ImageParserConfig(
-            **config.model_dump(), extra="ignore"
-        )
-        conf["mediaType"] = "image/" + conf["mediaType"].split("-")[-1]
-        core_config = ImageParserResourceConfig(**conf)
+        if config.downloadUrl is None:
+            raise ValueError("downloadUrl is required.")
+        if config.mediaType is None:
+            raise ValueError("mediaType is required.")
 
-        parse_strategy_session = ImageDataParseStrategy(core_config).initialize(
-            session
+        # Configuration for ImageDataParseStrategy in oteapi-core
+        core_config = {
+            "parserType": "parser/image",
+            "configuration": config.model_dump(),
+            "entity": self.parse_config.entity,
+        }
+        core_config["configuration"]["mediaType"] = (
+            "image/" + config.mediaType.split("-")[-1]
         )
-        output = ImageDataParseStrategy(core_config).get(parse_strategy_session)
+
+        output = create_strategy("parse", core_config).get()
 
         cache = DataCache()
         data = cache.get(output["image_key"])
@@ -121,14 +159,12 @@ class DLiteImageParseStrategy:
                 f"{type(data)}."
             )
 
-        meta = get_meta("http://onto-ns.com/meta/1.0/Image")
+        meta = get_meta(str(self.parse_config.entity))
         inst = meta(dimensions=data.shape)
         inst["data"] = data
 
-        LOGGER.info("session: %s", session)
-
-        coll = get_collection(session)
+        coll = get_collection(config.collection_id)
         coll.add(config.image_label, inst)
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteResult(collection_id=coll.uuid)

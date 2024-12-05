@@ -5,33 +5,35 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
-
-    from oteapi.interfaces import IParseStrategy
+    from ..conftest import PathsTuple
 
 
-def test_parse_excel(static_files: Path) -> None:
+def test_parse_excel(paths: PathsTuple) -> None:
     """Test excel parse strategy."""
     import dlite
     import numpy as np
     from oteapi.datacache import DataCache
+    from oteapi.utils.config_updater import populate_config_from_session
 
     from oteapi_dlite.strategies.parse_excel import DLiteExcelStrategy
 
-    sample_file = static_files / "test_parse_excel.xlsx"
+    sample_file = paths.staticdir / "test_parse_excel.xlsx"
 
     cache = DataCache()
 
     cache_key = cache.add(sample_file.read_bytes())
     config = {
-        "downloadUrl": sample_file.as_uri(),
-        "mediaType": "application/vnd.dlite-xlsx",
+        "parserType": "application/vnd.dlite-xlsx",
         "configuration": {
             "excel_config": {
                 "worksheet": "Sheet1",
                 "header_row": "1",
                 "row_from": "2",
             },
+            "downloadUrl": sample_file.as_uri(),
+            "mediaType": (
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ),
         },
     }
 
@@ -40,15 +42,22 @@ def test_parse_excel(static_files: Path) -> None:
         "collection_id": coll.uuid,
         "key": cache_key,
     }
+
+    # Mock updating the config with session content
+    # This is automatically done as part of a pipeline
+    config["configuration"].update(session)
+
     cache.add(coll.asjson(), key=coll.uuid)
 
     parser = DLiteExcelStrategy(config)
-    session.update(parser.initialize(session))
+    parsed_config = parser.parse_config
+    session = DLiteExcelStrategy(config).initialize()
+
+    populate_config_from_session(session, parsed_config)
 
     # Note that initialize() and get() are called on different parser
     # instances...
-    parser: IParseStrategy = DLiteExcelStrategy(config)
-    parser.get(session)
+    DLiteExcelStrategy(parsed_config).get()
 
     inst = coll.get("excel-data")
 

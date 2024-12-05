@@ -2,21 +2,13 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
-import dlite
-import numpy as np
-
 from oteapi_dlite.utils.exceptions import OteapiDliteException
-
-thisdir = Path(__file__).resolve().parent
-entitydir = thisdir.parent / "entities"
-
-dlite.storage_path.append(entitydir)
 
 
 def converter(energy, forces):
     """Converter."""
+    import dlite
+
     Result = dlite.get_instance("http://onto-ns.com/meta/0.1/Result")
     result = Result(dimensions=forces.dimensions)
     result.potential_energy = energy.energy
@@ -26,6 +18,8 @@ def converter(energy, forces):
 
 def converter_w_options(energy, forces, test_option):
     """Converter should fail if options not passed to it."""
+    import dlite
+
     if test_option != "fun":
         raise OteapiDliteException
     Result = dlite.get_instance("http://onto-ns.com/meta/0.1/Result")
@@ -36,20 +30,24 @@ def converter_w_options(energy, forces, test_option):
     return result
 
 
-# Self-tests
-Energy = dlite.get_instance("http://onto-ns.com/meta/0.1/Energy")
-Forces = dlite.get_instance("http://onto-ns.com/meta/0.1/Forces")
+def test_convert_strategy_module() -> None:
+    """self tests for convert strategy module."""
+    import dlite
+    import numpy as np
 
-energy = Energy()
-energy.energy = 2.1
+    Energy = dlite.get_instance("http://onto-ns.com/meta/0.1/Energy")
+    Forces = dlite.get_instance("http://onto-ns.com/meta/0.1/Forces")
 
-forces = Forces(dimensions={"natoms": 2, "ncoords": 3})
-forces.forces = [
-    (0.1, 0.0, 0.3),
-    (0.5, 0.0, 0.0),
-]
+    energy = Energy()
+    energy.energy = 2.1
 
-result = converter(energy, forces)
+    forces = Forces(dimensions={"natoms": 2, "ncoords": 3})
+    forces.forces = [
+        (0.1, 0.0, 0.3),
+        (0.5, 0.0, 0.0),
+    ]
 
-assert np.allclose(result.potential_energy, energy.energy)
-assert np.allclose(result.forces, forces.forces)
+    result = converter(energy, forces)
+
+    assert np.allclose(result.potential_energy, energy.energy)
+    assert np.allclose(result.forces, forces.forces)

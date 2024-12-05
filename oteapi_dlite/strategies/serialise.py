@@ -4,21 +4,18 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from pathlib import Path
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import Annotated, Optional
 
 import dlite
-from oteapi.models import AttrDict, FilterConfig
+from oteapi.models import FilterConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteResult
 from oteapi_dlite.utils import get_collection, update_collection
 
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
 
-
-class SerialiseConfig(AttrDict):
+class SerialiseConfig(DLiteResult):
     """DLite serialise-specific configurations."""
 
     driver: Annotated[
@@ -74,19 +71,19 @@ class SerialiseStrategy:
 
     filter_config: SerialiseFilterConfig
 
-    def initialize(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.filter_config.configuration.collection_id
+            ).uuid
+        )
 
-    def get(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute the strategy."""
         config = self.filter_config.configuration
 
-        coll = get_collection(session)
+        coll = get_collection(config.collection_id)
 
         storage = dlite.Storage(
             driver_or_url=config.driver,
@@ -101,4 +98,4 @@ class SerialiseStrategy:
                 inst.save_to_storage(storage)
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteResult(collection_id=coll.uuid)

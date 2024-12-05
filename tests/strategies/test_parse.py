@@ -5,31 +5,28 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from oteapi.interfaces import IParseStrategy
-
-    from oteapi_dlite.models import DLiteSessionUpdate
+    from ..conftest import PathsTuple
 
 
 # if True:
-def test_parse_no_options() -> None:
+def test_parse_no_options(paths: PathsTuple) -> None:
     """Test the dlite-parse strategy."""
-
     import dlite
     from oteapi.datacache import DataCache
-    from paths import staticdir
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
-    sample_file = staticdir / "molecule.json"
+    sample_file = paths.staticdir / "molecule.json"
 
     cache = DataCache()
 
     orig_key = cache.add(sample_file.read_bytes())
     config = {
-        "downloadUrl": sample_file.as_uri(),
-        "mediaType": "image/vnd.dlite-parse",
+        "parserType": "application/vnd.dlite-parse",
         "configuration": {
             "driver": "json",
+            "downloadUrl": sample_file.as_uri(),
+            "mediaType": "image/vnd.dlite-parse",
         },
     }
     coll = dlite.Collection()
@@ -37,9 +34,13 @@ def test_parse_no_options() -> None:
         "collection_id": coll.uuid,
         "key": orig_key,
     }
+
+    # Mock updating the config with session content
+    # This is automatically done as part of a pipeline
+    config["configuration"].update(session)
+
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: IParseStrategy = DLiteParseStrategy(config)
-    output: DLiteSessionUpdate = parser.get(session)
+    output = DLiteParseStrategy(config).get()
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 
@@ -52,26 +53,25 @@ def test_parse_no_options() -> None:
 
 
 # if True:
-def test_parse_label() -> None:
+def test_parse_label(paths: PathsTuple) -> None:
     """Test the dlite-parse strategy."""
-
     import dlite
     from oteapi.datacache import DataCache
-    from paths import staticdir
 
     from oteapi_dlite.strategies.parse import DLiteParseStrategy
 
-    sample_file = staticdir / "molecule.json"
+    sample_file = paths.staticdir / "molecule.json"
 
     cache = DataCache()
 
     orig_key = cache.add(sample_file.read_bytes())
     config = {
-        "downloadUrl": sample_file.as_uri(),
-        "mediaType": "image/vnd.dlite-parse",
+        "parserType": "application/vnd.dlite-parse",
         "configuration": {
             "driver": "json",
             "label": "instance",
+            "downloadUrl": sample_file.as_uri(),
+            "mediaType": "image/vnd.dlite-parse",
         },
     }
     coll = dlite.Collection()
@@ -79,9 +79,13 @@ def test_parse_label() -> None:
         "collection_id": coll.uuid,
         "key": orig_key,
     }
+
+    # Mock updating the config with session content
+    # This is automatically done as part of a pipeline
+    config["configuration"].update(session)
+
     cache.add(coll.asjson(), key=coll.uuid)
-    parser: IParseStrategy = DLiteParseStrategy(config)
-    output: DLiteSessionUpdate = parser.get(session)
+    output = DLiteParseStrategy(config).get()
     assert "collection_id" in output
     assert output.collection_id == coll.uuid
 

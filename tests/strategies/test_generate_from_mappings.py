@@ -1,16 +1,20 @@
-"""Tests generate strategy."""
+"""Test generate from mappings."""
 
 # if True:
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 
-def test_generate_from_mappings():
+if TYPE_CHECKING:
+    from ..conftest import PathsTuple
+
+
+def test_generate_from_mappings(paths: PathsTuple) -> None:
     """Test generate from mappings."""
-    from pathlib import Path
-
     import dlite
     from oteapi.datacache import DataCache
-    from tripper import EMMO, MAP, Namespace
+    from oteapi.utils.config_updater import populate_config_from_session
+    from tripper import EMMO, MAP
 
     from oteapi_dlite.strategies.generate import (
         DLiteGenerateConfig,
@@ -22,16 +26,9 @@ def test_generate_from_mappings():
     )
     from oteapi_dlite.utils import get_meta
 
-    thisdir = Path(__file__).resolve().parent
-    entitydir = thisdir / ".." / "entities"
-    outdir = thisdir / ".." / "output"
+    coll = dlite.Collection()
 
-    dlite.storage_path.append(entitydir)
-
-    FORCES = Namespace("http://onto-ns.com/meta/0.1/Forces#")  # noqa: F841
-    ENERGY = Namespace("http://onto-ns.com/meta/0.1/Energy#")  # noqa: F841
-
-    config1 = DLiteMappingConfig(
+    mapping_config = DLiteMappingConfig(
         mappingType="mappings",
         prefixes={
             "f": "http://onto-ns.com/meta/0.1/Forces#",
@@ -46,15 +43,18 @@ def test_generate_from_mappings():
             ("r:forces", "map:mapsTo", "emmo:Force"),
             ("r:potential_energy", "map:mapsTo", "emmo:PotentialEnergy"),
         ],
+        configuration={"collection_id": coll.uuid},
     )
 
-    config2 = DLiteGenerateConfig(
+    generate_config = DLiteGenerateConfig(
         functionType="application/vnd.dlite-generate",
         configuration={
             "datamodel": "http://onto-ns.com/meta/0.1/Result",
             "driver": "json",
-            "location": str(outdir / "results.json"),
+            "location": str(paths.outputdir / "results.json"),
             "options": "mode=w",
+            # Remove collection_id here when EMMC-ASBL/oteapi#545 is fixed
+            "collection_id": coll.uuid,
         },
     )
 
@@ -66,7 +66,6 @@ def test_generate_from_mappings():
     forces = Forces(dimensions={"natoms": 2, "ncoords": 3})
     forces.forces = [[0.1, 0.0, -3.2], [0.0, -2.3, 1.2]]  # eV/Å
 
-    coll = dlite.Collection()
     coll.add("energy", energy)
     coll.add("forces", forces)
 
@@ -74,16 +73,13 @@ def test_generate_from_mappings():
     cache = DataCache()
     cache.add(coll.asjson(), key=coll.uuid)
 
-    session = {"collection_id": coll.uuid}
+    session = DLiteMappingStrategy(mapping_config).initialize()
 
-    mapper = DLiteMappingStrategy(config1)
-    session.update(mapper.initialize(session))
-
-    generator = DLiteGenerateStrategy(config2)
-    session.update(generator.get(session))
+    populate_config_from_session(session, generate_config)
+    DLiteGenerateStrategy(generate_config).get()
 
     # Check stored results
-    result_file = outdir / "results.json"
+    result_file = paths.outputdir / "results.json"
     assert result_file.exists()
 
     r = dlite.Instance.from_location("json", result_file)

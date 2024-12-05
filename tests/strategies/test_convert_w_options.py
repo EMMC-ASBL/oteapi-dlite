@@ -1,22 +1,32 @@
-"""Test convert strategy."""
+"""Test convert strategy with options."""
 
 from __future__ import annotations
 
-from otelib import OTEClient
-from paths import inputdir, outputdir
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..conftest import PathsTuple
 
 
-def test_convert():
+def test_convert_with_options(paths: PathsTuple) -> None:
     """
     Test convert strategy
     """
-    resultfile = outputdir / "result.yaml"
+    from otelib import OTEClient
+
+    resultfile = paths.outputdir / "result.yaml"
 
     client = OTEClient("python")
 
     energy_resource = client.create_dataresource(
-        downloadUrl=(inputdir / "energy.yaml").as_uri(),
-        mediaType="application/vnd.dlite-parse",
+        resourceType="resource/url",
+        downloadUrl=(paths.inputdir / "energy.yaml").as_uri(),
+        mediaType="application/yaml",
+    )
+
+    energy_resource_parser = client.create_parser(
+        parserType="application/vnd.dlite-parse",
+        entity="http://example.org",
         configuration={
             "driver": "yaml",
             "options": "mode=r",
@@ -25,8 +35,14 @@ def test_convert():
     )
 
     forces_resource = client.create_dataresource(
-        downloadUrl=(inputdir / "forces.yaml").as_uri(),
-        mediaType="application/vnd.dlite-parse",
+        resourceType="resource/url",
+        downloadUrl=(paths.inputdir / "forces.yaml").as_uri(),
+        mediaType="application/yaml",
+    )
+
+    forces_resource_parser = client.create_parser(
+        parserType="application/vnd.dlite-parse",
+        entity="http://example.org",
         configuration={
             "driver": "yaml",
             "options": "mode=r",
@@ -37,7 +53,7 @@ def test_convert():
     convert = client.create_function(
         functionType="application/vnd.dlite-convert",
         configuration={
-            "module_name": "test_package.convert_module",
+            "module_name": "test_package.test_convert_module",
             "function_name": "converter_w_options",
             "inputs": [
                 {"label": "energy"},
@@ -65,7 +81,14 @@ def test_convert():
         resultfile.unlink()
 
     # Run pipeline
-    pipeline = energy_resource >> forces_resource >> convert >> generate
+    pipeline = (
+        energy_resource
+        >> energy_resource_parser
+        >> forces_resource
+        >> forces_resource_parser
+        >> convert
+        >> generate
+    )
     pipeline.get()
 
     # Ensure that the result file is regenerated

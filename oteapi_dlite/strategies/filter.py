@@ -3,21 +3,18 @@
 from __future__ import annotations
 
 import re
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import Annotated, Optional
 
 from dlite.utils import get_referred_instances
-from oteapi.models import AttrDict, FilterConfig
+from oteapi.models import FilterConfig
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteResult
 from oteapi_dlite.utils import get_collection, update_collection
 
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
 
-
-class DLiteQueryConfig(AttrDict):
+class DLiteQueryConfig(DLiteResult):
     """Configuration for the DLite filter strategy.
 
     First the `remove_label` and `remove_datamodel` configurations are
@@ -97,22 +94,21 @@ class DLiteFilterStrategy:
 
     **Registers strategies**:
 
-    - `("filterType", "dlite/filter")`
+    - `("filterType", "application/vnd.dlite-filter")`
 
     """
 
     filter_config: DLiteFilterConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, Any]] = None,
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.filter_config.configuration.collection_id
+            ).uuid
+        )
 
-    def get(
-        self, session: Optional[dict[str, Any]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute the strategy."""
         config = self.filter_config.configuration
 
@@ -122,7 +118,7 @@ class DLiteFilterStrategy:
         )
 
         instdict = {}  # Map instance labels to [uuid, metaURI]
-        coll = get_collection(session)
+        coll = get_collection(config.collection_id)
         for s, _, o in coll.get_relations(p="_has-uuid"):
             instdict[s] = [o]
         for s, _, o in coll.get_relations(p="_has-meta"):
@@ -170,4 +166,4 @@ class DLiteFilterStrategy:
             coll.remove(label)
 
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(collection_id=coll.uuid)
