@@ -1,138 +1,180 @@
 """Tests filter strategies."""
 
-from pathlib import Path
+from __future__ import annotations
 
-import dlite
+from typing import TYPE_CHECKING
 
-from oteapi_dlite.strategies.filter import (
-    DLiteFilterConfig,
-    DLiteFilterStrategy,
-)
-from oteapi_dlite.utils import get_meta
+import pytest
 
-thisdir = Path(__file__).resolve().parent
-entitydir = thisdir / ".." / "entities"
-outdir = thisdir / ".." / "output"
+if TYPE_CHECKING:
 
-Image = get_meta("http://onto-ns.com/meta/1.0/Image")
-image1 = Image([2, 2, 1])
-image2 = Image([2, 2, 1])
-image3 = Image([2, 2, 1])
-image4 = Image([2, 2, 1])
-innercoll = dlite.Collection()
-innercoll.add("im1", image1)
-innercoll.add("im2", image2)
-
-coll = dlite.Collection()
-coll.add("innercoll", innercoll)
-coll.add("image1", image1)
-coll.add("image2", image2)
-coll.add("image3", image3)
-coll.add("image4", image4)
+    from dlite import Collection, Instance
 
 
-# Test simple use of query
-# Here keeping all instances with label containing "im" in the collection
-config = DLiteFilterConfig(
-    filterType="dlite/filter",
-    query="^im",
-    configuration={},
-)
-coll0 = coll.copy()
-session = {"collection_id": coll0.uuid}
+@pytest.fixture
+def initialize_collection() -> tuple[Collection, Instance]:
+    """Initialize a collection with some images"""
+    import dlite
 
-strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize(session))
+    from oteapi_dlite.utils import get_meta
 
-strategy = DLiteFilterStrategy(config)
-session.update(strategy.get(session))
+    Image = get_meta("http://onto-ns.com/meta/1.0/Image")
+    image1 = Image([2, 2, 1])
+    image2 = Image([2, 2, 1])
+    image3 = Image([2, 2, 1])
+    image4 = Image([2, 2, 1])
+    innercoll = dlite.Collection()
+    innercoll.add("im1", image1)
+    innercoll.add("im2", image2)
 
-assert set(coll0.get_labels()) == set(
-    [
+    coll = dlite.Collection()
+    coll.add("innercoll", innercoll)
+    coll.add("image1", image1)
+    coll.add("image2", image2)
+    coll.add("image3", image3)
+    coll.add("image4", image4)
+
+    return coll, Image
+
+
+def test_simple_use_of_query(
+    initialize_collection: tuple[Collection, Instance],
+) -> None:
+    """Test simple use of query
+
+    Here keeping all instances with label containing "im" in the collection
+    """
+    from oteapi.utils.config_updater import populate_config_from_session
+
+    from oteapi_dlite.strategies.filter import (
+        DLiteFilterConfig,
+        DLiteFilterStrategy,
+    )
+
+    coll, _ = initialize_collection
+
+    config = DLiteFilterConfig(
+        filterType="dlite/filter",
+        query="^im",
+        configuration={"collection_id": coll.uuid},
+    )
+
+    session = DLiteFilterStrategy(config).initialize()
+
+    populate_config_from_session(session, config)
+    DLiteFilterStrategy(config).get()
+
+    assert set(coll.get_labels()) == {
         "image1",
         "image2",
         "image3",
         "image4",
-    ]
-)
+    }
 
 
-# Same test as above, but use use `keep_label` instead of `query`
-config = DLiteFilterConfig(
-    filterType="dlite/filter",
-    configuration={
-        "keep_label": "^im",
-    },
-)
-coll1 = coll.copy()
-session = {"collection_id": coll1.uuid}
+def test_keep_label(
+    initialize_collection: tuple[Collection, Instance],
+) -> None:
+    """Same test as above, but use use `keep_label` instead of `query`"""
+    from oteapi.utils.config_updater import populate_config_from_session
 
-strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize(session))
+    from oteapi_dlite.strategies.filter import (
+        DLiteFilterConfig,
+        DLiteFilterStrategy,
+    )
 
-strategy = DLiteFilterStrategy(config)
-session.update(strategy.get(session))
+    coll, _ = initialize_collection
 
-assert set(coll1.get_labels()) == set(
-    [
+    config = DLiteFilterConfig(
+        filterType="dlite/filter",
+        configuration={
+            "keep_label": "^im",
+            "collection_id": coll.uuid,
+        },
+    )
+
+    session = DLiteFilterStrategy(config).initialize()
+
+    populate_config_from_session(session, config)
+
+    DLiteFilterStrategy(config).get()
+
+    assert set(coll.get_labels()) == {
         "image1",
         "image2",
         "image3",
         "image4",
-    ]
-)
+    }
 
 
-# Test combining remove and keep
-config = DLiteFilterConfig(
-    filterType="dlite/filter",
-    configuration={
-        "remove_datamodel": Image.uri,
-        "keep_label": "(image2)|(image4)",
-        "keep_referred": False,
-    },
-)
-coll2 = coll.copy()
-session = {"collection_id": coll2.uuid}
+def test_combining_remove_and_keep(
+    initialize_collection: tuple[Collection, Instance],
+) -> None:
+    """Test combining remove and keep"""
+    from oteapi.utils.config_updater import populate_config_from_session
 
-strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize(session))
+    from oteapi_dlite.strategies.filter import (
+        DLiteFilterConfig,
+        DLiteFilterStrategy,
+    )
 
-strategy = DLiteFilterStrategy(config)
-session.update(strategy.get(session))
+    coll, Image = initialize_collection
 
-assert set(coll2.get_labels()) == set(
-    [
+    config = DLiteFilterConfig(
+        filterType="dlite/filter",
+        configuration={
+            "remove_datamodel": Image.uri,
+            "keep_label": "(image2)|(image4)",
+            "keep_referred": False,
+            "collection_id": coll.uuid,
+        },
+    )
+
+    session = DLiteFilterStrategy(config).initialize()
+
+    populate_config_from_session(session, config)
+
+    DLiteFilterStrategy(config).get()
+
+    assert set(coll.get_labels()) == {
         "innercoll",
         "image2",
         "image4",
-    ]
-)
+    }
 
 
-# Test with keep_referred=True
-config = DLiteFilterConfig(
-    filterType="dlite/filter",
-    configuration={
-        "remove_datamodel": Image.uri,
-        "keep_label": "(image2)|(image4)",
-        "keep_referred": True,
-    },
-)
-coll3 = coll.copy()
-session = {"collection_id": coll3.uuid}
+def test_keep_referred_true(
+    initialize_collection: tuple[Collection, Instance],
+) -> None:
+    """Test with keep_referred=True"""
+    from oteapi.utils.config_updater import populate_config_from_session
 
-strategy = DLiteFilterStrategy(config)
-session.update(strategy.initialize(session))
+    from oteapi_dlite.strategies.filter import (
+        DLiteFilterConfig,
+        DLiteFilterStrategy,
+    )
 
-strategy = DLiteFilterStrategy(config)
-session.update(strategy.get(session))
+    coll, Image = initialize_collection
 
-assert set(coll3.get_labels()) == set(
-    [
+    config = DLiteFilterConfig(
+        filterType="dlite/filter",
+        configuration={
+            "remove_datamodel": Image.uri,
+            "keep_label": "(image2)|(image4)",
+            "keep_referred": True,
+            "collection_id": coll.uuid,
+        },
+    )
+
+    session = DLiteFilterStrategy(config).initialize()
+
+    populate_config_from_session(session, config)
+
+    DLiteFilterStrategy(config).get()
+
+    assert set(coll.get_labels()) == {
         "innercoll",
         "image1",
         "image2",
         "image4",
-    ]
-)
+    }

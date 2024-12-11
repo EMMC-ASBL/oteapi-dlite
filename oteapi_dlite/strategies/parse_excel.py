@@ -1,43 +1,52 @@
 """Strategy for parsing an Excel spreadsheet to a DLite instance."""
 
-# pylint: disable=unused-argument
+from __future__ import annotations
+
 import re
+import sys
 from random import getrandbits
 from typing import TYPE_CHECKING, Annotated, Optional
+
+if sys.version_info >= (3, 9, 1):
+    from typing import Literal
+else:
+    from typing_extensions import Literal  # type: ignore[assignment]
 
 import dlite
 import numpy as np
 from dlite.datamodel import DataModel
-from oteapi.models import AttrDict, ResourceConfig
-from oteapi.strategies.parse.excel_xlsx import (
-    XLSXParseConfig,
-    XLSXParseStrategy,
-)
-from pydantic import Field, HttpUrl
+from oteapi.models import HostlessAnyUrl, ParserConfig, ResourceConfig
+from oteapi.plugins import create_strategy
+from oteapi.strategies.parse.excel_xlsx import XLSXParseConfig
+from pydantic import AnyHttpUrl, Field
 from pydantic.dataclasses import dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteResult
 from oteapi_dlite.utils import dict2recarray, get_collection, update_collection
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Union
-
-    from oteapi.interfaces import IParseStrategy
+    from typing import Any
 
 
-class DLiteExcelParseConfig(AttrDict):
+class DLiteExcelParseConfig(DLiteResult):
     """Configuration for DLite Excel parser."""
 
-    metadata: Annotated[
-        Optional[HttpUrl],
+    # Resource config
+    downloadUrl: Annotated[
+        Optional[HostlessAnyUrl],
         Field(
-            description=(
-                "URI of DLite metadata to return.  If not provided, the "
-                "metadata will be inferred from the excel file."
-            ),
+            description=ResourceConfig.model_fields["downloadUrl"].description
         ),
     ] = None
 
+    mediaType: Annotated[
+        Literal[
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ],
+        Field(description=ResourceConfig.model_fields["mediaType"].description),
+    ] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+    # Parser config
     id: Annotated[
         Optional[str], Field(description="Optional id on new instance.")
     ] = None
@@ -63,16 +72,29 @@ class DLiteExcelParseConfig(AttrDict):
     ] = None
 
 
-class DLiteExcelParseResourceConfig(ResourceConfig):
+class DLiteExcelParserConfig(ParserConfig):
     """DLite excel parse strategy resource config."""
 
+    parserType: Annotated[
+        Literal["application/vnd.dlite-xlsx"],
+        Field(description=ParserConfig.model_fields["parserType"].description),
+    ] = "application/vnd.dlite-xlsx"
     configuration: Annotated[
         DLiteExcelParseConfig,
         Field(description="DLite excel parse strategy-specific configuration."),
     ]
+    entity: Annotated[
+        Optional[AnyHttpUrl],
+        Field(
+            description=(
+                "URI of DLite metadata to return. If not provided, the "
+                "metadata will be inferred from the excel file."
+            ),
+        ),
+    ] = None
 
 
-class DLiteExcelSessionUpdate(DLiteSessionUpdate):
+class DLiteExcelSessionUpdate(DLiteResult):
     """Class for returning values from DLite excel parser."""
 
     inst_uuid: Annotated[
@@ -100,25 +122,21 @@ class DLiteExcelStrategy:
 
     """
 
-    parse_config: DLiteExcelParseResourceConfig
+    parse_config: DLiteExcelParserConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, "Any"]] = None,
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.parse_config.configuration.collection_id
+            ).uuid
+        )
 
-    def get(
-        self, session: Optional[dict[str, "Any"]] = None
-    ) -> DLiteExcelSessionUpdate:
+    def get(self) -> DLiteExcelSessionUpdate:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
         of the OTE-API Services.
-
-        Parameters:
-            session: A session-specific dictionary context.
 
         Returns:
             DLite instance.
@@ -126,17 +144,30 @@ class DLiteExcelStrategy:
         """
         config = self.parse_config.configuration
 
-        xlsx_config = self.parse_config.model_dump()
-        xlsx_config["configuration"] = config.excel_config
-        xlsx_config["mediaType"] = (
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
-        parser: "IParseStrategy" = XLSXParseStrategy(xlsx_config)
-        columns: dict[str, "Any"] = parser.get(session)["data"]
+        if config.downloadUrl is None:
+            raise ValueError("downloadUrl is required.")
+        if config.mediaType is None:
+            raise ValueError("mediaType is required.")
 
-        names, units = zip(
-            *[split_column_name(column) for column in columns.keys()]
+        xlsx_config = {
+            "parserType": "parser/excel_xlsx",
+            "configuration": config.excel_config.model_dump(),
+            "entity": (
+                self.parse_config.entity
+                if self.parse_config.entity
+                else "https://example.org"
+            ),
+        }
+        xlsx_config["configuration"].update(
+            {
+                "downloadUrl": config.downloadUrl,
+                "mediaType": config.mediaType,
+            }
         )
+        parser = create_strategy("parse", xlsx_config)
+        columns: dict[str, Any] = parser.get()["data"]
+
+        names, units = zip(*[split_column_name(column) for column in columns])
         rec = dict2recarray(columns, names=names)
 
         if not isinstance(units, (list, tuple)):
@@ -145,11 +176,12 @@ class DLiteExcelStrategy:
                 f"units must be a list or tuple, instead it was {type(units)}"
             )
 
-        if config.metadata:
+        meta_uri = self.parse_config.entity
+        if meta_uri:
             if config.storage_path is not None:
                 for storage_path in config.storage_path.split("|"):
                     dlite.storage_path.append(storage_path)
-            meta = dlite.get_instance(config.metadata)
+            meta = dlite.get_instance(str(meta_uri))
             # check the metadata config would go here
         else:
             meta = infer_metadata(rec, units=units)
@@ -159,7 +191,7 @@ class DLiteExcelStrategy:
             inst[name] = rec[name]
 
         # Insert inst into collection
-        coll = get_collection(session)
+        coll = get_collection(config.collection_id)
         coll.add(config.label, inst)
 
         update_collection(coll)

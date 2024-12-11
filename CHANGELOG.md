@@ -1,5 +1,59 @@
 # Changelog
 
+## [v0.3.2](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.3.2) (2024-10-21)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.3.1...v0.3.2)
+
+**Merged pull requests:**
+
+- Update tripper dependecy to have version number [\#315](https://github.com/EMMC-ASBL/oteapi-dlite/pull/315) ([francescalb](https://github.com/francescalb))
+
+## [v0.3.1](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.3.1) (2024-10-21)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.3.0...v0.3.1)
+
+**Implemented enhancements:**
+
+- Use ruff instead of pylint [\#308](https://github.com/EMMC-ASBL/oteapi-dlite/issues/308)
+- Update CI/CD, streamlining and aligning it [\#307](https://github.com/EMMC-ASBL/oteapi-dlite/issues/307)
+
+**Closed issues:**
+
+- Use Trusted Publishers from PyPI [\#310](https://github.com/EMMC-ASBL/oteapi-dlite/issues/310)
+- mkdocs autorefs fails in strict mode after 1.1.0, and fails with error with 1.2.0 [\#269](https://github.com/EMMC-ASBL/oteapi-dlite/issues/269)
+- Support pre-commit in Windows [\#214](https://github.com/EMMC-ASBL/oteapi-dlite/issues/214)
+- Make ci\_tests work for Python 3.11 [\#168](https://github.com/EMMC-ASBL/oteapi-dlite/issues/168)
+
+**Merged pull requests:**
+
+- Update CI/CD, fix MkDocs build, use Trusted Publishers for PyPI [\#311](https://github.com/EMMC-ASBL/oteapi-dlite/pull/311) ([CasperWA](https://github.com/CasperWA))
+- Update dev tools [\#309](https://github.com/EMMC-ASBL/oteapi-dlite/pull/309) ([CasperWA](https://github.com/CasperWA))
+
+## [v0.3.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.3.0) (2024-10-14)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.2.2...v0.3.0)
+
+**Fixed bugs:**
+
+- Use new `[full]` extra when installing DLite [\#162](https://github.com/EMMC-ASBL/oteapi-dlite/issues/162)
+
+**Closed issues:**
+
+- Let convert strategy accept kwargs than can be passed on to the function. [\#268](https://github.com/EMMC-ASBL/oteapi-dlite/issues/268)
+- Add option to dlite-generate for also storing data documentation of the generated data to the KB [\#263](https://github.com/EMMC-ASBL/oteapi-dlite/issues/263)
+
+**Merged pull requests:**
+
+- \[pre-commit.ci\] pre-commit autoupdate [\#297](https://github.com/EMMC-ASBL/oteapi-dlite/pull/297) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#286](https://github.com/EMMC-ASBL/oteapi-dlite/pull/286) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- Updated test\_generate\_kb to use otelib [\#281](https://github.com/EMMC-ASBL/oteapi-dlite/pull/281) ([jesper-friis](https://github.com/jesper-friis))
+- Improved control over partial pipeline created with the generate strategy [\#280](https://github.com/EMMC-ASBL/oteapi-dlite/pull/280) ([jesper-friis](https://github.com/jesper-friis))
+- Updated dependencies [\#273](https://github.com/EMMC-ASBL/oteapi-dlite/pull/273) ([jesper-friis](https://github.com/jesper-friis))
+- Update `kb_document` with the possibility to connect input to output [\#267](https://github.com/EMMC-ASBL/oteapi-dlite/pull/267) ([jesper-friis](https://github.com/jesper-friis))
+- Added options to strategy convert [\#266](https://github.com/EMMC-ASBL/oteapi-dlite/pull/266) ([francescalb](https://github.com/francescalb))
+- Add new `kb_document` option to the generate strategy [\#264](https://github.com/EMMC-ASBL/oteapi-dlite/pull/264) ([jesper-friis](https://github.com/jesper-friis))
+- \[pre-commit.ci\] pre-commit autoupdate [\#260](https://github.com/EMMC-ASBL/oteapi-dlite/pull/260) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+
 ## [v0.2.2](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.2.2) (2024-07-04)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.2.1...v0.2.2)

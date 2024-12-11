@@ -1,13 +1,15 @@
 """Mapping filter strategy."""
 
-# pylint: disable=unused-argument,invalid-name
+from __future__ import annotations
+
+import json
 from typing import TYPE_CHECKING, Annotated, Optional
 
-from oteapi.models import AttrDict, MappingConfig
+from oteapi.models import MappingConfig
 from pydantic import AnyUrl
 from pydantic.dataclasses import Field, dataclass
 
-from oteapi_dlite.models import DLiteSessionUpdate
+from oteapi_dlite.models import DLiteConfiguration, DLiteResult
 from oteapi_dlite.utils import (
     get_collection,
     get_triplestore,
@@ -15,10 +17,10 @@ from oteapi_dlite.utils import (
 )
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
+    pass
 
 
-class DLiteMappingStrategyConfig(AttrDict):
+class DLiteMappingStrategyConfig(DLiteConfiguration):
     """Configuration for a DLite mapping filter."""
 
     datamodel: Annotated[
@@ -52,14 +54,25 @@ class DLiteMappingStrategy:
 
     mapping_config: DLiteMappingConfig
 
-    def initialize(
-        self, session: Optional[dict[str, "Any"]] = None
-    ) -> DLiteSessionUpdate:
+    def initialize(self) -> DLiteResult:
         """Initialize strategy."""
-        if session is None:
-            session = {}
+        config = self.mapping_config.configuration
 
-        ts = get_triplestore(session)
+        coll = get_collection(config.collection_id)
+
+        kb_settings = config.dlite_settings.get("tripper.triplestore")
+        if isinstance(kb_settings, str):
+            kb_settings = json.loads(kb_settings)
+        if kb_settings and not isinstance(kb_settings, dict):
+            raise ValueError(
+                "The `tripper.triplestore` setting must be a dictionary."
+            )
+
+        if TYPE_CHECKING:  # pragma: no cover
+            # This block will only be run by mypy when checking typing
+            assert isinstance(kb_settings, dict) or kb_settings is None  # nosec
+
+        ts = get_triplestore(kb_settings=kb_settings, collection_id=coll.uuid)
 
         if self.mapping_config.prefixes:
             for prefix, iri in self.mapping_config.prefixes.items():
@@ -72,16 +85,17 @@ class DLiteMappingStrategy:
                         ts.expand_iri(t) if isinstance(t, str) else t
                         for t in triple
                     ]
-                    for triple in self.mapping_config.triples  # pylint: disable=not-an-iterable
+                    for triple in self.mapping_config.triples
                 ]
             )
 
-        coll = get_collection(session)
         update_collection(coll)
-        return DLiteSessionUpdate(collection_id=coll.uuid)
+        return DLiteResult(collection_id=coll.uuid)
 
-    def get(
-        self, session: Optional[dict[str, "Any"]] = None
-    ) -> DLiteSessionUpdate:
+    def get(self) -> DLiteResult:
         """Execute strategy and return a dictionary."""
-        return DLiteSessionUpdate(collection_id=get_collection(session).uuid)
+        return DLiteResult(
+            collection_id=get_collection(
+                self.mapping_config.configuration.collection_id
+            ).uuid
+        )

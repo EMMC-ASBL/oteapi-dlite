@@ -8,38 +8,63 @@ ci:
   autoupdate_branch: 'master'
   autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
   autoupdate_schedule: 'weekly'
-  skip: [pylint, pylint-tests]
+  skip: []
   submodules: false
 
 # hooks
 repos:
+  # pre-commit-hooks supplies a multitude of small hooks
+  # To get an overview of them all as well as the ones used here, please see
+  # https://github.com/pre-commit/pre-commit-hooks#hooks-available
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
     - id: end-of-file-fixer
+      exclude: ^CHANGELOG.md$
     - id: debug-statements
     - id: check-yaml
       name: Check YAML
     - id: check-toml
       name: Check TOML
-    - id: requirements-txt-fixer
-      name: Fix requirements*.txt
-      files: ^requirements.*\.txt$
     - id: trailing-whitespace
       args: [--markdown-linebreak-ext=md]
+      exclude: ^CHANGELOG.md$
 
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+  # pyupgrade is a tool for automatically upgrading Python syntax for newer versions of
+  # the language
+  # It works on files in-place
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.19.0
     hooks:
-    - id: isort
-      args: ["--profile", "black", "--line-length", "80", "--filter-files", "--skip-gitignore"]
+    - id: pyupgrade
+      args: [--py39-plus, --keep-runtime-typing]
 
+  # Black is a code style and formatter
+  # It works on files in-place
   - repo: https://github.com/psf/black
     rev: 24.10.0
     hooks:
     - id: black
-      args: ["--line-length", "80"]
 
+  # ruff is a Python linter, incl. import sorter and formatter
+  # It works partly on files in-place
+  # More information can be found in its documentation:
+  # https://docs.astral.sh/ruff/
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.4
+    hooks:
+    - id: ruff
+      # Fix what can be fixed in-place and exit with non-zero status if files were
+      # changed and/or there are rules violations.
+      args:
+      - "--fix"
+      - "--exit-non-zero-on-fix"
+      - "--show-fixes"
+      - "--no-unsafe-fixes"
+
+  # Bandit is a security linter
+  # More information can be found in its documentation:
+  # https://bandit.readthedocs.io/en/latest/
   - repo: https://github.com/PyCQA/bandit
     rev: 1.7.10
     hooks:
@@ -47,8 +72,13 @@ repos:
       args: ["-r"]
       files: ^oteapi_dlite/.*$
 
+  # mypy is a static typing linter
+  # The main code repository can be found at:
+  # https://github.com/python/mypy
+  # The project's documentation can be found at:
+  # https://mypy.readthedocs.io/en/stable/index.html
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.2
+    rev: v1.13.0
     hooks:
     - id: mypy
       exclude: ^tests/.*$
@@ -56,8 +86,12 @@ repos:
       - "types-requests"
       - "pydantic>=2,<3"
 
+  # ci-cd is a collection of hooks to prepare for CI/CD workflows
+  # It's mainly related to documentation
+  # More information can be found in its documentation:
+  # https://SINTEF.github.io/ci-cd/
   - repo: https://github.com/SINTEF/ci-cd
-    rev: v2.8.2
+    rev: v2.8.3
     hooks:
     - id: docs-api-reference
       args:
@@ -68,28 +102,4 @@ repos:
       args:
       - --replacement=(LICENSE),(LICENSE.md)
       - --replacement=https://EMMC-ASBL.github.io/oteapi-dlite/latest/,
-
-  - repo: local
-    hooks:
-    - id: pylint
-      name: pylint
-      entry: pylint
-      args:
-      - "--rcfile=pyproject.toml"
-      - "--extension-pkg-whitelist='pydantic'"
-      language: python
-      types: [python]
-      require_serial: true
-      files: ^.*$
-      exclude: ^tests/.*$
-    - id: pylint-tests
-      name: pylint - tests
-      entry: pylint
-      args:
-      - "--rcfile=pyproject.toml"
-      - "--extension-pkg-whitelist='pydantic'"
-      - "--disable=import-outside-toplevel,redefined-outer-name,import-error"
-      language: python
-      types: [python]
-      require_serial: true
-      files: ^tests/.*$
+      - --replacement=all_strategies),all_strategies.md)

@@ -1,13 +1,14 @@
 """Tests oteapi-dlite.utils.get_instance()."""
 
-# pylint: disable=too-many-locals
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from ..conftest import PathsTuple
 
 
-def test_instantiate_calcresults(entities_path: "Path") -> None:
+def test_instantiate_calcresults(paths: PathsTuple) -> None:
     """Test utils.get_instance().
 
     Instantiate a CalcResult - typically done in a function strategy.
@@ -30,7 +31,7 @@ def test_instantiate_calcresults(entities_path: "Path") -> None:
     from oteapi_dlite.utils import get_instance
 
     # Setup
-    dlite.storage_path.append(str(entities_path / "*.json"))
+    dlite.storage_path.append(str(paths.entitydir / "*.json"))
 
     # Create collection - called the first time get_collection() is called
     # in a strategy

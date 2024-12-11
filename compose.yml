@@ -1,0 +1,34 @@
+services:
+  oteapi:
+    image: ghcr.io/emmc-asbl/oteapi:${DOCKER_OTEAPI_VERSION:-latest}
+    ports:
+      - "5000:8080"
+    environment:
+      OTEAPI_REDIS_TYPE: redis
+      OTEAPI_REDIS_HOST: redis
+      OTEAPI_REDIS_PORT: 6379
+      OTEAPI_PREFIX: "${OTEAPI_PREFIX:-/api/v1}"
+      PATH_TO_OTEAPI_CORE:
+      OTEAPI_PLUGIN_PACKAGES: "-v git+https://github.com/EMMC-ASBL/oteapi-dlite@cwa/close-303-update-to-dev-core-versions"
+      # OTEAPI_PLUGIN_PACKAGES: "-v -e /oteapi-dlite"
+    depends_on:
+      - redis
+    volumes:
+      - "${PATH_TO_OTEAPI_CORE:-/dev/null}:/oteapi-core"
+      # - "${PWD}:/oteapi-dlite"
+    entrypoint: |
+      /bin/bash -c "if [ \"${PATH_TO_OTEAPI_CORE}\" != \"/dev/null\" ] && [ -n \"${PATH_TO_OTEAPI_CORE}\" ]; then \
+      pip install -U --force-reinstall -e /oteapi-core; fi && ./entrypoint.sh --reload --debug --log-level debug"
+    stop_grace_period: 1s
+
+  redis:
+    image: redis:latest
+    volumes:
+      - redis-oteapi:/data
+
+volumes:
+  redis-oteapi:
+
+networks:
+  default:
+    name: otenet

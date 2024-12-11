@@ -1,8 +1,11 @@
 """Tests mapping strategy."""
 
+from __future__ import annotations
+
 
 def test_mapping_without_prefixes() -> None:
     """Test without prefixes."""
+    from oteapi.utils.config_updater import populate_config_from_session
     from tripper import EMMO, MAP, Namespace
 
     from oteapi_dlite.strategies.mapping import (
@@ -22,22 +25,25 @@ def test_mapping_without_prefixes() -> None:
         ],
     )
 
-    session = {}
+    session = DLiteMappingStrategy(config).initialize()
 
-    strategy = DLiteMappingStrategy(config)
-    session.update(strategy.initialize(session))
+    # Remove the line immediately below once EMMC-ASBL/oteapi#545 is fixed
+    config.configuration.collection_id = session.collection_id
+    populate_config_from_session(session, config)
 
-    strategy = DLiteMappingStrategy(config)
-    session.update(strategy.get(session))
+    DLiteMappingStrategy(config).get()
 
-    collection = get_collection(session)
-    relations = set(collection.get_relations())
+    coll = get_collection(session.collection_id)
+
+    relations = set(coll.get_relations())
+    assert len(list(coll.get_relations())) == len(relations)
     assert (FORCES.forces, MAP.mapsTo, EMMO.Force) in relations
     assert (ENERGY.energy, MAP.mapsTo, EMMO.PotentialEnergy) in relations
 
 
 def test_mapping_with_prefixes() -> None:
     """Test with prefixes."""
+    from oteapi.utils.config_updater import populate_config_from_session
     from tripper import EMMO, MAP, Namespace
 
     from oteapi_dlite.strategies.mapping import (
@@ -63,11 +69,15 @@ def test_mapping_with_prefixes() -> None:
         ],
     )
 
-    mapper = DLiteMappingStrategy(config)
-    session = mapper.initialize()
-    session.update(mapper.get(session))
+    session = DLiteMappingStrategy(config).initialize()
 
-    coll = get_collection(session)
+    # Remove the line immediately below once EMMC-ASBL/oteapi#545 is fixed
+    config.configuration.collection_id = session.collection_id
+    populate_config_from_session(session, config)
+
+    DLiteMappingStrategy(config).get()
+
+    coll = get_collection(session.collection_id)
 
     relations = set(coll.get_relations())
     assert len(list(coll.get_relations())) == len(relations)

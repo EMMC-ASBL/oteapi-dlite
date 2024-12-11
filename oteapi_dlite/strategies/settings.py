@@ -1,24 +1,15 @@
 """Generic strategy for adding configurations to the session."""
 
-# pylint: disable=unused-argument,invalid-name
-from typing import TYPE_CHECKING, Annotated, Optional, Union
+from __future__ import annotations
 
-from oteapi.models import AttrDict, FilterConfig, SessionUpdate
-from pydantic import Field
+from typing import Annotated
+
+from oteapi.models import AttrDict, FilterConfig
+from pydantic import Field, JsonValue
 from pydantic.dataclasses import dataclass
-
-# from oteapi_dlite.models import DLiteSessionUpdate
-from oteapi_dlite.utils import add_settings
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any
-
 
 # Must add this explicitly to make mypy happy
 NoneType = type(None)
-
-# Python object that is JSON serialisable
-JSONSerialisable = Union[dict, list, str, int, float, bool, NoneType]
 
 
 class SettingsConfig(AttrDict):
@@ -44,7 +35,7 @@ class SettingsConfig(AttrDict):
         ),
     ]
     settings: Annotated[
-        JSONSerialisable,
+        JsonValue,
         Field(
             description=(
                 "The configurations to be stored, represented as a Python "
@@ -74,16 +65,14 @@ class SettingsStrategy:
 
     """
 
-    settings_config: SettingsFilterConfig
+    filter_config: SettingsFilterConfig
 
-    def initialize(
-        self,
-        session: Optional[dict[str, "Any"]] = None,
-    ) -> SessionUpdate:
+    def initialize(self) -> AttrDict:
         """Store settings."""
-        config = self.settings_config.configuration
-        return add_settings(session, config.label, config.settings)
+        config = self.filter_config.configuration
 
-    def get(self, session: Optional[dict[str, "Any"]] = None) -> SessionUpdate:
+        return AttrDict(dlite_settings={config.label: config.settings})
+
+    def get(self) -> AttrDict:
         """Do nothing."""
-        return SessionUpdate()
+        return AttrDict()
