@@ -24,8 +24,7 @@ dynamic = ["version"]
 dependencies = [
     # Core dependencies
     "DLite-Python>=0.4.5,<0.5.28",
-    "numpy>=1.21,<3", # it fails now because of numpy issues 
-    # will be fixed with tripper being updated, which updates pint whih updates numpy
+    "numpy>=1.21,<3",
     "oteapi-core>=0.7.0.dev3,<1",
     "pydantic>=2.1,<3",
     "pydantic-settings>=2.0,<3",
