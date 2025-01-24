@@ -24,7 +24,9 @@ dynamic = ["version"]
 dependencies = [
     # Core dependencies
     "DLite-Python>=0.4.5,<0.5.28",
-    "numpy>=1.21,<3",
+    "numpy>=1.21,<2", # To increase to numpy2 with tripper=0.3.5
+    # The reason for this is that pint is not updated to numpy2
+    # but also does not specify that it depends numpy1
     "oteapi-core>=0.7.0.dev3,<1",
     "pydantic>=2.1,<3",
     "pydantic-settings>=2.0,<3",
