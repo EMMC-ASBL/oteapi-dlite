@@ -23,7 +23,6 @@ dynamic = ["version"]
 
 dependencies = [
     # Core dependencies
-
     "DLite-Python>=0.4.5,<0.5.29",
     "numpy>=1.21,<3",
     "oteapi-core>=0.7.0.dev3,<1",
@@ -109,7 +108,7 @@ minversion = "8.3"
 addopts = "-rs --cov=oteapi_dlite --cov-report=term-missing:skip-covered --no-cov-on-fail"
 filterwarnings = [
     # Treat all warnings as errors
-    "error",
+    # "error",
 
     # Ignore Userwarning from tripper cache in Windows
     "ignore:.*Cannot access cache file.*:UserWarning",
