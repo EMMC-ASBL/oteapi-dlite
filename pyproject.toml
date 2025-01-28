@@ -23,8 +23,13 @@ dynamic = ["version"]
 
 dependencies = [
     # Core dependencies
-    "DLite-Python>=0.4.5,<0.5.28",
-    "numpy>=1.21,<3",
+    "DLite-Python>=0.4.5,<0.5.29",
+    #"numpy>=1.21,<3",
+    "numpy>=1.21,<2", # pint<0.24 does not specify its req
+    # since tripper[mappings] uses pint the system does not
+    # catch that pint cannot use numpy~=2
+    # this is fixed in pint0.24, which will be availeble in
+    # tripper 0.3.5
     "oteapi-core>=0.7.0.dev3,<1",
     "pydantic>=2.1,<3",
     "pydantic-settings>=2.0,<3",
@@ -109,7 +114,7 @@ minversion = "8.3"
 addopts = "-rs --cov=oteapi_dlite --cov-report=term-missing:skip-covered --no-cov-on-fail"
 filterwarnings = [
     # Treat all warnings as errors
-    #"error",
+    # "error",
 
     # Ignore Userwarning from tripper cache in Windows
     "ignore:.*Cannot access cache file.*:UserWarning",
