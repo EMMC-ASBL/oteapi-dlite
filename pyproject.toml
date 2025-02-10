@@ -23,7 +23,7 @@ dynamic = ["version"]
 
 dependencies = [
     # Core dependencies
-    "DLite-Python>=0.4.5,<0.5.24",
+    "DLite-Python>=0.4.5,<0.5.30",
     "numpy>=1.21,<3",
     "oteapi-core>=0.7.0.dev3,<1",
     "pydantic>=2.1,<3",
@@ -40,18 +40,18 @@ docs = [
     "mkdocs-autorefs~=1.2",
     "mkdocs-awesome-pages-plugin~=2.9",
     "mkdocs-material~=9.5",
-    "mkdocstrings[python]~=0.27.0",
+    "mkdocstrings[python]>=0.27,<0.29",
 ]
 testing = [
     "PyYAML>=5.4.1,<7",
     "otelib>=0.5.0.dev1,<1",
     "rdflib>=5.0.0,<8",
-    "pytest==8.3.3",
+    "pytest==8.3.4",
     "pytest-cov==6.0.0",
 ]
 dev = [
     "oteapi-dlite[docs,testing]",
-    "pre-commit==4.0.1",
+    "pre-commit==4.1.0",
 ]
 
 [project.urls]
