@@ -19,7 +19,7 @@ jobs:
       run_pre-commit: false
 
       ## pylint & safety
-      python_version_pylint_safety: "3.9"
+      python_version_pylint_safety: "3.10"
 
       # pylint-specific settings
       run_pylint: false
@@ -42,13 +42,13 @@ jobs:
 
       ## Build package
       run_build_package: true
-      python_version_package: "3.9"
+      python_version_package: "3.10"
       build_libs: flit
       build_cmd: flit build
 
       ## Build documentation
       run_build_docs: true
-      python_version_docs: "3.9"
+      python_version_docs: "3.10"
       warnings_as_errors: true
       use_mkdocs: true
 
@@ -71,10 +71,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.10", "3.11", "3.12"]
 
     steps:
-    - name: Checkout oteapi-dlite
+    - name: Checkout ${{ github.repository }}
       uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python-version }}
@@ -93,13 +93,33 @@ jobs:
       run: pip freeze
 
     - name: Test with pytest
-      run: pytest -vvv --cov-report=xml --doctest-modules
+      run: |
+        pytest -vv --cov-report=xml --doctest-modules
+        pytest -vv --cov-report=xml:strategies.xml --cov=oteapi/strategies
 
     - name: Upload coverage to Codecov
-      if: matrix.python-version == '3.9' && github.repository == 'EMMC-ASBL/oteapi-dlite'
+      if: github.repository == 'EMMC-ASBL/oteapi-dlite'
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+        files: coverage.xml
+        flags: windows
+        env_vars: PYTHON,OS
+      env:
+        OS: Linux
+        PYTHON: ${{ matrix.python-version }}
+
+    - name: Upload strategies coverage to Codecov
+      if: github.repository == 'EMMC-ASBL/oteapi-dlite'
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: strategies.xml
+        flags: windows-strategies
+        env_vars: PYTHON,OS
+      env:
+        OS: Linux
+        PYTHON: ${{ matrix.python-version }}
 
   pytest-win:
     name: pytest (windows-py${{ matrix.python-version }})
@@ -108,10 +128,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.10", "3.11", "3.12"]
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout ${{ github.repository }}
+      uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python-version}}
       uses: actions/setup-python@v5
@@ -135,19 +156,29 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest -vvv --cov-report=xml --cov=oteapi --durations=10
-        pytest --cov-report=xml:strategies.xml --cov=oteapi/strategies --durations=10
+        pytest -vv --cov-report=xml --cov=oteapi
+        pytest -vv --cov-report=xml:strategies.xml --cov=oteapi/strategies
 
     - name: Upload coverage to Codecov
-      if: matrix.python-version == '3.9' && github.repository == 'EMMC-ASBL/oteapi-core'
+      if: github.repository == 'EMMC-ASBL/oteapi-core'
       uses: codecov/codecov-action@v5
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage.xml
         flags: windows
+        env_vars: PYTHON,OS
+      env:
+        OS: Windows
+        PYTHON: ${{ matrix.python-version }}
 
     - name: Upload strategies coverage to Codecov
-      if: matrix.python-version == '3.9' && github.repository == 'EMMC-ASBL/oteapi-core'
+      if: github.repository == 'EMMC-ASBL/oteapi-core'
       uses: codecov/codecov-action@v5
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: strategies.xml
         flags: windows-strategies
+        env_vars: PYTHON,OS
+      env:
+        OS: Windows
+        PYTHON: ${{ matrix.python-version }}

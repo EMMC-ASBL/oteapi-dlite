@@ -3,13 +3,7 @@
 from __future__ import annotations
 
 import logging
-import sys
-from typing import Annotated, Optional
-
-if sys.version_info >= (3, 9, 1):
-    from typing import Literal
-else:
-    from typing_extensions import Literal  # type: ignore[assignment]
+from typing import Annotated, Literal, Optional
 
 import numpy as np
 from oteapi.datacache import DataCache

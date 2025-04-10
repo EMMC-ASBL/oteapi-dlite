@@ -2,14 +2,8 @@
 
 from __future__ import annotations
 
-import sys
 from pathlib import Path
-from typing import Annotated, Optional
-
-if sys.version_info >= (3, 9, 1):
-    from typing import Literal
-else:
-    from typing_extensions import Literal  # type: ignore[assignment]
+from typing import Annotated, Literal, Optional
 
 import dlite
 from oteapi.datacache import DataCache

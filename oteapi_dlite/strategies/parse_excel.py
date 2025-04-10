@@ -3,14 +3,8 @@
 from __future__ import annotations
 
 import re
-import sys
 from random import getrandbits
-from typing import TYPE_CHECKING, Annotated, Optional
-
-if sys.version_info >= (3, 9, 1):
-    from typing import Literal
-else:
-    from typing_extensions import Literal  # type: ignore[assignment]
+from typing import TYPE_CHECKING, Annotated, Literal, Optional
 
 import dlite
 import numpy as np
