@@ -4,6 +4,7 @@
 # of all GH Actions being run at the top of the hour.
 
 version: 2
+
 updates:
 - package-ecosystem: pip
   directory: "/"
@@ -22,6 +23,7 @@ updates:
     python-security:
       applies-to: security-updates
       patterns: ["*"]
+
 - package-ecosystem: github-actions
   directory: "/"
   schedule:

@@ -64,13 +64,16 @@ jobs:
         https://EMMC-ASBL.github.io/oteapi-dlite/latest/,
         all_strategies),all_strategies.md)
 
-  pytest-linux:
-    name: pytest (linux-py${{ matrix.python-version }})
-    runs-on: ubuntu-latest
+  pytest:
+    name: pytest (${{ matrix.os[1] }}-py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os[0] }}
 
     strategy:
       fail-fast: false
       matrix:
+        os:
+          - ["ubuntu-latest", "Linux"]
+          - ["windows-latest", "Windows"]
         python-version: ["3.10", "3.11", "3.12"]
 
     steps:
@@ -82,64 +85,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
-      run: |
-        sudo apt install graphviz
-        python -m pip install -U pip
-        pip install -U setuptools wheel flit
-        pip install -e .[testing]
+    - name: Install Linux system dependencies
+      if: matrix.os[1] == 'Linux'
+      run: sudo apt -qqy update && sudo apt install -y ghostscript
 
-    - name: List installed packages
-      run: pip freeze
-
-    - name: Test with pytest
-      run: |
-        pytest -vv --cov-report=xml --doctest-modules
-        pytest -vv --cov-report=xml:strategies.xml --cov=oteapi/strategies
-
-    - name: Upload coverage to Codecov
-      if: github.repository == 'EMMC-ASBL/oteapi-dlite'
-      uses: codecov/codecov-action@v5
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: coverage.xml
-        flags: windows
-        env_vars: PYTHON,OS
-      env:
-        OS: Linux
-        PYTHON: ${{ matrix.python-version }}
-
-    - name: Upload strategies coverage to Codecov
-      if: github.repository == 'EMMC-ASBL/oteapi-dlite'
-      uses: codecov/codecov-action@v5
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: strategies.xml
-        flags: windows-strategies
-        env_vars: PYTHON,OS
-      env:
-        OS: Linux
-        PYTHON: ${{ matrix.python-version }}
-
-  pytest-win:
-    name: pytest (windows-py${{ matrix.python-version }})
-    runs-on: windows-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
-
-    steps:
-    - name: Checkout ${{ github.repository }}
-      uses: actions/checkout@v4
-
-    - name: Set up Python ${{ matrix.python-version}}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version}}
-
-    - name: Install system dependencies
+    - name: Install Windows system dependencies
+      if: matrix.os[1] == 'Windows'
       run: |
         $url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9550/gs9550w64.exe"
         $outpath = "${{ github.workspace }}\ghostscript.exe"
@@ -148,37 +99,40 @@ jobs:
         Start-Process -Filepath $outpath -ArgumentList $args
       shell: powershell
 
-    - name: Install Python dependencies
+    - name: Install dependencies
       run: |
         python -m pip install -U pip
         pip install -U setuptools wheel
         pip install -e .[testing]
 
+    - name: List installed packages
+      run: pip freeze
+
     - name: Test with pytest
       run: |
-        pytest -vv --cov-report=xml --cov=oteapi
-        pytest -vv --cov-report=xml:strategies.xml --cov=oteapi/strategies
+        pytest -vv --cov-report=xml --doctest-modules --cov=oteapi_dlite
+        pytest -vv --cov-report=xml:strategies.xml --doctest-modules --cov=oteapi_dlite/strategies
 
     - name: Upload coverage to Codecov
-      if: github.repository == 'EMMC-ASBL/oteapi-core'
+      if: github.repository == 'EMMC-ASBL/oteapi-dlite'
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage.xml
-        flags: windows
+        flags: ${{ matrix.os[1] }}
         env_vars: PYTHON,OS
       env:
-        OS: Windows
+        OS: ${{ matrix.os[1] }}
         PYTHON: ${{ matrix.python-version }}
 
     - name: Upload strategies coverage to Codecov
-      if: github.repository == 'EMMC-ASBL/oteapi-core'
+      if: github.repository == 'EMMC-ASBL/oteapi-dlite'
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: strategies.xml
-        flags: windows-strategies
+        flags: ${{ matrix.os[1] }}-strategies
         env_vars: PYTHON,OS
       env:
-        OS: Windows
+        OS: ${{ matrix.os[1] }}
         PYTHON: ${{ matrix.python-version }}
