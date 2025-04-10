@@ -195,6 +195,7 @@ class DLiteConvertStrategy:
         # error.
         for inst, output_config in zip(outputs, config.outputs, strict=False):
             coll.add(output_config.label, inst)
+            inst._incref()
 
         update_collection(coll)
         return DLiteResult(collection_id=coll.uuid)
