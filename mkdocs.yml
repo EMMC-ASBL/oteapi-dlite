@@ -84,8 +84,6 @@ plugins:
 
             # Docstring options
             docstring_style: google
-            docstring_options:
-              replace_admonitions: true
             show_if_no_docstring: false
   - awesome-pages
   - autorefs:

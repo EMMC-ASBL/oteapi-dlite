@@ -1,5 +1,40 @@
 # Changelog
 
+## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.4.0...HEAD)
+
+## Support pydantic v2
+
+Support Pydantic v2 and the latest OTEAPI Core version.
+
+## [v0.4.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.4.0) (2025-03-10)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.3.2...v0.4.0)
+
+## Support pydantic v2
+
+Support Pydantic v2 and the latest OTEAPI Core version.
+
+**Implemented enhancements:**
+
+- Support latest `dev` version of OTEAPI-Core [\#303](https://github.com/EMMC-ASBL/oteapi-dlite/issues/303)
+
+**Merged pull requests:**
+
+- \[pre-commit.ci\] pre-commit autoupdate [\#344](https://github.com/EMMC-ASBL/oteapi-dlite/pull/344) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#342](https://github.com/EMMC-ASBL/oteapi-dlite/pull/342) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#340](https://github.com/EMMC-ASBL/oteapi-dlite/pull/340) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#338](https://github.com/EMMC-ASBL/oteapi-dlite/pull/338) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- Fixate DLite-Python and tripper so that nothing fails in master.  [\#330](https://github.com/EMMC-ASBL/oteapi-dlite/pull/330) ([francescalb](https://github.com/francescalb))
+- \[pre-commit.ci\] pre-commit autoupdate [\#325](https://github.com/EMMC-ASBL/oteapi-dlite/pull/325) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#324](https://github.com/EMMC-ASBL/oteapi-dlite/pull/324) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#322](https://github.com/EMMC-ASBL/oteapi-dlite/pull/322) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#320](https://github.com/EMMC-ASBL/oteapi-dlite/pull/320) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#318](https://github.com/EMMC-ASBL/oteapi-dlite/pull/318) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#317](https://github.com/EMMC-ASBL/oteapi-dlite/pull/317) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- Upgrade to `dev` core versions [\#316](https://github.com/EMMC-ASBL/oteapi-dlite/pull/316) ([CasperWA](https://github.com/CasperWA))
+
 ## [v0.3.2](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.3.2) (2024-10-21)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.3.1...v0.3.2)
