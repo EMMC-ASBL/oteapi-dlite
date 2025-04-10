@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from random import getrandbits
-from typing import TYPE_CHECKING, Annotated, Literal, Optional
+from typing import TYPE_CHECKING, Annotated, Literal
 
 import dlite
 import numpy as np
@@ -27,7 +27,7 @@ class DLiteExcelParseConfig(DLiteResult):
 
     # Resource config
     downloadUrl: Annotated[
-        Optional[HostlessAnyUrl],
+        HostlessAnyUrl | None,
         Field(
             description=ResourceConfig.model_fields["downloadUrl"].description
         ),
@@ -42,11 +42,11 @@ class DLiteExcelParseConfig(DLiteResult):
 
     # Parser config
     id: Annotated[
-        Optional[str], Field(description="Optional id on new instance.")
+        str | None, Field(description="Optional id on new instance.")
     ] = None
 
     label: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="Optional label for new instance in collection.",
         ),
@@ -59,7 +59,7 @@ class DLiteExcelParseConfig(DLiteResult):
         ),
     ]
     storage_path: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="Path to metadata storage",
         ),
@@ -78,7 +78,7 @@ class DLiteExcelParserConfig(ParserConfig):
         Field(description="DLite excel parse strategy-specific configuration."),
     ]
     entity: Annotated[
-        Optional[AnyHttpUrl],
+        AnyHttpUrl | None,
         Field(
             description=(
                 "URI of DLite metadata to return. If not provided, the "
@@ -161,7 +161,9 @@ class DLiteExcelStrategy:
         parser = create_strategy("parse", xlsx_config)
         columns: dict[str, Any] = parser.get()["data"]
 
-        names, units = zip(*[split_column_name(column) for column in columns])
+        names, units = zip(
+            *[split_column_name(column) for column in columns], strict=False
+        )
         rec = dict2recarray(columns, names=names)
 
         if not isinstance(units, (list, tuple)):

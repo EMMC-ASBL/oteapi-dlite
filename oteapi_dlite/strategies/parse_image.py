@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Annotated, Literal, Optional
+from typing import Annotated, Literal
 
 import numpy as np
 from oteapi.datacache import DataCache
@@ -26,7 +26,8 @@ class DLiteImageConfig(ImageConfig, DLiteResult):
 
     # Resource config
     mediaType: Annotated[
-        Optional[
+        None
+        | (
             Literal[
                 "image/vnd.dlite-jpg",
                 "image/vnd.dlite-jpeg",
@@ -36,7 +37,7 @@ class DLiteImageConfig(ImageConfig, DLiteResult):
                 "image/vnd.dlite-tiff",
                 "image/vnd.dlite-eps",
             ]
-        ],
+        ),
         Field(description=ResourceConfig.model_fields["mediaType"].description),
     ] = None
 

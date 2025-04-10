@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 import pytest
 
 if TYPE_CHECKING:
-    from typing import Optional
 
     from ..conftest import PathsTuple
 
@@ -26,8 +25,8 @@ if TYPE_CHECKING:
 )
 def test_image(
     test_file: str,
-    target_file: Optional[str],
-    crop_rect: Optional[tuple[int, int, int, int]],
+    target_file: str | None,
+    crop_rect: tuple[int, int, int, int] | None,
     paths: PathsTuple,
 ) -> None:
     """Test parsing an image format."""

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Optional
+from typing import Annotated
 
 from oteapi.models import AttrDict
 from pydantic import Field, JsonValue
@@ -12,7 +12,7 @@ class DLiteResult(AttrDict):
     """Class for returning values from DLite strategies."""
 
     collection_id: Annotated[
-        Optional[str], Field(description="A reference to a DLite collection.")
+        str | None, Field(description="A reference to a DLite collection.")
     ] = None
 
 
