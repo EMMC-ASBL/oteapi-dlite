@@ -111,7 +111,7 @@ class DLiteImageParseStrategy:
         """Execute the strategy.
 
         This method will be called through the strategy-specific
-        endpoint of the OTE-API Services.  It assumes that the image to
+        endpoint of the OTEAPI Services.  It assumes that the image to
         parse is stored in a data cache, and can be retrieved via a key
         that is supplied in the parser configuration.
 

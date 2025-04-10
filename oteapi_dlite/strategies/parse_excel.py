@@ -130,7 +130,7 @@ class DLiteExcelStrategy:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
-        of the OTE-API Services.
+        of the OTEAPI Services.
 
         Returns:
             DLite instance.
