@@ -26,18 +26,16 @@ class DLiteImageConfig(ImageConfig, DLiteResult):
 
     # Resource config
     mediaType: Annotated[
-        None
-        | (
-            Literal[
-                "image/vnd.dlite-jpg",
-                "image/vnd.dlite-jpeg",
-                "image/vnd.dlite-jp2",
-                "image/vnd.dlite-png",
-                "image/vnd.dlite-gif",
-                "image/vnd.dlite-tiff",
-                "image/vnd.dlite-eps",
-            ]
-        ),
+        Literal[
+            "image/vnd.dlite-jpg",
+            "image/vnd.dlite-jpeg",
+            "image/vnd.dlite-jp2",
+            "image/vnd.dlite-png",
+            "image/vnd.dlite-gif",
+            "image/vnd.dlite-tiff",
+            "image/vnd.dlite-eps",
+        ]
+        | None,
         Field(description=ResourceConfig.model_fields["mediaType"].description),
     ] = None
 

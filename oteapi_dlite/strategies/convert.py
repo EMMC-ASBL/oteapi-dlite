@@ -190,6 +190,9 @@ class DLiteConvertStrategy:
         if isinstance(outputs, dlite.Instance):
             outputs = [outputs]
 
+        # NOTE: Using 'strict=False' in the zip call could allow mismatched
+        # lengths between 'outputs' and 'config.outputs' without raising an
+        # error.
         for inst, output_config in zip(outputs, config.outputs, strict=False):
             coll.add(output_config.label, inst)
 
