@@ -161,6 +161,8 @@ class DLiteExcelStrategy:
         parser = create_strategy("parse", xlsx_config)
         columns: dict[str, Any] = parser.get()["data"]
 
+        # NOTE: Using 'strict=False' in the zip call could allow mismatched
+        # lengths between the inputs without raising an error.
         names, units = zip(
             *[split_column_name(column) for column in columns], strict=False
         )
