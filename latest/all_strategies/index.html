@@ -957,6 +957,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.property_mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      property_mappings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.store_collection" class="md-nav__link">
     <span class="md-ellipsis">
       store_collection
@@ -2996,6 +3005,15 @@
   <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.options" class="md-nav__link">
     <span class="md-ellipsis">
       options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.property_mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      property_mappings
     </span>
   </a>
   
@@ -6026,13 +6044,13 @@ from the collection.</p>
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteGenerateConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteGenerateConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite generate strategy config.&quot;&quot;&quot;</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
@@ -6110,17 +6128,7 @@ from the collection.</p>
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">255</span>
 <span class="normal">256</span>
 <span class="normal">257</span>
 <span class="normal">258</span>
@@ -6326,7 +6334,17 @@ from the collection.</p>
 <span class="normal">458</span>
 <span class="normal">459</span>
 <span class="normal">460</span>
-<span class="normal">461</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DLiteGenerateStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite generate strategy utilising DLite storage plugins.</span>
 
@@ -6371,7 +6389,7 @@ from the collection.</p>
         <span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">:</span>
             <span class="n">instances</span> <span class="o">=</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_instances</span><span class="p">(</span>
                 <span class="n">metaid</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">,</span>
-                <span class="n">property_mappings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">property_mappings</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">property_mappings</span><span class="p">,</span>
                 <span class="n">allow_incomplete</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">allow_incomplete</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">inst</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">instances</span><span class="p">)</span>
@@ -6619,17 +6637,7 @@ of the OTEAPI Services.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">275</span>
 <span class="normal">276</span>
 <span class="normal">277</span>
 <span class="normal">278</span>
@@ -6815,7 +6823,17 @@ of the OTEAPI Services.</p>
 <span class="normal">458</span>
 <span class="normal">459</span>
 <span class="normal">460</span>
-<span class="normal">461</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
 <span class="sd">    This method will be called through the strategy-specific endpoint</span>
@@ -6840,7 +6858,7 @@ of the OTEAPI Services.</p>
     <span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">:</span>
         <span class="n">instances</span> <span class="o">=</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_instances</span><span class="p">(</span>
             <span class="n">metaid</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">datamodel</span><span class="p">,</span>
-            <span class="n">property_mappings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">property_mappings</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">property_mappings</span><span class="p">,</span>
             <span class="n">allow_incomplete</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">allow_incomplete</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">inst</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">instances</span><span class="p">)</span>
@@ -7034,13 +7052,13 @@ of the OTEAPI Services.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
         <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
@@ -7291,7 +7309,17 @@ or <code>mediaType</code> field.</p>
 <span class="normal">230</span>
 <span class="normal">231</span>
 <span class="normal">232</span>
-<span class="normal">233</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">DLiteConfiguration</span><span class="p">):</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteStorageConfig</span><span class="p">(</span><span class="n">DLiteConfiguration</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a generic DLite storage filter.</span>
 
 <span class="sd">    The DLite storage driver to can be specified using either the `driver`</span>
@@ -7352,19 +7380,29 @@ or <code>mediaType</code> field.</p>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">property_mappings</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+        <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">Field</span><span class="p">(</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether property mappings should be performed.&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">store_collection</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">bool</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether to store the entire collection in the session &quot;</span>
-            <span class="s2">&quot;instead of a single instance.  Cannot be combined with `label` or &quot;</span>
-            <span class="s2">&quot;`datamodel`.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="p">(</span>
+                <span class="s2">&quot;Whether to store the entire collection in the session &quot;</span>
+                <span class="s2">&quot;instead of a single instance.  Cannot be combined with &quot;</span>
+                <span class="s2">&quot;`label` or `datamodel`.&quot;</span>
+            <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">store_collection_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Used together with `store_collection` If given, store &quot;</span>
-            <span class="s2">&quot;a copy of the collection with this id.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="p">(</span>
+                <span class="s2">&quot;Used together with `store_collection` If given, store &quot;</span>
+                <span class="s2">&quot;a copy of the collection with this id.&quot;</span>
+            <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">allow_incomplete</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
@@ -7781,6 +7819,27 @@ or <code>mediaType</code> field.</p>
 
 
 
+<h4 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.property_mappings" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">property_mappings</span> <span class="o">=</span> <span class="kc">True</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#oteapi_dlite.strategies.generate.DLiteStorageConfig.property_mappings" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
 <h4 id="oteapi_dlite.strategies.generate.DLiteStorageConfig.store_collection" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">store_collection</span> <span class="o">=</span> <span class="kc">False</span></code>
 
@@ -7968,17 +8027,7 @@ or <code>mediaType</code> field.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/generate.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">464</span>
-<span class="normal">465</span>
-<span class="normal">466</span>
-<span class="normal">467</span>
-<span class="normal">468</span>
-<span class="normal">469</span>
-<span class="normal">470</span>
-<span class="normal">471</span>
-<span class="normal">472</span>
-<span class="normal">473</span>
-<span class="normal">474</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">474</span>
 <span class="normal">475</span>
 <span class="normal">476</span>
 <span class="normal">477</span>
@@ -7988,7 +8037,17 @@ or <code>mediaType</code> field.</p>
 <span class="normal">481</span>
 <span class="normal">482</span>
 <span class="normal">483</span>
-<span class="normal">484</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">individual_iri</span><span class="p">(</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">individual_iri</span><span class="p">(</span>
     <span class="n">class_iri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_iri</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">randbytes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return an IRI for an individual of a class.</span>
