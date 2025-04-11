@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import importlib
 from collections.abc import Sequence
-from typing import Annotated, Optional
+from typing import Annotated
 
 import dlite
 from oteapi.models import AttrDict, FunctionConfig
@@ -25,13 +25,13 @@ class DLiteConvertInputConfig(AttrDict):
     """
 
     label: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="Label of the instance.",
         ),
     ] = None
     datamodel: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="URI of data model.",
         ),
@@ -48,13 +48,13 @@ class DLiteConvertOutputConfig(AttrDict):
     """Configuration for output instance to generic DLite converter."""
 
     label: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="Label to use when storing the instance.",
         ),
     ] = None
     datamodel: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="URI of data model.  Used for documentation.",
         ),
@@ -81,7 +81,7 @@ class DLiteConvertStrategyConfig(DLiteResult):
         ),
     ]
     package: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Used when performing a relative import of the converter "
@@ -92,7 +92,7 @@ class DLiteConvertStrategyConfig(DLiteResult):
         ),
     ] = None
     pypi_package: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Package name on PyPI.  This field is currently only "
@@ -114,7 +114,7 @@ class DLiteConvertStrategyConfig(DLiteResult):
         ),
     ] = []
     kwargs: Annotated[
-        Optional[dict],
+        dict | None,
         Field(
             description="Additional keyword arguments passed "
             "to the convert function.",
@@ -156,7 +156,7 @@ class DLiteConvertStrategy:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
-        of the OTE-API Services.
+        of the OTEAPI Services.
 
         Returns:
             SessionUpdate instance.
@@ -190,8 +190,12 @@ class DLiteConvertStrategy:
         if isinstance(outputs, dlite.Instance):
             outputs = [outputs]
 
-        for inst, output_config in zip(outputs, config.outputs):
+        # NOTE: Using 'strict=False' in the zip call could allow mismatched
+        # lengths between 'outputs' and 'config.outputs' without raising an
+        # error.
+        for inst, output_config in zip(outputs, config.outputs, strict=False):
             coll.add(output_config.label, inst)
+            inst._incref()
 
         update_collection(coll)
         return DLiteResult(collection_id=coll.uuid)

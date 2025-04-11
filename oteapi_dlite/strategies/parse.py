@@ -2,14 +2,8 @@
 
 from __future__ import annotations
 
-import sys
 from pathlib import Path
-from typing import Annotated, Optional
-
-if sys.version_info >= (3, 9, 1):
-    from typing import Literal
-else:
-    from typing_extensions import Literal  # type: ignore[assignment]
+from typing import Annotated, Literal
 
 import dlite
 from oteapi.datacache import DataCache
@@ -33,14 +27,14 @@ class DLiteParseConfig(DLiteResult):
 
     # "Required" resource strategy fields
     downloadUrl: Annotated[
-        Optional[HostlessAnyUrl],
+        HostlessAnyUrl | None,
         Field(
             description=ResourceConfig.model_fields["downloadUrl"].description
         ),
     ] = None
 
     mediaType: Annotated[
-        Optional[str],
+        str | None,
         Field(description=ResourceConfig.model_fields["mediaType"].description),
     ] = None
 
@@ -52,7 +46,7 @@ class DLiteParseConfig(DLiteResult):
         ),
     ]
     location: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Explicit location of storage.  Normally data is read from the "
@@ -62,7 +56,7 @@ class DLiteParseConfig(DLiteResult):
         ),
     ] = None
     options: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Comma-separated list of options passed to the DLite storage "
@@ -71,13 +65,13 @@ class DLiteParseConfig(DLiteResult):
         ),
     ] = None
     id: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="If given, the id of the instance in the storage.",
         ),
     ] = None
     label: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Optional label of the new DLite instance in the collection."
@@ -85,7 +79,7 @@ class DLiteParseConfig(DLiteResult):
         ),
     ] = None
     datamodel: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "DLite datamodel documenting the structure of the data set. "
@@ -100,7 +94,7 @@ class DLiteParseConfig(DLiteResult):
         Field(description="Configurations provided to a download strategy."),
     ] = AttrDict()
     datacache_config: Annotated[
-        Optional[DataCacheConfig],
+        DataCacheConfig | None,
         Field(
             description="Configuration options for the local data cache.",
         ),
@@ -119,7 +113,7 @@ class DLiteParseParserConfig(ParserConfig):
         Field(description="DLite parse strategy-specific configuration."),
     ]
     entity: Annotated[
-        Optional[AnyHttpUrl],
+        AnyHttpUrl | None,
         Field(description=ParserConfig.model_fields["entity"].description),
     ] = None
 
@@ -148,7 +142,7 @@ class DLiteParseStrategy:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
-        of the OTE-API Services.
+        of the OTEAPI Services.
 
         Returns:
             Reference to a DLite collection ID.

@@ -1,6 +1,6 @@
-[![DOI](https://zenodo.org/badge/455070691.svg)](https://zenodo.org/badge/latestdoi/455070691)
-
 # OTEAPI DLite Plugin
+
+[![DOI](https://zenodo.org/badge/455070691.svg)](https://zenodo.org/badge/latestdoi/455070691)
 
 All strategies implemented in this plugin (except for `create_collection`) assumes that you have the UUID of a DLite collection with the key `collection_id` in the `session`:
 
@@ -16,8 +16,8 @@ In order to make it easy retrieve the collection id when executing a pipeline, t
 
 Further reading:
 
-- [OTE-API Core Documentation](https://emmc-asbl.github.io/oteapi-core)
-- [OTE-API Services Documentation](https://github.com/EMMC-ASBL/oteapi-services)
+- [OTEAPI Core Documentation](https://emmc-asbl.github.io/oteapi-core)
+- [OTEAPI Services Documentation](https://github.com/EMMC-ASBL/oteapi-services)
 - [DLite](https://github.com/SINTEF/dlite)
 
 A list and documentation for all the strategies in this plugin can be found [here](all_strategies.md).
@@ -28,7 +28,7 @@ The OTEAPI DLite Plugin is released under the [MIT license](LICENSE.md) with cop
 
 ## Acknowledgment
 
-OTEAPI DLite Plugin has been created via the [cookiecutter](https://cookiecutter.readthedocs.io/) [template for OTE-API plugins](https://github.com/EMMC-ASBL/oteapi-plugin-template).
+OTEAPI DLite Plugin has been created via the [cookiecutter](https://cookiecutter.readthedocs.io/) [template for OTEAPI plugins](https://github.com/EMMC-ASBL/oteapi-plugin-template).
 
 OTEAPI DLite Plugin has been supported by the following projects:
 

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import Annotated, Optional
+from typing import Annotated
 
 from dlite.utils import get_referred_instances
 from oteapi.models import FilterConfig
@@ -33,17 +33,17 @@ class DLiteQueryConfig(DLiteResult):
     """
 
     remove_label: Annotated[
-        Optional[str],
+        str | None,
         Field(description="Regular expression matching labels to remove."),
     ] = None
     remove_datamodel: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="Regular expression matching datamodel URIs to remove.",
         ),
     ] = None
     keep_label: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Regular expression matching labels to keep. This "
@@ -55,7 +55,7 @@ class DLiteQueryConfig(DLiteResult):
         ),
     ] = None
     keep_datamodel: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Regular expression matching datamodel URIs to keep in "

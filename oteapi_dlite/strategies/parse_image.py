@@ -3,13 +3,7 @@
 from __future__ import annotations
 
 import logging
-import sys
-from typing import Annotated, Optional
-
-if sys.version_info >= (3, 9, 1):
-    from typing import Literal
-else:
-    from typing_extensions import Literal  # type: ignore[assignment]
+from typing import Annotated, Literal
 
 import numpy as np
 from oteapi.datacache import DataCache
@@ -32,17 +26,16 @@ class DLiteImageConfig(ImageConfig, DLiteResult):
 
     # Resource config
     mediaType: Annotated[
-        Optional[
-            Literal[
-                "image/vnd.dlite-jpg",
-                "image/vnd.dlite-jpeg",
-                "image/vnd.dlite-jp2",
-                "image/vnd.dlite-png",
-                "image/vnd.dlite-gif",
-                "image/vnd.dlite-tiff",
-                "image/vnd.dlite-eps",
-            ]
-        ],
+        Literal[
+            "image/vnd.dlite-jpg",
+            "image/vnd.dlite-jpeg",
+            "image/vnd.dlite-jp2",
+            "image/vnd.dlite-png",
+            "image/vnd.dlite-gif",
+            "image/vnd.dlite-tiff",
+            "image/vnd.dlite-eps",
+        ]
+        | None,
         Field(description=ResourceConfig.model_fields["mediaType"].description),
     ] = None
 
@@ -116,7 +109,7 @@ class DLiteImageParseStrategy:
         """Execute the strategy.
 
         This method will be called through the strategy-specific
-        endpoint of the OTE-API Services.  It assumes that the image to
+        endpoint of the OTEAPI Services.  It assumes that the image to
         parse is stored in a data cache, and can be retrieved via a key
         that is supplied in the parser configuration.
 

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import TYPE_CHECKING, Annotated
 
 from oteapi.models import MappingConfig
 from pydantic import AnyUrl
@@ -24,7 +24,7 @@ class DLiteMappingStrategyConfig(DLiteConfiguration):
     """Configuration for a DLite mapping filter."""
 
     datamodel: Annotated[
-        Optional[AnyUrl],
+        AnyUrl | None,
         Field(
             description="URI of the datamodel that is mapped.",
         ),

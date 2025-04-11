@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import dlite
 from oteapi.models import FilterConfig
@@ -31,13 +31,13 @@ class SerialiseConfig(DLiteResult):
         ),
     ]
     options: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description="Options passed to the driver.",
         ),
     ] = ""
     labels: Annotated[
-        Optional[Sequence[str]],
+        Sequence[str] | None,
         Field(
             None,
             description=(
