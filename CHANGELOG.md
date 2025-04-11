@@ -2,13 +2,69 @@
 
 ## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
 
-[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.4.0...HEAD)
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v1.0.0...HEAD)
 
-## Support pydantic v2
+# OTEAPI Dlite v1
 
-Support Pydantic v2 and the latest OTEAPI Core version.
+This release marks the upgrade from in-development versions to a proper v1.
+It represents the vast work that has gone into the OTE work through various EU projects; developing and utilizing the technology to bring semantically documented data through to simulators and other software that can specify what they desire, semantically, and subsequently retrieve it through OTE pipelines.
 
-## [v0.4.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.4.0) (2025-03-10)
+## Drop Python 3.9 support
+
+With this version Python 3.9 support is also dropped.
+This matches the drop of Python 3.9 support in the [OTEAPI Core](https://github.com/EMMC-ASBL/oteapi-core) package.
+
+The minimum required Python version is now Python 3.10.
+Python 3.12 test runs are added to the CI workflows.
+
+## Upgrade to latest DLite and tripper
+
+The latest versions of DLite (v0.5.29) and tripper (v0.4.0) as of this release are now supported.
+These versions bring several updates and crucial fixes.
+
+## DX
+
+Update dev tools, specifically add several other dev tools: `blacken-docs` and `markdownlint-cli2`, as well as several other pre-commit hooks from the base pre-commit-hooks repository.
+
+## [v1.0.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v1.0.0) (2025-04-11)
+
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.4.0...v1.0.0)
+
+# OTEAPI Dlite v1
+
+This release marks the upgrade from in-development versions to a proper v1.
+It represents the vast work that has gone into the OTE work through various EU projects; developing and utilizing the technology to bring semantically documented data through to simulators and other software that can specify what they desire, semantically, and subsequently retrieve it through OTE pipelines.
+
+## Drop Python 3.9 support
+
+With this version Python 3.9 support is also dropped.
+This matches the drop of Python 3.9 support in the [OTEAPI Core](https://github.com/EMMC-ASBL/oteapi-core) package.
+
+The minimum required Python version is now Python 3.10.
+Python 3.12 test runs are added to the CI workflows.
+
+## Upgrade to latest DLite and tripper
+
+The latest versions of DLite (v0.5.29) and tripper (v0.4.0) as of this release are now supported.
+These versions bring several updates and crucial fixes.
+
+## DX
+
+Update dev tools, specifically add several other dev tools: `blacken-docs` and `markdownlint-cli2`, as well as several other pre-commit hooks from the base pre-commit-hooks repository.
+
+**Closed issues:**
+
+- Dlite v0.5.24 causes segmentation fault in linux for pytest startup [\#327](https://github.com/EMMC-ASBL/oteapi-dlite/issues/327)
+
+**Merged pull requests:**
+
+- Upgrade to OTEAPI v1 [\#352](https://github.com/EMMC-ASBL/oteapi-dlite/pull/352) ([CasperWA](https://github.com/CasperWA))
+- \[pre-commit.ci\] pre-commit autoupdate [\#351](https://github.com/EMMC-ASBL/oteapi-dlite/pull/351) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#349](https://github.com/EMMC-ASBL/oteapi-dlite/pull/349) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- \[pre-commit.ci\] pre-commit autoupdate [\#347](https://github.com/EMMC-ASBL/oteapi-dlite/pull/347) ([pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci))
+- Added an configuration option to turn off property mappings in the generate strategy [\#328](https://github.com/EMMC-ASBL/oteapi-dlite/pull/328) ([jesper-friis](https://github.com/jesper-friis))
+
+## [v0.4.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v0.4.0) (2025-03-11)
 
 [Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v0.3.2...v0.4.0)
 
