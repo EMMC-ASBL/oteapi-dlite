@@ -1160,7 +1160,7 @@ created and returned.</p>
                 <code>collection_id</code>
             </td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+                  <code><span title="str">str</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1223,7 +1223,7 @@ created and returned.</p>
 <span class="normal">90</span>
 <span class="normal">91</span>
 <span class="normal">92</span>
-<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">:</span>
+<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve a DLite Collection.</span>
 
 <span class="sd">    Looks for a Collection UUID with `collection_id`.</span>
@@ -1303,8 +1303,8 @@ created and returned.</p>
 <span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_driver</span><span class="p">(</span>
-    <span class="n">mediaType</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">accessService</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mediaType</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">accessService</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return name of DLite driver for the given media type/access service.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">mediaType</span><span class="p">:</span>
@@ -1354,7 +1354,7 @@ created and returned.</p>
                 <code>meta</code>
             </td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="dlite.Metadata">Metadata</span>]</code>
+                  <code><span title="str">str</span> | <span title="dlite.Metadata">Metadata</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1370,7 +1370,7 @@ created and returned.</p>
                 <code>collection</code>
             </td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="dlite.Collection">Collection</span>]</code>
+                  <code><span title="dlite.Collection">Collection</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1447,11 +1447,11 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 <span class="normal">180</span>
 <span class="normal">181</span>
 <span class="normal">182</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_instance</span><span class="p">(</span>
-    <span class="n">meta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Metadata</span><span class="p">],</span>
-    <span class="n">collection_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">collection</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">routedict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">instance_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">meta</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Metadata</span><span class="p">,</span>
+    <span class="n">collection_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">collection</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">routedict</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">instance_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">allow_incomplete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
@@ -1582,8 +1582,8 @@ used.</p>
 <span class="normal">204</span>
 <span class="normal">205</span>
 <span class="normal">206</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_triplestore</span><span class="p">(</span>
-    <span class="n">kb_settings</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">collection_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">kb_settings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">collection_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Triplestore</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a tripper.Triplestore instance for the current kb_settings.</span>
 
@@ -1728,7 +1728,7 @@ in <code>dct</code> will be removed.</p>
                 <code>update</code>
             </td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="dict">dict</span>]</code>
+                  <code><span title="dict">dict</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1845,7 +1845,7 @@ between different number types is accepted.</p>
 <span class="normal">269</span>
 <span class="normal">270</span>
 <span class="normal">271</span>
-<span class="normal">272</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_dict</span><span class="p">(</span><span class="n">dct</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="normal">272</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_dict</span><span class="p">(</span><span class="n">dct</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update dictionary `dct` using dictionary `update`.</span>
 
 <span class="sd">    This function differ from `dict.update()` in that it updates</span>

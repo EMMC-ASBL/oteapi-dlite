@@ -1292,7 +1292,13 @@
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 31</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
 <span class="normal"> 32</span>
 <span class="normal"> 33</span>
 <span class="normal"> 34</span>
@@ -1362,25 +1368,19 @@
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteParseConfig</span><span class="p">(</span><span class="n">DLiteResult</span><span class="p">):</span>
+<span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteParseConfig</span><span class="p">(</span><span class="n">DLiteResult</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for generic DLite parser.&quot;&quot;&quot;</span>
 
     <span class="c1"># &quot;Required&quot; resource strategy fields</span>
     <span class="n">downloadUrl</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="n">HostlessAnyUrl</span><span class="p">],</span>
+        <span class="n">HostlessAnyUrl</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;downloadUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="n">mediaType</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;mediaType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -1392,7 +1392,7 @@
         <span class="p">),</span>
     <span class="p">]</span>
     <span class="n">location</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
                 <span class="s2">&quot;Explicit location of storage.  Normally data is read from the &quot;</span>
@@ -1402,7 +1402,7 @@
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">options</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
                 <span class="s2">&quot;Comma-separated list of options passed to the DLite storage &quot;</span>
@@ -1411,13 +1411,13 @@
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="nb">id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="s2">&quot;If given, the id of the instance in the storage.&quot;</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
                 <span class="s2">&quot;Optional label of the new DLite instance in the collection.&quot;</span>
@@ -1425,7 +1425,7 @@
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
                 <span class="s2">&quot;DLite datamodel documenting the structure of the data set. &quot;</span>
@@ -1440,7 +1440,7 @@
         <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Configurations provided to a download strategy.&quot;</span><span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="n">AttrDict</span><span class="p">()</span>
     <span class="n">datacache_config</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="n">DataCacheConfig</span><span class="p">],</span>
+        <span class="n">DataCacheConfig</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Configuration options for the local data cache.&quot;</span><span class="p">,</span>
         <span class="p">),</span>
@@ -1703,7 +1703,13 @@
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
@@ -1711,13 +1717,7 @@
 <span class="normal">115</span>
 <span class="normal">116</span>
 <span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteParseParserConfig</span><span class="p">(</span><span class="n">ParserConfig</span><span class="p">):</span>
+<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteParseParserConfig</span><span class="p">(</span><span class="n">ParserConfig</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite parse strategy resource config.&quot;&quot;&quot;</span>
 
     <span class="n">parserType</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
@@ -1729,7 +1729,7 @@
         <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite parse strategy-specific configuration.&quot;</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="n">entity</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="n">AnyHttpUrl</span><span class="p">],</span>
+        <span class="n">AnyHttpUrl</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ParserConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;entity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
@@ -1844,7 +1844,13 @@
 
               <details class="quote">
                 <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
 <span class="normal">128</span>
 <span class="normal">129</span>
 <span class="normal">130</span>
@@ -1935,13 +1941,7 @@
 <span class="normal">215</span>
 <span class="normal">216</span>
 <span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">218</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DLiteParseStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite parse strategy utilising DLite storage plugins.</span>
 
@@ -1965,7 +1965,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
 <span class="sd">        This method will be called through the strategy-specific endpoint</span>
-<span class="sd">        of the OTE-API Services.</span>
+<span class="sd">        of the OTEAPI Services.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Reference to a DLite collection ID.</span>
@@ -2087,7 +2087,7 @@
 
         <p>Execute the strategy.</p>
 <p>This method will be called through the strategy-specific endpoint
-of the OTE-API Services.</p>
+of the OTEAPI Services.</p>
 
 
     <p><span class="doc-section-title">Returns:</span></p>
@@ -2115,7 +2115,13 @@ of the OTE-API Services.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">147</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
 <span class="normal">148</span>
 <span class="normal">149</span>
 <span class="normal">150</span>
@@ -2186,17 +2192,11 @@ of the OTE-API Services.</p>
 <span class="normal">215</span>
 <span class="normal">216</span>
 <span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
+<span class="normal">218</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
 
 <span class="sd">    This method will be called through the strategy-specific endpoint</span>
-<span class="sd">    of the OTE-API Services.</span>
+<span class="sd">    of the OTEAPI Services.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Reference to a DLite collection ID.</span>
@@ -2292,13 +2292,13 @@ of the OTE-API Services.</p>
 
             <details class="quote">
               <summary>Source code in <code>oteapi_dlite/strategies/parse.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
         <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
