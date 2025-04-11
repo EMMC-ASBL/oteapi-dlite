@@ -64,8 +64,16 @@ def test_mapping_with_prefixes() -> None:
             "emmo": str(EMMO),
         },
         triples=[
-            ("f:forces", "map:mapsTo", "emmo:Force"),
-            ("e:energy", "map:mapsTo", "emmo:PotentialEnergy"),
+            (
+                "f:forces",
+                "map:mapsTo",
+                "https://w3id.org/emmo#EMMO_1f087811_06cb_42d5_90fb_25d0e7e068ef",
+            ),
+            (
+                "e:energy",
+                "map:mapsTo",
+                "https://w3id.org/emmo#EMMO_4c151909_6f26_4ef9_b43d_7c9e9514883a",
+            ),
         ],
     )
 

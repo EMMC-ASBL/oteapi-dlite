@@ -1,3 +1,9 @@
+# There are 3 different versions of OTEAPI_PLUGIN_PACKAGES given below.
+# The first is there to support installing a local oteapi-core and oteapi-dlite.
+# The second is there to support installing a local oteapi-dlite only.
+# The final and third is the "default" version that installs the oteapi-dlite
+# package from the PyPI repository.
+
 services:
   oteapi:
     image: ghcr.io/emmc-asbl/oteapi:${DOCKER_OTEAPI_VERSION:-latest}
@@ -8,17 +14,14 @@ services:
       OTEAPI_REDIS_HOST: redis
       OTEAPI_REDIS_PORT: 6379
       OTEAPI_PREFIX: "${OTEAPI_PREFIX:-/api/v1}"
-      PATH_TO_OTEAPI_CORE:
-      OTEAPI_PLUGIN_PACKAGES: "-v git+https://github.com/EMMC-ASBL/oteapi-dlite@cwa/close-303-update-to-dev-core-versions"
+      # OTEAPI_PLUGIN_PACKAGES: "--force-reinstall -v -e /oteapi-core|-v -e /oteapi-dlite"
       # OTEAPI_PLUGIN_PACKAGES: "-v -e /oteapi-dlite"
+      OTEAPI_PLUGIN_PACKAGES: "-v oteapi-dlite"
     depends_on:
       - redis
     volumes:
-      - "${PATH_TO_OTEAPI_CORE:-/dev/null}:/oteapi-core"
-      # - "${PWD}:/oteapi-dlite"
-    entrypoint: |
-      /bin/bash -c "if [ \"${PATH_TO_OTEAPI_CORE}\" != \"/dev/null\" ] && [ -n \"${PATH_TO_OTEAPI_CORE}\" ]; then \
-      pip install -U --force-reinstall -e /oteapi-core; fi && ./entrypoint.sh --reload --debug --log-level debug"
+      - "${OTEAPI_CORE_PATH:-/dev/null}:/oteapi-core"
+      - "${PWD}:/oteapi-dlite"
     stop_grace_period: 1s
 
   redis:

@@ -6,7 +6,7 @@ import json
 import os
 import tempfile
 from pathlib import Path
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import TYPE_CHECKING, Annotated
 
 from oteapi.datacache import DataCache
 from oteapi.models import DataCacheConfig, FunctionConfig
@@ -44,19 +44,19 @@ class DLiteStorageConfig(DLiteConfiguration):
     """
 
     driver: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description='Name of DLite driver (ex: "json").',
         ),
     ] = None
     mediaType: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description='Media type for DLite driver (ex: "application/json").',
         ),
     ] = None
     options: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Comma-separated list of options passed to the DLite "
@@ -65,7 +65,7 @@ class DLiteStorageConfig(DLiteConfiguration):
         ),
     ] = None
     location: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Location of storage to write to.  If unset to store in data "
@@ -75,7 +75,7 @@ class DLiteStorageConfig(DLiteConfiguration):
         ),
     ] = None
     label: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Label of DLite instance in the collection to serialise."
@@ -83,7 +83,7 @@ class DLiteStorageConfig(DLiteConfiguration):
         ),
     ] = None
     datamodel: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "URI to the datamodel of the new instance.  Needed when "
@@ -109,7 +109,7 @@ class DLiteStorageConfig(DLiteConfiguration):
         ),
     ] = False
     store_collection_id: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "Used together with `store_collection` If given, store "
@@ -118,19 +118,19 @@ class DLiteStorageConfig(DLiteConfiguration):
         ),
     ] = None
     allow_incomplete: Annotated[
-        Optional[bool],
+        bool | None,
         Field(
             description="Whether to allow incomplete property mappings.",
         ),
     ] = False
     datacache_config: Annotated[
-        Optional[DataCacheConfig],
+        DataCacheConfig | None,
         Field(
             description="Configuration options for the local data cache.",
         ),
     ] = None
     kb_document_class: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "IRI of a class in the ontology."
@@ -168,7 +168,7 @@ class DLiteStorageConfig(DLiteConfiguration):
         ),
     ] = None
     kb_document_update: Annotated[
-        Optional[dict],
+        dict | None,
         Field(
             description=(
                 "Dict updating the documentation (partial pipeline) created "
@@ -193,7 +193,7 @@ class DLiteStorageConfig(DLiteConfiguration):
         str, Field(description="Base IRI or prefix for created individuals.")
     ] = ":"
     kb_document_context: Annotated[
-        Optional[dict],
+        dict | None,
         Field(
             description=(
                 "If `kb_document_class` is given, this configuration will add "
@@ -213,7 +213,7 @@ class DLiteStorageConfig(DLiteConfiguration):
         ),
     ] = None
     kb_document_computation: Annotated[
-        Optional[str],
+        str | None,
         Field(
             description=(
                 "IRI of a computation subclass."
@@ -276,7 +276,7 @@ class DLiteGenerateStrategy:
         """Execute the strategy.
 
         This method will be called through the strategy-specific endpoint
-        of the OTE-API Services.
+        of the OTEAPI Services.
 
         Returns:
             SessionUpdate instance.

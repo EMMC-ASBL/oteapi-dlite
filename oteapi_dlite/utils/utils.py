@@ -13,7 +13,7 @@ from oteapi.datacache import DataCache
 from oteapi_dlite.utils.exceptions import CollectionNotFound
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Any, Optional, Union
+    from typing import Any
 
     from tripper import Triplestore
 
@@ -49,7 +49,7 @@ ACCESSSERVICES = {
 }
 
 
-def get_collection(collection_id: Optional[str] = None) -> dlite.Collection:
+def get_collection(collection_id: str | None = None) -> dlite.Collection:
     """Retrieve a DLite Collection.
 
     Looks for a Collection UUID with `collection_id`.
@@ -115,8 +115,8 @@ def get_meta(uri: str) -> dlite.Instance:
 
 
 def get_driver(
-    mediaType: Optional[str] = None,
-    accessService: Optional[str] = None,
+    mediaType: str | None = None,
+    accessService: str | None = None,
 ) -> str:
     """Return name of DLite driver for the given media type/access service."""
     if mediaType:
@@ -133,11 +133,11 @@ def get_driver(
 
 
 def get_instance(
-    meta: Union[str, dlite.Metadata],
-    collection_id: Optional[str] = None,
-    collection: Optional[dlite.Collection] = None,
-    routedict: Optional[dict] = None,
-    instance_id: Optional[str] = None,
+    meta: str | dlite.Metadata,
+    collection_id: str | None = None,
+    collection: dlite.Collection | None = None,
+    routedict: dict | None = None,
+    instance_id: str | None = None,
     allow_incomplete: bool = False,
     **kwargs,
 ) -> dlite.Instance:
@@ -183,8 +183,8 @@ def get_instance(
 
 
 def get_triplestore(
-    kb_settings: Optional[dict[str, Any]] = None,
-    collection_id: Optional[str] = None,
+    kb_settings: dict[str, Any] | None = None,
+    collection_id: str | None = None,
 ) -> Triplestore:
     """Return a tripper.Triplestore instance for the current kb_settings.
 
@@ -217,7 +217,7 @@ class RemoveItem:
     be removed in the source dictionary."""
 
 
-def update_dict(dct: dict, update: Optional[dict]) -> dict:
+def update_dict(dct: dict, update: dict | None) -> dict:
     """Update dictionary `dct` using dictionary `update`.
 
     This function differ from `dict.update()` in that it updates

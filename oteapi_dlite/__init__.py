@@ -1,6 +1,6 @@
 """OTEAPI DLite Plugin
 
-A plugin for OTE-API.
+A plugin for OTEAPI.
 
 Authored by team4.0@sintef.no, SINTEF, 2022
 Created from cookiecutter-oteapi-plugin, SINTEF, 2022

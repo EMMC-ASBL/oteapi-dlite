@@ -8,11 +8,11 @@ import numpy as np
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Sequence
-    from typing import Any, Optional
+    from typing import Any
 
 
 def dict2recarray(
-    excel_dict: dict[str, Any], names: Optional[Sequence[str]] = None
+    excel_dict: dict[str, Any], names: Sequence[str] | None = None
 ) -> np.recarray:
     """Converts a dict returned by the Excel parser to a numpy rec array.
 
