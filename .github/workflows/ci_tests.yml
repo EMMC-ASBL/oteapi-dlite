@@ -19,26 +19,8 @@ jobs:
       run_pre-commit: false
 
       ## pylint & safety
-      python_version_pylint_safety: "3.10"
-
-      # pylint-specific settings
       run_pylint: false
-
-      # safety-specific settings
-      run_safety: true
-      # 48547: RDFLib vulnerability: https://pyup.io/vulnerabilities/PVE-2022-48547/48547/
-      # 44715-44717: NumPy vulnerabilities:
-      #  https://pyup.io/vulnerabilities/CVE-2021-41495/44715/
-      #  https://pyup.io/vulnerabilities/CVE-2021-41496/44716/
-      #  https://pyup.io/vulnerabilities/CVE-2021-34141/44717/
-      # 70612: Jinja2 vulnerability. Only used as subdependency for mkdocs++ in oteapi-dlite.
-      #  https://data.safetycli.com/v/70612/97c/
-      safety_options: |
-        --ignore=48547
-        --ignore=44715
-        --ignore=44716
-        --ignore=44717
-        --ignore=70612
+      run_safety: false
 
       ## Build package
       run_build_package: true
@@ -63,6 +45,27 @@ jobs:
         (LICENSE),(LICENSE.md)
         https://EMMC-ASBL.github.io/oteapi-dlite/latest/,
         all_strategies),all_strategies.md)
+
+  pip-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout ${{ github.repository }}
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install -U pip
+        pip install -U setuptools wheel
+        pip install -e .[dev]
+
+    - name: Run pip-audit
+      uses: pypa/gh-action-pip-audit@v1.1.0
 
   pytest:
     name: pytest (${{ matrix.os[1] }}-py${{ matrix.python-version }})
