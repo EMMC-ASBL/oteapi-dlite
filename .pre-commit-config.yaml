@@ -78,7 +78,7 @@ repos:
   # More information can be found in its documentation:
   # https://docs.astral.sh/ruff/
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.4
+    rev: v0.11.6
     hooks:
     - id: ruff
       # Fix what can be fixed in-place and exit with non-zero status if files were
