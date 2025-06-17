@@ -2333,9 +2333,15 @@ of the OTEAPI Services.</p>
 <span class="normal">222</span>
 <span class="normal">223</span>
 <span class="normal">224</span>
-<span class="normal">225</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Infer dlite metadata from recarray `rec`.&quot;&quot;&quot;</span>
-    <span class="n">rnd</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+    <span class="c1"># bandit issue B311:blacklist.</span>
+    <span class="c1"># This is not relevant here because we are not using this for</span>
+    <span class="c1"># security/cryptographic purposes - hence the nosec.</span>
+    <span class="n">rnd</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>  <span class="c1"># nosec</span>
     <span class="n">uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://onto-ns.com/meta/1.0/generated_from_excel_</span><span class="si">{</span><span class="n">rnd</span><span class="si">:</span><span class="s2">0x</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">metadata</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span>
         <span class="n">uri</span><span class="p">,</span>
