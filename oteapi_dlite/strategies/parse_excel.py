@@ -211,7 +211,10 @@ def split_column_name(column: str) -> tuple[str, str]:
 
 def infer_metadata(rec: np.recarray, units: tuple[str, ...]) -> dlite.Instance:
     """Infer dlite metadata from recarray `rec`."""
-    rnd = getrandbits(128)
+    # bandit issue B311:blacklist.
+    # This is not relevant here because we are not using this for
+    # security/cryptographic purposes - hence the nosec.
+    rnd = getrandbits(128)  # nosec
     uri = f"http://onto-ns.com/meta/1.0/generated_from_excel_{rnd:0x}"
     metadata = DataModel(
         uri,

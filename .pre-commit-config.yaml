@@ -78,7 +78,7 @@ repos:
   # More information can be found in its documentation:
   # https://docs.astral.sh/ruff/
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.12
+    rev: v0.11.13
     hooks:
     - id: ruff
       # Fix what can be fixed in-place and exit with non-zero status if files were
@@ -93,7 +93,7 @@ repos:
   # More information can be found in its documentation:
   # https://bandit.readthedocs.io/en/latest/
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.8.3
+    rev: 1.8.4
     hooks:
     - id: bandit
       args: ["-r"]
