@@ -68,7 +68,7 @@ repos:
 
   # Run black on Python code in documentation strings and files
   - repo: https://github.com/adamchainz/blacken-docs
-    rev: 1.19.1
+    rev: 1.20.0
     hooks:
     - id: blacken-docs
       additional_dependencies: [black]
@@ -78,7 +78,7 @@ repos:
   # More information can be found in its documentation:
   # https://docs.astral.sh/ruff/
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.11
+    rev: v0.12.12
     hooks:
     - id: ruff-check
       name: ruff
