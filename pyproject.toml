@@ -45,7 +45,7 @@ testing = [
     "otelib~=1.0",
     "rdflib>=5.0.0,<8",
     "pytest==8.4.2",
-    "pytest-cov==6.3.0",
+    "pytest-cov==7.0.0",
 ]
 dev = [
     "oteapi-dlite[docs,testing]",
