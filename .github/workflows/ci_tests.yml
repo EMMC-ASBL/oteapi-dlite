@@ -64,6 +64,9 @@ jobs:
         pip install -U setuptools wheel
         pip install -U -r .github/utils/requirements_audit.txt
 
+        # TEMPORARY: Use pip<25.3 due to a compatibility issue with pip-tools and pip 25.3+
+        pip install "pip<25.3"
+
     - name: Prepare for pip-audit
       run: pip-compile --output-file="${{ runner.temp }}/requirements.txt" --all-extras --allow-unsafe --color --verbose "${{ github.workspace }}/pyproject.toml"
 
