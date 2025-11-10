@@ -54,7 +54,7 @@ repos:
   # the language
   # It works on files in-place
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.21.0
+    rev: v3.21.1
     hooks:
     - id: pyupgrade
       args: [--py310-plus]
@@ -62,7 +62,7 @@ repos:
   # Black is a code style and formatter
   # It works on files in-place
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 25.9.0
+    rev: 25.11.0
     hooks:
     - id: black
 
@@ -78,7 +78,7 @@ repos:
   # More information can be found in its documentation:
   # https://docs.astral.sh/ruff/
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.3
+    rev: v0.14.4
     hooks:
     - id: ruff-check
       name: ruff
