@@ -44,12 +44,12 @@ testing = [
     "PyYAML~=6.0",
     "otelib~=1.0",
     "rdflib>=5.0.0,<8",
-    "pytest==8.4.2",
+    "pytest==9.0.0",
     "pytest-cov==7.0.0",
 ]
 dev = [
     "oteapi-dlite[docs,testing]",
-    "pre-commit==4.3.0",
+    "pre-commit==4.4.0",
 ]
 
 [project.urls]
