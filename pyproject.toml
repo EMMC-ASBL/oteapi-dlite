@@ -44,7 +44,7 @@ testing = [
     "PyYAML~=6.0",
     "otelib~=1.0",
     "rdflib>=5.0.0,<8",
-    "pytest==9.0.1",
+    "pytest==9.0.2",
     "pytest-cov==7.0.0",
 ]
 dev = [
