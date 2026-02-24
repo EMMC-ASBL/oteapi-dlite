@@ -28,6 +28,7 @@ dependencies = [
     "oteapi-core>=1.0,<2",
     "pydantic-settings>=2.8,<3",
     "Pillow>=9.0.1,<13",
+    "psycopg[binary]!=3.3.3",  # Dlite throws a segmentation fault with psycopg 3.3.3
     "tripper[mappings]>=0.4.0,<1",
 ]
 
