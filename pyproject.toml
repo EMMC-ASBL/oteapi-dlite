@@ -23,7 +23,7 @@ dynamic = ["version"]
 
 dependencies = [
     # Core dependencies
-    "DLite-Python>=0.5.29,<1",
+    "DLite-Python>=0.5.29,!=0.5.40,<1",
     "numpy>=2.1,<3",
     "oteapi-core>=1.0,<2",
     "pydantic-settings>=2.8,<3",
