@@ -164,7 +164,7 @@ class DLiteConvertStrategy:
         config = self.function_config.configuration
         module = importlib.import_module(config.module_name, config.package)
         function = getattr(module, config.function_name)
-        kwargs = config.kwargs
+        kwargs = config.kwargs or {}
 
         coll = get_collection(config.collection_id)
 
