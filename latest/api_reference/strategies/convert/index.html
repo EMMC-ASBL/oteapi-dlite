@@ -2039,7 +2039,7 @@ instances to zero or more output instances.</p>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span>
         <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">package</span><span class="p">)</span>
         <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">function_name</span><span class="p">)</span>
-        <span class="n">kwargs</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">kwargs</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 
         <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
 
@@ -2209,7 +2209,7 @@ of the OTEAPI Services.</p>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span>
     <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">package</span><span class="p">)</span>
     <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">function_name</span><span class="p">)</span>
-    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">kwargs</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 
     <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
 
