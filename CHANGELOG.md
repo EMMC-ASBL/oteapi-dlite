@@ -2,29 +2,31 @@
 
 ## [Unreleased](https://github.com/EMMC-ASBL/oteapi-dlite/tree/HEAD)
 
-[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v1.0.0...HEAD)
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v1.0.1...HEAD)
 
-# OTEAPI Dlite v1
+## Update dependencies
 
-This release marks the upgrade from in-development versions to a proper v1.
-It represents the vast work that has gone into the OTE work through various EU projects; developing and utilizing the technology to bring semantically documented data through to simulators and other software that can specify what they desire, semantically, and subsequently retrieve it through OTE pipelines.
+The main reason for this update is to ensure the proper dependencies are installed and supported for security, stability, and compatibility reasons.
 
-## Drop Python 3.9 support
+### Miscellaneous
 
-With this version Python 3.9 support is also dropped.
-This matches the drop of Python 3.9 support in the [OTEAPI Core](https://github.com/EMMC-ASBL/oteapi-core) package.
+Updated development/developer tools and associated changes in the code base.
 
-The minimum required Python version is now Python 3.10.
-Python 3.12 test runs are added to the CI workflows.
+## [v1.0.1](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v1.0.1) (2026-04-21)
 
-## Upgrade to latest DLite and tripper
+[Full Changelog](https://github.com/EMMC-ASBL/oteapi-dlite/compare/v1.0.0...v1.0.1)
 
-The latest versions of DLite (v0.5.29) and tripper (v0.4.0) as of this release are now supported.
-These versions bring several updates and crucial fixes.
+## Update dependencies
 
-## DX
+The main reason for this update is to ensure the proper dependencies are installed and supported for security, stability, and compatibility reasons.
 
-Update dev tools, specifically add several other dev tools: `blacken-docs` and `markdownlint-cli2`, as well as several other pre-commit hooks from the base pre-commit-hooks repository.
+### Miscellaneous
+
+Updated development/developer tools and associated changes in the code base.
+
+**Merged pull requests:**
+
+- Drop `safety` in favor of `pip-audit` [\#355](https://github.com/EMMC-ASBL/oteapi-dlite/pull/355) ([CasperWA](https://github.com/CasperWA))
 
 ## [v1.0.0](https://github.com/EMMC-ASBL/oteapi-dlite/tree/v1.0.0) (2025-04-11)
 
