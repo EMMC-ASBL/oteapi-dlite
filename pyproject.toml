@@ -23,7 +23,7 @@ dynamic = ["version"]
 
 dependencies = [
     # Core dependencies
-    "DLite-Python>=0.5.29,<0.5.40",
+    "DLite-Python>=0.5.29,<0.5.50",
     "numpy>=2.1,<3",
     "oteapi-core>=1.0,<2",
     "pydantic-settings>=2.8,<3",
@@ -44,7 +44,7 @@ testing = [
     "PyYAML~=6.0",
     "otelib~=1.0",
     "rdflib>=5.0.0,<8",
-    "pytest==9.0.3",
+    "pytest==9.1.0",
     "pytest-cov==7.1.0",
 ]
 dev = [
