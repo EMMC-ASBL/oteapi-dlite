@@ -127,8 +127,8 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest -vv --cov-report=xml --doctest-modules --cov=oteapi_dlite
-        pytest -vv --cov-report=xml:strategies.xml --doctest-modules --cov=oteapi_dlite/strategies
+        pytest -vv --color=yes --cov-report=xml --doctest-modules --cov=oteapi_dlite
+        pytest -vv --color=yes --cov-report=xml:strategies.xml --doctest-modules --cov=oteapi_dlite/strategies
 
     - name: Upload coverage to Codecov
       if: github.repository == 'EMMC-ASBL/oteapi-dlite'

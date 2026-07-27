@@ -41,7 +41,7 @@ repos:
   # More information can be found in its source repository:
   # https://github.com/DavidAnson/markdownlint-cli2
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.23.1
+    rev: v0.23.2
     hooks:
     - id: markdownlint-cli2
       name: markdownlint
@@ -78,7 +78,7 @@ repos:
   # More information can be found in its documentation:
   # https://docs.astral.sh/ruff/
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.22
+    rev: v0.16.0
     hooks:
     - id: ruff-check
       name: ruff

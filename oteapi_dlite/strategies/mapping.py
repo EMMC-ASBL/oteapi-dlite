@@ -16,9 +16,6 @@ from oteapi_dlite.utils import (
     update_collection,
 )
 
-if TYPE_CHECKING:  # pragma: no cover
-    pass
-
 
 class DLiteMappingStrategyConfig(DLiteConfiguration):
     """Configuration for a DLite mapping filter."""
