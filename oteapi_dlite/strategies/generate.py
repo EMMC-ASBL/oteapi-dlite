@@ -185,7 +185,7 @@ class DLiteStorageConfig(DLiteConfiguration):
                 "where the provided items will override the the default "
                 "configurations in respective partial pipeline created by "
                 '`kb_document_class`.  Any of the items "dataresource", '
-                '"parse" and "mapping" are optional.',
+                '"parse" and "mapping" are optional.'
             ),
         ),
     ] = None
