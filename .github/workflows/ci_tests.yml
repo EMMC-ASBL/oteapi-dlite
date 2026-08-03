@@ -53,10 +53,11 @@ jobs:
     - name: Checkout ${{ github.repository }}
       uses: actions/checkout@v7
 
-    - name: Set up Python 3.10
+    # Use Python 3.11, since pip-tools has dropped Python 3.10 support
+    - name: Set up Python 3.11
       uses: actions/setup-python@v7
       with:
-        python-version: "3.10"
+        python-version: "3.11"
 
     - name: Install dependencies
       run: |
@@ -64,8 +65,8 @@ jobs:
         pip install -U setuptools wheel
         pip install -U -r .github/utils/requirements_audit.txt
 
-        # TEMPORARY: Use pip<25.3 due to a compatibility issue with pip-tools and pip 25.3+
-        pip install "pip<25.3"
+        # TEMPORARY: Use pip<26.2 due to a compatibility issue with pip-tools
+        pip install "pip<26.2"
 
     - name: Prepare for pip-audit
       run: pip-compile --output-file="${{ runner.temp }}/requirements.txt" --all-extras --allow-unsafe --color --verbose "${{ github.workspace }}/pyproject.toml"
