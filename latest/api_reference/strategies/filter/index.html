@@ -1349,11 +1349,11 @@
 <span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteFilterConfig</span><span class="p">(</span><span class="n">FilterConfig</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite generate strategy config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""DLite generate strategy config."""</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">DLiteQueryConfig</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite filter strategy-specific configuration.&quot;</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"DLite filter strategy-specific configuration."</span><span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1514,21 +1514,21 @@ to keep in the collection.  All other labels will be removed.</p>
 <span class="normal">168</span>
 <span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DLiteFilterStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter that removes all but specified instances in the collection.</span>
+<span class="w">    </span><span class="sd">"""Filter that removes all but specified instances in the collection.</span>
 
 <span class="sd">    The `query` configuration should be a regular expression matching labels</span>
 <span class="sd">    to keep in the collection.  All other labels will be removed.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
-<span class="sd">    - `(&quot;filterType&quot;, &quot;application/vnd.dlite-filter&quot;)`</span>
+<span class="sd">    - `("filterType", "application/vnd.dlite-filter")`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">filter_config</span><span class="p">:</span> <span class="n">DLiteFilterConfig</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize."""</span>
         <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
             <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">filter_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -1536,7 +1536,7 @@ to keep in the collection.  All other labels will be removed.</p>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Execute the strategy."""</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_config</span><span class="o">.</span><span class="n">configuration</span>
 
         <span class="c1"># Alias for query configuration</span>
@@ -1546,9 +1546,9 @@ to keep in the collection.  All other labels will be removed.</p>
 
         <span class="n">instdict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Map instance labels to [uuid, metaURI]</span>
         <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s2">&quot;_has-uuid&quot;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s2">"_has-uuid"</span><span class="p">):</span>
             <span class="n">instdict</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s2">&quot;_has-meta&quot;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s2">"_has-meta"</span><span class="p">):</span>
             <span class="n">instdict</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
 
         <span class="n">removal</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># Labels marked for removal</span>
@@ -1705,7 +1705,7 @@ to keep in the collection.  All other labels will be removed.</p>
 <span class="normal">167</span>
 <span class="normal">168</span>
 <span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Execute the strategy."""</span>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_config</span><span class="o">.</span><span class="n">configuration</span>
 
     <span class="c1"># Alias for query configuration</span>
@@ -1715,9 +1715,9 @@ to keep in the collection.  All other labels will be removed.</p>
 
     <span class="n">instdict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Map instance labels to [uuid, metaURI]</span>
     <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s2">&quot;_has-uuid&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s2">"_has-uuid"</span><span class="p">):</span>
         <span class="n">instdict</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s2">&quot;_has-meta&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">coll</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s2">"_has-meta"</span><span class="p">):</span>
         <span class="n">instdict</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
 
     <span class="n">removal</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># Labels marked for removal</span>
@@ -1792,7 +1792,7 @@ to keep in the collection.  All other labels will be removed.</p>
 <span class="normal">107</span>
 <span class="normal">108</span>
 <span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Initialize."""</span>
     <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
         <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">filter_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -1910,7 +1910,7 @@ from the collection.</p>
 <span class="normal">74</span>
 <span class="normal">75</span>
 <span class="normal">76</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteQueryConfig</span><span class="p">(</span><span class="n">DLiteResult</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the DLite filter strategy.</span>
+<span class="w">    </span><span class="sd">"""Configuration for the DLite filter strategy.</span>
 
 <span class="sd">    First the `remove_label` and `remove_datamodel` configurations are</span>
 <span class="sd">    used to mark matching instances for removal.  If neither</span>
@@ -1925,27 +1925,27 @@ from the collection.</p>
 
 <span class="sd">    Finally, the instances that are still marked for removal are removed</span>
 <span class="sd">    from the collection.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">remove_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Regular expression matching labels to remove.&quot;</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Regular expression matching labels to remove."</span><span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">remove_datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Regular expression matching datamodel URIs to remove.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Regular expression matching datamodel URIs to remove."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">keep_label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Regular expression matching labels to keep. This &quot;</span>
-                <span class="s2">&quot;configuration overrides `remove_label` and &quot;</span>
-                <span class="s2">&quot;`remove_datamodel`. Alias for the FilterStrategy `query` &quot;</span>
-                <span class="s2">&quot;configuration, that is inherited from the oteapi-core Filter &quot;</span>
-                <span class="s2">&quot;data model.&quot;</span>
+                <span class="s2">"Regular expression matching labels to keep. This "</span>
+                <span class="s2">"configuration overrides `remove_label` and "</span>
+                <span class="s2">"`remove_datamodel`. Alias for the FilterStrategy `query` "</span>
+                <span class="s2">"configuration, that is inherited from the oteapi-core Filter "</span>
+                <span class="s2">"data model."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1953,9 +1953,9 @@ from the collection.</p>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Regular expression matching datamodel URIs to keep in &quot;</span>
-                <span class="s2">&quot;collection. This configuration overrides `remove_label` and &quot;</span>
-                <span class="s2">&quot;`remove_datamodel`.&quot;</span>
+                <span class="s2">"Regular expression matching datamodel URIs to keep in "</span>
+                <span class="s2">"collection. This configuration overrides `remove_label` and "</span>
+                <span class="s2">"`remove_datamodel`."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1963,9 +1963,9 @@ from the collection.</p>
         <span class="nb">bool</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Whether to keep all instances in the collection that are &quot;</span>
-                <span class="s2">&quot;directly or indirectly referred to (via ref-types or &quot;</span>
-                <span class="s2">&quot;collections) by kept instances.&quot;</span>
+                <span class="s2">"Whether to keep all instances in the collection that are "</span>
+                <span class="s2">"directly or indirectly referred to (via ref-types or "</span>
+                <span class="s2">"collections) by kept instances."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>

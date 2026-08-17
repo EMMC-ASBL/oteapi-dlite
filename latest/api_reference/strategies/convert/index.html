@@ -1572,11 +1572,11 @@ to zero or more new output instances.</p>
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteConvertConfig</span><span class="p">(</span><span class="n">FunctionConfig</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite convert strategy resource config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""DLite convert strategy resource config."""</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">DLiteConvertStrategyConfig</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite convert strategy-specific configuration.&quot;</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"DLite convert strategy-specific configuration."</span><span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1675,27 +1675,27 @@ to zero or more new output instances.</p>
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteConvertInputConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for input instance to generic DLite converter.</span>
+<span class="w">    </span><span class="sd">"""Configuration for input instance to generic DLite converter.</span>
 
 <span class="sd">    At least one of `label` or `datamodel` should be given.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Label of the instance.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Label of the instance."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;URI of data model.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"URI of data model."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">property_mappings</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">bool</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether to infer instance from property mappings.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Whether to infer instance from property mappings."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
@@ -1828,18 +1828,18 @@ to zero or more new output instances.</p>
 <span class="normal">59</span>
 <span class="normal">60</span>
 <span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteConvertOutputConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for output instance to generic DLite converter.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Configuration for output instance to generic DLite converter."""</span>
 
     <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Label to use when storing the instance.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Label to use when storing the instance."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;URI of data model.  Used for documentation.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"URI of data model.  Used for documentation."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
@@ -2008,19 +2008,19 @@ instances to zero or more output instances.</p>
 <span class="normal">200</span>
 <span class="normal">201</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DLiteConvertStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite convert strategy for converting zero or more input</span>
+<span class="w">    </span><span class="sd">"""Generic DLite convert strategy for converting zero or more input</span>
 <span class="sd">    instances to zero or more output instances.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
-<span class="sd">    - `(&quot;functionType&quot;, &quot;application/vnd.dlite-convert&quot;)`</span>
+<span class="sd">    - `("functionType", "application/vnd.dlite-convert")`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">function_config</span><span class="p">:</span> <span class="n">DLiteConvertConfig</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize."""</span>
         <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
             <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -2028,14 +2028,14 @@ instances to zero or more output instances.</p>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
+<span class="w">        </span><span class="sd">"""Execute the strategy.</span>
 
 <span class="sd">        This method will be called through the strategy-specific endpoint</span>
 <span class="sd">        of the OTEAPI Services.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            SessionUpdate instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span>
         <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">package</span><span class="p">)</span>
         <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">function_name</span><span class="p">)</span>
@@ -2058,15 +2058,15 @@ instances to zero or more output instances.</p>
                 <span class="n">instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;either `label` or `datamodel` must be specified in &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;inputs[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]&quot;</span>
+                    <span class="s2">"either `label` or `datamodel` must be specified in "</span>
+                    <span class="sa">f</span><span class="s2">"inputs[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]"</span>
                 <span class="p">)</span>
         <span class="n">outputs</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">instances</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">):</span>
             <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">outputs</span><span class="p">]</span>
 
-        <span class="c1"># NOTE: Using &#39;strict=False&#39; in the zip call could allow mismatched</span>
-        <span class="c1"># lengths between &#39;outputs&#39; and &#39;config.outputs&#39; without raising an</span>
+        <span class="c1"># NOTE: Using 'strict=False' in the zip call could allow mismatched</span>
+        <span class="c1"># lengths between 'outputs' and 'config.outputs' without raising an</span>
         <span class="c1"># error.</span>
         <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">output_config</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
             <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">output_config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
@@ -2198,14 +2198,14 @@ of the OTEAPI Services.</p>
 <span class="normal">199</span>
 <span class="normal">200</span>
 <span class="normal">201</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
+<span class="w">    </span><span class="sd">"""Execute the strategy.</span>
 
 <span class="sd">    This method will be called through the strategy-specific endpoint</span>
 <span class="sd">    of the OTEAPI Services.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        SessionUpdate instance.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span>
     <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">package</span><span class="p">)</span>
     <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">function_name</span><span class="p">)</span>
@@ -2228,15 +2228,15 @@ of the OTEAPI Services.</p>
             <span class="n">instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;either `label` or `datamodel` must be specified in &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;inputs[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]&quot;</span>
+                <span class="s2">"either `label` or `datamodel` must be specified in "</span>
+                <span class="sa">f</span><span class="s2">"inputs[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]"</span>
             <span class="p">)</span>
     <span class="n">outputs</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">instances</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">):</span>
         <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">outputs</span><span class="p">]</span>
 
-    <span class="c1"># NOTE: Using &#39;strict=False&#39; in the zip call could allow mismatched</span>
-    <span class="c1"># lengths between &#39;outputs&#39; and &#39;config.outputs&#39; without raising an</span>
+    <span class="c1"># NOTE: Using 'strict=False' in the zip call could allow mismatched</span>
+    <span class="c1"># lengths between 'outputs' and 'config.outputs' without raising an</span>
     <span class="c1"># error.</span>
     <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">output_config</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">coll</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">output_config</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
@@ -2273,7 +2273,7 @@ of the OTEAPI Services.</p>
 <span class="normal">151</span>
 <span class="normal">152</span>
 <span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Initialize."""</span>
     <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
         <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">function_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -2380,21 +2380,21 @@ of the OTEAPI Services.</p>
 <span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteConvertStrategyConfig</span><span class="p">(</span><span class="n">DLiteResult</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for generic DLite converter.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Configuration for generic DLite converter."""</span>
 
     <span class="n">function_name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Name of convert function.  It will be pased the input &quot;</span>
-            <span class="s2">&quot;instances as arguments and should return a sequence of output &quot;</span>
-            <span class="s2">&quot;instances.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Name of convert function.  It will be pased the input "</span>
+            <span class="s2">"instances as arguments and should return a sequence of output "</span>
+            <span class="s2">"instances."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span>
     <span class="n">module_name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Name of Python module containing the convertion function.&quot;</span>
+                <span class="s2">"Name of Python module containing the convertion function."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span>
@@ -2402,10 +2402,10 @@ of the OTEAPI Services.</p>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Used when performing a relative import of the converter &quot;</span>
-                <span class="s2">&quot;function.  It specifies the package to use as the anchor &quot;</span>
-                <span class="s2">&quot;point from which to resolve the relative import to an absolute&quot;</span>
-                <span class="s2">&quot; import.&quot;</span>
+                <span class="s2">"Used when performing a relative import of the converter "</span>
+                <span class="s2">"function.  It specifies the package to use as the anchor "</span>
+                <span class="s2">"point from which to resolve the relative import to an absolute"</span>
+                <span class="s2">" import."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -2413,29 +2413,29 @@ of the OTEAPI Services.</p>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Package name on PyPI.  This field is currently only &quot;</span>
-                <span class="s2">&quot;informative, but might be used in the future for automatic &quot;</span>
-                <span class="s2">&quot;package installation.&quot;</span>
+                <span class="s2">"Package name on PyPI.  This field is currently only "</span>
+                <span class="s2">"informative, but might be used in the future for automatic "</span>
+                <span class="s2">"package installation."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">inputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">Sequence</span><span class="p">[</span><span class="n">DLiteConvertInputConfig</span><span class="p">],</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Input instances.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Input instances."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">outputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">Sequence</span><span class="p">[</span><span class="n">DLiteConvertOutputConfig</span><span class="p">],</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Output instances.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Output instances."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">kwargs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Additional keyword arguments passed &quot;</span>
-            <span class="s2">&quot;to the convert function.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Additional keyword arguments passed "</span>
+            <span class="s2">"to the convert function."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># noqa: RUF012</span>
 </code></pre></div></td></tr></table></div>

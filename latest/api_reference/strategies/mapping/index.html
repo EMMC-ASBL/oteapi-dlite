@@ -1263,12 +1263,12 @@
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteMappingConfig</span><span class="p">(</span><span class="n">MappingConfig</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite mapping strategy config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""DLite mapping strategy config."""</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">DLiteMappingStrategyConfig</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite mapping strategy-specific configuration.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"DLite mapping strategy-specific configuration."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="n">DLiteMappingStrategyConfig</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
@@ -1404,28 +1404,28 @@
 <span class="normal">97</span>
 <span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DLiteMappingStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Strategy for a mapping.</span>
+<span class="w">    </span><span class="sd">"""Strategy for a mapping.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
-<span class="sd">    - `(&quot;mappingType&quot;, &quot;mappings&quot;)`</span>
+<span class="sd">    - `("mappingType", "mappings")`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">mapping_config</span><span class="p">:</span> <span class="n">DLiteMappingConfig</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize strategy.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize strategy."""</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping_config</span><span class="o">.</span><span class="n">configuration</span>
 
         <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
 
-        <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">dlite_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tripper.triplestore&quot;</span><span class="p">)</span>
+        <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">dlite_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tripper.triplestore"</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kb_settings</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">kb_settings</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">kb_settings</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kb_settings</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;The `tripper.triplestore` setting must be a dictionary.&quot;</span>
+                <span class="s2">"The `tripper.triplestore` setting must be a dictionary."</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -1453,7 +1453,7 @@
         <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">coll</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute strategy and return a dictionary.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Execute strategy and return a dictionary."""</span>
         <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
             <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">mapping_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -1518,7 +1518,7 @@
 <span class="normal">96</span>
 <span class="normal">97</span>
 <span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute strategy and return a dictionary.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Execute strategy and return a dictionary."""</span>
     <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
         <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mapping_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -1583,17 +1583,17 @@
 <span class="normal">88</span>
 <span class="normal">89</span>
 <span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize strategy.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Initialize strategy."""</span>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping_config</span><span class="o">.</span><span class="n">configuration</span>
 
     <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">collection_id</span><span class="p">)</span>
 
-    <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">dlite_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tripper.triplestore&quot;</span><span class="p">)</span>
+    <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">dlite_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tripper.triplestore"</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kb_settings</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">kb_settings</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">kb_settings</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">kb_settings</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kb_settings</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;The `tripper.triplestore` setting must be a dictionary.&quot;</span>
+            <span class="s2">"The `tripper.triplestore` setting must be a dictionary."</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -1670,12 +1670,12 @@
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteMappingStrategyConfig</span><span class="p">(</span><span class="n">DLiteConfiguration</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a DLite mapping filter.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Configuration for a DLite mapping filter."""</span>
 
     <span class="n">datamodel</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">AnyUrl</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;URI of the datamodel that is mapped.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"URI of the datamodel that is mapped."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>

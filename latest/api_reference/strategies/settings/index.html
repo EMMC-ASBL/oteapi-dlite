@@ -1355,7 +1355,7 @@ by its label.</p>
 <span class="normal">43</span>
 <span class="normal">44</span>
 <span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SettingsConfig</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a generic &quot;settings&quot; filter.</span>
+<span class="w">    </span><span class="sd">"""Configuration for a generic "settings" filter.</span>
 
 <span class="sd">    This strategy stores settings in the session such that they are</span>
 <span class="sd">    available for other strategies.  For this to work, this strategy</span>
@@ -1365,14 +1365,14 @@ by its label.</p>
 <span class="sd">    The settings are stored as a JSON string which can be accessed</span>
 <span class="sd">    by its label.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Label for accessing this configuration.  &quot;</span>
-                <span class="s2">&quot;It should be unique.&quot;</span>
+                <span class="s2">"Label for accessing this configuration.  "</span>
+                <span class="s2">"It should be unique."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span>
@@ -1380,8 +1380,8 @@ by its label.</p>
         <span class="n">JsonValue</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;The configurations to be stored, represented as a Python &quot;</span>
-                <span class="s2">&quot;object that can be serialised to JSON.&quot;</span>
+                <span class="s2">"The configurations to be stored, represented as a Python "</span>
+                <span class="s2">"object that can be serialised to JSON."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span>
@@ -1484,11 +1484,11 @@ by its label.</p>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SettingsFilterConfig</span><span class="p">(</span><span class="n">FilterConfig</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Settings strategy config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Settings strategy config."""</span>
 
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">SettingsConfig</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Settings strategy-specific configuration.&quot;</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Settings strategy-specific configuration."</span><span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1588,25 +1588,25 @@ strategies.</p>
 <span class="normal">77</span>
 <span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SettingsStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic settings strategy for storing settings for other</span>
+<span class="w">    </span><span class="sd">"""Generic settings strategy for storing settings for other</span>
 <span class="sd">    strategies.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
-<span class="sd">    - `(&quot;mediaType&quot;, &quot;application/vnd.dlite-settings&quot;)`</span>
+<span class="sd">    - `("mediaType", "application/vnd.dlite-settings")`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">filter_config</span><span class="p">:</span> <span class="n">SettingsFilterConfig</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AttrDict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store settings.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Store settings."""</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_config</span><span class="o">.</span><span class="n">configuration</span>
 
         <span class="k">return</span> <span class="n">AttrDict</span><span class="p">(</span><span class="n">dlite_settings</span><span class="o">=</span><span class="p">{</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">settings</span><span class="p">})</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AttrDict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Do nothing.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Do nothing."""</span>
         <span class="k">return</span> <span class="n">AttrDict</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1663,7 +1663,7 @@ strategies.</p>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AttrDict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Do nothing.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Do nothing."""</span>
     <span class="k">return</span> <span class="n">AttrDict</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1692,7 +1692,7 @@ strategies.</p>
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AttrDict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Store settings.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Store settings."""</span>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_config</span><span class="o">.</span><span class="n">configuration</span>
 
     <span class="k">return</span> <span class="n">AttrDict</span><span class="p">(</span><span class="n">dlite_settings</span><span class="o">=</span><span class="p">{</span><span class="n">config</span><span class="o">.</span><span class="n">label</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">settings</span><span class="p">})</span>

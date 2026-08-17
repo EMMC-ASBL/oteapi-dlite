@@ -1104,19 +1104,19 @@ configurations for DLite strategies.</p>
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteConfiguration</span><span class="p">(</span><span class="n">DLiteResult</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data model representing recurring fields necessary in strategy-specific</span>
+<span class="w">    </span><span class="sd">"""Data model representing recurring fields necessary in strategy-specific</span>
 <span class="sd">    configurations for DLite strategies.</span>
 
 <span class="sd">    Note, this data model already includes the `collection_id` field from the</span>
 <span class="sd">    `DLiteResult` data model.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">dlite_settings</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">],</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Settings used by DLite strategies within a single pipeline &quot;</span>
-                <span class="s2">&quot;run.&quot;</span>
+                <span class="s2">"Settings used by DLite strategies within a single pipeline "</span>
+                <span class="s2">"run."</span>
             <span class="p">)</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># noqa: RUF012</span>
@@ -1178,10 +1178,10 @@ configurations for DLite strategies.</p>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteResult</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for returning values from DLite strategies.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Class for returning values from DLite strategies."""</span>
 
     <span class="n">collection_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;A reference to a DLite collection.&quot;</span><span class="p">)</span>
+        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"A reference to a DLite collection."</span><span class="p">)</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
               </details>

@@ -1240,8 +1240,8 @@ be removed in the source dictionary.</p>
                 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">215</span>
 <span class="normal">216</span>
 <span class="normal">217</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RemoveItem</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Singleton class used by update_dict() to indicate items that should</span>
-<span class="sd">    be removed in the source dictionary.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Singleton class used by update_dict() to indicate items that should</span>
+<span class="sd">    be removed in the source dictionary."""</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -1282,9 +1282,9 @@ between the <code>dct</code> and <code>update</code> dictionaries.</p>
 <span class="normal">210</span>
 <span class="normal">211</span>
 <span class="normal">212</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TypeMismatchError</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised by update_dict() if there is a mismatch in value types</span>
+<span class="w">    </span><span class="sd">"""Raised by update_dict() if there is a mismatch in value types</span>
 <span class="sd">    between the `dct` and `update` dictionaries.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -1390,7 +1390,7 @@ created and returned.</p>
 <span class="normal">91</span>
 <span class="normal">92</span>
 <span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve a DLite Collection.</span>
+<span class="w">    </span><span class="sd">"""Retrieve a DLite Collection.</span>
 
 <span class="sd">    Looks for a Collection UUID with `collection_id`.</span>
 <span class="sd">    If none exists or `collection_id` is not given, a new, empty Collection is</span>
@@ -1402,7 +1402,7 @@ created and returned.</p>
 <span class="sd">    Return:</span>
 <span class="sd">        A DLite Collection to be used throughout the OTEAPI pipeline run.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
 
     <span class="c1"># Storing the collection in the datacache is not scalable.</span>
@@ -1422,12 +1422,12 @@ created and returned.</p>
             <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="n">collection_id</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">dlite</span><span class="o">.</span><span class="n">DLiteError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">CollectionNotFound</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Could not find DLite Collection with id </span><span class="si">{</span><span class="n">collection_id</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"Could not find DLite Collection with id </span><span class="si">{</span><span class="n">collection_id</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
     <span class="k">if</span> <span class="n">coll</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span> <span class="o">!=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">COLLECTION_ENTITY</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">CollectionNotFound</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;instance with id </span><span class="si">{</span><span class="n">collection_id</span><span class="si">}</span><span class="s2"> is not a collection&quot;</span>
+            <span class="sa">f</span><span class="s2">"instance with id </span><span class="si">{</span><span class="n">collection_id</span><span class="si">}</span><span class="s2"> is not a collection"</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">coll</span>
@@ -1472,18 +1472,18 @@ created and returned.</p>
     <span class="n">mediaType</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">accessService</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return name of DLite driver for the given media type/access service.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return name of DLite driver for the given media type/access service."""</span>
     <span class="k">if</span> <span class="n">mediaType</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">mediaType</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MEDIATYPES</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown DLite mediaType: </span><span class="si">{mediaType}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"unknown DLite mediaType: </span><span class="si">{mediaType}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">MEDIATYPES</span><span class="p">[</span><span class="n">mediaType</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">accessService</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">accessService</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ACCESSSERVICES</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown DLite accessService: </span><span class="si">{accessService}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"unknown DLite accessService: </span><span class="si">{accessService}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ACCESSSERVICES</span><span class="p">[</span><span class="n">accessService</span><span class="p">]</span>
 
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;either `mediaType` or `accessService` must be provided&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"either `mediaType` or `accessService` must be provided"</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1621,7 +1621,7 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
     <span class="n">allow_incomplete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiates and returns an instance of `meta`.</span>
+<span class="w">    </span><span class="sd">"""Instantiates and returns an instance of `meta`.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        meta: Metadata to instantiate.  Typically its URI.</span>
@@ -1637,19 +1637,19 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 <span class="sd">            of the returned instance.</span>
 <span class="sd">        kwargs: Additional arguments passed to dlite.mappings.instantiate().</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Import here to avoid a hard dependency on tripper.</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">tripper</span><span class="w"> </span><span class="kn">import</span> <span class="n">Triplestore</span>
 
     <span class="k">if</span> <span class="n">collection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">collection_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;get_instance() requires that either `collection_id` or &quot;</span>
-                <span class="s2">&quot;`collection` argument is given.&quot;</span>
+                <span class="s2">"get_instance() requires that either `collection_id` or "</span>
+                <span class="s2">"`collection` argument is given."</span>
             <span class="p">)</span>
         <span class="n">collection</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="p">)</span>
 
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">Triplestore</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;collection&quot;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="n">collection</span><span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">Triplestore</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">"collection"</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="n">collection</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">instantiate</span><span class="p">(</span>
         <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
@@ -1692,13 +1692,13 @@ kwargs: Additional arguments passed to dlite.mappings.instantiate().</p>
 <span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_meta</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata corresponding to given uri.</span>
+<span class="w">    </span><span class="sd">"""Returns metadata corresponding to given uri.</span>
 
 <span class="sd">    This function may in the future be connected to a database.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">meta</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">meta</span><span class="o">.</span><span class="n">is_meta</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;uri </span><span class="si">{uri}</span><span class="s2"> does not correspond to metadata&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"uri </span><span class="si">{uri}</span><span class="s2"> does not correspond to metadata"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">meta</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1751,13 +1751,13 @@ used.</p>
     <span class="n">kb_settings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">collection_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Triplestore</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a tripper.Triplestore instance for the current kb_settings.</span>
+<span class="w">    </span><span class="sd">"""Return a tripper.Triplestore instance for the current kb_settings.</span>
 
-<span class="sd">    If a &#39;tripper.triplestore&#39; setting has been added with the</span>
+<span class="sd">    If a 'tripper.triplestore' setting has been added with the</span>
 <span class="sd">    SettingsStrategy, it will be used to configure the returned</span>
 <span class="sd">    triplestore instance.  Otherwise the provided collection ID will be</span>
 <span class="sd">    used.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Import here to avoid a hard dependency on tripper.</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">tripper</span><span class="w"> </span><span class="kn">import</span> <span class="n">Triplestore</span>
 
@@ -1766,9 +1766,9 @@ used.</p>
 
     <span class="k">if</span> <span class="n">collection_id</span><span class="p">:</span>
         <span class="n">coll</span> <span class="o">=</span> <span class="n">get_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">Triplestore</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;collection&quot;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="n">coll</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Triplestore</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">"collection"</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="n">coll</span><span class="p">)</span>
 
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Either of &#39;kb_settings&#39; or &#39;collection_id&#39; must be set.&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Either of 'kb_settings' or 'collection_id' must be set."</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1830,11 +1830,11 @@ used.</p>
 <span class="normal">101</span>
 <span class="normal">102</span>
 <span class="normal">103</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Collection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update collection in DataCache.</span>
+<span class="w">    </span><span class="sd">"""Update collection in DataCache.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        collection: The DLite Collection to be updated.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">cache</span> <span class="o">=</span> <span class="n">DataCache</span><span class="p">()</span>
     <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">collection</span><span class="o">.</span><span class="n">asjson</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">collection</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2012,7 +2012,7 @@ between different number types is accepted.</p>
 <span class="normal">270</span>
 <span class="normal">271</span>
 <span class="normal">272</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_dict</span><span class="p">(</span><span class="n">dct</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update dictionary `dct` using dictionary `update`.</span>
+<span class="w">    </span><span class="sd">"""Update dictionary `dct` using dictionary `update`.</span>
 
 <span class="sd">    This function differ from `dict.update()` in that it updates</span>
 <span class="sd">    sub-directories recursively, instead of replacing them with the</span>
@@ -2033,7 +2033,7 @@ between different number types is accepted.</p>
 <span class="sd">            between the `dct` and `update` dictionaries.  Conversion</span>
 <span class="sd">            between different number types is accepted.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">update</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">dct</span>
 
@@ -2049,8 +2049,8 @@ between different number types is accepted.</p>
                 <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
             <span class="p">):</span>
                 <span class="k">raise</span> <span class="n">TypeMismatchError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;type of `update[&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&#39;]` (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">!r}</span><span class="s2">) is not a &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;subclass of the type of `dct[&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&#39;]` (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+                    <span class="sa">f</span><span class="s2">"type of `update['</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">']` (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">update</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">!r}</span><span class="s2">) is not a "</span>
+                    <span class="sa">f</span><span class="s2">"subclass of the type of `dct['</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">']` (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">!r}</span><span class="s2">)"</span>
                 <span class="p">)</span>
 
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>

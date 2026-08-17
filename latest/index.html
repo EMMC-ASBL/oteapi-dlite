@@ -1002,7 +1002,7 @@
 <h1 id="oteapi-dlite-plugin">OTEAPI DLite Plugin<a class="headerlink" href="#oteapi-dlite-plugin" title="Permanent link">&para;</a></h1>
 <p><a href="https://zenodo.org/badge/latestdoi/455070691"><img alt="DOI" src="https://zenodo.org/badge/455070691.svg" /></a></p>
 <p>All strategies implemented in this plugin (except for <code>create_collection</code>) assumes that you have the UUID of a DLite collection with the key <code>collection_id</code> in the <code>session</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">collection_id</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;collection_id&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">collection_id</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">"collection_id"</span><span class="p">]</span>
 <span class="n">coll</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="p">)</span>
 </code></pre></div>
 <p>A DLite collection stores references to DLite instances and relations between them as RDF triples.

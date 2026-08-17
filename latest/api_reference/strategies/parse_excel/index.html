@@ -1572,45 +1572,45 @@
 <span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteExcelParseConfig</span><span class="p">(</span><span class="n">DLiteResult</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for DLite Excel parser.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Configuration for DLite Excel parser."""</span>
 
     <span class="c1"># Resource config</span>
     <span class="n">downloadUrl</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">HostlessAnyUrl</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;downloadUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">"downloadUrl"</span><span class="p">]</span><span class="o">.</span><span class="n">description</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="n">mediaType</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">Literal</span><span class="p">[</span>
-            <span class="s2">&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;</span>
+            <span class="s2">"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"</span>
         <span class="p">],</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;mediaType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
-    <span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">"mediaType"</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="s2">"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"</span>
 
     <span class="c1"># Parser config</span>
     <span class="nb">id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Optional id on new instance.&quot;</span><span class="p">)</span>
+        <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Optional id on new instance."</span><span class="p">)</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Optional label for new instance in collection.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Optional label for new instance in collection."</span><span class="p">,</span>
         <span class="p">),</span>
-    <span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;excel-data&quot;</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="s2">"excel-data"</span>
 
     <span class="n">excel_config</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">XLSXParseConfig</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite-specific excel configurations.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"DLite-specific excel configurations."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span>
     <span class="n">storage_path</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Path to metadata storage&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Path to metadata storage"</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
@@ -1693,7 +1693,7 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.label" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;excel-data&#39;</span></code>
+            <code class="highlight language-python"><span class="n">label</span> <span class="o">=</span> <span class="s1">'excel-data'</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -1714,7 +1714,7 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParseConfig.mediaType" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">mediaType</span> <span class="o">=</span> <span class="s1">&#39;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#39;</span></code>
+            <code class="highlight language-python"><span class="n">mediaType</span> <span class="o">=</span> <span class="s1">'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -1810,22 +1810,22 @@
 <span class="normal">86</span>
 <span class="normal">87</span>
 <span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteExcelParserConfig</span><span class="p">(</span><span class="n">ParserConfig</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite excel parse strategy resource config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""DLite excel parse strategy resource config."""</span>
 
     <span class="n">parserType</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;application/vnd.dlite-xlsx&quot;</span><span class="p">],</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ParserConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;parserType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
-    <span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;application/vnd.dlite-xlsx&quot;</span>
+        <span class="n">Literal</span><span class="p">[</span><span class="s2">"application/vnd.dlite-xlsx"</span><span class="p">],</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ParserConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">"parserType"</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="s2">"application/vnd.dlite-xlsx"</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">DLiteExcelParseConfig</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite excel parse strategy-specific configuration.&quot;</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"DLite excel parse strategy-specific configuration."</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="n">entity</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">AnyHttpUrl</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;URI of DLite metadata to return. If not provided, the &quot;</span>
-                <span class="s2">&quot;metadata will be inferred from the excel file.&quot;</span>
+                <span class="s2">"URI of DLite metadata to return. If not provided, the "</span>
+                <span class="s2">"metadata will be inferred from the excel file."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1888,7 +1888,7 @@
 
 
 <h3 id="oteapi_dlite.strategies.parse_excel.DLiteExcelParserConfig.parserType" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">parserType</span> <span class="o">=</span> <span class="s1">&#39;application/vnd.dlite-xlsx&#39;</span></code>
+            <code class="highlight language-python"><span class="n">parserType</span> <span class="o">=</span> <span class="s1">'application/vnd.dlite-xlsx'</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -1958,18 +1958,18 @@
 <span class="normal">103</span>
 <span class="normal">104</span>
 <span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteExcelSessionUpdate</span><span class="p">(</span><span class="n">DLiteResult</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for returning values from DLite excel parser.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Class for returning values from DLite excel parser."""</span>
 
     <span class="n">inst_uuid</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;UUID of new instance.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"UUID of new instance."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span>
     <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Label of the new instance in the collection.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Label of the new instance in the collection."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
@@ -2161,19 +2161,19 @@
 <span class="normal">199</span>
 <span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DLiteExcelStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse strategy for Excel files.</span>
+<span class="w">    </span><span class="sd">"""Parse strategy for Excel files.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
-<span class="sd">    - `(&quot;mediaType&quot;,</span>
-<span class="sd">        &quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;)`</span>
+<span class="sd">    - `("mediaType",</span>
+<span class="sd">        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">parse_config</span><span class="p">:</span> <span class="n">DLiteExcelParserConfig</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize."""</span>
         <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
             <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -2181,7 +2181,7 @@
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteExcelSessionUpdate</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
+<span class="w">        </span><span class="sd">"""Execute the strategy.</span>
 
 <span class="sd">        This method will be called through the strategy-specific endpoint</span>
 <span class="sd">        of the OTEAPI Services.</span>
@@ -2189,33 +2189,33 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            DLite instance.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
 
         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">downloadUrl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;downloadUrl is required.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"downloadUrl is required."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mediaType is required.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mediaType is required."</span><span class="p">)</span>
 
         <span class="n">xlsx_config</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;parserType&quot;</span><span class="p">:</span> <span class="s2">&quot;parser/excel_xlsx&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">excel_config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span>
-            <span class="s2">&quot;entity&quot;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">"parserType"</span><span class="p">:</span> <span class="s2">"parser/excel_xlsx"</span><span class="p">,</span>
+            <span class="s2">"configuration"</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">excel_config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span>
+            <span class="s2">"entity"</span><span class="p">:</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">entity</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">entity</span>
-                <span class="k">else</span> <span class="s2">&quot;https://example.org&quot;</span>
+                <span class="k">else</span> <span class="s2">"https://example.org"</span>
             <span class="p">),</span>
         <span class="p">}</span>
-        <span class="n">xlsx_config</span><span class="p">[</span><span class="s2">&quot;configuration&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="n">xlsx_config</span><span class="p">[</span><span class="s2">"configuration"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
             <span class="p">{</span>
-                <span class="s2">&quot;downloadUrl&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">downloadUrl</span><span class="p">,</span>
-                <span class="s2">&quot;mediaType&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span><span class="p">,</span>
+                <span class="s2">"downloadUrl"</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">downloadUrl</span><span class="p">,</span>
+                <span class="s2">"mediaType"</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="n">parser</span> <span class="o">=</span> <span class="n">create_strategy</span><span class="p">(</span><span class="s2">&quot;parse&quot;</span><span class="p">,</span> <span class="n">xlsx_config</span><span class="p">)</span>
-        <span class="n">columns</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">create_strategy</span><span class="p">(</span><span class="s2">"parse"</span><span class="p">,</span> <span class="n">xlsx_config</span><span class="p">)</span>
+        <span class="n">columns</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get</span><span class="p">()[</span><span class="s2">"data"</span><span class="p">]</span>
 
-        <span class="c1"># NOTE: Using &#39;strict=False&#39; in the zip call could allow mismatched</span>
+        <span class="c1"># NOTE: Using 'strict=False' in the zip call could allow mismatched</span>
         <span class="c1"># lengths between the inputs without raising an error.</span>
         <span class="n">names</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span>
             <span class="o">*</span><span class="p">[</span><span class="n">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span>
@@ -2225,13 +2225,13 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="c1"># This check is to satisfy mypy for the `infer_metadata` call below.</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;units must be a list or tuple, instead it was </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">units</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"units must be a list or tuple, instead it was </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">units</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
         <span class="n">meta_uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">entity</span>
         <span class="k">if</span> <span class="n">meta_uri</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">storage_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">storage_path</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">storage_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">storage_path</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">storage_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"|"</span><span class="p">):</span>
                     <span class="n">dlite</span><span class="o">.</span><span class="n">storage_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">storage_path</span><span class="p">)</span>
             <span class="n">meta</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">meta_uri</span><span class="p">))</span>
             <span class="c1"># check the metadata config would go here</span>
@@ -2401,7 +2401,7 @@ of the OTEAPI Services.</p>
 <span class="normal">198</span>
 <span class="normal">199</span>
 <span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteExcelSessionUpdate</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
+<span class="w">    </span><span class="sd">"""Execute the strategy.</span>
 
 <span class="sd">    This method will be called through the strategy-specific endpoint</span>
 <span class="sd">    of the OTEAPI Services.</span>
@@ -2409,33 +2409,33 @@ of the OTEAPI Services.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        DLite instance.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
 
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">downloadUrl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;downloadUrl is required.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"downloadUrl is required."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mediaType is required.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mediaType is required."</span><span class="p">)</span>
 
     <span class="n">xlsx_config</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;parserType&quot;</span><span class="p">:</span> <span class="s2">&quot;parser/excel_xlsx&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">excel_config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span>
-        <span class="s2">&quot;entity&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"parserType"</span><span class="p">:</span> <span class="s2">"parser/excel_xlsx"</span><span class="p">,</span>
+        <span class="s2">"configuration"</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">excel_config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span>
+        <span class="s2">"entity"</span><span class="p">:</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">entity</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">entity</span>
-            <span class="k">else</span> <span class="s2">&quot;https://example.org&quot;</span>
+            <span class="k">else</span> <span class="s2">"https://example.org"</span>
         <span class="p">),</span>
     <span class="p">}</span>
-    <span class="n">xlsx_config</span><span class="p">[</span><span class="s2">&quot;configuration&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="n">xlsx_config</span><span class="p">[</span><span class="s2">"configuration"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
         <span class="p">{</span>
-            <span class="s2">&quot;downloadUrl&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">downloadUrl</span><span class="p">,</span>
-            <span class="s2">&quot;mediaType&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span><span class="p">,</span>
+            <span class="s2">"downloadUrl"</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">downloadUrl</span><span class="p">,</span>
+            <span class="s2">"mediaType"</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">mediaType</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="p">)</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">create_strategy</span><span class="p">(</span><span class="s2">&quot;parse&quot;</span><span class="p">,</span> <span class="n">xlsx_config</span><span class="p">)</span>
-    <span class="n">columns</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">create_strategy</span><span class="p">(</span><span class="s2">"parse"</span><span class="p">,</span> <span class="n">xlsx_config</span><span class="p">)</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get</span><span class="p">()[</span><span class="s2">"data"</span><span class="p">]</span>
 
-    <span class="c1"># NOTE: Using &#39;strict=False&#39; in the zip call could allow mismatched</span>
+    <span class="c1"># NOTE: Using 'strict=False' in the zip call could allow mismatched</span>
     <span class="c1"># lengths between the inputs without raising an error.</span>
     <span class="n">names</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span>
         <span class="o">*</span><span class="p">[</span><span class="n">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span>
@@ -2445,13 +2445,13 @@ of the OTEAPI Services.</p>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
         <span class="c1"># This check is to satisfy mypy for the `infer_metadata` call below.</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;units must be a list or tuple, instead it was </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">units</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"units must be a list or tuple, instead it was </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">units</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
 
     <span class="n">meta_uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">entity</span>
     <span class="k">if</span> <span class="n">meta_uri</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">storage_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">storage_path</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">storage_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">storage_path</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">storage_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"|"</span><span class="p">):</span>
                 <span class="n">dlite</span><span class="o">.</span><span class="n">storage_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">storage_path</span><span class="p">)</span>
         <span class="n">meta</span> <span class="o">=</span> <span class="n">dlite</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">meta_uri</span><span class="p">))</span>
         <span class="c1"># check the metadata config would go here</span>
@@ -2501,7 +2501,7 @@ of the OTEAPI Services.</p>
 <span class="normal">125</span>
 <span class="normal">126</span>
 <span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Initialize."""</span>
     <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
         <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -2555,21 +2555,21 @@ of the OTEAPI Services.</p>
 <span class="normal">226</span>
 <span class="normal">227</span>
 <span class="normal">228</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">infer_metadata</span><span class="p">(</span><span class="n">rec</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">dlite</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Infer dlite metadata from recarray `rec`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Infer dlite metadata from recarray `rec`."""</span>
     <span class="c1"># bandit issue B311:blacklist.</span>
     <span class="c1"># This is not relevant here because we are not using this for</span>
     <span class="c1"># security/cryptographic purposes - hence the nosec.</span>
     <span class="n">rnd</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>  <span class="c1"># nosec</span>
-    <span class="n">uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://onto-ns.com/meta/1.0/generated_from_excel_</span><span class="si">{</span><span class="n">rnd</span><span class="si">:</span><span class="s2">0x</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"http://onto-ns.com/meta/1.0/generated_from_excel_</span><span class="si">{</span><span class="n">rnd</span><span class="si">:</span><span class="s2">0x</span><span class="si">}</span><span class="s2">"</span>
     <span class="n">metadata</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span>
         <span class="n">uri</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Generated datamodel from excel file.&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Generated datamodel from excel file."</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">metadata</span><span class="o">.</span><span class="n">add_dimension</span><span class="p">(</span><span class="s2">&quot;nrows&quot;</span><span class="p">,</span> <span class="s2">&quot;Number of rows.&quot;</span><span class="p">)</span>
+    <span class="n">metadata</span><span class="o">.</span><span class="n">add_dimension</span><span class="p">(</span><span class="s2">"nrows"</span><span class="p">,</span> <span class="s2">"Number of rows."</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">):</span>
         <span class="n">dtype</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
-        <span class="n">ptype</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span> <span class="k">if</span> <span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;U&quot;</span> <span class="k">else</span> <span class="n">dtype</span><span class="o">.</span><span class="n">name</span>
-        <span class="n">metadata</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">ptype</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;nrows&quot;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="n">units</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">ptype</span> <span class="o">=</span> <span class="s2">"string"</span> <span class="k">if</span> <span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">"U"</span> <span class="k">else</span> <span class="n">dtype</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">metadata</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">ptype</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s2">"nrows"</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="n">units</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2600,10 +2600,10 @@ of the OTEAPI Services.</p>
 <span class="normal">207</span>
 <span class="normal">208</span>
 <span class="normal">209</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">split_column_name</span><span class="p">(</span><span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Split column name into a (name, unit) tuple.&quot;&quot;&quot;</span>
-    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*([^ ([&lt;]+)\s*[([&lt;]?([^] )&gt;]*)[])&gt;]?&quot;</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Split column name into a (name, unit) tuple."""</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s*([^ ([&lt;]+)\s*[([&lt;]?([^] )&gt;]*)[])&gt;]?"</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">column</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">column</span><span class="p">,</span> <span class="s2">""</span>
     <span class="n">name</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">unit</span>
 </code></pre></div></td></tr></table></div>

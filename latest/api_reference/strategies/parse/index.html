@@ -1573,35 +1573,35 @@
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteParseConfig</span><span class="p">(</span><span class="n">DLiteResult</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for generic DLite parser.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Configuration for generic DLite parser."""</span>
 
-    <span class="c1"># &quot;Required&quot; resource strategy fields</span>
+    <span class="c1"># "Required" resource strategy fields</span>
     <span class="n">downloadUrl</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">HostlessAnyUrl</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;downloadUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">"downloadUrl"</span><span class="p">]</span><span class="o">.</span><span class="n">description</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="n">mediaType</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;mediaType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ResourceConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">"mediaType"</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># Parser-specific configuration</span>
     <span class="n">driver</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Name of DLite driver (ex: &quot;json&quot;).&#39;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s1">'Name of DLite driver (ex: "json").'</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span>
     <span class="n">location</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Explicit location of storage.  Normally data is read from the &quot;</span>
-                <span class="s2">&quot;data cache using `datacache_config.accessKey` (default: &quot;</span>
-                <span class="s2">&quot;&#39;key&#39;).&quot;</span>
+                <span class="s2">"Explicit location of storage.  Normally data is read from the "</span>
+                <span class="s2">"data cache using `datacache_config.accessKey` (default: "</span>
+                <span class="s2">"'key')."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1609,22 +1609,22 @@
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Comma-separated list of options passed to the DLite storage &quot;</span>
-                <span class="s2">&quot;plugin.&quot;</span>
+                <span class="s2">"Comma-separated list of options passed to the DLite storage "</span>
+                <span class="s2">"plugin."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="nb">id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;If given, the id of the instance in the storage.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"If given, the id of the instance in the storage."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;Optional label of the new DLite instance in the collection.&quot;</span>
+                <span class="s2">"Optional label of the new DLite instance in the collection."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1632,21 +1632,21 @@
         <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
             <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;DLite datamodel documenting the structure of the data set. &quot;</span>
-                <span class="s2">&quot;Often unused, since the datamodel is implicitly defined in &quot;</span>
-                <span class="s2">&quot;the DLite driver (DLite plugin), but for a documentation &quot;</span>
-                <span class="s2">&quot;point of view this is a very important field.&quot;</span>
+                <span class="s2">"DLite datamodel documenting the structure of the data set. "</span>
+                <span class="s2">"Often unused, since the datamodel is implicitly defined in "</span>
+                <span class="s2">"the DLite driver (DLite plugin), but for a documentation "</span>
+                <span class="s2">"point of view this is a very important field."</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">download_config</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">AttrDict</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Configurations provided to a download strategy.&quot;</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Configurations provided to a download strategy."</span><span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="n">AttrDict</span><span class="p">()</span>
     <span class="n">datacache_config</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">DataCacheConfig</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Field</span><span class="p">(</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Configuration options for the local data cache.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Configuration options for the local data cache."</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
@@ -1925,19 +1925,19 @@
 <span class="normal">116</span>
 <span class="normal">117</span>
 <span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DLiteParseParserConfig</span><span class="p">(</span><span class="n">ParserConfig</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;DLite parse strategy resource config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""DLite parse strategy resource config."""</span>
 
     <span class="n">parserType</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;application/vnd.dlite-parse&quot;</span><span class="p">],</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ParserConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;parserType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
+        <span class="n">Literal</span><span class="p">[</span><span class="s2">"application/vnd.dlite-parse"</span><span class="p">],</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ParserConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">"parserType"</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">DLiteParseConfig</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DLite parse strategy-specific configuration.&quot;</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"DLite parse strategy-specific configuration."</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="n">entity</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
         <span class="n">AnyHttpUrl</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ParserConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">&quot;entity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
+        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">ParserConfig</span><span class="o">.</span><span class="n">model_fields</span><span class="p">[</span><span class="s2">"entity"</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
     <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -2153,18 +2153,18 @@
 <span class="normal">217</span>
 <span class="normal">218</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DLiteParseStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic DLite parse strategy utilising DLite storage plugins.</span>
+<span class="w">    </span><span class="sd">"""Generic DLite parse strategy utilising DLite storage plugins.</span>
 
 <span class="sd">    **Registers strategies**:</span>
 
-<span class="sd">    - `(&quot;mediaType&quot;, &quot;application/vnd.dlite-parse&quot;)`</span>
+<span class="sd">    - `("mediaType", "application/vnd.dlite-parse")`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">parse_config</span><span class="p">:</span> <span class="n">DLiteParseParserConfig</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize."""</span>
         <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
             <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
@@ -2172,7 +2172,7 @@
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
+<span class="w">        </span><span class="sd">"""Execute the strategy.</span>
 
 <span class="sd">        This method will be called through the strategy-specific endpoint</span>
 <span class="sd">        of the OTEAPI Services.</span>
@@ -2180,7 +2180,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Reference to a DLite collection ID.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
         <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
 
@@ -2203,18 +2203,18 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Download the file</span>
             <span class="n">download_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
-            <span class="n">download_config</span><span class="p">[</span><span class="s2">&quot;configuration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">download_config</span><span class="p">[</span><span class="s2">"configuration"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="n">config</span><span class="o">.</span><span class="n">download_config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
             <span class="p">)</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">create_strategy</span><span class="p">(</span><span class="s2">&quot;download&quot;</span><span class="p">,</span> <span class="n">download_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">create_strategy</span><span class="p">(</span><span class="s2">"download"</span><span class="p">,</span> <span class="n">download_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="n">cacheconfig</span> <span class="ow">and</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span><span class="p">:</span>
                 <span class="n">key</span> <span class="o">=</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span>
-            <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s2">"key"</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"key"</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                    <span class="s2">&quot;No data cache key provided for the downloaded content.&quot;</span>
+                    <span class="s2">"No data cache key provided for the downloaded content."</span>
                 <span class="p">)</span>
 
             <span class="c1"># See if we can extract file suffix from downloadUrl</span>
@@ -2404,7 +2404,7 @@ of the OTEAPI Services.</p>
 <span class="normal">216</span>
 <span class="normal">217</span>
 <span class="normal">218</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the strategy.</span>
+<span class="w">    </span><span class="sd">"""Execute the strategy.</span>
 
 <span class="sd">    This method will be called through the strategy-specific endpoint</span>
 <span class="sd">    of the OTEAPI Services.</span>
@@ -2412,7 +2412,7 @@ of the OTEAPI Services.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        Reference to a DLite collection ID.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span>
     <span class="n">cacheconfig</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">datacache_config</span>
 
@@ -2435,18 +2435,18 @@ of the OTEAPI Services.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Download the file</span>
         <span class="n">download_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
-        <span class="n">download_config</span><span class="p">[</span><span class="s2">&quot;configuration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">download_config</span><span class="p">[</span><span class="s2">"configuration"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">config</span><span class="o">.</span><span class="n">download_config</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
         <span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">create_strategy</span><span class="p">(</span><span class="s2">&quot;download&quot;</span><span class="p">,</span> <span class="n">download_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">create_strategy</span><span class="p">(</span><span class="s2">"download"</span><span class="p">,</span> <span class="n">download_config</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">cacheconfig</span> <span class="ow">and</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span><span class="p">:</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">cacheconfig</span><span class="o">.</span><span class="n">accessKey</span>
-        <span class="k">elif</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="s2">"key"</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"key"</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="s2">&quot;No data cache key provided for the downloaded content.&quot;</span>
+                <span class="s2">"No data cache key provided for the downloaded content."</span>
             <span class="p">)</span>
 
         <span class="c1"># See if we can extract file suffix from downloadUrl</span>
@@ -2510,7 +2510,7 @@ of the OTEAPI Services.</p>
 <span class="normal">137</span>
 <span class="normal">138</span>
 <span class="normal">139</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DLiteResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Initialize."""</span>
     <span class="k">return</span> <span class="n">DLiteResult</span><span class="p">(</span>
         <span class="n">collection_id</span><span class="o">=</span><span class="n">get_collection</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parse_config</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">collection_id</span>
